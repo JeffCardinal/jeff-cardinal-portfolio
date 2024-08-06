@@ -106,7 +106,7 @@ export default function Page() {
             imageName="htmhell-pink"
             imageHoverName="htmhell-sage"
             bgColor="bg-black"
-            textColor="text-[#ff00aa]" children={''}
+            textColor="text-[#ff00aa]"
           >
           </Feature>
         </Breaker>
