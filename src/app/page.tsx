@@ -1,113 +1,188 @@
-import Image from "next/image";
+import React from 'react';
+import Marquee from "react-fast-marquee";
+import Link from 'next/link';
 
-export default function Home() {
+import Feature from './components/Feature'
+import CodeFeature from './components/CodeFeature'
+import VideoFeature from './components/VideoFeature'
+import Container from './components/Container'
+import Breaker from './components/Breaker'
+import Scroller from './components/Scroller'
+import Splash from './components/Splash'
+import Image from 'next/image'
+import UnderConstruction from './components/UnderConstruction'
+
+export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
+    <div className="bg-white">
+
+      <Splash bgColor={'bg-sky-400'}>
+        <div className="z-10 max-w-screen">
+          <div className='flex flex-col items-center text-center'>
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              className="flex flex-1 lg:hidden md:hidden items-center text-center"
+              src={`/images/jclogo-shiny-2.png`}
+              alt=''
+              width="400"
+              height="0"
             />
-          </a>
+          </div>
+          <div className="text-4xl">Hey, my name is</div>
+          <div className="
+            font-distancia pt-2 bg-transparent
+            text-4xl
+            lg:text-7xl
+          ">
+            Jeff Cardinal
+          </div>
+          <div className="text-4xl">I'm a programmer, designer, and musician.</div>
+          <div className="mt-4">I have a <span className="italic">vision</span> for the <span className="italic">future.</span> Here's some glimpses inside.</div>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+          <Image
+            className="absolute left-16 z-0 max-md:hidden"
+            src={`/images/jclogo-shiny-2.png`}
+            alt=''
+            width="400"
+            height="0"
+          />
+      </Splash>
+      
+      {/* Container */}
+      <Container>
+        <Marquee
+          pauseOnHover="true"
+          speed='100'
+          className="border-t-2 border-b-2 border-black"
         >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <Scroller title="FEATURES ✦"/>
+          <Scroller title="FEATURES ✦"/>
+          <Scroller title="CLICK SOMETHIN' WILL YA? ✦"/>
+          <Scroller title="FEATURES ✦"/>
+          <Scroller title="FEATURES ✦"/>
+        </Marquee>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Breaker
+          title="[GFX]"
+          bgColor="bg-orange-400"
         >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <Feature
+            title="PLUS100 Branding"
+            description="Branding for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
+            inspiration="Minimalism and kawaii Japanese emoji."
+            tools="Illustrator, Photoshop"
+            imageName="plus100logo"
+            bgColor="bg-white"
+            textColor="text-black"
+          >
+            <div className="pt-2"><Link href="/case-plus100"><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-rose-500 text-rose-500 bg-white hover:text-white hover:bg-rose-500 rounded-full transition duration-300 font-distancia text-2xl">Case Study</button></Link></div>
+          </Feature>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+          <Feature
+            title="DR. GABBA Flyer"
+            description="Flyer advertisement for Chicago techno party."
+            inspiration="Liquid chrome entangles an iconic 90s acid smiley in Y2K fashion. Custom goop font for DR. GABBA."
+            tools="Cinema 4D, Illustrator, Photoshop"
+            imageName="drgabbaflyer"
+            bgColor="bg-black"
+            textColor="text-lime-500"
+          >
+          </Feature>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+          <Feature
+            title="Mana Pool Album Cover"
+            description="Album cover for my debut album, Mana Pool."
+            inspiration="Minimalistic aquatic ambiance."
+            tools="Illustrator, Photoshop"
+            imageName="manapool"
+            bgColor="bg-sky-400"
+          >
+          </Feature>
+
+          <Feature
+            title="HTMHELL Logo"
+            description="Logo design for a band. It's mirrored on the y-axis, try to read it. Hover for a surprise."
+            inspiration="Metalcore logo."
+            tools="Illustrator, Photoshop"
+            imageName="htmhell-pink"
+            imageHoverName="htmhell-sage"
+            bgColor="bg-black"
+            textColor="text-[#ff00aa]" children={''}
+          >
+          </Feature>
+        </Breaker>
+
+        <Breaker 
+          title={"[VFX]"}
+          bgColor={"bg-rose-400"}
         >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <VideoFeature/>
+        </Breaker>
+
+        <Breaker 
+          title={"[PHOTO]"}
+          bgColor={"bg-purple-400"}
+        >
+          <UnderConstruction textColor='black' bgColor='bg-black'/>
+        </Breaker>
+
+        <Breaker 
+          title={"[CODE]"}
+          bgColor={"bg-sky-400"}
+        >
+          <CodeFeature
+            title='GOJIRA - SYNTH OSCILLATOR'
+            imageName=''
+            bgColor='bg-black'
+            textColor='text-lime-500'
+            description=''
+          >
+          </CodeFeature>
+        </Breaker>
+
+        <Breaker 
+          title={"[UI/UX]"}
+          bgColor={"bg-teal-400"}
+        >
+          <UnderConstruction textColor='black' bgColor='bg-black'/>
+        </Breaker>
+
+        <Breaker 
+          title={"[PD]"}
+          bgColor={"bg-lime-400"}
+        >
+          <UnderConstruction textColor='black' bgColor='bg-black'/>
+        </Breaker>
+        
+        <div className="
+          flex flex-3
+          flex-col-reverse
+          lg:flex-row
+          justify-left items-center
+        ">
+          <Image
+            className="p-8"
+            src='/images/jclogo-shiny-3.png'
+            width="400" 
+            height="0"
+          />
+          <div className='flex grow pt-8 min-w-[300px] justify-center text-center'>
+            <div className="text-2xl text-black flex-auto">
+            <div className="font-distancia text-2xl">Nav</div>
+              <Link href='/'>Home</Link><br></br>
+              <Link href='/about'>About</Link><br></br>
+              <Link href='/resume'>Resume</Link><br></br>
+            </div>
+          </div>
+          <div className='flex grow pt-8 min-w-[300px] justify-center text-center'>
+            <div className="text-2xl text-black flex-auto">
+            <div className="font-distancia text-2xl">Social</div>
+              <Link href='https://www.instagram.com/vaperror'>IG</Link><br></br>
+              <Link href='https://www.x.com/vaperror'>X</Link><br></br>
+              <Link href='https://www.linkedin.com/in/jeffjcardinal'>LinkedIn</Link><br></br>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
   );
 }
