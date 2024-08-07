@@ -47,7 +47,6 @@ export default function Page() {
           />
       </Splash>
       
-      {/* Container */}
       <Container>
         <Marquee
           pauseOnHover={true}
@@ -71,6 +70,7 @@ export default function Page() {
             inspiration="Minimalism and kawaii Japanese emoji."
             tools="Illustrator, Photoshop"
             imageName="plus100logo"
+            imageHoverName="plus100logo"
             bgColor="bg-white"
             textColor="text-black"
           >
@@ -83,9 +83,11 @@ export default function Page() {
             inspiration="Liquid chrome entangles an iconic 90s acid smiley in Y2K fashion. Custom goop font for DR. GABBA."
             tools="Cinema 4D, Illustrator, Photoshop"
             imageName="drgabbaflyer"
+            imageHoverName="drgabbaflyer"
             bgColor="bg-black"
             textColor="text-lime-500"
           >
+            {undefined}
           </Feature>
 
           <Feature
@@ -94,8 +96,11 @@ export default function Page() {
             inspiration="Minimalistic aquatic ambiance."
             tools="Illustrator, Photoshop"
             imageName="manapool"
+            imageHoverName="manapool"
             bgColor="bg-sky-400"
+            textColor="text-white"
           >
+            {undefined}
           </Feature>
 
           <Feature
@@ -108,6 +113,7 @@ export default function Page() {
             bgColor="bg-black"
             textColor="text-[#ff00aa]"
           >
+            {undefined}
           </Feature>
         </Breaker>
 
@@ -130,11 +136,9 @@ export default function Page() {
           bgColor={"bg-sky-400"}
         >
           <CodeFeature
-            title='GOJIRA - SYNTH OSCILLATOR'
-            imageName=''
+            title='GOJIRA - SYNTH OSC'
             bgColor='bg-black'
             textColor='text-lime-500'
-            description=''
           >
           </CodeFeature>
         </Breaker>
@@ -161,6 +165,7 @@ export default function Page() {
         ">
           <Image
             className="p-8"
+            alt='Chrome JC Logo'
             src='/images/jclogo-shiny-3.png'
             width="400" 
             height="0"

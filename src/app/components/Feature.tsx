@@ -9,7 +9,7 @@ export default function Feature(
     inspiration,
     tools,
     imageName,
-    imageHoverName=imageName,
+    imageHoverName,
     bgColor,
     textColor
   }: { 

@@ -4,21 +4,11 @@ import Image from 'next/image'
 
 
 export default function CodeFeature({
-  children,
   title,
-  description,
-  inspiration,
-  tools,
-  imageName,
   bgColor,
   textColor,
- }: { 
-  children: ReactNode,
+ }: {
   title: string,
-  description: string,
-  inspiration: string,
-  tools: string,
-  imageName: string,
   bgColor: string,
   textColor: string
 }) {
@@ -57,8 +47,6 @@ for (; y != y_e; ) {
 `}
           </pre>
         </div>
-        <p className="font-mono">{inspiration}</p>
-        <p className="italic">{tools}</p>
       </div>
       </div>
     </div>
