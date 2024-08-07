@@ -17,7 +17,7 @@ export default function Page() {
     <div className="bg-white">
 
       <Splash bgColor={'bg-sky-400'}>
-        <div className="z-10 max-w-screen">
+        <div className="z-10 max-w-screen text-white">
           <div className='flex flex-col items-center text-center'>
             <Image
               className="flex flex-1 lg:hidden md:hidden items-center text-center"
