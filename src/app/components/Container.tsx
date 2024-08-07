@@ -1,15 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-interface ContainerProps {
-  children: string;
-}
-
-const Container: React.FC<ContainerProps> = ({ children }) => {
+export default function Container({ children }: { children: ReactNode }) {
   return (
     <div className="">
       { children }
     </div>
   );
 };
-
-export default Container;
