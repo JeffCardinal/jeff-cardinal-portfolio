@@ -77,7 +77,7 @@ export default function MobileNav({ children }: { children: ReactNode }) {
             About
           </div>
         </Link>
-        <Link href="/resume"
+        <Link href="/JeffCardinalResume2024PDF.pdf"
           className={`
             ${vis_3 ? 'visible' : 'invisible'}
             ${inEffect  && isAnimating && "animate-easeInNav_3"}
