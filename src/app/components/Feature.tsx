@@ -1,20 +1,28 @@
 'use client'
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Image from 'next/image'
 
-interface FeatureProps {
-  children: string;
-  title: string;
-  description: string;
-  inspiration: string;
-  tools: string;
-  imageName: string;
-  imageHoverName: string;
-  bgColor: string;
-  textColor: string;
-}
-
-const Feature: React.FC<FeatureProps> = ({ children, title, description, inspiration, tools, imageName, imageHoverName=imageName, bgColor, textColor }) => {
+export default function Feature(
+  { children,
+    title,
+    description,
+    inspiration,
+    tools,
+    imageName,
+    imageHoverName=imageName,
+    bgColor,
+    textColor
+  }: { 
+    children: ReactNode,
+    title: string,
+    description: string,
+    inspiration: string,
+    tools: string,
+    imageName: string,
+    imageHoverName: string,
+    bgColor: string,
+    textColor: string
+  }) {
   const [hovering, setHovering] = useState(true);
 
   return (
@@ -40,5 +48,3 @@ const Feature: React.FC<FeatureProps> = ({ children, title, description, inspira
     </div>
   );
 };
-
-export default Feature;

@@ -50,8 +50,8 @@ export default function Page() {
       {/* Container */}
       <Container>
         <Marquee
-          pauseOnHover="true"
-          speed='100'
+          pauseOnHover={true}
+          speed={100}
           className="border-t-2 border-b-2 border-black"
         >
           <Scroller title="FEATURES ✦"/>
