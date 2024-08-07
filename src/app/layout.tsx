@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MobileNav children={undefined}/>
+        <MobileNav>{children}</MobileNav>
         <Header>
           <Link href="/">     <button className="pt-[2px] pr-4 pl-4 mr-4 outline  outline-white hover:text-sky-400 hover:bg-white rounded-full transition duration-300 font-distancia text-md">Home</button></Link>
           <Link href="/about"><button className="pt-[2px] pr-4 pl-4 mr-4 outline  outline-white hover:text-sky-400 hover:bg-white text-white rounded-full transition duration-300 font-distancia text-md">About</button></Link>
