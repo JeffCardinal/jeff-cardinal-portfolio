@@ -175,7 +175,7 @@ export default function Page() {
             <div className="font-distancia text-2xl">Nav</div>
               <Link href='/'>Home</Link><br></br>
               <Link href='/about'>About</Link><br></br>
-              <Link href='/resume'>Resume</Link><br></br>
+              <Link href="/JeffCardinalResume2024PDF.pdf">Resume</Link><br></br>
             </div>
           </div>
           <div className='flex grow pt-8 min-w-[300px] justify-center text-center'>
