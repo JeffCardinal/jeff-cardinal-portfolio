@@ -74,7 +74,7 @@ export default function Page() {
             bgColor="bg-white"
             textColor="text-black"
           >
-            <div className="pt-2"><Link href="/case-plus100"><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-rose-500 text-rose-500 bg-white hover:text-white hover:bg-rose-500 rounded-full transition duration-300 font-distancia text-2xl">Case Study</button></Link></div>
+            <div className="pt-2"><Link href="https://plus100.bandcamp.com/"><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-rose-500 text-rose-500 bg-white hover:text-white hover:bg-rose-500 rounded-full transition duration-300 font-distancia text-2xl">To Bandcamp</button></Link></div>
           </Feature>
 
           <Feature
