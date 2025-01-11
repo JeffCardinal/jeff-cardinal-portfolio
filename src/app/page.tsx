@@ -11,13 +11,15 @@ import Scroller from './components/Scroller'
 import Splash from './components/Splash'
 import Image from 'next/image'
 import UnderConstruction from './components/UnderConstruction'
+import _3JS from './components/_3JS'
 
 export default function Page() {
   return (
     <div className="bg-white">
 
       <Splash bgColor={'bg-sky-400'}>
-        <div className="z-10 max-w-screen text-white">
+        <_3JS/>
+        {/* <div className="z-10 max-w-screen text-white">
           <div className='flex flex-col items-center text-center'>
             <Image
               className="flex flex-1 lg:hidden md:hidden items-center text-center"
@@ -38,13 +40,13 @@ export default function Page() {
           <div className="text-4xl">I'm a programmer, designer, and musician.</div>
           <div className="mt-4">I have a <span className="italic">vision</span> for the <span className="italic">future.</span> Here's some glimpses inside.</div>
         </div>
-          <Image
-            className="absolute left-16 z-0 max-md:hidden"
-            src={`/images/jclogo-shiny-2.png`}
-            alt=''
-            width="400"
-            height="0"
-          />
+        <Image
+          className="absolute left-16 z-0 max-md:hidden"
+          src={`/images/jclogo-shiny-2.png`}
+          alt=''
+          width="400"
+          height="0"
+        /> */}
       </Splash>
       
       <Container>
