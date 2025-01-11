@@ -22,6 +22,8 @@ import { LayerMaterial, Depth, Noise, Color } from 'lamina';
 import * as THREE from 'three';
 import NoiseGradientShaderMaterial from './NoiseGradientShaderMaterial';
 import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/events';
+import RotatingText from './RotatingText';
+import HelloText from './HelloText';
 
 function Torus() {
   const ref = useRef<THREE.Mesh>(null!);
@@ -121,49 +123,49 @@ function ThreeDText({
   );
 }
 
-function RotatingText() {
-    const phrases = ["software engineer", "multimedia designer", "music producer"];
-    const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
-    const [opacity, setOpacity] = useState(1);
+// function RotatingText() {
+//     const phrases = ["software engineer", "multimedia designer", "music producer"];
+//     const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+//     const [opacity, setOpacity] = useState(1);
   
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setOpacity(0);
-        setTimeout(() => {
-          setCurrentPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
-          setOpacity(1);
-        }, 500);
-      }, 2500);
+//     useEffect(() => {
+//       const interval = setInterval(() => {
+//         setOpacity(0);
+//         setTimeout(() => {
+//           setCurrentPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+//           setOpacity(1);
+//         }, 500);
+//       }, 2500);
   
-      return () => clearInterval(interval);
-    }, []);
+//       return () => clearInterval(interval);
+//     }, []);
   
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "65%",
-          transform: "translate(0%, -100%)",
-          fontSize: "48px",
-          fontWeight: "bold",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <span style={{ color: "#FFFFFF" }}>I'm a</span>
-        <span
-          style={{
-            color: "magenta",
-            opacity: opacity,
-            transition: "opacity 0.5s ease-in-out",
-          }}
-        >
-          {phrases[currentPhraseIndex]}.
-        </span>
-      </div>
-    );
-}
+//     return (
+//       <div
+//         style={{
+//           position: "absolute",
+//           top: "65%",
+//           transform: "translate(0%, -100%)",
+//           fontSize: "48px",
+//           fontWeight: "bold",
+//           display: "flex",
+//           justifyContent: "center",
+//           alignItems: "center",
+//         }}
+//       >
+//         <span style={{ color: "#FFFFFF", whiteSpace:"pre" }}>I'm a </span>
+//         <span
+//           style={{
+//             color: "magenta",
+//             opacity: opacity,
+//             transition: "opacity 0.5s ease-in-out",
+//           }}
+//         >
+//           {phrases[currentPhraseIndex]}.
+//         </span>
+//       </div>
+//     );
+// }
   
 
 function Striplight(props: React.JSX.IntrinsicAttributes & Omit<ExtendedColors<Overwrite<Partial<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>, NodeProps<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>, typeof THREE.Mesh>>>, NonFunctionKeys<{ position?: Vector3; up?: Vector3; scale?: Vector3; rotation?: Euler; matrix?: Matrix4; quaternion?: Quaternion; layers?: Layers; dispose?: (() => void) | null; }>> & { position?: Vector3; up?: Vector3; scale?: Vector3; rotation?: Euler; matrix?: Matrix4; quaternion?: Quaternion; layers?: Layers; dispose?: (() => void) | null; } & EventHandlers) {
@@ -244,20 +246,8 @@ export default function _3JS() {
             </mesh>
         </React.Suspense>
     </Canvas>
-        <div
-            style={{
-            position: "absolute",
-            top: "37%",
-            left: "50%",
-            transform: "translate(-50%, -100%)",
-            fontSize: "48px",
-            fontWeight: "bold",
-            color: "#FFFFFF",
-            }}
-        >
-Hey! I'm
-        </div>
-        <RotatingText/>
+    <HelloText/>
+    <RotatingText/>
     </>
   );
 }

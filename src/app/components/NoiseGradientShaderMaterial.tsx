@@ -57,6 +57,10 @@ export default function NoiseGradientShaderMaterial(): JSX.Element {
       // ) * n; // Apply noise-based gradient to color
 
       vec3 color = rainbow(time + n * 5.0); // Add noise influence to rainbow colors
+
+      float grain = random(vUv * time * 100.0) * 0.1;
+      color += vec3(grain) + vec3(grain); // Add a lot of grain
+
       gl_FragColor = vec4(color, 1.0);
     }
   `;
