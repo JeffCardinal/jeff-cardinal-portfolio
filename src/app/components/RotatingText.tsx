@@ -23,7 +23,7 @@ function RotatingText() {
           position: "absolute",
           top: "70%",
           transform: "translate(0%, -100%)",
-          fontSize: "clamp(24px, 4vw, 64px)",
+          fontSize: "clamp(36px, 4vw, 64px)",
           fontWeight: "bold",
           display: "flex",
           justifyContent: "center",
