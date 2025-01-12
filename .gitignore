@@ -35,5 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# jeff
+# jeff's stuff
+# I want to keep the high quality videos on my local just in case I need to re-encode them later
 public/videos/
