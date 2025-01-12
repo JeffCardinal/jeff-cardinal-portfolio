@@ -24,7 +24,6 @@ export default function VideoFeature() {
         videoUrl="/videos-optimized/tribal-heart-reel.mp4"
         title={"Tribal Diamond Heart"}
         description={""} caseStudyUrl={"./case-tribal-heart"} />
-          {/* Rendered in Blender using Cycles. Custom material set to mimic real diamond refractive index. Graffiti background from construction zone in Montreal, shot on iPhone 13. */}
         <Video 
         videoUrl="/videos-optimized/metalheartreel1.mp4"
         title={"DJ CAMGIRL - Aberrations"}
