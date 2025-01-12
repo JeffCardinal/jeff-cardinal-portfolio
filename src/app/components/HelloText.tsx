@@ -3,20 +3,11 @@ import Image from "next/image";
 const HelloText: React.FC = () => {
     return (
         <Image
-            className=""
+            className="absolute top-[40%] lg:left-[31%] left-[50%] -translate-x-1/2 -translate-y-full -rotate-5"
             src={`/images/heyim.png`}
             alt='' 
             width={250}
             height={250}
-            // sizes="100vw"
-            // style={{ width: '100%', height: 'auto' }}
-            style={{
-                position: "absolute",
-                top: "40%",
-                left: "31%",
-                transform: "translate(-50%, -100%)",
-                rotate: "-5deg",
-            }}
             objectFit='contain'
         />
         // <div

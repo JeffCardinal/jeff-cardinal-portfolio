@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function RotatingText() {
-    const phrases = ["programmer", "designer", "musician", "creative"];
+    const phrases = ["programmer", "designer", "musician"];
     const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
     const [opacity, setOpacity] = useState(1);
   
@@ -22,13 +22,13 @@ function RotatingText() {
         style={{
           position: "absolute",
           top: "68%",
-          transform: "translate(0%, -100%)",
-          fontSize: "clamp(48px, 4vw, 64px)",
+          fontSize: "clamp(36px, 4vw, 64px)",
           fontWeight: "bold",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           whiteSpace: "nowrap",
+          overflow: "hidden",
         }}
       >
         <span style={{ color: "#FFFFFF", whiteSpace: "pre" }}>I'm a </span>

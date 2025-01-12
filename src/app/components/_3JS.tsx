@@ -1,44 +1,21 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Canvas, Euler, ExtendedColors, Layers, Matrix4, NodeProps, NonFunctionKeys, Overwrite, Quaternion, useFrame, useThree, Vector3 } from '@react-three/fiber';
 import { 
     Center,
     Text3D,
     Environment,
-    OrbitControls,
-    MeshTransmissionMaterial,
     Float,
     Lightformer,
-    useProgress,
-    Html,
-    Stars,
-    MeshWobbleMaterial,
-    MeshRefractionMaterial,
-    // Html,
 } from '@react-three/drei';
 import Blob from './Blob'; // Import the Blob component
-import { LayerMaterial, Depth, Noise, Color } from 'lamina';
 import * as THREE from 'three';
 import NoiseGradientShaderMaterial from './NoiseGradientShaderMaterial';
 import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/events';
 import RotatingText from './RotatingText';
 import HelloText from './HelloText';
 import Loader from './Loader';
-
-function Torus() {
-  const ref = useRef<THREE.Mesh>(null!);
-  useFrame(() => (ref.current.rotation.x += 0.01));
-  useFrame(() => (ref.current.rotation.y += 0.005));
-  useFrame(() => (ref.current.rotation.z += 0.01));
-
-  return (
-    <mesh ref={ref}>
-      <torusGeometry args={[1, 0.1, 32, 32]} />
-      <meshBasicMaterial attach="material" args={[{ color: '#FFF' }]} />
-    </mesh>
-  );
-}  
 
 function ThreeDText({
   config,
@@ -76,21 +53,6 @@ function ThreeDText({
           >
             {text}
             <meshStandardMaterial color="white" roughness={0.1} metalness={1} />
-            {/* <LayerMaterial side={THREE.BackSide}>
-                <Color color="blue" alpha={1} mode="normal" />
-                <Depth colorA="#ffffff" colorB="#00BFFF" alpha={0.5} mode="normal" near={0} far={300} origin={[100, 100, 100]} />
-                <Noise mapping="local" type="cell" scale={0.5} mode="softlight" />
-            </LayerMaterial> */}
-            {/* <meshPhysicalMaterial
-                color="white"
-                metalness={1}
-                roughness={0}
-                // reflectivity={1}
-                clearcoat={1}
-                clearcoatRoughness={0}
-                envMapIntensity={1}
-            /> */}
-            {/* <MeshTransmissionMaterial {...config} /> */}
           </Text3D>
         </Center>
       </group>
@@ -122,61 +84,59 @@ export default function _3JS() {
     }, []);
 
     //this config is just for the 3d text, so it may be moved later to something that makes more sense
-  const { ...config } = {
+    const { ...config } = {
     backside: true,
     backsideThickness: 1,
     transmission: 2,
     chromaticAberration: 50,
-    // ior: 10,
-    // color: '#000000',
-  };
+    };
 
-  return (
+    return (
     <>
-    <Canvas camera={{ position: [0, 0, 10] }}>
-        <React.Suspense fallback={<Loader />}>
-            {!isMobile && (
-                <group>
-                    <Blob scale={1} position={[-5, 5, -3]} />
-                    <Blob scale={1.2} position={[-5, 1.5, 5]} />
-                    <Blob scale={1.3} position={[5, 3, 1]} />
-                    <Blob scale={1.5} position={[-5, -2, 4]} />
-                    <Blob scale={1.1} position={[8, 1, 2]} />
+        <Canvas camera={{ position: [0, 0, 10] }}>
+            <React.Suspense fallback={<Loader />}>
+                {!isMobile && (
+                    <group>
+                        <Blob scale={1} position={[-5, 5, -3]} />
+                        <Blob scale={1.2} position={[-5, 1.5, 5]} />
+                        <Blob scale={1.3} position={[5, 3, 1]} />
+                        <Blob scale={1.5} position={[-5, -2, 4]} />
+                        <Blob scale={1.1} position={[8, 1, 2]} />
+                    </group>
+                )}
+                <Float speed={3} rotationIntensity={0.5}>
+                    <ThreeDText config={config} position={[-0.75, 0.6, 0]} text="Jeff" />
+                    <ThreeDText config={config} position={[0.75, -0.5, 0]} size={0.45} text="Cardinal" />
+                </Float>
+                <Environment 
+                    // preset="studio"
+                    files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
+                    // blur={}
+                    backgroundIntensity={5}
+                    background={false}
+                    backgroundRotation={[0, 0, 0]}
+                >
+                <Striplight position={[10, 2, 0]} scale={[1, 3, 10]} />
+                <Striplight position={[-10, 2, 0]} scale={[1, 3, 10]} />
+                <directionalLight
+                    intensity={10}
+                    position={[2, 2, 5]}
+                />
+                <ambientLight intensity={10} />
+                <Striplight position={[10, 2, 0]} scale={[1, 3, -10]} />
+                <Striplight position={[-10, 2, 0]} scale={[1, 3, -10]} />
+                <group rotation={[0, 0, 0]}>
+                    <Lightformer intensity={1} rotation-x={ Math.PI / 2} position={[0, 5, 9]}   scale={[10, 10, 1]} />
                 </group>
-            )}
-            <Float speed={3} rotationIntensity={0.5}>
-                <ThreeDText config={config} position={[-0.75, 0.6, 0]} text="Jeff" />
-                <ThreeDText config={config} position={[0.75, -0.5, 0]} size={0.45} text="Cardinal" />
-            </Float>
-            <Environment 
-                // preset="studio"
-                files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
-                // blur={}
-                backgroundIntensity={5}
-                background={false}
-                backgroundRotation={[0, 0, 0]}
-            >
-            <Striplight position={[10, 2, 0]} scale={[1, 3, 10]} />
-            <Striplight position={[-10, 2, 0]} scale={[1, 3, 10]} />
-            <directionalLight
-                intensity={10}
-                position={[2, 2, 5]}
-            />
-            <ambientLight intensity={10} />
-            <Striplight position={[10, 2, 0]} scale={[1, 3, -10]} />
-            <Striplight position={[-10, 2, 0]} scale={[1, 3, -10]} />
-            <group rotation={[0, 0, 0]}>
-                <Lightformer intensity={1} rotation-x={ Math.PI / 2} position={[0, 5, 9]}   scale={[10, 10, 1]} />
-            </group>
-            </Environment>
-            <mesh position={[0, 0, -5]}>
-                <planeGeometry args={[45, 25]} />
-                <NoiseGradientShaderMaterial />
-            </mesh>
-        </React.Suspense>
-    </Canvas>
-    <HelloText/>
-    <RotatingText/>
+                </Environment>
+                <mesh position={[0, 0, -5]}>
+                    <planeGeometry args={[45, 25]} />
+                    <NoiseGradientShaderMaterial />
+                </mesh>
+            </React.Suspense>
+        </Canvas>
+        <HelloText/>
+        <RotatingText/>
     </>
-  );
+    );
 }
