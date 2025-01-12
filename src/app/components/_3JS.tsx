@@ -108,6 +108,19 @@ function Striplight(props: React.JSX.IntrinsicAttributes & Omit<ExtendedColors<O
 }
 
 export default function _3JS() {
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 800);
+    };
+  
+    useEffect(() => {
+      checkScreenSize();
+      window.addEventListener("resize", checkScreenSize);
+      return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
     //this config is just for the 3d text, so it may be moved later to something that makes more sense
   const { ...config } = {
     backside: true,
@@ -122,11 +135,15 @@ export default function _3JS() {
     <>
     <Canvas camera={{ position: [0, 0, 10] }}>
         <React.Suspense fallback={<Loader />}>
-            <Blob position={[-5, 5, -3]} />
-            <Blob position={[-5, 1.5, 5]} />
-            <Blob position={[5, 3, 1]} />
-            <Blob position={[-5, -2, 4]} />
-            <Blob position={[8, 1, 2]} />
+            {!isMobile && (
+                <group>
+                    <Blob scale={1} position={[-5, 5, -3]} />
+                    <Blob scale={1.2} position={[-5, 1.5, 5]} />
+                    <Blob scale={1.3} position={[5, 3, 1]} />
+                    <Blob scale={1.5} position={[-5, -2, 4]} />
+                    <Blob scale={1.1} position={[8, 1, 2]} />
+                </group>
+            )}
             <Float speed={3} rotationIntensity={0.5}>
                 <ThreeDText config={config} position={[-0.75, 0.6, 0]} text="Jeff" />
                 <ThreeDText config={config} position={[0.75, -0.5, 0]} size={0.45} text="Cardinal" />

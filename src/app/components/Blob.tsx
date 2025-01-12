@@ -14,7 +14,9 @@ export default function Blob({
   const ref = useRef<Mesh>(null!)
 
   useFrame(({ clock }, dt) => {
+    // ref.current.position.x = Math.cos(clock.elapsedTime + rand * 100) * -0.1 + 0.2
     ref.current.position.y = Math.sin(clock.elapsedTime + rand * 100) * 0.1 - 0.2
+    // ref.current.position.z = Math.cos(clock.elapsedTime + rand * 100) * -0.1 + 0.2
 
     if (displaceRef.current.strength !== strength.current) {
       displaceRef.current.strength = MathUtils.lerp(
@@ -32,11 +34,11 @@ export default function Blob({
   return (
     <group {...props}>
       <Sphere
-        // castShadow
         onPointerEnter={() => (strength.current = 0.2)}
         onPointerLeave={() => (strength.current = 0)}
         ref={ref}
         args={[0.4, 128, 128]}
+        scale={props.scale}
       >
         <LayerMaterial
           color={'#ffffff'}
