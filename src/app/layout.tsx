@@ -23,17 +23,17 @@ export default function RootLayout({
         <MobileNav>{children}</MobileNav>
         <Header>
           <Link href="/">     
-            <button className="pt-[2px] pr-4 pl-4 mr-4 outline  outline-white hover:text-sky-400 hover:bg-white rounded-full transition duration-300 font-distancia text-md">
+            <button className="pt-[2px] pr-4 pl-4 mr-4 outline  outline-white mix-blend-lighten hover:text-opacity-0 hover:bg-white rounded-full transition duration-300 font-distancia text-md">
               Home
             </button>
           </Link>
           <Link href="/about">
-            <button className="pt-[2px] pr-4 pl-4 mr-4 outline  outline-white hover:text-sky-400 hover:bg-white text-white rounded-full transition duration-300 font-distancia text-md">
-              About
-            </button>
+          <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white mix-blend-lighten hover:text-opacity-0 text-opacity-100 bg-white text-white rounded-full transition duration-300 font-distancia text-md">
+            About
+          </button>
           </Link>
           <Link href="/JeffCardinalResume2024PDF.pdf">
-            <button className="pt-[2px] pr-4 pl-4 mr-0 outline outline-white hover:text-sky-400 hover:bg-white text-white rounded-full transition duration-300 font-distancia text-md">
+            <button className="pt-[2px] pr-4 pl-4 mr-0 outline outline-white mix-blend-lighten hover:text-opacity-0 hover:bg-white text-white rounded-full transition duration-300 font-distancia text-md">
               Resume
             </button>
           </Link>
