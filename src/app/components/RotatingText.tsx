@@ -21,8 +21,8 @@ function RotatingText() {
       <div
         style={{
           position: "absolute",
-          top: "68%",
-          fontSize: "clamp(36px, 4vw, 64px)",
+          top: "59%",
+          fontSize: "clamp(40px, 4vw, 64px)",
           fontWeight: "bold",
           display: "flex",
           justifyContent: "center",

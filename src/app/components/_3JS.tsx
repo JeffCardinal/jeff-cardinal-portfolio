@@ -18,31 +18,23 @@ import HelloText from './HelloText';
 import Loader from './Loader';
 
 function ThreeDText({
-  config,
   font = "/fonts/Distancia-800-ExtraBold.json",
   text,
   size = 1,
   position = [0, 0, 0],
-  ...props
 }: {
-  config: any;
   font?: string;
   text?: string;
   size?: number;
   position?: [number, number, number];
 }) {
-
-  const { viewport } = useThree();
-  const scaleFactor = Math.min(viewport.width, viewport.height) * 0.03 * size;
-  const adjustedPosition: [number, number, number] = [position[0], (position[1]+3)*scaleFactor-1, position[2]];
-
   return (
     <>
       <group>
-        <Center scale={[scaleFactor, scaleFactor, scaleFactor]} position={adjustedPosition} {...props}>
+        <Center position={position}>
           <Text3D
             font={font}
-            scale={3.5}
+            scale={2*size}
             letterSpacing={0}
             height={0.3/size}
             curveSegments={10}
@@ -50,6 +42,7 @@ function ThreeDText({
             bevelSize={0.05}
             bevelSegments={1}
             bevelThickness={0.05/size}
+            position={position}
           >
             {text}
             <meshStandardMaterial color="white" roughness={0.1} metalness={1} />
@@ -58,6 +51,19 @@ function ThreeDText({
       </group>
     </>
   );
+}
+
+function JeffCardinalText() {
+    const { viewport } = useThree();
+    const scaleFactor = Math.min(viewport.width, viewport.height) * 0.065;
+    return (
+        <group scale={scaleFactor}>
+            <Float speed={3} rotationIntensity={0.5}>
+                <ThreeDText position={[-0.85, 0.8, 0]} text="Jeff" />
+                <ThreeDText position={[0.75, -0.8, 0]} size={0.45} text="Cardinal" />
+            </Float>
+        </group>
+    )
 }
 
 function Striplight(props: React.JSX.IntrinsicAttributes & Omit<ExtendedColors<Overwrite<Partial<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>>, NodeProps<THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[], THREE.Object3DEventMap>, typeof THREE.Mesh>>>, NonFunctionKeys<{ position?: Vector3; up?: Vector3; scale?: Vector3; rotation?: Euler; matrix?: Matrix4; quaternion?: Quaternion; layers?: Layers; dispose?: (() => void) | null; }>> & { position?: Vector3; up?: Vector3; scale?: Vector3; rotation?: Euler; matrix?: Matrix4; quaternion?: Quaternion; layers?: Layers; dispose?: (() => void) | null; } & EventHandlers) {
@@ -104,10 +110,7 @@ export default function _3JS() {
                         <Blob scale={1.1} position={[8, 1, 2]} />
                     </group>
                 )}
-                <Float speed={3} rotationIntensity={0.5}>
-                    <ThreeDText config={config} position={[-0.75, 0.6, 0]} text="Jeff" />
-                    <ThreeDText config={config} position={[0.75, -0.5, 0]} size={0.45} text="Cardinal" />
-                </Float>
+                <JeffCardinalText/>
                 <Environment 
                     // preset="studio"
                     files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
