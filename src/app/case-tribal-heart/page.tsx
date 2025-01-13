@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from 'three';
+import Footer from '../components/Footer';
 
 function Heart() {
     const scaleFactor = 2;
@@ -102,6 +103,14 @@ export default function _3JS() {
             </div>
         
             {/* Process */}
+            <div>
+                <div className="text-2xl md:text-4xl lg:text-7xl font-distancia pt-8 px-8 bg-transparent text-rose-500">
+                    Process:
+                </div>
+                <div className="text-white w-full text-left justify-center items-center align-middle p-8">
+                    Sketch in Adobe Illustrator. Rendered in Blender using Cycles. Custom material set to mimic real diamond refractive index. Graffiti background from construction zone in Montreal, shot on iPhone 13.
+                </div>
+            </div>
             <div className="flex flex-wrap lg:flex-row sm:flex-col items-center justify-center bg-black">
                 <div className="lg:w-1/3 sm:w-full px-8 pt-8">
                     <Image
@@ -137,14 +146,7 @@ export default function _3JS() {
                     />
                 </div>
             </div>
-            <div>
-                <div className="text-2xl md:text-4xl lg:text-7xl font-distancia pt-8 px-8 bg-transparent text-rose-500">
-                    Process:
-                </div>
-                <div className="text-white w-full text-left justify-center items-center align-middle p-8">
-                    Sketch in Adobe Illustrator. Rendered in Blender using Cycles. Custom material set to mimic real diamond refractive index. Graffiti background from construction zone in Montreal, shot on iPhone 13.
-                </div>
-            </div>
+            <Footer textColor={'text-white'}/>
         </>
     );
 }

@@ -12,6 +12,7 @@ import Splash from './components/Splash'
 import Image from 'next/image'
 import UnderConstruction from './components/UnderConstruction'
 import _3JS from './components/_3JS'
+import Footer from './components/Footer';
 
 export default function Page() {
   return (
@@ -159,36 +160,7 @@ export default function Page() {
           <UnderConstruction textColor='black' bgColor='bg-black'/>
         </Breaker>
         
-        <div className="
-          flex flex-3
-          flex-col-reverse
-          lg:flex-row
-          justify-left items-center
-        ">
-          <Image
-            className="p-8"
-            alt='Chrome JC Logo'
-            src='/images/jclogo-shiny-3.png'
-            width="400" 
-            height="0"
-          />
-          <div className='flex grow pt-8 min-w-[300px] justify-center text-center'>
-            <div className="text-2xl text-black flex-auto">
-            <div className="font-distancia text-2xl">Nav</div>
-              <Link href='/'>Home</Link><br></br>
-              <Link href='/about'>About</Link><br></br>
-              <Link href="/JeffCardinalResume2024PDF.pdf">Resume</Link><br></br>
-            </div>
-          </div>
-          <div className='flex grow pt-8 min-w-[300px] justify-center text-center'>
-            <div className="text-2xl text-black flex-auto">
-            <div className="font-distancia text-2xl">Social</div>
-              <Link href='https://www.instagram.com/vaperror'>IG</Link><br></br>
-              <Link href='https://www.x.com/vaperror'>X</Link><br></br>
-              <Link href='https://www.linkedin.com/in/jeffjcardinal'>LinkedIn</Link><br></br>
-            </div>
-          </div>
-        </div>
+        <Footer textColor={'text-black'}/>
       </Container>
     </div>
   );
