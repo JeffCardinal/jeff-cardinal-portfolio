@@ -50,16 +50,11 @@ export default function NoiseGradientShaderMaterial(): JSX.Element {
       uv.y += cos(time * 0.05); // Modify the y-component of UV by time for motion in both directions
 
       float n = noise(uv); // Generate noise with moving texture coordinates
-      // vec3 color = vec3(
-      //   float(0x00) / 255.0,
-      //   float(0x3D) / 255.0,
-      //   float(0xFF) / 255.0
-      // ) * n; // Apply noise-based gradient to color
 
       vec3 color = rainbow(time + n * 5.0); // Add noise influence to rainbow colors
 
       float grain = random(vUv * time * 100.0) * 0.1;
-      color += vec3(grain) + vec3(grain); // Add a lot of grain
+      color += vec3(grain); // Add grain. Previously I had two layers of grain, but it caused some moire-like patterns on mobile.
 
       gl_FragColor = vec4(color, 1.0);
     }
