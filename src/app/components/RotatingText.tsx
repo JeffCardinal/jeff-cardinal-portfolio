@@ -19,9 +19,9 @@ function RotatingText() {
   
     return (
       <div
+        className="top-[66%] sm:top-[70%] lg:top-[59%]"
         style={{
           position: "absolute",
-          top: "59%",
           fontSize: "clamp(40px, 4vw, 64px)",
           fontWeight: "bold",
           display: "flex",
