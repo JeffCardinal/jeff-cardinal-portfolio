@@ -104,7 +104,7 @@ export default function _3JS() {
         
             {/* Process */}
             <div>
-                <div className="text-2xl md:text-4xl lg:text-7xl font-distancia pt-8 px-8 bg-transparent text-rose-500">
+                <div className="text-2xl md:text-4xl lg:text-7xl font-distancia pt-8 px-8 bg-black text-rose-500">
                     Process:
                 </div>
                 <div className="text-white w-full text-left justify-center items-center align-middle p-8">
@@ -146,7 +146,7 @@ export default function _3JS() {
                     />
                 </div>
             </div>
-            <Footer textColor={'text-white'}/>
+            <Footer textColor={'text-white'} bgColor={'bg-black'}/>
         </>
     );
 }
