@@ -19,7 +19,7 @@ export default function Page() {
                 objectFit='contain'
               />
             </div>
-            <div className="justify-start text-start sm:px-2 px-8 lg:w-[500px] md:w-[300px] sm:w-[300px]">
+            <div className="justify-start text-start sm:px-2 px-8 lg:w-[500px] md:w-[300px] sm:w-[300px] text-white">
               <div className="font-distancia text-2xl pt-8">
                 Yeah, about me.
               </div>

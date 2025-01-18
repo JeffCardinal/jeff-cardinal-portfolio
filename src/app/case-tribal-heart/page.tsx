@@ -73,9 +73,9 @@ function Torus(
 
 export default function _3JS() {
     return (
-        <>
+        <div className="bg-black">
             {/* 3D Canvas */}
-            <div className="h-screen min-h-screen bg-black">
+            <div className="h-screen min-h-screen">
                 <div className="relative w-full">
                     <div className="absolute w-full top-24 items-center text-center px-8 z-10 select-none">
                         <div className="font-distancia text-2xl text-rose-500">
@@ -103,15 +103,15 @@ export default function _3JS() {
             </div>
         
             {/* Process */}
-            <div>
-                <div className="text-2xl md:text-4xl lg:text-7xl font-distancia pt-8 px-8 bg-black text-rose-500">
+            <div className="">
+                <div className="text-2xl md:text-4xl lg:text-7xl font-distancia pt-8 px-8 text-rose-500">
                     Process:
                 </div>
                 <div className="text-white w-full text-left justify-center items-center align-middle p-8">
                     Sketch in Adobe Illustrator. Rendered in Blender using Cycles. Custom material set to mimic real diamond refractive index. Graffiti background from construction zone in Montreal, shot on iPhone 13.
                 </div>
             </div>
-            <div className="flex flex-wrap lg:flex-row sm:flex-col items-center justify-center bg-black">
+            <div className="flex flex-wrap lg:flex-row sm:flex-col items-center justify-center">
                 <div className="lg:w-1/3 sm:w-full px-8 pt-8">
                     <Image
                         src={`/images/case-tribal-heart/tribal-heart-wire.png`}
@@ -147,6 +147,6 @@ export default function _3JS() {
                 </div>
             </div>
             <Footer textColor={'text-white'} bgColor={'bg-black'}/>
-        </>
+        </div>
     );
 }
