@@ -153,8 +153,21 @@ export default function Page() {
           bgColor={"bg-teal-400"}
         >
           <FeatureFont
-            title="RetRoh!"
-            description="A cute retrospective board for reflecting on your Agile projects after each sprint."
+            title="GPU Booking (2024)"
+            description="Lightweight UI component for booking GPUs. Hover to open."
+            inspiration=""
+            tools="React, Tailwind"
+            imageName="ui-projects/gpu.jpg"
+            imageHoverName="ui-projects/gpu-2.jpg"
+            bgColor="bg-black"
+            textColor="text-white"
+            font={'w-full block text-3xl lg:text-4xl font-distancia'}
+            isTitleVerticallyCentered={false}>
+          {undefined}
+          </FeatureFont>
+          <FeatureFont
+            title="RetRoh! (2017)"
+            description="A cute retrospective board for reflecting on your Agile projects after each sprint. Hover for login page."
             inspiration=""
             tools="React, Spring Boot, PostgreSQL"
             imageName="ui-projects/retroh-board.jpg"
@@ -190,7 +203,7 @@ export default function Page() {
             font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
             isTitleVerticallyCentered={false}
           >
-            <div className="pt-2"><Link href=""><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white text-white bg-black hover:text-white hover:bg-black rounded-full transition duration-300 font-distancia text-2xl line-through opacity-50">Download</button></Link></div>
+            <div className="pt-2"><><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white text-white bg-black hover:text-white hover:bg-black rounded-full transition duration-300 font-distancia text-2xl line-through opacity-50">Download</button></></div>
           </FeatureFont>
           
           <FeatureDouble
