@@ -16,7 +16,7 @@ export default function Video(
         </div>
     }
   return (
-    <div className="relative group " style={{ width: "400px", overflow: "hidden" }}>
+    <div className="relative group" style={{ width: "400px", overflow: "hidden" }}>
         <video width="400" playsInline autoPlay loop muted className="block">
             <source src={videoUrl} type="video/mp4" />
             Your browser does not support the video tag.

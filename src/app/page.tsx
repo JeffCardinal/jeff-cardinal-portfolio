@@ -13,6 +13,8 @@ import Image from 'next/image'
 import UnderConstruction from './components/UnderConstruction'
 import _3JS from './components/_3JS'
 import Footer from './components/Footer';
+import FeatureDouble from './components/FeatureDouble';
+import FeatureFont from './components/FeatureFont';
 
 export default function Page() {
   return (
@@ -72,8 +74,8 @@ export default function Page() {
             description="Branding for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
             inspiration="Minimalism and kawaii Japanese emoji."
             tools="Illustrator, Photoshop"
-            imageName="plus100logo"
-            imageHoverName="plus100logo"
+            imageName="plus100logo.png"
+            imageHoverName="plus100logo.png"
             bgColor="bg-white"
             textColor="text-black"
           >
@@ -85,10 +87,10 @@ export default function Page() {
             description="Flyer advertisement for Chicago techno party."
             inspiration="Liquid chrome entangles an iconic 90s acid smiley in Y2K fashion. Custom goop font for DR. GABBA."
             tools="Cinema 4D, Illustrator, Photoshop"
-            imageName="drgabbaflyer"
-            imageHoverName="drgabbaflyer"
+            imageName="drgabbaflyer.png"
+            imageHoverName="drgabbaflyer.png"
             bgColor="bg-black"
-            textColor="text-lime-500"
+            textColor="text-lime-400"
           >
             {undefined}
           </Feature>
@@ -98,8 +100,8 @@ export default function Page() {
             description="Album cover for my debut album, Mana Pool."
             inspiration="Minimalistic aquatic ambiance."
             tools="Illustrator, Photoshop"
-            imageName="manapool"
-            imageHoverName="manapool"
+            imageName="manapool.png"
+            imageHoverName="manapool.png"
             bgColor="bg-sky-400"
             textColor="text-white"
           >
@@ -111,8 +113,8 @@ export default function Page() {
             description="Logo design for a band. It's mirrored on the y-axis, try to read it. Hover for a surprise."
             inspiration="Metalcore logo."
             tools="Illustrator, Photoshop"
-            imageName="htmhell-pink"
-            imageHoverName="htmhell-sage"
+            imageName="htmhell-pink.png"
+            imageHoverName="htmhell-sage.png"
             bgColor="bg-black"
             textColor="text-[#ff00aa]"
           >
@@ -141,7 +143,7 @@ export default function Page() {
           <CodeFeature
             title='GOJIRA - SYNTH OSC'
             bgColor='bg-black'
-            textColor='text-lime-500'
+            textColor='text-lime-400'
           >
           </CodeFeature>
         </Breaker>
@@ -150,7 +152,19 @@ export default function Page() {
           title={"[UI/UX]"}
           bgColor={"bg-teal-400"}
         >
-          <UnderConstruction textColor='black' bgColor='bg-black'/>
+          <FeatureFont
+            title="RetRoh!"
+            description="A cute retrospective board for reflecting on your Agile projects after each sprint."
+            inspiration=""
+            tools="React, Spring Boot, PostgreSQL"
+            imageName="ui-projects/retroh-board.jpg"
+            imageHoverName="ui-projects/retroh-login.jpg"
+            bgColor="bg-white"
+            textColor="text-black"
+            font={'w-full block text-3xl lg:text-4xl font-distancia'}
+            isTitleVerticallyCentered={false}>
+          {undefined}
+          </FeatureFont>
         </Breaker>
 
         <Breaker 
@@ -158,6 +172,37 @@ export default function Page() {
           bgColor={"bg-lime-400"}
         >
           <UnderConstruction textColor='black' bgColor='bg-black'/>
+        </Breaker>
+
+        <Breaker 
+          title={"[FONTS]"}
+          bgColor={"bg-yellow-300"}
+        >
+          <FeatureFont
+            title="Goupe"
+            description={`Read like "coupe". Goupe is a fun, funky flowing font for all your goopy design needs.`}
+            inspiration="Modern retro font. Currently unavailable for download, but I will be releasing it officially in Q1 2025, so please stay tuned."
+            tools="Procreate, Illustrator, Fontself"
+            imageName="fonts/goopdemo.jpg"
+            imageHoverName="fonts/goopdemo-black.jpg"
+            bgColor="bg-black"
+            textColor="text-white"
+            font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
+            isTitleVerticallyCentered={false}
+          >
+            <div className="pt-2"><Link href=""><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white text-white bg-black hover:text-white hover:bg-black rounded-full transition duration-300 font-distancia text-2xl line-through opacity-50">Download</button></Link></div>
+          </FeatureFont>
+          
+          <FeatureDouble
+            alt1={'Poster'}
+            alt2={'Model'}
+            imageName1={'fonts/PutOnASmile.png'}
+            imageHover1Name={'fonts/PutOnASmile-Crumple-ColorCorrected.png'}
+            imageName2={'fonts/supersonic6-edit.png'}
+            imageHover2Name={'fonts/supersonic6-edit-intense.png'}
+            bgColor={'bg-black'}
+            textColor={''}
+          />
         </Breaker>
         
         <Footer textColor={'text-black'}/>

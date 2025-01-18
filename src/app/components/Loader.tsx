@@ -2,7 +2,6 @@ import { Html, useProgress } from "@react-three/drei";
 
 export default function Loader() {
     const { progress } = useProgress();
-  
     return (
       <Html center>
         <div
@@ -19,7 +18,7 @@ export default function Loader() {
           }}
         >
           <h1>Initializing start up sequence...</h1>
-          <p>{Math.floor(progress)}%</p>
+          <div>{Math.floor(progress)}%</div>
         </div>
       </Html>
     );

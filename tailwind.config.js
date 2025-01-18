@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         distancia: ['Distancia-800-ExtraBold'],
+        goupe: ['Goupe'],
       },
     },
     keyframes: {
