@@ -205,7 +205,7 @@ export default function Page() {
           />
         </Breaker>
         
-        <Footer textColor={'text-black'}/>
+        <Footer textColor={'text-black'} bgColor={'bg-white'}/>
       </Container>
     </div>
   );

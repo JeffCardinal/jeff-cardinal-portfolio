@@ -2,14 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-function Footer({ textColor }: { textColor: string }) {
+function Footer({ textColor, bgColor }: { textColor: string, bgColor: string }) {
     return (
-        <div className="
+        <div className={`
             flex flex-3
             flex-col-reverse
             lg:flex-row
             justify-left items-center
-        ">
+            ${bgColor}
+        `}>
             <Image
                 className="p-8"
                 alt='Chrome JC Logo'
