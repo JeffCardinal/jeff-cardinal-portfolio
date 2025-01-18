@@ -17,8 +17,9 @@ export default function Loader() {
             color: "#FFFFFF",
           }}
         >
+          <div className="w-12 h-12 border-8 m-4 border-white border-t-black rounded-full animate-spin items-center justify-center"/>
           <h1>Initializing start up sequence...</h1>
-          <div>{Math.floor(progress)}%</div>
+          {/* <div>{Math.floor(progress)}%</div> */}
         </div>
       </Html>
     );

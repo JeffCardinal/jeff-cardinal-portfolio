@@ -20,6 +20,10 @@ module.exports = {
       easeOutNav: {
         "0%":   { transform: "translateX(0%)" },
         "100%": { transform: "translateX(-100%)" },
+      },
+      spin: {
+        "0%":   { transform: "rotate(0deg)" },
+        "100%": { transform: "rotate(360deg)" },
       }
     },
     animation: {
@@ -29,6 +33,7 @@ module.exports = {
       easeOutNav:   'easeOutNav 300ms  ease-in-out',
       easeOutNav_2: 'easeOutNav 450ms  ease-in-out',
       easeOutNav_3: 'easeOutNav 600ms  ease-in-out',
+      spin:         'spin 1s linear infinite',
     }
   },
   plugins: [
