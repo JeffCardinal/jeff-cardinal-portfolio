@@ -32,17 +32,17 @@ export default function Feature(
           className="pb-8 lg:pb-0"
           onMouseEnter={() => setHovering(false)}
           onMouseLeave={() => setHovering(true)}
-          src={hovering ? `/images/${imageName}.png`: `/images/${imageHoverName}.png`}
+          src={hovering ? `/images/${imageName}`: `/images/${imageHoverName}`}
           alt={title} 
           width="500"
           height="0"
         />
       </div>
       <div className="flex-1 lg:pl-8">
-        <span className="w-full block text-3xl lg:text-4xl font-distancia">{title}</span>
+        <span className={`w-full block text-3xl lg:text-4xl font-distancia`}>{title}</span>
         <p>{description}</p>
         <p>{inspiration}</p>
-        <p className="italic">{tools}</p>
+        <p className="opacity-50">Tools: {tools}</p>
         <div>{ children }</div>
       </div>
     </div>

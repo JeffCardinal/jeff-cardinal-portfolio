@@ -38,3 +38,5 @@ next-env.d.ts
 # jeff's stuff
 # I want to keep the high quality videos on my local just in case I need to re-encode them later
 public/videos/
+# Just need to keep these on local, nothing super important here, might move
+public/psd
