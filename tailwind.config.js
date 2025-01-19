@@ -24,16 +24,38 @@ module.exports = {
       spin: {
         "0%":   { transform: "rotate(0deg)" },
         "100%": { transform: "rotate(360deg)" },
+      },
+      loadInFromLeft: {
+        "0%":   {
+          opacity: 0,
+          transform: "translateX(-2%)",
+         },
+        "100%": {
+          opacity: 1,
+          transform: "translateX(0%)",
+         },
+      },
+      loadInFromRight: {
+        "0%":   {
+          opacity: 0,
+          transform: "translateX(2%)",
+         },
+        "100%": {
+          opacity: 1,
+          transform: "translateX(0%)",
+         },
       }
     },
     animation: {
-      easeInNav:    'easeInNav  300ms  ease-in-out',
-      easeInNav_2:  'easeInNav  450ms  ease-in-out',
-      easeInNav_3:  'easeInNav  600ms  ease-in-out',
-      easeOutNav:   'easeOutNav 300ms  ease-in-out',
-      easeOutNav_2: 'easeOutNav 450ms  ease-in-out',
-      easeOutNav_3: 'easeOutNav 600ms  ease-in-out',
-      spin:         'spin 1s linear infinite',
+      easeInNav:      'easeInNav  300ms  ease-in-out',
+      easeInNav_2:    'easeInNav  450ms  ease-in-out',
+      easeInNav_3:    'easeInNav  600ms  ease-in-out',
+      easeOutNav:     'easeOutNav 300ms  ease-in-out',
+      easeOutNav_2:   'easeOutNav 450ms  ease-in-out',
+      easeOutNav_3:   'easeOutNav 600ms  ease-in-out',
+      spin:           'spin 1s linear infinite',
+      loadInFromLeft: 'loadInFromLeft 0.5s ease-in-out',
+      loadInFromRight: 'loadInFromRight 0.5s ease-in-out',
     }
   },
   plugins: [
