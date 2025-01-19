@@ -16,6 +16,9 @@ import Footer from './components/Footer';
 import FeatureDouble from './components/FeatureDouble';
 import FeatureFont from './components/FeatureFont';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 export default function Page() {
   return (
     <div className="bg-white">
@@ -163,7 +166,38 @@ export default function Page() {
             textColor="text-white"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
-          {undefined}
+            <div className="pt-2">
+              <Link href="https://sf-compute-takehome.vercel.app/" target="_blank">
+                <button className="pt-[2px] px-4 mr-4 outline outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
+                  Demo
+                </button>
+              </Link>
+            </div>
+          </FeatureFont>
+          <FeatureFont
+            title="Social Portal (2019)"
+            description={`Here's a "hero" screen for a social portal I designed in 2019. In 2025, I ported the site to use Vite. It animates, so be sure to check the demo.`}
+            inspiration=""
+            tools="React, Vite, CSS3 Animations"
+            imageName="ui-projects/jeffcardinal-2019.jpg"
+            imageHoverName="ui-projects/jeffcardinal-2019.jpg"
+            bgColor="bg-sky-500"
+            textColor="text-white"
+            font={'w-full block text-3xl lg:text-4xl font-distancia'}
+            isTitleVerticallyCentered={false}>
+            <div className="pt-2 flex flex-row align-middle">
+              <Link href="https://jeff-cardinal-website.vercel.app/" target="_blank">
+                <button className="pt-[2px] px-4 mr-4 outline outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
+                  Demo
+                </button>
+              </Link>
+              <Link href="https://github.com/JeffCardinal/JeffCardinalWebsite/" target="_blank">
+                <button className="outline outline-white mr-4 hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
+                  <div className="h-6 w-6 ml-2 mt-[5px]"><FontAwesomeIcon icon={faGithub} /></div>
+                  <div className="pt-[2px] pl-2 pr-4">Github</div>
+                </button>
+              </Link>              
+            </div>
           </FeatureFont>
           <FeatureFont
             title="RetRoh! (2017)"
@@ -176,7 +210,7 @@ export default function Page() {
             textColor="text-black"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
-          {undefined}
+            {undefined}
           </FeatureFont>
         </Breaker>
 

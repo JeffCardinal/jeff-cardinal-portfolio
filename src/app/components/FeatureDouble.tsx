@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image'
 
 export default function Feature(
