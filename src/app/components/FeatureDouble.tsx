@@ -28,7 +28,7 @@ export default function Feature(
       <div className="text-center pb-8">Example usage</div>
       <div className={`box-border pb-8 mx-8 lg:px-16 flex flex-col lg:flex-row items-center justify-center gap-8`}>
         <Image
-          className=""
+          className="observableLeft opacity-0"
           onMouseEnter={() => setHovering1(false)}
           onMouseLeave={() => setHovering1(true)}
           src={hovering1 ? `/images/${imageName1}` : `/images/${imageHover1Name}`}
@@ -37,7 +37,7 @@ export default function Feature(
           height={0}
         />
         <Image
-          className=""
+          className="observableRight opacity-0"
           onMouseEnter={() => setHovering2(false)}
           onMouseLeave={() => setHovering2(true)}
           src={hovering2 ? `/images/${imageName2}` : `/images/${imageHover2Name}`}
