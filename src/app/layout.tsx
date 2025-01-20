@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <MobileNav>{children}</MobileNav>
         <Header>
-          <Link href="/">     
+          <Link href="/">
             <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white hover:outline-black mix-blend-lighten hover:bg-white text-white hover:text-black rounded-full transition duration-300 font-distancia text-md">
               Home
             </button>

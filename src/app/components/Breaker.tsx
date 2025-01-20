@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useState, Suspense } from 'react';
+import React, { ReactNode, useState, Suspense, useEffect } from 'react';
 
 export default function Breaker({
   children,
@@ -12,10 +12,35 @@ export default function Breaker({
 }) {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const observableElements = document.querySelectorAll('.observableLeft, .observableRight');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.target.classList.contains('observableLeft')) {
+            entry.target.classList.toggle('animate-loadInFromLeft', entry.isIntersecting);
+          }
+          if (entry.target.classList.contains('observableRight')) {
+            entry.target.classList.toggle('animate-loadInFromRight', entry.isIntersecting);
+          }
+          if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            entry.target.classList.remove('opacity-0');
+            entry.target.classList.remove('observableLeft');
+            entry.target.classList.remove('observableRight');
+          }
+        })
+    }, { threshold: 0.75 });
+
+    observableElements.forEach((element) => {
+      observer.observe(element);
+    });
+  }, [open])
+
   return (
     <>
       <div
-        onClick={() => setOpen(!open)}
+        onClick={() => { setOpen(!open); }}
         className={`${bgColor} h-12 pl-16 flex items-center transition-all duration-[500ms] ease-in-out justify-center text-white border-b-1 border-black select-none
           ${open ? 'py-8' : 'py-16'}
         `}

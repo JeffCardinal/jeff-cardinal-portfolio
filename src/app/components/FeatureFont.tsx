@@ -33,7 +33,7 @@ export default function Feature(
 
   return (
     <div className={`box-border p-8 flex flex-col lg:flex-row ${verticalCentering} ${bgColor} ${textColor}`}>
-      <div className="flex flex-1 justify-center lg:justify-end animate-loadInFromLeft">
+      <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
         <Image
           className="pb-8 lg:pb-0  object-scale-down"
           onMouseEnter={() => setHovering(false)}
@@ -44,7 +44,7 @@ export default function Feature(
           height="0"
         />
       </div>
-      <div className="flex-1 lg:pl-8 animate-loadInFromRight">
+      <div className="flex-1 lg:pl-8 observableRight opacity-0">
         <span className={`w-full block ${font}`}>{title}</span>
         <p>{description}</p>
         <p>{inspiration}</p>

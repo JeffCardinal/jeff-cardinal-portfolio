@@ -9,7 +9,6 @@ import Container from './components/Container'
 import Breaker from './components/Breaker'
 import Scroller from './components/Scroller'
 import Splash from './components/Splash'
-import Image from 'next/image'
 import UnderConstruction from './components/UnderConstruction'
 import _3JS from './components/_3JS'
 import Footer from './components/Footer';
