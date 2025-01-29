@@ -13,28 +13,30 @@ export default function Breaker({
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const observableElements = document.querySelectorAll('.observableLeft, .observableRight');
+    setTimeout(() => {
+      const observableElements = document.querySelectorAll('.observableLeft, .observableRight');
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.target.classList.contains('observableLeft')) {
-            entry.target.classList.toggle('animate-loadInFromLeft', entry.isIntersecting);
-          }
-          if (entry.target.classList.contains('observableRight')) {
-            entry.target.classList.toggle('animate-loadInFromRight', entry.isIntersecting);
-          }
-          if (entry.isIntersecting) {
-            observer.unobserve(entry.target);
-            entry.target.classList.remove('opacity-0');
-            entry.target.classList.remove('observableLeft');
-            entry.target.classList.remove('observableRight');
-          }
-        })
-    }, { threshold: 0.75 });
-
-    observableElements.forEach((element) => {
-      observer.observe(element);
-    });
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.target.classList.contains('observableLeft')) {
+              entry.target.classList.toggle('animate-loadInFromLeft', entry.isIntersecting);
+            }
+            if (entry.target.classList.contains('observableRight')) {
+              entry.target.classList.toggle('animate-loadInFromRight', entry.isIntersecting);
+            }
+            if (entry.isIntersecting) {
+              observer.unobserve(entry.target);
+              entry.target.classList.remove('opacity-0');
+              entry.target.classList.remove('observableLeft');
+              entry.target.classList.remove('observableRight');
+            }
+          })
+      }, { threshold: 0.75 });
+  
+      observableElements.forEach((element) => {
+        observer.observe(element);
+      });
+    }, 250)
   }, [open])
 
   return (
@@ -58,9 +60,9 @@ export default function Breaker({
       >
         {open && (
           <div className="overflow-hidden">
-            <Suspense fallback={<div className="text-center">Loading!...</div>}>
+            {/* <Suspense fallback={<div className="text-center">Loading!...</div>}> */}
               {children}
-            </Suspense>
+            {/* </Suspense> */}
           </div>
         )}
       </div>

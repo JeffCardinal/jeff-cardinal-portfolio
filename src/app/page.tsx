@@ -72,6 +72,24 @@ export default function Page() {
           bgColor="bg-orange-400"
         >
           <Feature
+            title="Floating in the Breeze"
+            description="Remix single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover."
+            inspiration="Y2K chrometype (remix) and 70s psychedelia (original)."
+            tools="Blender, Illustrator, Photoshop, Procreate"
+            imageName="FloatingInTheBreeze-Remix-1080.jpg"
+            imageHoverName="FloatingInTheBreeze-Original-1080.jpg"
+            bgColor="bg-sky-400"
+            textColor="text-white"
+          >
+            <div className="pt-2">
+              <Link href="https://open.spotify.com/track/1apyw8zRVvzi8nSe3Ipsdk?si=5d99f98d77ef4265">
+                <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white hover:outline-black text-white bg-sky-400 hover:text-black hover:bg-white rounded-full transition duration-300 font-distancia text-2xl">
+                  Stream now
+                </button>
+              </Link>
+            </div>
+          </Feature>
+          <Feature
             title="PLUS100 Branding"
             description="Branding for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
             inspiration="Minimalism and kawaii Japanese emoji."
