@@ -17,6 +17,7 @@ export default function MobileNav({ children }: { children: ReactNode }) {
 
   const handleClick = () => {
     window.scrollTo({ top: 0});
+    document.documentElement.scrollTop = 0;
     if (!inEffect && !outEffect && !isAnimating) {
       setInEffect(true);
     }

@@ -25,7 +25,7 @@ export default function Feature(
 
   return (
     <div className={`${bgColor}`}>
-      <div className="text-center pb-8">Example usage</div>
+      <div className="text-center pb-8 text-2xl">Example usage:</div>
       <div className={`box-border pb-8 mx-8 lg:px-16 flex flex-col lg:flex-row items-center justify-center gap-8`}>
         <Image
           className="observableLeft opacity-0"

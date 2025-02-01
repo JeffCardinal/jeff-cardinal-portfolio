@@ -17,6 +17,8 @@ import FeatureFont from './components/FeatureFont';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Button from './components/Button';
+import ArrowNav from './components/arrow-nav';
 
 export default function Page() {
   return (
@@ -58,7 +60,7 @@ export default function Page() {
         <Marquee
           pauseOnHover={true}
           speed={100}
-          className="border-t-2 border-b-2 border-black"
+          className="border-t-[5px] border-b-[5px] border-black"
         >
           <Scroller title="FEATURES ✦"/>
           <Scroller title="FEATURES ✦"/>
@@ -71,7 +73,7 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
-          <Feature
+            <Feature
             title="Floating in the Breeze"
             description="Remix single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover."
             inspiration="Y2K chrometype (remix) and 70s psychedelia (original)."
@@ -80,15 +82,21 @@ export default function Page() {
             imageHoverName="FloatingInTheBreeze-Original-1080.jpg"
             bgColor="bg-sky-400"
             textColor="text-white"
-          >
-            <div className="pt-2">
-              <Link href="https://open.spotify.com/track/1apyw8zRVvzi8nSe3Ipsdk?si=5d99f98d77ef4265">
-                <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white hover:outline-black text-white bg-sky-400 hover:text-black hover:bg-white rounded-full transition duration-300 font-distancia text-2xl">
-                  Stream now
-                </button>
-              </Link>
-            </div>
-          </Feature>
+            >
+            <Button 
+              text={'Stream Now'} 
+              link={'https://open.spotify.com/track/1apyw8zRVvzi8nSe3Ipsdk?si=affc3e2daa0346eb'} 
+              textColor={'text-white'} 
+              hoverTextColor={'hover:text-black'} 
+              bgColor={''} 
+              hoverBgColor={'hover:bg-white'} 
+              outlineColor={'outline-white'} 
+              hoverOutlineColor={'hover:outline-black'} 
+              optional={'ml-0 mt-2'} 
+              hoverGlyph={<ArrowNav color={'#000000'}/>}
+              hoverable={true}
+            />
+            </Feature>
           <Feature
             title="PLUS100 Branding"
             description="Branding for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
@@ -99,7 +107,30 @@ export default function Page() {
             bgColor="bg-white"
             textColor="text-black"
           >
-            <div className="pt-2"><Link href="https://plus100.bandcamp.com/"><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-rose-500 text-rose-500 bg-white hover:text-white hover:bg-rose-500 rounded-full transition duration-300 font-distancia text-2xl">To Bandcamp</button></Link></div>
+            {/* <div className="pt-2">
+              <Link href="https://plus100.bandcamp.com/">
+                <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-[5px] 
+                outline-rose-500 text-rose-500 bg-white hover:text-white hover:bg-rose-500 
+                rounded-full transition duration-300 font-distancia text-2xl">
+                  Visit
+                </button>
+              </Link>
+            </div> */}
+
+            <Button 
+              text={'Visit Site'} 
+              link={'https://plus100.bandcamp.com/'} 
+              textColor={'text-rose-500'} 
+              hoverTextColor={'hover:text-white'} 
+              bgColor={'bg-white'} 
+              hoverBgColor={'hover:bg-rose-500'} 
+              outlineColor={'outline-rose-500'} 
+              hoverOutlineColor={'hover:outline-rose-500'} 
+              optional={'ml-0 mt-2'} 
+              hoverGlyph={<ArrowNav color={"#FFFFFF"}/>}
+              hoverable={true}
+            />
+
           </Feature>
 
           <Feature
@@ -183,9 +214,9 @@ export default function Page() {
             textColor="text-white"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
-            <div className="pt-2">
+            <div className="pt-2 invisible lg:visible">
               <Link href="https://sf-compute-takehome.vercel.app/" target="_blank">
-                <button className="pt-[2px] px-4 mr-4 outline outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
+                <button className="pt-[2px] px-4 mr-4 outline outline-[5px] outline-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:outline-indigo-500 rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
                 </button>
               </Link>
@@ -203,13 +234,13 @@ export default function Page() {
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
             <div className="pt-2 flex flex-row align-middle">
-              <Link href="https://jeff-cardinal-website.vercel.app/" target="_blank">
-                <button className="pt-[2px] px-4 mr-4 outline outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
+              <Link href="https://jeff-cardinal-website.vercel.app/" target="_blank" className="hidden lg:flex">
+                <button className="pt-[2px] px-4 mr-4 outline outline-[5px] outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
                 </button>
               </Link>
               <Link href="https://github.com/JeffCardinal/JeffCardinalWebsite/" target="_blank">
-                <button className="outline outline-white mr-4 hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
+                <button className="outline outline-[5px] outline-white mr-4 hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
                   <div className="h-6 w-6 ml-2 mt-[5px]"><FontAwesomeIcon icon={faGithub} /></div>
                   <div className="pt-[2px] pl-2 pr-4">Github</div>
                 </button>
@@ -254,7 +285,7 @@ export default function Page() {
             font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
             isTitleVerticallyCentered={false}
           >
-            <div className="pt-2"><><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white text-white bg-black hover:text-white hover:bg-black rounded-full transition duration-300 font-distancia text-2xl line-through opacity-50">Download</button></></div>
+            <div className="pt-2"><><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-[5px] outline-white text-white bg-black hover:text-white hover:bg-black rounded-full transition duration-300 font-distancia text-2xl line-through opacity-50">Download</button></></div>
           </FeatureFont>
           
           <FeatureDouble
