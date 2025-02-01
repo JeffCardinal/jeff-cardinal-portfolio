@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Link from "next/link";
 import MobileNav from "./components/MobileNav";
 import Head from "next/head";
+import Button from "./components/Button";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,21 +27,45 @@ export default function RootLayout({
       <body className={inter.className}>
         <MobileNav>{children}</MobileNav>
         <Header>
-          <Link href="/">
-            <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white hover:outline-black mix-blend-lighten hover:bg-white text-white hover:text-black rounded-full transition duration-300 font-distancia text-md">
-              Home
-            </button>
-          </Link>
-          <Link href="/about">
-          <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-white hover:outline-black mix-blend-lighten text-opacity-100 hover:bg-white text-white hover:text-black rounded-full transition duration-300 font-distancia text-md">
-            About
-          </button>
-          </Link>
-          <Link href="/JeffCardinalResume2024PDF.pdf">
-            <button className="pt-[2px] pr-4 pl-4 mr-0 outline outline-white hover:outline-black mix-blend-lighten hover:bg-white text-white hover:text-black rounded-full transition duration-300 font-distancia text-md">
-              Resume
-            </button>
-          </Link>
+          <Button
+            text="Home"
+            link="/"
+            textColor="text-white"
+            hoverTextColor="hover:text-black"
+            bgColor=""
+            hoverBgColor="hover:bg-white"
+            outlineColor="outline-white"
+            hoverOutlineColor="hover:outline-black"
+            optional="mix-blend-lighten"
+            hoverGlyph={undefined}
+            hoverable={false}
+          />
+          <Button
+            text="About"
+            link="/about"
+            textColor="text-white"
+            hoverTextColor="hover:text-black"
+            bgColor=""
+            hoverBgColor="hover:bg-white"
+            outlineColor="outline-white"
+            hoverOutlineColor="hover:outline-black"
+            optional="mix-blend-lighten" 
+            hoverGlyph={undefined}
+            hoverable={false}
+          />
+          <Button
+            text="Resume"
+            link="/JeffCardinalResume2024PDF.pdf"
+            textColor="text-white"
+            hoverTextColor="hover:text-black"
+            bgColor=""
+            hoverBgColor="hover:bg-white"
+            outlineColor="outline-white"
+            hoverOutlineColor="hover:outline-black"
+            optional="mix-blend-lighten"
+            hoverGlyph={undefined}
+            hoverable={false}
+          />
         </Header>
         {children}
       </body>

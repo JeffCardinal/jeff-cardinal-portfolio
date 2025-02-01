@@ -44,18 +44,33 @@ module.exports = {
           opacity: 1,
           transform: "translateX(0%)",
          },
-      }
+      },
+      buttonGlyphEaseIn: {
+        "0%":   {
+          opacity: 0,
+          transform: "translateX(20%)",
+         },
+        "50%": {
+          opacity: 1,
+          transform: "translateX(-10%)",
+         },
+         "100%": {
+          opacity: 0,
+          transform: "translateX(-40%)",
+         }
+      },
     },
     animation: {
-      easeInNav:      'easeInNav  300ms  ease-in-out',
-      easeInNav_2:    'easeInNav  450ms  ease-in-out',
-      easeInNav_3:    'easeInNav  600ms  ease-in-out',
-      easeOutNav:     'easeOutNav 300ms  ease-in-out',
-      easeOutNav_2:   'easeOutNav 450ms  ease-in-out',
-      easeOutNav_3:   'easeOutNav 600ms  ease-in-out',
-      spin:           'spin 1s linear infinite',
-      loadInFromLeft: 'loadInFromLeft 0.5s ease-in-out',
-      loadInFromRight: 'loadInFromRight 0.5s ease-in-out',
+      easeInNav:         'easeInNav  300ms  ease-in-out',
+      easeInNav_2:       'easeInNav  450ms  ease-in-out',
+      easeInNav_3:       'easeInNav  600ms  ease-in-out',
+      easeOutNav:        'easeOutNav 300ms  ease-in-out',
+      easeOutNav_2:      'easeOutNav 450ms  ease-in-out',
+      easeOutNav_3:      'easeOutNav 600ms  ease-in-out',
+      spin:              'spin 1s linear infinite',
+      loadInFromLeft:    'loadInFromLeft 0.5s ease-in-out',
+      loadInFromRight:   'loadInFromRight 0.5s ease-in-out',
+      buttonGlyphEaseIn: 'buttonGlyphEaseIn 1s linear infinite',
     }
   },
   plugins: [
