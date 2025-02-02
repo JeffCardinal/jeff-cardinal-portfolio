@@ -45,6 +45,14 @@ module.exports = {
           transform: "translateX(0%)",
          },
       },
+      loadIn: {
+        "0%":   {
+          opacity: 0,
+         },
+        "100%": {
+          opacity: 1,
+         },
+      },
       buttonGlyphEaseIn: {
         "0%":   {
           opacity: 0,
@@ -70,6 +78,7 @@ module.exports = {
       spin:              'spin 1s linear infinite',
       loadInFromLeft:    'loadInFromLeft 0.5s ease-in-out',
       loadInFromRight:   'loadInFromRight 0.5s ease-in-out',
+      loadIn:            'loadIn 0.5s ease-in-out',
       buttonGlyphEaseIn: 'buttonGlyphEaseIn 1s linear infinite',
     }
   },
