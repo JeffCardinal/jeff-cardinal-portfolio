@@ -75,13 +75,14 @@ return (
             </div>
             <div className="mt-8 p-8 bg-[#111111]">
               <video 
-                src="/videos-optimized/gojira-osc.mp4" 
                 className="w-full h-60 object-cover" 
                 autoPlay 
                 loop
                 muted
                 playsInline
-              />
+              >
+                <source src="/videos-optimized/gojira-osc.mp4" type="video/mp4"/>
+              </video>
             </div>
           </div>
         </div>
