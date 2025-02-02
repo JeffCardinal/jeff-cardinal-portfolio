@@ -78,8 +78,9 @@ return (
                 src="/videos-optimized/gojira-osc.mp4" 
                 className="w-full h-60 object-cover" 
                 autoPlay 
-                loop 
+                loop
                 muted
+                playsInline
               />
             </div>
           </div>
