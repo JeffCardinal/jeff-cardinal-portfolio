@@ -5,7 +5,8 @@ import Header from "./components/Header";
 import MobileNav from "./components/MobileNav";
 import Head from "next/head";
 import Button from "./components/Button";
-import { Analytics } from "@vercel/analytics/react"
+import { VercelAnalytics } from "./lib/analytics";
+import { VercelSpeedInsights } from "./lib/speed-insights";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -67,7 +68,8 @@ export default function RootLayout({
             hoverable={false}
           />
         </Header>
-        <Analytics/>
+        <VercelAnalytics/>
+        <VercelSpeedInsights/>
         {children}
       </body>
     </html>
