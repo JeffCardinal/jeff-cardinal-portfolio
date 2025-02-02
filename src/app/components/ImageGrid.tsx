@@ -18,6 +18,29 @@ const ImageGrid = () => {
         }
     }, [selectedIndex]);
 
+    useEffect(() => {
+        setTimeout(() => {
+          const observableElements = document.querySelectorAll('.observable');
+    
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.target.classList.contains('observable')) {
+                  entry.target.classList.toggle('animate-loadIn', entry.isIntersecting);
+                }
+                if (entry.isIntersecting) {
+                  observer.unobserve(entry.target);
+                  entry.target.classList.remove('opacity-0');
+                  entry.target.classList.remove('observable');
+                }
+              })
+          }, { threshold: 1 });
+      
+          observableElements.forEach((element) => {
+            observer.observe(element);
+          });
+        }, 250)
+      }, [open])
+
     const closeModal = () => {
         setIsVisible(false);
         setTimeout(() => setSelectedIndex(null), 300);
@@ -40,13 +63,13 @@ const ImageGrid = () => {
         <div className="font-distancia bg-black pt-2 text-center text-4xl">Album Cover Grid</div>
         <div className="grid md:grid-cols-4 md:grid-rows-4 lg:grid-cols-4 lg:grid-rows-4 grid-cols-2 grid-rows-8 gap-[5px] p-[5px] lg:px-[300px] bg-black">
             {imageNames.map((name, index) => (
-            <div key={index} className="w-full h-full bg-gray-300 flex items-center justify-center cursor-pointer"
+            <div key={index} className="w-full h-full bg-black flex items-center justify-center cursor-pointer"
                 onClick={() => setSelectedIndex(index)}
             >
                 <img 
                     src={`/images/album-covers/${name}`} 
                     alt={`Image ${index + 1}`} 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover observable loadIn opacity-0"
                 />
             </div>
             ))}
