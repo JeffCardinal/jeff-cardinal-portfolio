@@ -2,6 +2,7 @@
 import React, { ReactNode } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { obsidian } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import Video from './Video';
 
 export default function CodeFeature({
   title,
@@ -57,7 +58,7 @@ return (
               </div>
             </div>
           </div>
-          <div className="mt-8 align-middle lg:w-1/2">
+          <div className="lg:mt-8 align-middle lg:w-1/2">
             <div className="w-full bg-[#111111] p-8">
               <span>Check out the eponymous track made entirely with Gojira here:</span>
               <div className="mt-8">
@@ -72,7 +73,15 @@ return (
                 ></iframe>
               </div>
             </div>
-            {/* <div className="mt-8 mb-8 p-4 bg-[#111111]">Test</div> */}
+            <div className="mt-8 p-8 bg-[#111111]">
+              <video 
+                src="/videos-optimized/gojira-osc.mp4" 
+                className="w-full h-60 object-cover" 
+                autoPlay 
+                loop 
+                muted
+              />
+            </div>
           </div>
         </div>
       </div>
