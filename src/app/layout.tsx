@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
-import Link from "next/link";
 import MobileNav from "./components/MobileNav";
 import Head from "next/head";
 import Button from "./components/Button";
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -67,6 +67,7 @@ export default function RootLayout({
             hoverable={false}
           />
         </Header>
+        <Analytics/>
         {children}
       </body>
     </html>
