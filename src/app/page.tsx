@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Button from './components/Button';
 import ArrowNav from './components/arrow-nav';
+import ImageGrid from './components/ImageGrid';
 
 export default function Page() {
   return (
@@ -171,6 +172,7 @@ export default function Page() {
           >
             {undefined}
           </Feature>
+          <ImageGrid/>
         </Breaker>
 
         <Breaker 
