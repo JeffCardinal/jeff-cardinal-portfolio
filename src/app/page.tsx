@@ -197,8 +197,7 @@ export default function Page() {
             title='GOJIRA - SYNTH OSC'
             bgColor='bg-black'
             textColor='text-lime-400'
-          >
-          </CodeFeature>
+          />
         </Breaker>
 
         <Breaker 
