@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link';
-import React, { Component, ReactNode, useState } from 'react';
+import React, { Component, ReactNode, useEffect, useState } from 'react';
 
 export default function Button ({
     text,
@@ -29,6 +29,15 @@ export default function Button ({
     hoverable: boolean, // Denotes animation glyph, consider refactoring
 }) {
     const [hovering, setHovering] = useState(true);
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsSmallScreen(window.innerWidth < 640);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    
     return (
         <Link href={link}>
             <button 
@@ -46,7 +55,7 @@ export default function Button ({
                     ${optional}
             `}>
                 {
-                hoverable ?
+                hoverable && !isSmallScreen ?
                     (
                         <span className="flex items-center">
                             <span>{text}</span> 
