@@ -84,7 +84,7 @@ export default function Page() {
             textColor="text-white"
             >
             <Button 
-              text={'Stream Now'} 
+              text={'Stream'} 
               link={'https://open.spotify.com/track/1apyw8zRVvzi8nSe3Ipsdk?si=affc3e2daa0346eb'} 
               textColor={'text-white'} 
               hoverTextColor={'hover:text-black'} 
