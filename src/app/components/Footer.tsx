@@ -26,7 +26,7 @@ function Footer({ textColor, bgColor }: { textColor: string, bgColor: string }) 
                     <div className="font-distancia text-4xl">Nav</div>
                     <Link href='/'>Home</Link><br></br>
                     <Link href='/about'>About</Link><br></br>
-                    <Link href="/JeffCardinalResume2024PDF.pdf">Resume</Link><br></br>
+                    <Link href="/resume.pdf">Resume</Link><br></br>
                 </div>
             </div>
             <div className='flex grow pt-8 min-w-[300px] justify-center text-center'>
