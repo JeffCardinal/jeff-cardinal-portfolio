@@ -56,7 +56,7 @@ export default function RootLayout({
           />
           <Button
             text="Resume"
-            link="/JeffCardinalResume2024PDF.pdf"
+            link="/resume.pdf"
             textColor="text-white"
             hoverTextColor="hover:text-black"
             bgColor=""
