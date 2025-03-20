@@ -59,6 +59,7 @@ function JeffCardinalText() {
   const { viewport } = useThree();
   const scaleFactor = Math.min(viewport.width, viewport.height) * 0.065;
 
+  // TODO: Broken animation 
   const springProps = useSpring({
     scale: [0.2, 0.2, 0.2],
     to: { scale: [scaleFactor, scaleFactor, scaleFactor] },
@@ -66,7 +67,7 @@ function JeffCardinalText() {
   });
 
   return (
-    <a.group scale={springProps.scale}>
+    <a.group>
       <Float speed={3} rotationIntensity={0.5}>
         <ThreeDText position={[-0.85, 0.8, 0]} text="Jeff" />
         <ThreeDText position={[0.75, -0.8, 0]} size={0.45} text="Cardinal" />
