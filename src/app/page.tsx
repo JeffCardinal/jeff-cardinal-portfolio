@@ -27,34 +27,6 @@ export default function Page() {
 
       <Splash bgColor={'bg-sky-400'}>
         <_3JS/>
-        {/* <div className="z-10 max-w-screen text-white">
-          <div className='flex flex-col items-center text-center'>
-            <Image
-              className="flex flex-1 lg:hidden md:hidden items-center text-center"
-              src={`/images/jclogo-shiny-2.png`}
-              alt=''
-              width="400"
-              height="0"
-            />
-          </div>
-          <div className="text-4xl">Hey, my name is</div>
-          <div className="
-            font-distancia pt-2 bg-transparent
-            text-4xl
-            lg:text-7xl
-          ">
-            Jeff Cardinal
-          </div>
-          <div className="text-4xl">I'm a programmer, designer, and musician.</div>
-          <div className="mt-4">I have a <span className="italic">vision</span> for the <span className="italic">future.</span> Here's some glimpses inside.</div>
-        </div>
-        <Image
-          className="absolute left-16 z-0 max-md:hidden"
-          src={`/images/jclogo-shiny-2.png`}
-          alt=''
-          width="400"
-          height="0"
-        /> */}
       </Splash>
       
       <Container>
@@ -68,6 +40,12 @@ export default function Page() {
           <Scroller title="CLICK SOMETHIN' WILL YA? ✦"/>
           <Scroller title="FEATURES ✦"/>
           <Scroller title="FEATURES ✦"/>
+          <Scroller title="CLICK SOMETHIN' WILL YA? ✦"/>
+          <Scroller title="FEATURES ✦"/>
+          <Scroller title="FEATURES ✦"/>
+          <Scroller title="CLICK SOMETHIN' WILL YA? ✦"/>
+          <Scroller title="FEATURES ✦"/>
+          <Scroller title="FEATURES ✦"/>
         </Marquee>
 
         <Breaker
@@ -75,28 +53,29 @@ export default function Page() {
           bgColor="bg-orange-400"
         >
             <Feature
-            title="Floating in the Breeze"
-            description="Remix single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover."
-            inspiration="Y2K chrometype (remix) and 70s psychedelia (original)."
-            tools="Blender, Illustrator, Photoshop, Procreate"
-            imageName="FloatingInTheBreeze-Remix-1080.jpg"
-            imageHoverName="FloatingInTheBreeze-Original-1080.jpg"
-            bgColor="bg-sky-400"
-            textColor="text-white"
+              title="Floating in the Breeze"
+              description="Single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover. Part of a larger campaign for the release of Heaven Sample's debut record, Distorted Reality."
+              inspiration="Y2K chrometype and metalheart (remix) and 70s psychedelia and pop art (original)."
+              tools="Blender, Illustrator, Photoshop, Procreate"
+              imageName="FloatingInTheBreeze-Remix-1080.jpg"
+              imageHoverName="FloatingInTheBreeze-Original-1080.jpg"
+              bgColor="bg-sky-400"
+              textColor="white"
+              borderColor="border-white"
             >
-            <Button 
-              text={'Stream'} 
-              link={'https://open.spotify.com/track/1apyw8zRVvzi8nSe3Ipsdk?si=affc3e2daa0346eb'} 
-              textColor={'text-white'} 
-              hoverTextColor={'hover:text-black'} 
-              bgColor={''} 
-              hoverBgColor={'hover:bg-white'} 
-              outlineColor={'outline-white'} 
-              hoverOutlineColor={'hover:outline-black'} 
-              optional={'ml-0 mt-2'} 
-              hoverGlyph={<ArrowNav color={'#000000'}/>}
-              hoverable={true}
-            />
+              <Button 
+                text={'Stream'} 
+                link={'https://open.spotify.com/track/1apyw8zRVvzi8nSe3Ipsdk?si=affc3e2daa0346eb'} 
+                textColor={'text-white'} 
+                hoverTextColor={'hover:text-black'} 
+                bgColor={''} 
+                hoverBgColor={'hover:bg-white'} 
+                outlineColor={'outline-white'} 
+                hoverOutlineColor={'hover:outline-black'} 
+                optional={'ml-0 mt-2'} 
+                hoverGlyph={<ArrowNav color={'#000000'}/>}
+                hoverable={true}
+              />
             </Feature>
           <Feature
             title="PLUS100 Branding"
@@ -106,7 +85,8 @@ export default function Page() {
             imageName="plus100logo.png"
             imageHoverName="plus100logo.png"
             bgColor="bg-white"
-            textColor="text-black"
+            textColor="black"
+            borderColor="border-black"
           >
             {/* <div className="pt-2">
               <Link href="https://plus100.bandcamp.com/">
@@ -136,13 +116,14 @@ export default function Page() {
 
           <Feature
             title="DR. GABBA Flyer"
-            description="Flyer advertisement for Chicago techno party."
-            inspiration="Liquid chrome entangles an iconic 90s acid smiley in Y2K fashion. Custom goop font for DR. GABBA."
+            description="Flyer advertisement for Chicago techno party at Empty Bottle."
+            inspiration="Liquid chrome entangles an iconic 90s acid smiley in Y2K fashion. Matrix-like background. Custom goop font for DR. GABBA, which informed the later Goupe font."
             tools="Cinema 4D, Illustrator, Photoshop"
             imageName="drgabbaflyer.png"
             imageHoverName="drgabbaflyer.png"
             bgColor="bg-black"
-            textColor="text-lime-400"
+            textColor="lime-400"
+            borderColor="border-lime-400"
           >
             {undefined}
           </Feature>
@@ -155,7 +136,8 @@ export default function Page() {
             imageName="manapool.png"
             imageHoverName="manapool.png"
             bgColor="bg-sky-400"
-            textColor="text-white"
+            textColor="white"
+            borderColor="white"
           >
             {undefined}
           </Feature>
@@ -169,10 +151,10 @@ export default function Page() {
             imageHoverName="htmhell-sage.png"
             bgColor="bg-black"
             textColor="text-[#ff00aa]"
+            borderColor="border-[#ff00aa]"
           >
             {undefined}
           </Feature>
-          <ImageGrid/>
         </Breaker>
 
         <Breaker 
@@ -183,10 +165,10 @@ export default function Page() {
         </Breaker>
 
         <Breaker 
-          title={"[PHOTO]"}
+          title={"[ALBUMS]"}
           bgColor={"bg-purple-400"}
         >
-          <UnderConstruction textColor='black' bgColor='bg-black'/>
+          <ImageGrid/>
         </Breaker>
 
         <Breaker 

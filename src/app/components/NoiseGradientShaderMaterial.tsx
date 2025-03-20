@@ -76,6 +76,8 @@ export default function NoiseGradientShaderMaterial(): JSX.Element {
       uniforms={{
         time: { value: 0 },
       }}
+      depthWrite={false}
+      depthTest={false}
     />
   );
 }

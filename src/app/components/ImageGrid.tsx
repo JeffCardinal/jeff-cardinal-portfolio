@@ -60,8 +60,8 @@ const ImageGrid = () => {
 
     return (
     <>
-        <div className="font-distancia bg-black pt-2 text-center text-4xl">Album Cover Grid</div>
-        <div className="grid md:grid-cols-4 md:grid-rows-4 lg:grid-cols-4 lg:grid-rows-4 grid-cols-2 grid-rows-8 gap-[5px] p-[5px] lg:px-[300px] bg-black">
+        {/* <div className="font-distancia bg-black pt-2 text-center text-4xl">Album Cover Grid</div> */}
+        <div className="grid md:grid-cols-4 md:grid-rows-4 lg:grid-cols-4 lg:grid-rows-4 grid-cols-2 grid-rows-8 gap-[5px] p-[5px] lg:px-[200px] bg-black">
             {imageNames.map((name, index) => (
             <div key={index} className="w-full h-full bg-black flex items-center justify-center cursor-pointer"
                 onClick={() => setSelectedIndex(index)}

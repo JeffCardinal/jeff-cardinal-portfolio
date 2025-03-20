@@ -1,20 +1,6 @@
 'use client'
-import React, { ReactNode, Suspense, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Image from 'next/image'
-
-// function ImageWithDelay({ imageName, imageHoverName, title }) {
-//   const [hovering, setHovering] = useState(false);
-//   const [isSuspended, setIsSuspended] = useState(true);
-
-//   useEffect(() => {
-//     // Simulate a 5-second delay for the Suspense fallback
-//     const timeout = setTimeout(() => {
-//       setIsSuspended(false); // Allow Suspense to render the children
-//     }, 5000);
-
-//     return () => clearTimeout(timeout); // Cleanup timeout on unmount
-//   }, []);
-// }
 
 export default function Feature(
   { children,
@@ -25,7 +11,8 @@ export default function Feature(
     imageName,
     imageHoverName,
     bgColor,
-    textColor
+    textColor,
+    borderColor,
   }: { 
     children: ReactNode,
     title: string,
@@ -35,32 +22,70 @@ export default function Feature(
     imageName: string,
     imageHoverName: string,
     bgColor: string,
-    textColor: string
+    textColor: string,
+    borderColor: string,
   }) {
   const [hovering, setHovering] = useState(true);
+  const bottomPadding = children ? "my-6" : "";
 
   return (
-    <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`}>
-      <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
-        <div className="max-w-[500px] mb-8 w-full h-auto aspect-square text-black justify-center items-center">
-          <Image
-            className="pb-8 lg:pb-0"
-            onMouseEnter={() => setHovering(false)}
-            onMouseLeave={() => setHovering(true)}
-            src={hovering ? `/images/${imageName}`: `/images/${imageHoverName}`}
-            alt={title} 
-            width="500"
-            height="0"
-          />
+    <>
+      <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} text-${textColor}`}>
+        <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
+          <div className="max-w-full w-full h-auto aspect-square text-black justify-center items-center">
+            <Image
+              className="pb-8 lg:pb-0"
+              onMouseEnter={() => setHovering(false)}
+              onMouseLeave={() => setHovering(true)}
+              src={hovering ? `/images/${imageName}` : `/images/${imageHoverName}`}
+              alt={title}
+              width="1000"
+              height="0"
+            />
+          </div>
+        </div>
+
+        <div className="flex-1 lg:pl-8 observableRight opacity-0">
+          <span className="w-full block text-3xl lg:text-4xl font-distancia">{title}</span>
+
+          {/* Main Grid Container */}
+          <div className={`relative flex-col`}>
+
+            {/* Overview */}
+            <div className="relative my-8">
+              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl  font-semibold`}>
+                Overview
+              </div>
+              <div className={`p-8 border-[1px] ${borderColor}`}>
+                <p>{description}</p>
+              </div>
+            </div>
+
+            {/* Inspiration */}
+            <div className="relative my-8">
+              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+                Inspiration
+              </div>
+              <div className={`p-8 border-[1px] ${borderColor}`}>
+                <p>{inspiration}</p>
+              </div>
+            </div>
+
+            {/* Tools */}
+            <div className={`relative ${bottomPadding}`}>
+              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+                Tools
+              </div>
+              <div className={`p-8 border-[1px] ${borderColor}`}>
+                <p className="">{tools}</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div>{children}</div>
         </div>
       </div>
-      <div className="flex-1 lg:pl-8 observableRight opacity-0">
-        <span className={`w-full block text-3xl lg:text-4xl font-distancia`}>{title}</span>
-        <p>{description}</p>
-        <p>{inspiration}</p>
-        <p className="opacity-50">Tools: {tools}</p>
-        <div>{ children }</div>
-      </div>
-    </div>
+    </>
   );
 };
