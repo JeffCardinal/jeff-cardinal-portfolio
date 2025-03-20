@@ -67,7 +67,7 @@ function JeffCardinalText() {
   });
 
   return (
-    <a.group>
+    <a.group scale={scaleFactor}>
       <Float speed={3} rotationIntensity={0.5}>
         <ThreeDText position={[-0.85, 0.8, 0]} text="Jeff" />
         <ThreeDText position={[0.75, -0.8, 0]} size={0.45} text="Cardinal" />
