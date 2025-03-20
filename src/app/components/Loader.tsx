@@ -1,7 +1,7 @@
 import { Html, useProgress } from "@react-three/drei";
+import MetaballLoader from "./MetaballLoader";
 
 export default function Loader() {
-    const { progress } = useProgress();
     return (
       <Html center>
         <div
@@ -15,11 +15,12 @@ export default function Loader() {
             justifyContent: "center",
             background: "rgba(0, 0, 0)",
             color: "#FFFFFF",
+            overflowY: "hidden",
           }}
         >
-          <div className="w-12 h-12 border-8 m-4 border-white border-t-black rounded-full animate-spin items-center justify-center"/>
+          {/* <div className="w-12 h-12 border-8 m-4 border-white border-t-black rounded-full animate-spin items-center justify-center"/> */}
+          <MetaballLoader/>
           <h1>Initializing start up sequence...</h1>
-          {/* <div>{Math.floor(progress)}%</div> */}
         </div>
       </Html>
     );
