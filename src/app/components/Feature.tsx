@@ -47,11 +47,11 @@ export default function Feature(
           </div>
         </div>
 
-        <div className="flex-1 lg:pl-8 observableRight opacity-0 space-y-8">
-          <span className="w-full block text-3xl lg:text-4xl font-distancia">{title}</span>
+        <div className="flex-1 lg:pl-8 observableRight opacity-0">
+          <span className="w-full flex text-3xl lg:text-4xl font-distancia">{title}</span>
 
           {/* Main Grid Container */}
-          <div className={`flex-col`}>
+          <div className={`flex flex-col`}>
 
             {/* Year */}
             <div className={`relative my-8`}>
