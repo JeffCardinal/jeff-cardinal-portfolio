@@ -51,7 +51,7 @@ export default function Feature(
           <span className="w-full block text-3xl lg:text-4xl font-distancia">{title}</span>
 
           {/* Main Grid Container */}
-          <div className={`relative flex-col`}>
+          <div className={`flex-col`}>
 
             {/* Year */}
             <div className={`relative my-8`}>
