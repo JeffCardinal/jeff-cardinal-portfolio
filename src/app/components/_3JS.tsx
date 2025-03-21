@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { OrbitControls } from '@react-three/drei';
 import { Canvas, Euler, ExtendedColors, Layers, Matrix4, NodeProps, NonFunctionKeys, Overwrite, Quaternion, useFrame, useThree, Vector3 } from '@react-three/fiber';
 import { 
     Center,
@@ -9,15 +10,19 @@ import {
     Float,
     Lightformer,
     useProgress,
+    Preload,
 } from '@react-three/drei';
 import { a, useSpring } from '@react-spring/three';
 import Blob from './Blob';
 import * as THREE from 'three';
-import NoiseGradientShaderMaterial from './NoiseGradientShaderMaterial';
+import NoiseGradientShaderMaterial from './shaders/NoiseGradientShaderMaterial';
+import { extend } from '@react-three/fiber';
+
 import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/events';
 import RotatingText from './RotatingText';
 import HelloText from './HelloText';
 import Loader from './Loader';
+import ShaderPlane, { MouseShaderMaterial } from './shaders/MouseShaderMaterial';
 
 function ThreeDText({
   font = "/fonts/Distancia-800-ExtraBold.json",
@@ -112,6 +117,7 @@ export default function _3JS() {
     <>
       <Canvas camera={{ position: [0, 0, 10] }}>
         <React.Suspense fallback={<Loader />}>
+          {/* <ShaderPlane /> */}
             {!isMobile && (
               <group>
                 <Blob scale={1} position={[-5, 5, -3]} />
@@ -123,25 +129,18 @@ export default function _3JS() {
             )}
             {isLoaded && <JeffCardinalText />}
             <Environment 
-              // preset="studio"
               files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
-              // blur={10}
               backgroundIntensity={5}
               background={false}
               backgroundRotation={[0, 0, 0]}
             >
-            <Striplight position={[10, 2, 0]} scale={[1, 3, 10]} />
-            <Striplight position={[-10, 2, 0]} scale={[1, 3, 10]} />
-            <directionalLight
-              intensity={10}
-              position={[2, 2, 5]}
-            />
-            <ambientLight intensity={10} />
-            <Striplight position={[10, 2, 0]} scale={[1, 3, -10]} />
-            <Striplight position={[-10, 2, 0]} scale={[1, 3, -10]} />
-            <group rotation={[0, 0, 0]}>
+              <Striplight position={[10, 2, 0]} scale={[1, 3, 10]} />
+              <Striplight position={[-10, 2, 0]} scale={[1, 3, 10]} />
+              <directionalLight intensity={10} position={[2, 2, 5]} />
+              <Striplight position={[10, 2, 0]} scale={[1, 3, -10]} />
+              <Striplight position={[-10, 2, 0]} scale={[1, 3, -10]} />
+              <ambientLight intensity={10} />
               <Lightformer intensity={1} rotation-x={ Math.PI / 2} position={[0, 5, 9]} scale={[10, 10, 1]} />
-            </group>
             </Environment>
             {/* TODO: Maybe let's consider moving this to a scene background instead of rendering a mesh */}
             <mesh scale={[50, 50, 1]} renderOrder={-1}>
@@ -149,8 +148,10 @@ export default function _3JS() {
               <NoiseGradientShaderMaterial />
             </mesh>
         </React.Suspense>
+        <Preload all />
+        {/* <OrbitControls /> */}
       </Canvas>
-      {/* <HelloText/> */}
+      <HelloText/>
       <RotatingText/>
     </>
   );
