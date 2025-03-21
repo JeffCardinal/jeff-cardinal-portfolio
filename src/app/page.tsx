@@ -20,6 +20,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Button from './components/Button';
 import ArrowNav from './components/arrow-nav';
 import ImageGrid from './components/ImageGrid';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 export default function Page() {
   return (
@@ -57,6 +58,7 @@ export default function Page() {
               description="Single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover. Part of a larger campaign for the release of Heaven Sample's debut record, Distorted Reality."
               inspiration="Y2K chrometype and metalheart (remix) and 70s psychedelia and pop art (original)."
               tools="Blender, Illustrator, Photoshop, Procreate"
+              year="2025"
               imageName="FloatingInTheBreeze-Remix-1080.jpg"
               imageHoverName="FloatingInTheBreeze-Original-1080.jpg"
               bgColor="bg-sky-400"
@@ -82,6 +84,7 @@ export default function Page() {
             description="Branding for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
             inspiration="Minimalism and kawaii Japanese emoji."
             tools="Illustrator, Photoshop"
+            year="2018"
             imageName="plus100logo.png"
             imageHoverName="plus100logo.png"
             bgColor="bg-white"
@@ -119,6 +122,7 @@ export default function Page() {
             description="Flyer advertisement for Chicago techno party at Empty Bottle."
             inspiration="Liquid chrome entangles an iconic 90s acid smiley in Y2K fashion. Matrix-like background. Custom goop font for DR. GABBA, which informed the later Goupe font."
             tools="Cinema 4D, Illustrator, Photoshop"
+            year="2024"
             imageName="drgabbaflyer.png"
             imageHoverName="drgabbaflyer.png"
             bgColor="bg-black"
@@ -133,6 +137,7 @@ export default function Page() {
             description="Album cover for my debut album, Mana Pool."
             inspiration="Minimalistic aquatic ambiance."
             tools="Illustrator, Photoshop"
+            year="2018"
             imageName="manapool.png"
             imageHoverName="manapool.png"
             bgColor="bg-sky-400"
@@ -147,10 +152,11 @@ export default function Page() {
             description="Logo design for a band. It's mirrored on the y-axis, try to read it. Hover for a surprise."
             inspiration="Metalcore logo."
             tools="Illustrator, Photoshop"
+            year="2024"
             imageName="htmhell-pink.png"
             imageHoverName="htmhell-sage.png"
             bgColor="bg-black"
-            textColor="text-[#ff00aa]"
+            textColor="[#ff00aa]"
             borderColor="border-[#ff00aa]"
           >
             {undefined}
@@ -284,6 +290,7 @@ export default function Page() {
         </Breaker>
         
         <Footer textColor={'text-black'} bgColor={'bg-white'}/>
+        <ScrollToTopButton/>
       </Container>
     </div>
   );
