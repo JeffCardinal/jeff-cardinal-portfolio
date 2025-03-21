@@ -114,7 +114,6 @@ export default function _3JS() {
     <>
       <Canvas camera={{ position: [0, 0, 10] }}>
         <React.Suspense fallback={<Loader />}>
-          {/* <ShaderPlane /> */}
             {!isMobile && (
               <group>
                 <Blob scale={1} position={[-5, 5, -3]} />

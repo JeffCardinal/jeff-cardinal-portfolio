@@ -1,6 +1,7 @@
 const MetaballLoader = () => {
     return (
-      <svg viewBox="-100 -50 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+      <>
+      <svg viewBox="-120 -100 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="metaball">
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -97,6 +98,7 @@ const MetaballLoader = () => {
           </circle>
         </g>
       </svg>
+      </>
     );
   };
       

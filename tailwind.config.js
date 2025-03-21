@@ -11,6 +11,10 @@ module.exports = {
         distancia: ['Distancia-800-ExtraBold'],
         goupe: ['Goupe'],
       },
+      transitionDuration: {
+        '1000': '1000ms',
+        '2000': '2000ms',
+      },
     },
     keyframes: {
       easeInNav: {

@@ -8,6 +8,7 @@ export default function Feature(
     description,
     inspiration,
     tools,
+    year,
     imageName,
     imageHoverName,
     bgColor,
@@ -19,6 +20,7 @@ export default function Feature(
     description: string,
     inspiration: string,
     tools: string,
+    year: string,
     imageName: string,
     imageHoverName: string,
     bgColor: string,
@@ -51,12 +53,22 @@ export default function Feature(
           {/* Main Grid Container */}
           <div className={`relative flex-col`}>
 
+            {/* Year */}
+            <div className={`relative my-8`}>
+              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+                Year
+              </div>
+              <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
+                <p className="">{year}</p>
+              </div>
+            </div>
+
             {/* Overview */}
             <div className="relative my-8">
               <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl  font-semibold`}>
                 Overview
               </div>
-              <div className={`p-8 border-[1px] ${borderColor}`}>
+              <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
                 <p>{description}</p>
               </div>
             </div>
@@ -66,7 +78,7 @@ export default function Feature(
               <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Inspiration
               </div>
-              <div className={`p-8 border-[1px] ${borderColor}`}>
+              <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
                 <p>{inspiration}</p>
               </div>
             </div>
@@ -76,7 +88,7 @@ export default function Feature(
               <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Tools
               </div>
-              <div className={`p-8 border-[1px] ${borderColor}`}>
+              <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
                 <p className="">{tools}</p>
               </div>
             </div>
