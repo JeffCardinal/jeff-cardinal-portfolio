@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { OrbitControls } from '@react-three/drei';
 import { Canvas, Euler, ExtendedColors, Layers, Matrix4, NodeProps, NonFunctionKeys, Overwrite, Quaternion, useFrame, useThree, Vector3 } from '@react-three/fiber';
 import { 
     Center,
@@ -16,13 +15,11 @@ import { a, useSpring } from '@react-spring/three';
 import Blob from './Blob';
 import * as THREE from 'three';
 import NoiseGradientShaderMaterial from './shaders/NoiseGradientShaderMaterial';
-import { extend } from '@react-three/fiber';
 
 import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/events';
 import RotatingText from './RotatingText';
 import HelloText from './HelloText';
 import Loader from './Loader';
-import ShaderPlane, { MouseShaderMaterial } from './shaders/MouseShaderMaterial';
 
 function ThreeDText({
   font = "/fonts/Distancia-800-ExtraBold.json",
@@ -149,7 +146,6 @@ export default function _3JS() {
             </mesh>
         </React.Suspense>
         <Preload all />
-        {/* <OrbitControls /> */}
       </Canvas>
       <HelloText/>
       <RotatingText/>
