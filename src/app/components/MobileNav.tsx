@@ -39,7 +39,7 @@ export default function MobileNav({ children }: { children: ReactNode }) {
 
   return (
     <div className="">
-      <button onClick={handleClick} className="z-50 fixed top m-5 p-2 outline outline-[5px] text-white outline-white rounded-full text-md">
+      <button onClick={handleClick} className="z-50 fixed top m-5 p-2 outline outline-[5px] text-white border-white rounded-full text-md">
         <svg className={isOpen ? 'rotate-0 transition duration-500' : '-rotate-180 transition duration-500'} id="a" data-name="Nav Arrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 100 100">
           <polygon points="80 0 50 0 0 50 50 100 80 100 30 50 80 0" fill="#FFFFFF"/>
         </svg>

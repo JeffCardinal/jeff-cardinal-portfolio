@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header";
 import MobileNav from "./components/MobileNav";
 import Head from "next/head";
-import Button from "./components/Button";
 import { VercelAnalytics } from "./lib/analytics";
 import { VercelSpeedInsights } from "./lib/speed-insights";
 import Image from 'next/image'
-import sparkle from './svg/sparkle.svg';
 
 const inter = Inter({ subsets: ["latin"] });
 
