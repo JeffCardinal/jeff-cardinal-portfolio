@@ -20,7 +20,7 @@ export default function Loader() {
           }}
         >
 
-          {/* <div className="absolute bottom-1/2 w-full whitespace-nowrap z-0">
+          <div className="invisible md:visible lg:visible absolute bottom-1/2 w-full whitespace-nowrap z-0">
             <Marquee
               direction="right"
               pauseOnHover={false}
@@ -32,7 +32,7 @@ export default function Loader() {
             </Marquee>
           </div>
 
-          <div className="absolute w-full whitespace-nowrap z-0">
+          <div className="invisible md:visible lg:visible absolute w-full whitespace-nowrap z-0">
             <Marquee
               pauseOnHover={false}
               speed={300}
@@ -43,7 +43,7 @@ export default function Loader() {
             </Marquee>
           </div>
 
-          <div className="absolute top-1/2 w-full whitespace-nowrap z-0">
+          <div className="invisible md:visible lg:visible absolute top-1/2 w-full whitespace-nowrap z-0">
             <Marquee
               direction="right"
               pauseOnHover={false}
@@ -53,7 +53,7 @@ export default function Loader() {
                 LOADING...
               </span>
             </Marquee>
-          </div> */}
+          </div>
 
           <div className="z-10">
             <div className="relative w-[450px] h-[450px] flex items-center justify-center">

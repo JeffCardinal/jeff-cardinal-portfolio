@@ -7,6 +7,8 @@ import Head from "next/head";
 import Button from "./components/Button";
 import { VercelAnalytics } from "./lib/analytics";
 import { VercelSpeedInsights } from "./lib/speed-insights";
+import Image from 'next/image'
+import sparkle from './svg/sparkle.svg';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +29,24 @@ export default function RootLayout({
       </Head>
       <body className={inter.className}>
         <MobileNav>{children}</MobileNav>
-        <Header>
+        <div className="overflow-hidden flex justify-end p-4 absolute inset-x-0 top-0 z-10">
+          <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 184.424 184.451">
+            <path d="M182.92,94.058c-63.534,12.536-76.342,25.345-88.875,88.889-.396,2.006-3.269,2.006-3.665,0-12.534-63.543-25.342-76.353-88.875-88.889-2.006-.396-2.006-3.269,0-3.664,63.534-12.536,76.342-25.345,88.875-88.889.396-2.006,3.269-2.006,3.665,0,12.534,63.543,25.342,76.353,88.875,88.889,2.006.396,2.006,3.269,0,3.664Z" fill="white"/>
+          </svg>
+        </div>
+        <div className="overflow-hidden flex justify-center py-6 text-2xl absolute inset-x-0 top-0 z-10">
+          <Image
+            className="-m-[5px]"
+            src={`/images/jc-tribal-logo-flat.png`}
+            alt=""
+            width={120}
+            height={0}
+            sizes="100vw"
+            // style={{ width: '100%', height: 'auto' }}
+            objectFit='contain'
+          />
+        </div>
+        {/* <Header>
           <Button
             text="Home"
             link="/"
@@ -67,7 +86,7 @@ export default function RootLayout({
             hoverGlyph={undefined}
             hoverable={false}
           />
-        </Header>
+        </Header> */}
         <VercelAnalytics/>
         <VercelSpeedInsights/>
         {children}

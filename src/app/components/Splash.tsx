@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
  
 export default function _Splash({ children, bgColor }: { children: ReactNode, bgColor: string }) {
   return (
-    <div className={`flex h-screen min-h-screen ${bgColor} text-center items-center justify-center`}>
+    <div className={`flex h-dvh min-h-dvh ${bgColor} text-center items-center justify-center`}>
+      {/* h-screen min-h-screen */}
       { children }
     </div>
   );

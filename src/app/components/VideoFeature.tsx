@@ -5,7 +5,7 @@ const Video = lazy(() => import('./Video'));
 
 export default function VideoFeature() {
   return (
-      <div className="box-border lg:p-8 items-center justify-center flex flex-3 flex-col lg:flex-row bg-black">
+      <div className="box-border items-center justify-center flex flex-3 flex-col lg:flex-row bg-black">
         <Suspense fallback={<VideoFallback/>}>
           <Video 
           videoUrl="/videos-optimized/ditb-reel.mp4"

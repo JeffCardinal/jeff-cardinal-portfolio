@@ -21,6 +21,7 @@ import Button from './components/Button';
 import ArrowNav from './components/arrow-nav';
 import ImageGrid from './components/ImageGrid';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import FeatureUIUX from './components/FeatureUIUX';
 
 export default function Page() {
   return (
@@ -29,10 +30,10 @@ export default function Page() {
       <Splash bgColor={'bg-sky-400'}>
         <_3JS/>
       </Splash>
-      
+
       <Container>
         <Marquee
-          pauseOnHover={true}
+          pauseOnHover={false}
           speed={100}
           className="border-t-[5px] border-b-[5px] border-black"
         >
@@ -171,7 +172,7 @@ export default function Page() {
         </Breaker>
 
         <Breaker 
-          title={"[ALBUMS]"}
+          title={"[MUSIC]"}
           bgColor={"bg-purple-400"}
         >
           <ImageGrid/>
@@ -192,15 +193,16 @@ export default function Page() {
           title={"[UI/UX]"}
           bgColor={"bg-teal-400"}
         >
-          <FeatureFont
-            title="GPU Booking (2024)"
+          <FeatureUIUX
+            title="GPU Booking"
             description="Lightweight UI component for booking GPUs. Hover to open."
-            inspiration=""
+            year="2024"
             tools="React, Tailwind"
             imageName="ui-projects/gpu.jpg"
             imageHoverName="ui-projects/gpu-2.jpg"
             bgColor="bg-black"
-            textColor="text-white"
+            borderColor="border-indigo-500"
+            textColor="text-indigo-500"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
             <div className="pt-2 invisible lg:visible">
@@ -210,21 +212,22 @@ export default function Page() {
                 </button>
               </Link>
             </div>
-          </FeatureFont>
-          <FeatureFont
-            title="Social Portal (2019)"
+          </FeatureUIUX>
+          <FeatureUIUX
+            title="Social Portal"
             description={`Here's a "hero" screen for a social portal I designed in 2019. In 2025, I ported the site to use Vite. It animates, so be sure to check the demo.`}
-            inspiration=""
+            year="2019"
             tools="React, Vite, CSS3 Animations"
             imageName="ui-projects/jeffcardinal-2019.jpg"
             imageHoverName="ui-projects/jeffcardinal-2019.jpg"
             bgColor="bg-sky-500"
+            borderColor="border-white"
             textColor="text-white"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
             <div className="pt-2 flex flex-row align-middle">
               <Link href="https://jeff-cardinal-website.vercel.app/" target="_blank" className="hidden lg:flex">
-                <button className="pt-[2px] px-4 mr-4 outline outline-[5px] outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
+                <button className="pt-[2px] px-4 mr-6 outline outline-[5px] outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
                 </button>
               </Link>
@@ -235,20 +238,21 @@ export default function Page() {
                 </button>
               </Link>              
             </div>
-          </FeatureFont>
-          <FeatureFont
-            title="RetRoh! (2017)"
+          </FeatureUIUX>
+          <FeatureUIUX
+            title="RetRoh!"
             description="A cute retrospective board for reflecting on your Agile projects after each sprint. Hover for login page."
-            inspiration=""
+            year="2017"
             tools="React, Spring Boot, PostgreSQL"
             imageName="ui-projects/retroh-board.jpg"
             imageHoverName="ui-projects/retroh-login.jpg"
             bgColor="bg-white"
+            borderColor="border-black"
             textColor="text-black"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
             {undefined}
-          </FeatureFont>
+          </FeatureUIUX>
         </Breaker>
 
         <Breaker 
@@ -270,7 +274,8 @@ export default function Page() {
             imageName="fonts/goopdemo.jpg"
             imageHoverName="fonts/goopdemo-black.jpg"
             bgColor="bg-black"
-            textColor="text-white"
+            borderColor="border-lime-400"
+            textColor="text-lime-400"
             font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
             isTitleVerticallyCentered={false}
           >

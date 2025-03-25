@@ -37,7 +37,7 @@ export default function Feature(
         <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
           <div className="aspect-square text-black justify-center items-center">
             <Image
-              className="pb-8 lg:pb-0"
+              className="pb-8 lg:pb-0 object-cover"
               onMouseEnter={() => setHovering(false)}
               onMouseLeave={() => setHovering(true)}
               src={hovering ? `/images/${imageName}` : `/images/${imageHoverName}`}
@@ -49,10 +49,15 @@ export default function Feature(
         </div>
 
         <div className="flex-1 lg:pl-8 observableRight opacity-0">
-          <span className="w-full block text-3xl lg:text-4xl font-distancia">{title}</span>
+          <span 
+            className="w-full block text-3xl lg:text-4xl font-distancia"
+            style={{ lineHeight: 1 }}
+          >
+            {title}
+          </span>
 
           {/* Main Grid Container */}
-          <div className={`flex-col`}>
+          <div className={`flex-col max-w-[1000px]`}>
 
             {/* Year */}
             <div className={`relative my-8`}>

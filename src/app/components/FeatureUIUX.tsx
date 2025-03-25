@@ -6,7 +6,7 @@ export default function Feature(
   { children,
     title,
     description,
-    inspiration,
+    year,
     tools,
     imageName,
     imageHoverName,
@@ -19,7 +19,7 @@ export default function Feature(
     children: ReactNode,
     title: string,
     description: string,
-    inspiration: string,
+    year: string,
     tools: string,
     imageName: string,
     imageHoverName: string,
@@ -34,7 +34,7 @@ export default function Feature(
   if(isTitleVerticallyCentered) verticalCentering = 'items-center';
 
   return (
-    <div className={`box-border p-8 flex flex-col lg:flex-row ${verticalCentering} ${bgColor} ${textColor}`}>
+    <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} text-${textColor}`}>
       <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
         <Image
           className="pb-8 lg:pb-0  object-scale-down"
@@ -42,26 +42,23 @@ export default function Feature(
           onMouseLeave={() => setHovering(true)}
           src={hovering ? `/images/${imageName}`: `/images/${imageHoverName}`}
           alt={title} 
-          width="800"
+          width="1000"
           height="0"
         />
       </div>
-
-      <div className="flex-1 lg:pl-8 observableRight opacity-0">
+      <div className={`flex-1 lg:pl-8 observableRight opacity-0 ${textColor}`}>
+        <span className={`w-full block ${font}`}>{title}</span>
         <div className="max-w-[1000px]">
-          <span className={`w-full block ${font}`}>
-            <Image
-              className=""
-              src={`/images/goupe-3D.png`}
-              alt=""
-              width={600}
-              height={0}
-              sizes="100vw"
-              objectFit='contain'
-            />
-          </span>
-          <div className="relative my-8">
-            <div className={`absolute -top-6 left-4 ${bgColor} text-lime-400 rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+          <div className={`relative my-8`}>
+            <div className={`absolute -top-6 left-4 ${bgColor} rounded-full px-2 py-2 text-2xl font-semibold`} >
+              Year
+            </div>
+            <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
+              <p className="">{year}</p>
+            </div>
+          </div>
+          <div className={`relative my-8`}>
+            <div className={`absolute -top-6 left-4 ${bgColor} rounded-full px-2 py-2 text-2xl font-semibold`} >
               Overview
             </div>
             <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
@@ -69,26 +66,14 @@ export default function Feature(
             </div>
           </div>
           
-          {/* Information */}
-          <div className="relative my-8">
-            <div className={`absolute -top-6 left-4 ${bgColor} text-lime-400 rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
-              Information
-            </div>
-            <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
-              <p>{inspiration}</p>
-            </div>
-          </div>
-          
-          {/* Tools */}
           <div className={`relative my-6`}>
-            <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+            <div className={`absolute -top-6 left-4 ${bgColor} rounded-full px-2 py-2 text-2xl font-semibold`} >
               Tools
             </div>
             <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
               <p className="">{tools}</p>
             </div>
           </div>
-          
           <div>{ children }</div>
         </div>
       </div>

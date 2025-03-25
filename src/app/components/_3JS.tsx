@@ -15,6 +15,7 @@ import { a, useSpring } from '@react-spring/three';
 import Blob from './Blob';
 import * as THREE from 'three';
 import NoiseGradientShaderMaterial from './shaders/NoiseGradientShaderMaterial';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 
 import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/events';
 import RotatingText from './RotatingText';
