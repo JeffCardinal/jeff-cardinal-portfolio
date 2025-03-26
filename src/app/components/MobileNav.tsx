@@ -45,7 +45,7 @@ export default function MobileNav({ children }: { children: ReactNode }) {
         </svg>
       </button>
       <div className={`
-          ${isOpen ? 'touch-none' : ''}
+          ${isOpen ? 'touch-none pointer-events-auto' : 'pointer-events-none'}
           z-20 md:invisible lg:invisible flex flex-col h-[calc(100dvh)]
           text-white text-center items-center justify-center text-2xl fixed inset-x-0 top-0
       `}>
