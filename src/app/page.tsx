@@ -22,6 +22,7 @@ import ArrowNav from './components/arrow-nav';
 import ImageGrid from './components/ImageGrid';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import FeatureUIUX from './components/FeatureUIUX';
+import SparkleSvg from './svg/SparkleSvg';
 
 export default function Page() {
   return (
@@ -35,19 +36,26 @@ export default function Page() {
         <Marquee
           pauseOnHover={false}
           speed={100}
-          className="border-t-[5px] border-b-[5px] border-black"
+          className="border-t-[5px] border-b-[5px] border-black bg-yellow-300"
         >
-          <Scroller title="FEATURES ✦"/>
-          <Scroller title="FEATURES ✦"/>
-          <Scroller title="CLICK SOMETHIN' WILL YA? ✦"/>
-          <Scroller title="FEATURES ✦"/>
-          <Scroller title="FEATURES ✦"/>
-          <Scroller title="CLICK SOMETHIN' WILL YA? ✦"/>
-          <Scroller title="FEATURES ✦"/>
-          <Scroller title="FEATURES ✦"/>
-          <Scroller title="CLICK SOMETHIN' WILL YA? ✦"/>
-          <Scroller title="FEATURES ✦"/>
-          <Scroller title="FEATURES ✦"/>
+          <Scroller pad={true}> FEATURES </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> FEATURES </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> CLICK SOMETHIN' WILL YA? </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> FEATURES </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> FEATURES </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> CLICK SOMETHIN' WILL YA? </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> FEATURES </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> FEATURES </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
+          <Scroller pad={true}> CLICK SOMETHIN' WILL YA? </Scroller>
+          <Scroller pad={false}> <SparkleSvg color={"black"} dim={"36px"}/> </Scroller>
         </Marquee>
 
         <Breaker
@@ -89,7 +97,7 @@ export default function Page() {
             imageName="plus100logo.png"
             imageHoverName="plus100logo.png"
             bgColor="bg-white"
-            textColor="black"
+            textColor="text-black"
             borderColor="border-black"
           >
             {/* <div className="pt-2">
@@ -127,7 +135,7 @@ export default function Page() {
             imageName="drgabbaflyer.png"
             imageHoverName="drgabbaflyer.png"
             bgColor="bg-black"
-            textColor="lime-400"
+            textColor="text-lime-400"
             borderColor="border-lime-400"
           >
             {undefined}
@@ -142,7 +150,7 @@ export default function Page() {
             imageName="manapool.png"
             imageHoverName="manapool.png"
             bgColor="bg-sky-400"
-            textColor="white"
+            textColor="text-white"
             borderColor="white"
           >
             {undefined}
@@ -157,7 +165,7 @@ export default function Page() {
             imageName="htmhell-pink.png"
             imageHoverName="htmhell-sage.png"
             bgColor="bg-black"
-            textColor="[#ff00aa]"
+            textColor="text-[#ff00aa]"
             borderColor="border-[#ff00aa]"
           >
             {undefined}
@@ -290,7 +298,7 @@ export default function Page() {
             imageName2={'fonts/supersonic6-edit.png'}
             imageHover2Name={'fonts/supersonic6-edit-intense.png'}
             bgColor={'bg-black'}
-            textColor={''}
+            textColor={'text-white'}
           />
         </Breaker>
         

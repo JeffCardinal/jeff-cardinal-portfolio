@@ -32,7 +32,7 @@ export default function Feature(
 
   return (
     <>
-      <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} text-${textColor}`}>
+      <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`}>
         
         <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
           <div className="aspect-square text-black justify-center items-center">

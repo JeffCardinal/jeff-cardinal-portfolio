@@ -49,7 +49,7 @@ export default function Breaker({
     <>
       <div
         onClick={() => { setOpen(!open); }}
-        className={`${bgColor} h-12 pl-16 flex items-center transition-all duration-[500ms] ease-in-out justify-center text-white border-b-1 border-black select-none
+        className={`${bgColor} h-12 pl-16 flex items-center transition-all duration-300 ease-in-out justify-center text-black border-b-1 border-black select-none
           ${open ? 'py-8' : 'py-16'}
         `}
         aria-expanded={open}
@@ -66,7 +66,7 @@ export default function Breaker({
       </div>
 
       <div
-        className={`overflow-hidden transition-all duration-1000 ease-in-out
+        className={`overflow-hidden transition-all duration-300 ease-in-out
           ${open ? `max-h-[${contentHeight}px]` : 'max-h-0'}
         `}
         id="accordion-content"
