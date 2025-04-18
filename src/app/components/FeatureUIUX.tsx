@@ -34,7 +34,7 @@ export default function Feature(
   if(isTitleVerticallyCentered) verticalCentering = 'items-center';
 
   return (
-    <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} text-${textColor}`}>
+    <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`}>
       <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
         <Image
           className="pb-8 lg:pb-0  object-scale-down"
