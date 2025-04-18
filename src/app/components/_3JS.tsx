@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { Canvas, Euler, ExtendedColors, Layers, Matrix4, NodeProps, NonFunctionKeys, Overwrite, Quaternion, useFrame, useThree, Vector3 } from '@react-three/fiber';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Canvas, Euler, ExtendedColors, Layers, Matrix4, NodeProps, NonFunctionKeys, Overwrite, Quaternion, useFrame, useLoader, useThree, Vector3 } from '@react-three/fiber';
 import { 
     Center,
     Text3D,
@@ -20,6 +20,8 @@ import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/eve
 import RotatingText from './RotatingText';
 import HelloText from './HelloText';
 import Loader from './Loader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Displace } from 'lamina'
 
 function ThreeDText({
   font = "/fonts/Distancia-800-ExtraBold.json",
@@ -87,9 +89,75 @@ function Striplight(props: React.JSX.IntrinsicAttributes & Omit<ExtendedColors<O
   )
 }
 
+function Smiley() {
+  const { camera, size } = useThree();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [smileyPosition, setSmileyPosition] = useState({ x: 0, y: 0 });
+
+  const gltf = useLoader(GLTFLoader, "/3d-models/smiley.glb");
+  const smiley = gltf.scene.clone();
+
+  const rand = useMemo(() => Math.random(), []);
+  const displaceRef = useRef(null);
+  const ref = useRef<THREE.Mesh>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (event: { clientX: number; clientY: number; }) => {
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = -(event.clientY / window.innerHeight) * 2 + 1;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    const updatePosition = () => {
+      const x = (size.width / 2) / window.innerWidth * 2 - 1;
+      const y = -(size.height / 2) / window.innerHeight * 2 + 1;
+      setSmileyPosition({ x, y });
+    };
+
+    updatePosition();
+
+    window.addEventListener('resize', updatePosition);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [size]);
+
+  useFrame(({ clock }) => {
+    if (!ref.current) return;
+
+    const mouseVector = new THREE.Vector3(mousePosition.x, mousePosition.y, 0.5);
+    mouseVector.unproject(camera);
+
+    mouseVector.sub(camera.position).normalize().multiplyScalar(5);
+    mouseVector.add(camera.position);
+
+    ref.current.lookAt(mouseVector);
+
+    const worldPosition = new THREE.Vector3(smileyPosition.x, smileyPosition.y, 0);
+    worldPosition.unproject(camera);
+    ref.current.position.set(worldPosition.x, worldPosition.y, -2);
+  });
+
+  return (
+    <mesh position={[7, -3, 0]}>
+      <primitive ref={ref} object={smiley} scale={[15, 15, 15]} position={[0, 0, -2]} />
+      <meshStandardMaterial 
+        metalness={1} 
+        roughness={0.2}
+        color="#FFFFFF"
+      />
+      <Displace ref={displaceRef} strength={0} scale={5} offset={[0, 0, 0]} />
+    </mesh>
+  );
+}
+
 export default function _3JS() {
     const { progress } = useProgress();
-    const isLoaded = progress === 100; // Wait until fully loaded
+    const isLoaded = progress === 100;
     const [isMobile, setIsMobile] = useState(false);
 
     const checkScreenSize = () => {
@@ -124,6 +192,7 @@ export default function _3JS() {
               </group>
             )}
             {isLoaded && <JeffCardinalText />}
+            {/* <Smiley/> */}
             <Environment 
               files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
               backgroundIntensity={5}

@@ -40,7 +40,7 @@ function Footer({ textColor, bgColor }: { textColor: string, bgColor: string }) 
                         </Link>
                         <Link href='https://www.linkedin.com/in/jeffjcardinal'>
                             <div className="w-16 h-16 flex items-center justify-center">
-                                <FontAwesomeIcon icon={faLinkedin} color="#2d64bc" fill-opacity="white" className="text-[64px]" />
+                                <FontAwesomeIcon icon={faLinkedin} color="#2d64bc" fillOpacity="white" className="text-[64px]" />
                             </div>
                         </Link>
                     </div>

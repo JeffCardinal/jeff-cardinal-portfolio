@@ -1,8 +1,6 @@
 import React from 'react';
-import Header from '../components/Header';
 import Splash from '../components/Splash'
 import Image from 'next/image'
-import Link from 'next/link';
 
 export default function Page() {
     return ( 

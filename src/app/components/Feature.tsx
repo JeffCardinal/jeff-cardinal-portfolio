@@ -61,7 +61,7 @@ export default function Feature(
 
             {/* Year */}
             <div className={`relative my-8`}>
-              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+              <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Year
               </div>
               <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
@@ -71,7 +71,7 @@ export default function Feature(
 
             {/* Overview */}
             <div className="relative my-8">
-              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl  font-semibold`}>
+              <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl  font-semibold`}>
                 Overview
               </div>
               <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
@@ -81,7 +81,7 @@ export default function Feature(
 
             {/* Inspiration */}
             <div className="relative my-8">
-              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+              <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Inspiration
               </div>
               <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>
@@ -91,7 +91,7 @@ export default function Feature(
 
             {/* Tools */}
             <div className={`relative ${bottomPadding}`}>
-              <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
+              <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Tools
               </div>
               <div className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}>

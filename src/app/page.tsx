@@ -71,7 +71,7 @@ export default function Page() {
               imageName="FloatingInTheBreeze-Remix-1080.jpg"
               imageHoverName="FloatingInTheBreeze-Original-1080.jpg"
               bgColor="bg-sky-400"
-              textColor="white"
+              textColor="text-white"
               borderColor="border-white"
             >
               <Button 
