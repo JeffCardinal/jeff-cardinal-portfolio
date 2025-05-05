@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import MobileNav from "./components/MobileNav";
 import Head from "next/head";
-import { VercelAnalytics } from "./lib/analytics";
+import { Analytics } from '@vercel/analytics/next';
 import { VercelSpeedInsights } from "./lib/speed-insights";
 import Image from 'next/image'
 import SparkleSvg from "./svg/SparkleSvg";
@@ -81,7 +81,7 @@ export default function RootLayout({
             hoverable={false}
           />
         </Header> */}
-        <VercelAnalytics/>
+        <Analytics/>
         <VercelSpeedInsights/>
         {children}
       </body>
