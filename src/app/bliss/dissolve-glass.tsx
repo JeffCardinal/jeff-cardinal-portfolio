@@ -80,7 +80,7 @@ const fragmentShader = `
     // Apply dissolve effect with sharper edges
     float threshold = uProgress;
     // Old value + 0.05
-    float dissolveEdge = smoothstep(threshold - 0.05, threshold + 0.95, combinedNoise);
+    float dissolveEdge = smoothstep(threshold - 0.05, threshold + 0.05, combinedNoise);
     
     // Calculate glass properties
     vec3 normal = normalize(vNormal);

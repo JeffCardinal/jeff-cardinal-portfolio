@@ -132,7 +132,7 @@ function Comp() {
 }
 
 function StaticBackground() {
-    const tex = useLoader(THREE.TextureLoader, '/bliss/bliss-bg-large.png');
+    const tex = useLoader(THREE.TextureLoader, '/bliss/bliss-bg.jpg');
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
     
     const meshRef = useRef<THREE.Mesh>(null);
@@ -147,14 +147,14 @@ function StaticBackground() {
     
     return (
         <mesh ref={meshRef} position={[0, -30, -50]}>
-        <planeGeometry args={[200, 100]} />
-        <meshBasicMaterial
-            map={tex}
-            side={THREE.DoubleSide}
-            depthTest={false}
-            toneMapped={false}
-            transparent={false}
-        />
+            <planeGeometry args={[200, 100]} />
+            <meshBasicMaterial
+                map={tex}
+                side={THREE.DoubleSide}
+                depthTest={false}
+                toneMapped={false}
+                transparent={false}
+            />
         </mesh>
     );
 }
@@ -162,10 +162,10 @@ function StaticBackground() {
 export default function _3JS() {
     return (
         <div className="bg-white h-screen">
-            <div className="fixed top-0 w-full max-h-[500px] bg-white z-10"></div>
+            {/* <div className="fixed top-0 left-0 w-full h-[20.3vh] bg-white z-10"/> */}
             <img
-                src="/bliss/bliss-textonly-header.png"
-                className="fixed top-0 left-1/2 -translate-x-1/2 w-auto max-h-[510px] object-cover z-20 pointer-events-none"
+                src="/bliss/bliss-header.png"
+                className="fixed top-0 max-h-[550px] object-cover z-20 pointer-events-none"
                 alt="Bliss Header"
             />
             <PlayBlissButton />
