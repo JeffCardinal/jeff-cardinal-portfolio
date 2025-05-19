@@ -14,11 +14,8 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-three/drei": "^10.0.8",
     "@react-three/fiber": "^9.1.2",
-    "@react-three/postprocessing": "^3.0.4",
     "@vercel/analytics": "^1.5.0",
-    "gl-noise": "^1.6.1",
     "lamina": "^1.1.23",
-    "leva": "^0.10.0",
     "next": "^15.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -26,8 +23,7 @@
     "react-syntax-highlighter": "^15.6.1",
     "simplex-noise": "^4.0.3",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.172.0",
-    "three-custom-shader-material": "^6.3.6"
+    "three": "^0.172.0"
   },
   "devDependencies": {
     "@types/node": "^20",

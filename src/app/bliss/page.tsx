@@ -11,6 +11,8 @@ import Marquee from 'react-fast-marquee';
 import Scroller from '../components/Scroller';
 import SparkleSvg from '../svg/SparkleSvg';
 import Footer from '../components/Footer';
+import { Environment, OrbitControls } from '@react-three/drei';
+import SmileyParticles from './SmileyParticles';
 
 function Smiley() {
     const gltf = useLoader(GLTFLoader, '/3d-models/smile-smooth.glb')
@@ -19,6 +21,27 @@ function Smiley() {
     const dissolveMeshRef = useRef<THREE.Mesh>(null)
     const originalPositions = useRef<Float32Array | null>(null)
     const { camera } = useThree()
+
+    const groupRef = useRef<THREE.Group>(null)
+    const { size } = useThree()
+    const mouse = useRef({ x: 0, y: 0 })
+
+    // Listen to mouse movement on mount
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            mouse.current.x = (e.clientX / size.width) * 2 - 1
+            mouse.current.y = -(e.clientY / size.height) * 2 + 1
+        }
+        window.addEventListener('mousemove', handleMouseMove)
+        return () => window.removeEventListener('mousemove', handleMouseMove)
+    }, [size.width, size.height])
+
+    // Apply subtle rotation
+    useFrame(() => {
+        if (!groupRef.current) return
+        groupRef.current.rotation.y = mouse.current.x * 0.4
+        groupRef.current.rotation.x = -mouse.current.y * 0.3
+    })
   
     useEffect(() => {
       if (meshRef.current) {
@@ -28,38 +51,53 @@ function Smiley() {
     }, [])
   
     useFrame(({ clock }) => {
-      if (!meshRef.current || !originalPositions.current) return
-  
-      meshRef.current.quaternion.copy(camera.quaternion)
-      if (dissolveMeshRef.current) {
-        dissolveMeshRef.current.quaternion.copy(camera.quaternion)
-      }
-  
-      const posAttr = meshRef.current.geometry.attributes.position
-      const time = clock.getElapsedTime()
-  
-      for (let i = 0; i < posAttr.count; i++) {
-        const x = originalPositions.current[i * 3]
-        const y = originalPositions.current[i * 3 + 1]
-        const z = originalPositions.current[i * 3 + 2]
-        let wiggleX = x
-  
-        if (x > 0) {
-          const falloff = Math.min(Math.max(x / 1.0, 0), 1)
-          const wiggle = Math.sin(time * 3 + y * 30) * 0.2 * falloff
-          wiggleX += wiggle
+        if (!meshRef.current || !originalPositions.current) return
+      
+        meshRef.current.quaternion.copy(camera.quaternion)
+        if (dissolveMeshRef.current) {
+          dissolveMeshRef.current.quaternion.copy(camera.quaternion)
         }
-  
-        posAttr.setXYZ(i, wiggleX, y, z)
-      }
-  
-      posAttr.needsUpdate = true
-  
-      if (materialRef.current) {
-        materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
-        materialRef.current.uniforms.uProgress.value = Math.sin(clock.getElapsedTime() * 0.5) * 0.5 + 0.5;
-      }
-    })
+      
+        const posAttr = meshRef.current.geometry.attributes.position
+        const time = clock.getElapsedTime()
+      
+        const mouseX = mouse.current.x
+        const mouseY = mouse.current.y
+      
+        for (let i = 0; i < posAttr.count; i++) {
+          const x = originalPositions.current[i * 3]
+          const y = originalPositions.current[i * 3 + 1]
+          const z = originalPositions.current[i * 3 + 2]
+          let wiggleX = x
+
+          const xFalloff = Math.min(Math.max(Math.abs(x) / 1.0, 0), 1)
+          const yFalloff = 1 - Math.min(Math.max(Math.abs(mouseY) / 1.0, 0), 1)
+      
+          let strength = 0
+      
+          if (x > 0 && mouseX > 0) {
+            strength = mouseX * xFalloff * yFalloff
+          } else if (x < 0 && mouseX < 0) {
+            strength = -mouseX * xFalloff * yFalloff
+          }
+      
+          const wiggle = Math.sin(time * 3 + y * 30) * 0.2 * strength
+          wiggleX += wiggle
+      
+          posAttr.setXYZ(i, wiggleX, y, z)
+        }
+      
+        posAttr.needsUpdate = true
+      
+        if (materialRef.current) {
+          materialRef.current.uniforms.uTime.value = time
+          materialRef.current.uniforms.uProgress.value = Math.sin(time * 0.5) * 0.5 + 0.5
+        //   materialRef.current.uniforms.uProgress.value = 0.75;
+
+        }
+      })
+      
+      
   
     const geometry = useMemo(() => {
       let foundGeometry: THREE.BufferGeometry | null = null
@@ -72,8 +110,35 @@ function Smiley() {
     }, [gltf])
   
     return (
-      <group scale={[15, 15, 15]} position={[0, -1, 0]}>
-        <mesh geometry={geometry} ref={meshRef}>
+        <group ref={groupRef} scale={[15, 15, 15]} position={[0, -1, 0]}>
+            {/* <mesh 
+            geometry={geometry} 
+            ref={dissolveMeshRef}
+            renderOrder={2} // First in render sequence
+            >
+            <DissolveGlass
+                ref={materialRef}
+                uTime={0}
+                uProgress={0}
+                uNoiseScale={1000.0}
+                uColor={new THREE.Color('#ffffff')}
+                uEdgeSharpness={1}
+                transparent
+                // depthWrite={false}
+                // depthTest={false}
+                side={THREE.DoubleSide}
+                stencilWrite={true}
+                stencilRef={1}
+                stencilFunc={THREE.AlwaysStencilFunc}
+                stencilZPass={THREE.ReplaceStencilOp}
+                stencilZFail={THREE.KeepStencilOp}
+                depthWrite={true} // ✅ don't write to depth buffer
+                depthTest={true}   // still respect camera z order
+            />
+            </mesh> */}
+
+        <mesh geometry={geometry} ref={meshRef} renderOrder={1}>
+
           <meshPhysicalMaterial
             transmission={1}
             roughness={0.3}
@@ -87,34 +152,16 @@ function Smiley() {
             specularIntensity={1}
             transparent
             depthWrite={false}
-            stencilWrite={true}
+            stencilWrite={false} // ✅ don't override
             stencilRef={1}
             stencilFunc={THREE.EqualStencilFunc}
             stencilZPass={THREE.KeepStencilOp}
-            stencilZFail={THREE.ReplaceStencilOp}
-          />
-        </mesh>
-        <mesh 
-          geometry={geometry} 
-          ref={dissolveMeshRef}
-        >
-          <DissolveGlass
-            ref={materialRef}
-            uTime={0}
-            uProgress={0}
-            uNoiseScale={1000.0}
-            uColor={new THREE.Color('#ffffff')}
-            uEdgeSharpness={1}
-            transparent
-            depthWrite={false}
-            depthTest={false}
-            side={THREE.DoubleSide}
-            renderOrder={1}
-            stencilWrite={true}
-            stencilRef={1}
-            stencilFunc={THREE.AlwaysStencilFunc}
-            stencilZPass={THREE.ReplaceStencilOp}
-            stencilZFail={THREE.ReplaceStencilOp}
+            depthTest={true}   // ✅ still want Z sorting
+            // transparent={true}
+            blending={THREE.NormalBlending} 
+            polygonOffset={true}
+            polygonOffsetFactor={-1}
+            polygonOffsetUnits={-4}
           />
         </mesh>
       </group>
@@ -127,6 +174,7 @@ function Comp() {
     return (
         <group scale={scaleFactor} position={[0, -1.15, 0]}>
             <Smiley />
+            {/* <SmileyParticles /> */}
         </group>
     );
 }
@@ -151,7 +199,7 @@ function StaticBackground() {
             <meshBasicMaterial
                 map={tex}
                 side={THREE.DoubleSide}
-                depthTest={false}
+                depthTest={true}
                 toneMapped={false}
                 transparent={false}
             />
@@ -161,28 +209,32 @@ function StaticBackground() {
 
 export default function _3JS() {
     return (
-        <div className="bg-white h-screen">
+        <div className="h-screen overflow-hidden">
             {/* <div className="fixed top-0 left-0 w-full h-[20.3vh] bg-white z-10"/> */}
             <img
                 src="/bliss/bliss-header.png"
                 className="fixed top-0 max-h-[550px] object-cover z-20 pointer-events-none"
                 alt="Bliss Header"
             />
+            {/* <div className="fixed top-[50px] left-0 w-full h-full bg-[url('/bliss/bliss-bg.jpg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" /> */}
+            <div className="bg-white w-full h-full bg-cover bg-center fixed" />
             <PlayBlissButton />
             <Canvas 
                 camera={{ position: [0, 2, 10] }}
-                gl={{ antialias: true }}
+                gl={{ antialias: true, alpha: true, stencil: true, depth: true }}
                 onCreated={({ gl }) => {
-                    gl.setClearColor('#00BFFF');
+                    gl.setClearAlpha(0);
+                    gl.setClearColor(0x000000, 0);
                 }}
-            >
+                >
                 {/* <Environment files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr" /> */}
                 <ambientLight intensity={1} />
                 <directionalLight position={[2, 2, 5]} intensity={10.5} />
                 <React.Suspense fallback={null}>
-                    <Comp/>
+                    <Comp />
                     <StaticBackground />
                 </React.Suspense>
+                {/* <OrbitControls/> */}
             </Canvas>
             {/* <Marquee
                 pauseOnHover={false}
