@@ -1,68 +1,102 @@
-import { Sphere } from '@react-three/drei'
-import { GroupProps, useFrame } from '@react-three/fiber'
-import { Depth, Displace, Fresnel, LayerMaterial } from 'lamina'
-import { useMemo, useRef } from 'react'
-import { MathUtils, Mesh, Vector3 } from 'three'
-import { Displace as DisplaceType } from 'lamina/vanilla'
+import React, { useEffect, useMemo, useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
+import { createNoise4D } from 'simplex-noise';
+import { FresnelMaterial } from './Fresnel';
+import { Environment } from '@react-three/drei';
 
-export default function Blob({
-  ...props
-}) {
-  const rand = useMemo(() => Math.random(), [])
+type GroupProps = JSX.IntrinsicElements['group']
+
+const noise4D = createNoise4D();
+
+export default function Blob(props: GroupProps) {
+  const meshRef = useRef<THREE.Mesh>(null!)
   const strength = useRef(0)
-  const displaceRef = useRef<DisplaceType & { strength: number; offset: Vector3 }>(null!)
-  const ref = useRef<Mesh>(null!)
+  const effectStrength = useRef(0)
+  const basePositions = useRef<Float32Array | null>(null)
+  const rand = useMemo(() => Math.random(), [])
 
-  useFrame(({ clock }, dt) => {
-    ref.current.position.y = Math.sin(clock.elapsedTime + rand * 100) * 0.1 - 0.2
+  useEffect(() => {
+    if (meshRef.current) {
+      const geometry = meshRef.current.geometry as THREE.BufferGeometry
+      basePositions.current = new Float32Array(geometry.attributes.position.array)
+    }
+  }, [])
 
-    if (displaceRef.current.strength !== strength.current) {
-      displaceRef.current.strength = MathUtils.lerp(
-        displaceRef.current.strength,
-        strength.current,
-        0.1
-      )
+  useFrame(({ clock }) => {
+    if (!meshRef.current || !basePositions.current) return
+
+    const time = clock.getElapsedTime()
+    const geom = meshRef.current.geometry as THREE.BufferGeometry
+    const pos = geom.attributes.position as THREE.BufferAttribute
+    const original = basePositions.current
+
+    effectStrength.current = THREE.MathUtils.lerp(effectStrength.current, strength.current, 0.33)
+
+    for (let i = 0; i < pos.count; i++) {
+      const ix = i * 3
+      const x = original[ix]
+      const y = original[ix + 1]
+      const z = original[ix + 2]
+    
+      const frequency = 4
+      const n = noise4D(x * frequency, y * frequency, z * frequency, time * 1)
+    
+      const falloff = Math.pow(THREE.MathUtils.clamp(new THREE.Vector3(x, y, z).length() / 0.5, 0.5, 0.5), 1)
+      const displacement = n * 0.1 * effectStrength.current * falloff
+    
+      const ripple = Math.sin(time * 4 + y * 15) * 0.05 * effectStrength.current;
+    
+      pos.setXYZ(
+        i,
+        x + (displacement + ripple) * x,
+        y + (displacement + ripple) * y,
+        z + (displacement + ripple) * z
+      );
     }
 
-    if (strength.current > 0) {
-      displaceRef.current.offset.x += 0.3 * dt
-    }
+    pos.needsUpdate = true
+
+    meshRef.current.position.y = Math.sin(time + rand * 100) * 0.1 - 0.2
+
+    const targetScale = 1 + 0.25 * effectStrength.current
+    meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1)
   })
 
   return (
     <group {...props}>
-      <Sphere
-        onPointerEnter={() => (strength.current = 0.2)}
-        onPointerLeave={() => (strength.current = 0)}
-        ref={ref}
-        args={[0.4, 128, 128]}
+      <mesh
+        ref={meshRef}
         scale={props.scale}
+        onPointerEnter={() => (strength.current = 1)}
+        onPointerLeave={() => (strength.current = 0)}
       >
-        <LayerMaterial
-          color={'#ffffff'}
-          lighting={'physical'}
+        <sphereGeometry args={[0.4, 64, 64]} />
+        <meshPhysicalMaterial
           transmission={1}
-          roughness={0}
-          thickness={10}
-        >
-          <Depth
-            near={0.5}
-            far={0.8}
-            origin={[-0.5, 0.5, 0]}
-            colorA={'#fec5da'}
-            colorB={'#00b8fe'}
-          />
-          <Displace ref={displaceRef} strength={0} scale={5} offset={[0.09189000000357626, 0, 0]} />
-          <Fresnel
-            color={'#fefefe'}
-            bias={0.4}
-            intensity={4}
-            power={4}
-            factor={0.1}
-            mode={'screen'}
-          />
-        </LayerMaterial>
-      </Sphere>
+          roughness={0.005}
+          thickness={5}
+          ior={1.45}
+          reflectivity={1}
+          clearcoat={1}
+          clearcoatRoughness={0.0}
+          envMapIntensity={3.5}
+
+          iridescence={1}
+          iridescenceIOR={1.0}
+          iridescenceThicknessRange={[300, 700]}
+
+          attenuationColor="#ffffff"
+          attenuationDistance={0.1}
+
+          metalness={0}
+          toneMapped={false}
+          specularColor={"#ffffff"}
+          specularIntensity={1}
+        />
+
+        {/* <FresnelMaterial transparent blending={THREE.AdditiveBlending} side={THREE.BackSide} /> */}
+      </mesh>
     </group>
   )
 }
