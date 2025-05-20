@@ -132,15 +132,12 @@ const DissolveGlassMaterial = shaderMaterial(
 extend({ DissolveGlassMaterial })
 
 declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      dissolveGlassMaterial: ReactThreeFiber.Node<
-        typeof DissolveGlassMaterial,
-        typeof DissolveGlassMaterial
-      >
+    namespace JSX {
+      interface IntrinsicElements {
+        dissolveGlassMaterial: ReactThreeFiber.ThreeElements['meshStandardMaterial']
+      }
     }
   }
-}
 
 export const DissolveGlass = React.forwardRef((props: any, ref) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null!)
