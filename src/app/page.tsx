@@ -10,7 +10,7 @@ import Breaker from './components/Breaker'
 import Scroller from './components/Scroller'
 import Splash from './components/Splash'
 import UnderConstruction from './components/UnderConstruction'
-import _3JS from './components/_3JS'
+import Three from './components/Three'
 import Footer from './components/Footer';
 import FeatureDouble from './components/FeatureDouble';
 import FeatureFont from './components/FeatureFont';
@@ -29,7 +29,7 @@ export default function Page() {
     <div className="bg-white">
 
       <Splash bgColor={'bg-sky-400'}>
-        <_3JS/>
+        <Three/>
       </Splash>
 
       <Container>

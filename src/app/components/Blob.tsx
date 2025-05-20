@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { createNoise4D } from 'simplex-noise';
-import { FresnelMaterial } from './Fresnel';
-import { Environment } from '@react-three/drei';
 
 type GroupProps = JSX.IntrinsicElements['group']
 
@@ -45,7 +43,7 @@ export default function Blob(props: GroupProps) {
       const falloff = Math.pow(THREE.MathUtils.clamp(new THREE.Vector3(x, y, z).length() / 0.5, 0.5, 0.5), 1)
       const displacement = n * 0.1 * effectStrength.current * falloff
     
-      const ripple = Math.sin(time * 4 + y * 15) * 0.05 * effectStrength.current;
+      const ripple = Math.sin(time * 2 + y * 15) * Math.sin(time * 2 + x * 15) * 0.1 * Math.sin(time * 2 + z * 15) * 1 * effectStrength.current;
     
       pos.setXYZ(
         i,
@@ -94,8 +92,6 @@ export default function Blob(props: GroupProps) {
           specularColor={"#ffffff"}
           specularIntensity={1}
         />
-
-        {/* <FresnelMaterial transparent blending={THREE.AdditiveBlending} side={THREE.BackSide} /> */}
       </mesh>
     </group>
   )

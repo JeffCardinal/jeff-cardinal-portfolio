@@ -32,6 +32,7 @@ function RotatingText() {
           alignItems: "center",
           whiteSpace: "nowrap",
           overflow: "hidden",
+          userSelect: "none",
         }}
       >
         <span style={{ color: "#FFFFFF", whiteSpace: "pre" }}>I'm a </span>

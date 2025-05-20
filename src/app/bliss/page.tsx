@@ -6,13 +6,6 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 import PlayBlissButton from './PlayBlissButton';
-import { DissolveGlass } from './dissolve-glass';
-import Marquee from 'react-fast-marquee';
-import Scroller from '../components/Scroller';
-import SparkleSvg from '../svg/SparkleSvg';
-import Footer from '../components/Footer';
-import { Environment, OrbitControls } from '@react-three/drei';
-import SmileyParticles from './SmileyParticles';
 
 function Smiley() {
     const gltf = useLoader(GLTFLoader, '/3d-models/smile-smooth.glb')
@@ -93,7 +86,6 @@ function Smiley() {
           materialRef.current.uniforms.uTime.value = time
           materialRef.current.uniforms.uProgress.value = Math.sin(time * 0.5) * 0.5 + 0.5
         //   materialRef.current.uniforms.uProgress.value = 0.75;
-
         }
       })
       
@@ -207,7 +199,7 @@ function StaticBackground() {
     );
 }
 
-export default function _3JS() {
+export default function Three() {
     return (
         <div className="h-screen overflow-hidden">
             {/* <div className="fixed top-0 left-0 w-full h-[20.3vh] bg-white z-10"/> */}

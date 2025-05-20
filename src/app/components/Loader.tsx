@@ -1,4 +1,4 @@
-import { Html, useProgress } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 import MetaballLoader from "./MetaballLoader";
 import Marquee from "react-fast-marquee";
 
@@ -7,9 +7,9 @@ export default function Loader() {
       <Html center>
         <div
           style={{
+            userSelect: "none",
             minHeight: "100vh",
             minWidth: "100vw",
-            zIndex: 100,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -18,7 +18,7 @@ export default function Loader() {
             color: "#FFFFFF",
             overflowY: "hidden",
           }}
-        >
+        > 
 
           <div className="invisible md:visible lg:visible absolute bottom-1/2 w-full whitespace-nowrap z-0">
             <Marquee

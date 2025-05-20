@@ -148,10 +148,11 @@ function Smiley() {
   );
 }
 
-export default function _3JS() {
+export default function Three() {
     const { progress } = useProgress();
     const isLoaded = progress === 100;
     const [isMobile, setIsMobile] = useState(false);
+    const [zIndexStyle, setzIndexStyle] = useState('z-90');
 
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 800);
@@ -163,6 +164,12 @@ export default function _3JS() {
       return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
 
+    useEffect(() => {
+      setzIndexStyle(isLoaded ? 'z-90' : 'z-0');
+      console.log('isLoaded', isLoaded);
+      console.log('zIndexStyle', zIndexStyle);
+    },[isLoaded])
+
     //this config is just for the 3d text, so it may be moved later to something that makes more sense
     const { ...config } = {
       backside: true,
@@ -172,9 +179,14 @@ export default function _3JS() {
     };
 
     return (
-    <>
-      <Canvas camera={{ position: [0, 0, 10] }} gl={{ toneMapping: THREE.NoToneMapping }}>
-        <React.Suspense fallback={<Loader />}>
+      <>
+        <Canvas
+          id="canvas"
+          className={isLoaded ? 'z-80' : 'z-0'}
+          style={{ position: 'sticky' }}
+          camera={{ position: [0, 0, 10] }}
+        >
+        <React.Suspense fallback={<Loader/>}>
             {!isMobile && (
               <group>
                 <Blob scale={1} position={[-5, 5, -3]} />
@@ -186,10 +198,10 @@ export default function _3JS() {
             )}
             {isLoaded && <JeffCardinalText />}
             {/* <Smiley/> */}
-            <Stats />
+            {/* <Stats /> */}
             <Environment 
-              // files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
-              preset="warehouse"
+              files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
+              // preset="warehouse"
               backgroundIntensity={5}
               background={false}
               backgroundRotation={[0, 0, 0]}
@@ -210,8 +222,8 @@ export default function _3JS() {
         </React.Suspense>
         <Preload all />
       </Canvas>
-      <HelloText/>
-      <RotatingText/>
+      <HelloText />
+      <RotatingText />
     </>
   );
 }
