@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Stats } from '@react-three/drei'
-
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useLoader, useThree, Vector3 } from '@react-three/fiber';
 import { 
     Center,
     Text3D,
@@ -51,7 +49,7 @@ function ThreeDText({
             position={position}
           >
             {text}
-            <meshStandardMaterial color="white" roughness={0.2} metalness={0.9} />
+            <meshStandardMaterial color="white" roughness={0.125} metalness={1} />
           </Text3D>
         </Center>
       </group>
@@ -138,7 +136,7 @@ function Smiley() {
   return (
     <mesh position={[7, -3, 0]}>
       <primitive ref={ref} object={smiley} scale={[15, 15, 15]} position={[0, 0, -2]} />
-      <meshStandardMaterial 
+      <meshStandardMaterial
         metalness={1} 
         roughness={0.2}
         color="#FFFFFF"
@@ -152,7 +150,6 @@ export default function Three() {
     const { progress } = useProgress();
     const isLoaded = progress === 100;
     const [isMobile, setIsMobile] = useState(false);
-    const [zIndexStyle, setzIndexStyle] = useState('z-90');
 
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 800);
@@ -164,12 +161,6 @@ export default function Three() {
       return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
 
-    useEffect(() => {
-      setzIndexStyle(isLoaded ? 'z-90' : 'z-0');
-      console.log('isLoaded', isLoaded);
-      console.log('zIndexStyle', zIndexStyle);
-    },[isLoaded])
-
     //this config is just for the 3d text, so it may be moved later to something that makes more sense
     const { ...config } = {
       backside: true,
@@ -179,29 +170,23 @@ export default function Three() {
     };
 
     return (
-      <>
-        <Canvas
-          id="canvas"
-          className={isLoaded ? 'z-80' : 'z-0'}
-          style={{ position: 'sticky' }}
-          camera={{ position: [0, 0, 10] }}
-        >
-        <React.Suspense fallback={<Loader/>}>
+    <>
+      <Canvas camera={{ position: [0, 0, 10] }} id="Canvas">
+        <React.Suspense fallback={<Loader />}>
             {!isMobile && (
               <group>
                 <Blob scale={1} position={[-5, 5, -3]} />
-                <Blob scale={1.25} position={[-5, 1.5, 5]} />
-                <Blob scale={1.5} position={[5, 3, 1]} />
-                <Blob scale={2.5} position={[-5, -1.5, 4]} />
-                <Blob scale={1} position={[8, 1, 2]} />
+                <Blob scale={1.2} position={[-5, 1.5, 5]} />
+                <Blob scale={1.3} position={[5, 3, 1]} />
+                <Blob scale={1.5} position={[-5, -2, 4]} />
+                <Blob scale={1.1} position={[8, 1, 2]} />
               </group>
             )}
             {isLoaded && <JeffCardinalText />}
             {/* <Smiley/> */}
-            {/* <Stats /> */}
             <Environment 
-              files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
-              // preset="warehouse"
+              // files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
+              preset="warehouse"
               backgroundIntensity={5}
               background={false}
               backgroundRotation={[0, 0, 0]}

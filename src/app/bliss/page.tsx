@@ -143,17 +143,17 @@ function Smiley() {
             specularColor={'#ffffff'}
             specularIntensity={1}
             transparent
-            depthWrite={false}
-            stencilWrite={false} // ✅ don't override
-            stencilRef={1}
-            stencilFunc={THREE.EqualStencilFunc}
-            stencilZPass={THREE.KeepStencilOp}
-            depthTest={true}   // ✅ still want Z sorting
-            // transparent={true}
-            blending={THREE.NormalBlending} 
-            polygonOffset={true}
-            polygonOffsetFactor={-1}
-            polygonOffsetUnits={-4}
+            // depthWrite={false}
+            // stencilWrite={false}
+            // stencilRef={1}
+            // stencilFunc={THREE.EqualStencilFunc}
+            // stencilZPass={THREE.KeepStencilOp}
+            // depthTest={true}
+            // // transparent={true}
+            // blending={THREE.NormalBlending} 
+            // polygonOffset={true}
+            // polygonOffsetFactor={-1}
+            // polygonOffsetUnits={-4}
           />
         </mesh>
       </group>

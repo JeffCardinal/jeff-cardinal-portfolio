@@ -19,7 +19,7 @@ function RotatingText() {
   
     return (
       <div
-        className=""
+        className="z-10"
         style={{
           position: "absolute",
           top: "calc(60dvh + 4vw)",
