@@ -19,7 +19,7 @@ function RotatingText() {
   
     return (
       <div
-        className=""
+        className="z-10"
         style={{
           position: "absolute",
           top: "calc(60dvh + 4vw)",
@@ -32,6 +32,7 @@ function RotatingText() {
           alignItems: "center",
           whiteSpace: "nowrap",
           overflow: "hidden",
+          userSelect: "none",
         }}
       >
         <span style={{ color: "#FFFFFF", whiteSpace: "pre" }}>I'm a </span>

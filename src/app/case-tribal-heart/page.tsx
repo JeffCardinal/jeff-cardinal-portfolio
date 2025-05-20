@@ -71,7 +71,7 @@ function Torus(
     );
 }
 
-export default function _3JS() {
+export default function Three() {
     return (
         <div className="bg-black">
             {/* 3D Canvas */}
