@@ -147,4 +147,6 @@ export const DissolveGlass = React.forwardRef((props: any, ref) => {
   return <dissolveGlassMaterial ref={ref || materialRef} attach="material" {...props} />
 })
 
+DissolveGlass.displayName = 'DissolveGlass'
+
 export { DissolveGlassMaterial } 

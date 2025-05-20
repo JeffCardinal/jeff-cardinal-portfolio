@@ -10,6 +10,7 @@ import {
     Lightformer,
     useProgress,
     Preload,
+    Stats,
 } from '@react-three/drei';
 import Blob from './Blob';
 import * as THREE from 'three';
@@ -172,18 +173,20 @@ export default function Three() {
     return (
     <>
       <Canvas camera={{ position: [0, 0, 10] }} id="Canvas">
+      {/* <Stats/> */}
         <React.Suspense fallback={<Loader />}>
             {!isMobile && (
               <group>
                 <Blob scale={1} position={[-5, 5, -3]} />
-                <Blob scale={1.2} position={[-5, 1.5, 5]} />
-                <Blob scale={1.3} position={[5, 3, 1]} />
-                <Blob scale={1.5} position={[-5, -2, 4]} />
-                <Blob scale={1.1} position={[8, 1, 2]} />
+                <Blob scale={1.25} position={[-5, 1.5, 5]} />
+                <Blob scale={1.5} position={[5, 3, 1]} />
+                <Blob scale={2.5} position={[-5, -1.5, 4]} />
+                <Blob scale={1} position={[8, 1, 2]} />
               </group>
             )}
             {isLoaded && <JeffCardinalText />}
             {/* <Smiley/> */}
+            
             <Environment 
               // files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
               preset="warehouse"
