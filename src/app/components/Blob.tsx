@@ -3,11 +3,9 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { createNoise4D } from 'simplex-noise';
 
-type GroupProps = JSX.IntrinsicElements['group']
-
 const noise4D = createNoise4D();
 
-export default function Blob(props: GroupProps) {
+export default function Blob(props: any) {
   const meshRef = useRef<THREE.Mesh>(null!)
   const strength = useRef(0)
   const effectStrength = useRef(0)

@@ -72,7 +72,7 @@ function JeffCardinalText() {
   );
 }
 
-function Striplight(props: JSX.IntrinsicElements['mesh']) {
+function Striplight(props: any) {
   return (
     <mesh {...props}>
       <boxGeometry />
@@ -210,8 +210,8 @@ export default function Three() {
         </React.Suspense>
         <Preload all />
       </Canvas>
-      <HelloText />
-      <RotatingText />
+      <HelloText/>
+      <RotatingText/>
     </>
   );
 }
