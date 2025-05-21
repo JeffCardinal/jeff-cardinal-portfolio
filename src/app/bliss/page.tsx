@@ -6,6 +6,12 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 import PlayBlissButton from './PlayBlissButton';
+import NoiseGradientShaderMaterial from '../components/shaders/NoiseGradientShaderMaterial';
+import { DissolveGlass } from './dissolve-glass';
+import { PlaybackProvider, usePlayback } from './PlaybackContext';    
+
+const bpm = 155;
+const secondsPerBeat = 60 / bpm;
 
 function Smiley() {
     const gltf = useLoader(GLTFLoader, '/3d-models/smile-smooth.glb')
@@ -14,10 +20,19 @@ function Smiley() {
     const dissolveMeshRef = useRef<THREE.Mesh>(null)
     const originalPositions = useRef<Float32Array | null>(null)
     const { camera } = useThree()
+    const { audioRef } = usePlayback();
 
     const groupRef = useRef<THREE.Group>(null)
     const { size } = useThree()
     const mouse = useRef({ x: 0, y: 0 })
+
+    useFrame(() => {
+        const t = audioRef.current?.currentTime || 0;
+        if (meshRef.current) {
+            let beatPhase = (t % secondsPerBeat) / secondsPerBeat;
+            meshRef.current.scale.setScalar(1 + 0.025 * Math.sin(beatPhase * Math.PI * 2));
+        }
+      });
 
     // Listen to mouse movement on mount
     useEffect(() => {
@@ -88,9 +103,7 @@ function Smiley() {
         //   materialRef.current.uniforms.uProgress.value = 0.75;
         }
       })
-      
-      
-  
+
     const geometry = useMemo(() => {
       let foundGeometry: THREE.BufferGeometry | null = null
       gltf.scene.traverse((child) => {
@@ -103,10 +116,10 @@ function Smiley() {
   
     return (
         <group ref={groupRef} scale={[15, 15, 15]} position={[0, -1, 0]}>
-            {/* <mesh 
-            geometry={geometry} 
-            ref={dissolveMeshRef}
-            renderOrder={2} // First in render sequence
+            {/* <mesh
+                geometry={geometry} 
+                ref={dissolveMeshRef}
+                renderOrder={2} // First in render sequence
             >
             <DissolveGlass
                 ref={materialRef}
@@ -115,7 +128,7 @@ function Smiley() {
                 uNoiseScale={1000.0}
                 uColor={new THREE.Color('#ffffff')}
                 uEdgeSharpness={1}
-                transparent
+                // transparent
                 // depthWrite={false}
                 // depthTest={false}
                 side={THREE.DoubleSide}
@@ -124,8 +137,8 @@ function Smiley() {
                 stencilFunc={THREE.AlwaysStencilFunc}
                 stencilZPass={THREE.ReplaceStencilOp}
                 stencilZFail={THREE.KeepStencilOp}
-                depthWrite={true} // ✅ don't write to depth buffer
-                depthTest={true}   // still respect camera z order
+                depthWrite={true}
+                depthTest={true}
             />
             </mesh> */}
 
@@ -142,14 +155,14 @@ function Smiley() {
             toneMapped={false}
             specularColor={'#ffffff'}
             specularIntensity={1}
-            transparent
+            // transparent
             // depthWrite={false}
             // stencilWrite={false}
             // stencilRef={1}
             // stencilFunc={THREE.EqualStencilFunc}
             // stencilZPass={THREE.KeepStencilOp}
             // depthTest={true}
-            // // transparent={true}
+            // transparent={true}
             // blending={THREE.NormalBlending} 
             // polygonOffset={true}
             // polygonOffsetFactor={-1}
@@ -164,9 +177,8 @@ function Comp() {
     const { viewport } = useThree();
     const scaleFactor = Math.min(viewport.width, viewport.height) * 0.065;
     return (
-        <group scale={scaleFactor} position={[0, -1.15, 0]}>
+        <group scale={scaleFactor} position={[0, -1, 0]}>
             <Smiley />
-            {/* <SmileyParticles /> */}
         </group>
     );
 }
@@ -174,19 +186,38 @@ function Comp() {
 function StaticBackground() {
     const tex = useLoader(THREE.TextureLoader, '/bliss/bliss-bg.jpg');
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    
     const meshRef = useRef<THREE.Mesh>(null);
-
     const { camera } = useThree();
+    const { audioRef } = usePlayback();
+
+    const targetBeat = 64;
+    const lastBeat = useRef(-1);
+    // const totalBeats = Math.floor(audioRef.current?.duration / secondsPerBeat);
     
     useFrame(() => {
         if (meshRef.current) {
             meshRef.current.quaternion.copy(camera.quaternion);
+            
+            const material = meshRef.current.material as THREE.MeshBasicMaterial;
+
+            const time = audioRef.current?.currentTime || 0;
+            const duration = audioRef.current?.duration || Infinity;
+            
+            const currentBeat = Math.floor(time / secondsPerBeat);
+
+            if (currentBeat !== lastBeat.current) {
+                lastBeat.current = currentBeat;
+
+                if (currentBeat === targetBeat && meshRef.current) {
+                    material.transparent = true;
+                    material.opacity = 0;
+                }
+            }
         }
     });
     
     return (
-        <mesh ref={meshRef} position={[0, -30, -50]}>
+        <mesh ref={meshRef} position={[0, -25, -35]}>
             <planeGeometry args={[200, 100]} />
             <meshBasicMaterial
                 map={tex}
@@ -194,6 +225,7 @@ function StaticBackground() {
                 depthTest={true}
                 toneMapped={false}
                 transparent={false}
+                opacity={1}
             />
         </mesh>
     );
@@ -201,47 +233,53 @@ function StaticBackground() {
 
 export default function Three() {
     return (
-        <div className="h-screen overflow-hidden">
-            {/* <div className="fixed top-0 left-0 w-full h-[20.3vh] bg-white z-10"/> */}
-            <img
-                src="/bliss/bliss-header.png"
-                className="fixed top-0 max-h-[550px] object-cover z-20 pointer-events-none"
-                alt="Bliss Header"
-            />
-            {/* <div className="fixed top-[50px] left-0 w-full h-full bg-[url('/bliss/bliss-bg.jpg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" /> */}
-            <div className="bg-white w-full h-full bg-cover bg-center fixed" />
-            <PlayBlissButton />
-            <Canvas 
-                camera={{ position: [0, 2, 10] }}
-                gl={{ antialias: true, alpha: true, stencil: true, depth: true }}
-                onCreated={({ gl }) => {
-                    gl.setClearAlpha(0);
-                    gl.setClearColor(0x000000, 0);
-                }}
+        <PlaybackProvider>
+            <div className="h-screen overflow-hidden">
+                <div className="fixed top-0 w-full h-[20vh] bg-white flex justify-center z-50">
+                    <div 
+                        className="absolute bg-red-500 w-[90vw] max-w-[800px] h-[0px] rounded-full z-100" 
+                        style={{
+                            bottom: 0,
+                            left: '50%',
+                            transform: 'translateX(-50%) translateY(50%)',
+                            paddingLeft: '50px',
+                            paddingRight: '50px',
+                        }}
+                    >
+                        <img
+                            src="/bliss/bliss-header-2.png"
+                            className="fixed top-0 z-50 pointer-events-none"
+                            alt="Bliss Header"
+                            style={{
+                                left: '50%',
+                                bottom: 0,
+                                transform: 'translateX(-50%) translateY(-50%)',
+                                transformOrigin: 'center center',
+                            }}
+                        />
+                    </div>
+                </div>
+                <Canvas 
+                    camera={{ position: [0, 2, 10] }}
+                    gl={{ antialias: true, alpha: true, stencil: true, depth: true }}
+                    onCreated={({ gl }) => {
+                        gl.setClearAlpha(0);
+                        gl.setClearColor(0x000000, 0);
+                    }}
                 >
-                {/* <Environment files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr" /> */}
-                <ambientLight intensity={1} />
-                <directionalLight position={[2, 2, 5]} intensity={10.5} />
-                <React.Suspense fallback={null}>
-                    <Comp />
-                    <StaticBackground />
-                </React.Suspense>
-                {/* <OrbitControls/> */}
-            </Canvas>
-            {/* <Marquee
-                pauseOnHover={false}
-                speed={100}
-                className="border-t-[5px] border-b-[5px] border-white bg-[#ea43a3]"
-            >
-                <Scroller pad={true}><div className="text-white">NEW SINGLE OUT MAY 30 2025</div></Scroller>
-                <Scroller pad={false}> <SparkleSvg color={"white"} dim={"36px"}/> </Scroller>
-                <Scroller pad={true}><div className="text-white">PRODUCTION BY DREAMING DIARY AND VAPERROR</div></Scroller>
-                <Scroller pad={false}> <SparkleSvg color={"white"} dim={"36px"}/> </Scroller>
-                <Scroller pad={true}><div className="text-white">WE'RE SO BACK, BABY!</div></Scroller>
-                <Scroller pad={false}> <SparkleSvg color={"white"} dim={"36px"}/> </Scroller>
-            </Marquee>
-            <div className="h-dvh bg-[#ea43a3]"></div>
-            <Footer textColor={'text-white'} bgColor={'bg-black'}/> */}
-        </div>
+                    <ambientLight intensity={1} />
+                    <directionalLight position={[2, 2, 5]} intensity={10.5} />
+                    <React.Suspense fallback={null}>
+                        <Comp />
+                        <mesh scale={[50, 50, 1]} renderOrder={-1}>
+                            <planeGeometry args={[1, 1]} />
+                            <NoiseGradientShaderMaterial />
+                        </mesh>
+                        <StaticBackground/>
+                    </React.Suspense>
+                </Canvas>
+            </div>
+            <PlayBlissButton />
+        </PlaybackProvider>
     );
 }

@@ -1,15 +1,14 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
-import { xt256 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import React, { useRef, useEffect } from 'react'
+import { usePlayback } from './PlaybackContext'
 
 export default function PlayBlissButton() {
-  const audioRef = useRef<HTMLAudioElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const audioContextRef = useRef<AudioContext | null>(null)
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const { audioRef, isPlaying, play, pause } = usePlayback();
 
   const NUM_BARS = 128
 
@@ -62,22 +61,6 @@ export default function PlayBlissButton() {
     draw()
   }, [isPlaying])
 
-  const handleClick = () => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio('/bliss/Bliss-Loop.wav')
-      audioRef.current.loop = true
-      audioRef.current.preload = 'auto'
-    }
-
-    if (isPlaying) {
-      audioRef.current.pause()
-      setIsPlaying(false)
-    } else {
-      audioRef.current.play()
-      setIsPlaying(true)
-    }
-  }
-
   return (
     <>
       {isPlaying && (
@@ -114,9 +97,9 @@ export default function PlayBlissButton() {
           justifyContent: 'center',
           display: 'flex',
         }}
-        onClick={handleClick}
+        onClick={isPlaying ? pause : play}
       >
-        {isPlaying ? '⏸' : '⏵'}
+        {isPlaying ? '⏸\uFE0E' : '⏵\uFE0E'}
       </div>
     </>
   )

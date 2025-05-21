@@ -40,3 +40,6 @@ next-env.d.ts
 public/videos/
 # Just need to keep these on local, nothing super important here, might move
 public/psd
+
+# Ableton Live generated audio analysis files
+*.wav.asd
