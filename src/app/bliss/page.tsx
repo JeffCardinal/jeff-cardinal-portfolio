@@ -246,7 +246,7 @@ function StaticBackground() {
 }
 
 
-export function BurnEffectPlane() {
+function BurnEffectPlane() {
     const shaderRef = useRef<any>();
     const BPM = 155;
     const totalBeatsToFullyBurn = 64;
