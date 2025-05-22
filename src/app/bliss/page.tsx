@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useEffect, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import React, { useRef, useEffect, useMemo, useState } from 'react';
+import { Canvas, useFrame, useThree, extend, ReactThreeFiber, Object3DNode } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from 'three';
@@ -9,6 +9,16 @@ import PlayBlissButton from './PlayBlissButton';
 import NoiseGradientShaderMaterial from '../components/shaders/NoiseGradientShaderMaterial';
 import { DissolveGlass } from './dissolve-glass';
 import { PlaybackProvider, usePlayback } from './PlaybackContext';    
+import { BurnShaderMaterial } from './BurnShaderMaterial';
+extend({ BurnShaderMaterial });
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      burnShaderMaterial: Object3DNode<typeof BurnShaderMaterial, typeof BurnShaderMaterial>;
+    }
+  }
+}
 
 const bpm = 155;
 const secondsPerBeat = 60 / bpm;
@@ -192,7 +202,6 @@ function StaticBackground() {
 
     const targetBeat = 64;
     const lastBeat = useRef(-1);
-    // const totalBeats = Math.floor(audioRef.current?.duration / secondsPerBeat);
     
     useFrame(() => {
         if (meshRef.current) {
@@ -201,9 +210,14 @@ function StaticBackground() {
             const material = meshRef.current.material as THREE.MeshBasicMaterial;
 
             const time = audioRef.current?.currentTime || 0;
-            const duration = audioRef.current?.duration || Infinity;
-            
             const currentBeat = Math.floor(time / secondsPerBeat);
+            const looped = currentBeat < lastBeat.current;
+          
+            if (looped) {
+                lastBeat.current = 0;
+                material.transparent = false;
+                material.opacity = 1;
+            }
 
             if (currentBeat !== lastBeat.current) {
                 lastBeat.current = currentBeat;
@@ -229,6 +243,58 @@ function StaticBackground() {
             />
         </mesh>
     );
+}
+
+
+export function BurnEffectPlane() {
+    const shaderRef = useRef<any>();
+    const BPM = 155;
+    const totalBeatsToFullyBurn = 64;
+    const { audioRef } = usePlayback();
+    const texture = useLoader(THREE.TextureLoader, '/bliss/bliss-bg.jpg');
+  
+    const startBeat = 56;
+    const endBeat = 64;
+    const reverseStart = 92;
+    const reverseEnd = 96;
+
+    useFrame((state) => {
+        if (shaderRef.current) {
+        const time = state.clock.elapsedTime;
+        const beat = (audioRef.current?.currentTime ?? 0) * (BPM / 60);
+        shaderRef.current.uTime = time;
+        let progress;
+        if (beat < startBeat) {
+            progress = 0;
+        } else if (beat >= startBeat && beat < endBeat) {
+            progress = (beat - startBeat) / (endBeat - startBeat);
+        } else if (beat >= endBeat && beat < reverseStart) {
+            progress = 1;
+        } else if (beat >= reverseStart && beat < reverseEnd) {
+            progress = 1 - (beat - reverseStart) / (reverseEnd - reverseStart); // 1 → 0
+        } else if (beat >= reverseEnd) {
+            progress = 0;
+        }
+        shaderRef.current.uProgress = progress;
+      }
+    });
+  
+    return (
+        <mesh  position={[0, -25, -35]}>
+        <planeGeometry args={[200, 100]} />
+        <burnShaderMaterial
+          ref={shaderRef}
+          uTime={0}
+          uProgress={0}
+          uTexture={texture}
+        //   uReverse={false}
+          side={THREE.DoubleSide}
+          depthTest={true}
+          transparent={false}
+          opacity={1}
+        />
+      </mesh>
+  );
 }
 
 export default function Three() {
@@ -275,7 +341,8 @@ export default function Three() {
                             <planeGeometry args={[1, 1]} />
                             <NoiseGradientShaderMaterial />
                         </mesh>
-                        <StaticBackground/>
+                        <BurnEffectPlane/>
+                        {/* <StaticBackground/> */}
                     </React.Suspense>
                 </Canvas>
             </div>
