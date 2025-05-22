@@ -1,24 +1,16 @@
 'use client';
 
-import React, { useRef, useEffect, useMemo, useState } from 'react';
-import { Canvas, useFrame, useThree, extend, ReactThreeFiber, Object3DNode } from '@react-three/fiber';
+import React, { useRef, useEffect, useMemo } from 'react';
+import { Canvas, useFrame, useThree, extend } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 import PlayBlissButton from './PlayBlissButton';
 import NoiseGradientShaderMaterial from '../components/shaders/NoiseGradientShaderMaterial';
-import { DissolveGlass } from './dissolve-glass';
 import { PlaybackProvider, usePlayback } from './PlaybackContext';    
 import { BurnShaderMaterial } from './BurnShaderMaterial';
+import { Environment } from '@react-three/drei';
 extend({ BurnShaderMaterial });
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      burnShaderMaterial: Object3DNode<typeof BurnShaderMaterial, typeof BurnShaderMaterial>;
-    }
-  }
-}
 
 const bpm = 155;
 const secondsPerBeat = 60 / bpm;
@@ -156,27 +148,16 @@ function Smiley() {
 
           <meshPhysicalMaterial
             transmission={1}
-            roughness={0.3}
-            thickness={0.4}
+            roughness={0.15}
+            thickness={1}
             ior={1.45}
             reflectivity={0.5}
             attenuationDistance={1}
             metalness={0}
             toneMapped={false}
             specularColor={'#ffffff'}
-            specularIntensity={1}
-            // transparent
-            // depthWrite={false}
-            // stencilWrite={false}
-            // stencilRef={1}
-            // stencilFunc={THREE.EqualStencilFunc}
-            // stencilZPass={THREE.KeepStencilOp}
-            // depthTest={true}
-            // transparent={true}
-            // blending={THREE.NormalBlending} 
-            // polygonOffset={true}
-            // polygonOffsetFactor={-1}
-            // polygonOffsetUnits={-4}
+            specularIntensity={2}
+            attenuationColor="white"
           />
         </mesh>
       </group>
@@ -245,21 +226,26 @@ function StaticBackground() {
     );
 }
 
-
 function BurnEffectPlane() {
-    const shaderRef = useRef<any>();
     const BPM = 155;
-    const totalBeatsToFullyBurn = 64;
-    const { audioRef } = usePlayback();
     const texture = useLoader(THREE.TextureLoader, '/bliss/bliss-bg.jpg');
-  
-    const startBeat = 56;
+    const shaderRef = useRef<any>();
+
+    const { audioRef } = usePlayback();
+    const { camera } = useThree();
+
+    const startBeat = 60;
     const endBeat = 64;
     const reverseStart = 92;
     const reverseEnd = 96;
 
+    const meshRef = useRef<THREE.Mesh>(null);
+
     useFrame((state) => {
-        if (shaderRef.current) {
+      if (meshRef.current) {
+        meshRef.current.quaternion.copy(camera.quaternion);
+      }
+      if (shaderRef.current) {
         const time = state.clock.elapsedTime;
         const beat = (audioRef.current?.currentTime ?? 0) * (BPM / 60);
         shaderRef.current.uTime = time;
@@ -280,20 +266,32 @@ function BurnEffectPlane() {
     });
   
     return (
-        <mesh  position={[0, -25, -35]}>
-        <planeGeometry args={[200, 100]} />
-        <burnShaderMaterial
-          ref={shaderRef}
-          uTime={0}
-          uProgress={0}
-          uTexture={texture}
-        //   uReverse={false}
-          side={THREE.DoubleSide}
-          depthTest={true}
-          transparent={false}
-          opacity={1}
-        />
-      </mesh>
+    //   <mesh ref={meshRef} position={[0, -25, -35]}>
+    //     <planeGeometry args={[200, 100]} />
+    //     <meshBasicMaterial
+    //         map={texture}
+    //         side={THREE.DoubleSide}
+    //         depthTest={true}
+    //         toneMapped={false}
+    //         transparent={false}
+    //         opacity={1}
+    //     />
+    //   </mesh>
+        <mesh ref={meshRef} position={[0, -25, -35]}>
+            <planeGeometry args={[200, 100]} />
+            <burnShaderMaterial
+              ref={shaderRef}
+              uTime={0}
+              uProgress={0}
+              uTexture={texture}
+              side={THREE.DoubleSide}
+              depthTest={true}
+              transparent={false}
+              opacity={1}
+              toneMapped={true}
+            />
+            {/* <burnShaderMaterial uTexture={texture} toneMapped={true} /> */}
+        </mesh>
   );
 }
 
@@ -328,15 +326,23 @@ export default function Three() {
                 <Canvas 
                     camera={{ position: [0, 2, 10] }}
                     gl={{ antialias: true, alpha: true, stencil: true, depth: true }}
+                    
                     onCreated={({ gl }) => {
                         gl.setClearAlpha(0);
                         gl.setClearColor(0x000000, 0);
                     }}
                 >
-                    <ambientLight intensity={1} />
-                    <directionalLight position={[2, 2, 5]} intensity={10.5} />
+                    {/* <ambientLight intensity={1} /> */}
+                    <directionalLight position={[-2, 3, 5]} intensity={200} />
                     <React.Suspense fallback={null}>
                         <Comp />
+                        <Environment 
+                            files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
+                            preset="warehouse"
+                            backgroundIntensity={5}
+                            background={true}
+                            // backgroundRotation={[0, 0, 0]}
+                        />
                         <mesh scale={[50, 50, 1]} renderOrder={-1}>
                             <planeGeometry args={[1, 1]} />
                             <NoiseGradientShaderMaterial />

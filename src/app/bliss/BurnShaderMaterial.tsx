@@ -1,6 +1,8 @@
 // BurnShaderMaterial.tsx
 import { shaderMaterial } from '@react-three/drei'
-import { extend } from '@react-three/fiber'
+import { extend, ReactThreeFiber } from '@react-three/fiber'
+import { Texture } from 'three';
+// import { Texture } from 'three/src/Three.js';
 
 const BurnShaderMaterial = shaderMaterial(
   {
@@ -64,17 +66,34 @@ const BurnShaderMaterial = shaderMaterial(
       vec4 texB = texture2D(uTexture, uv - vec2(offset, 0.0));
       vec4 color = vec4(texR.r, texG.g, texB.b, 1.0);
 
-      // Glow around edges
-      // float glow = smoothstep(0.0, 0.2, abs(n - uProgress));
-
       color.a *= threshold;
 
       if (color.a < 0.5) discard;
+      // Sample the texture
+      vec4 tex = texture2D(uTexture, vUv);
+
+      // Convert from sRGB to linear color space
+      tex.rgb = pow(tex.rgb, vec3(2.2));
+
+      // Output final color
+      gl_FragColor = tex;
 
       gl_FragColor = color;
     }
   `
 );
+
+declare global {
+  namespace JSX {
+      interface IntrinsicElements {
+          burnShaderMaterial: ReactThreeFiber.ThreeElements['meshStandardMaterial'] & {
+            uTime: 0,
+            uProgress: 0,
+            uTexture: Texture,
+          },
+      }
+  }
+}
 
 extend({ BurnShaderMaterial });
 export { BurnShaderMaterial };
