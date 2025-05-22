@@ -10,6 +10,7 @@ import NoiseGradientShaderMaterial from '../components/shaders/NoiseGradientShad
 import { PlaybackProvider, usePlayback } from './PlaybackContext';    
 import { BurnShaderMaterial } from './BurnShaderMaterial';
 import { Environment } from '@react-three/drei';
+import Loader from '../components/Loader';
 extend({ BurnShaderMaterial });
 
 const bpm = 155;
@@ -102,7 +103,6 @@ function Smiley() {
         if (materialRef.current) {
           materialRef.current.uniforms.uTime.value = time
           materialRef.current.uniforms.uProgress.value = Math.sin(time * 0.5) * 0.5 + 0.5
-        //   materialRef.current.uniforms.uProgress.value = 0.75;
         }
       })
 
@@ -333,8 +333,8 @@ export default function Three() {
                     }}
                 >
                     {/* <ambientLight intensity={1} /> */}
-                    <directionalLight position={[-2, 3, 5]} intensity={200} />
-                    <React.Suspense fallback={null}>
+                    <React.Suspense fallback={<Loader/>}>
+                        <directionalLight position={[-2, 3, 5]} intensity={200} />
                         <Comp />
                         <Environment 
                             files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
