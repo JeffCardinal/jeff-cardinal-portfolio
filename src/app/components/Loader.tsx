@@ -59,7 +59,7 @@ export default function Loader() {
 
             <div className="z-10">
               <div className="relative w-[450px] h-[450px] flex items-center justify-center">
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
+              <div className="absolute top-0 left-0 w-full h-full flex items-center pointer-events-none">
                 <svg width="400" height="400" viewBox="0 0 400 400">
                   <defs>
                     <path
