@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { usePlayback } from './PlaybackContext'
 
 export default function PlayBlissButton() {
@@ -8,7 +8,7 @@ export default function PlayBlissButton() {
   const audioContextRef = useRef<AudioContext | null>(null)
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
-  const { audioRef, isPlaying, play, pause } = usePlayback();
+  const { audioRef, isPlaying, isBeenPlayed, play, pause } = usePlayback();
 
   const NUM_BARS = 128
 
@@ -85,20 +85,25 @@ export default function PlayBlissButton() {
           bottom: 20,
           right: 20,
           zIndex: 10,
-          height: '50px',
-          width: '50px',
+          height: '64px',
+          width: '64px',
           backgroundColor: '#ea43a3',
           borderRadius: '100px',
           color: 'white',
           fontWeight: 'bold',
           cursor: 'pointer',
-          fontSize: '32px',
+          fontSize: '48px',
           userSelect: 'none',
           justifyContent: 'center',
           display: 'flex',
+          verticalAlign: 'middle',
+          alignItems: 'center',
+          textAlign: 'center',
         }}
         onClick={isPlaying ? pause : play}
       >
+        {!isPlaying && !isBeenPlayed && <span className="absolute inset-0 rounded-full bg-pink-500 animate-radarPulse opacity-100 pointer-events-none -z-10"/>}
+        {!isPlaying && !isBeenPlayed && <span className="absolute inset-0 rounded-full bg-pink-500 animate-radarPulse_2 delay-500 opacity-100 pointer-events-none -z-10"/>}
         {isPlaying ? '⏸\uFE0E' : '⏵\uFE0E'}
       </div>
     </>

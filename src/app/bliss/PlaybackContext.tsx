@@ -2,6 +2,7 @@ import React, { createContext, useContext, useRef, useState } from 'react';
 
 type PlaybackContextType = {
   isPlaying: boolean;
+  isBeenPlayed: boolean;
   audioRef: React.RefObject<HTMLAudioElement>;
   play: () => void;
   pause: () => void;
@@ -18,11 +19,13 @@ export const usePlayback = () => {
 export const PlaybackProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isBeenPlayed, setIsBeenPlayed] = useState<boolean>(false);
 
   const play = () => {
     if (audioRef.current) {
       audioRef.current.play();
       setIsPlaying(true);
+      setIsBeenPlayed(true);
     }
   };
 
@@ -34,7 +37,7 @@ export const PlaybackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   return (
-    <PlaybackContext.Provider value={{ isPlaying, audioRef, play, pause }}>
+    <PlaybackContext.Provider value={{ isPlaying, isBeenPlayed, audioRef, play, pause }}>
       <>
         <audio ref={audioRef} src="/bliss/Bliss-Loop.wav" preload="auto" loop/>
         {children}

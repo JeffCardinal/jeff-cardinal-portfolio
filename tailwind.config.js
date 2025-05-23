@@ -73,6 +73,16 @@ module.exports = {
           transform: "translateX(-40%)",
          }
       },
+      radarPulse: {
+        '0%': { transform: 'scale(1)', opacity: '0.75' },
+        '70%': { transform: 'scale(1.5)', opacity: '0' },
+        '100%': { transform: 'scale(2.5)', opacity: '0' },
+      },
+      radarPulse_2: {
+        '0%': { transform: 'scale(1)', opacity: '0.75' },
+        '70%': { transform: 'scale(1.5)', opacity: '0' },
+        '100%': { transform: 'scale(2.5)', opacity: '0' },
+      },
     },
     animation: {
       easeInNav:         'easeInNav  300ms  ease-in-out',
@@ -86,9 +96,24 @@ module.exports = {
       loadInFromRight:   'loadInFromRight 0.5s ease-in-out',
       loadIn:            'loadIn 0.5s ease-in-out',
       buttonGlyphEaseIn: 'buttonGlyphEaseIn 1s linear infinite',
-    }
+      radarPulse: 'radarPulse 1.5s ease-out infinite',
+      radarPulse_2: 'radarPulse 1.5s ease-out infinite',
+    },
+    animationDelay: {
+      '500': '500ms',
+    },
   },
   plugins: [
     require("tailwindcss-animate"),
+    [
+      function ({ addUtilities, theme }) {
+        const delays = theme('animationDelay');
+        const utilities = {};
+        for (const key in delays) {
+          utilities[`.delay-${key}`] = { animationDelay: delays[key] };
+        }
+        addUtilities(utilities);
+      },
+    ],
   ],
 }
