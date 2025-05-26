@@ -35,15 +35,13 @@ export default function Feature(
       <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`}>
         
         <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
-          <div className="aspect-square text-black justify-center items-center">
-            <Image
-              className="pb-8 lg:pb-0 object-cover"
+          <div className="text-black flex justify-center items-center">
+            <img
+              className="pb-8 lg:pb-0 object-fill w-full max-w-[1000px]"
               onMouseEnter={() => setHovering(false)}
               onMouseLeave={() => setHovering(true)}
               src={hovering ? `/images/${imageName}` : `/images/${imageHoverName}`}
               alt={title}
-              width="1000"
-              height="0"
             />
           </div>
         </div>

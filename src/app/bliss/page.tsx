@@ -298,7 +298,7 @@ function BurnEffectPlane() {
 export default function Three() {
     return (
         <PlaybackProvider>
-            <div className="h-screen overflow-hidden">
+            <div className="h-screen overflow-hidden position-fixed">
                 <div className="fixed top-0 w-full h-[20vh] bg-white flex justify-center z-50">
                     <div 
                         className="absolute bg-red-500 w-[90vw] max-w-[800px] h-[0px] rounded-full z-100" 
