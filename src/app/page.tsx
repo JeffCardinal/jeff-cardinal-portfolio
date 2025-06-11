@@ -23,6 +23,7 @@ import ImageGrid from './components/ImageGrid';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import FeatureUIUX from './components/FeatureUIUX';
 import SparkleSvg from './svg/SparkleSvg';
+import FeatureGlass from './components/FeatureGlass';
 
 export default function Page() {
   return (
@@ -62,6 +63,34 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
+            <FeatureGlass
+              title="Bliss"
+              description="Single cover for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrush post-processing and 3D model by Jeff Cardinal."
+              inspiration="Y2K airbrushed hyperreality, icons evoke early cellphone OS feeling."
+              tools="Blender, Illustrator, Photoshop"
+              year="2025"
+              imageName="Bliss-JPG-2k.jpg"
+              imageHoverName="Bliss-JPG-2k.jpg"
+              bgColor="bg-white"
+              textColor="text-white"
+              headerTextColor="text-[#ea43a3]"
+              borderColor="border-[#ea43a3]"
+            >
+              <Button 
+                text={'Play'}
+                link={'/bliss'}
+                textColor={'text-white'}
+                hoverTextColor={'hover:text-[#ea43a3]'}
+                bgColor={''}
+                hoverBgColor={'hover:bg-white'} 
+                outlineColor={'outline-white'} 
+                hoverOutlineColor={'hover:outline-[#ea43a3]'} 
+                optional={'ml-0 mt-2'} 
+                hoverGlyph={<ArrowNav color={'#ea43a3'}/>}
+                hoverable={true}
+                styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-20'
+              />
+            </FeatureGlass>
             <Feature
               title="Floating in the Breeze"
               description="Single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover. Part of a larger campaign for the release of Heaven Sample's debut record, Distorted Reality."

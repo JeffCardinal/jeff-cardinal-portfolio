@@ -15,6 +15,7 @@ export default function Button ({
     optional,
     hoverGlyph,
     hoverable,
+    styling,
 } : {
     text: string,
     link: string,
@@ -27,6 +28,7 @@ export default function Button ({
     optional: string,
     hoverGlyph: ReactNode,
     hoverable: boolean, // Denotes animation glyph, consider refactoring
+    styling?: string,
 }) {
     const [hovering, setHovering] = useState(true);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -46,6 +48,7 @@ export default function Button ({
                 className={`
                     pt-[2px] px-4 outline outline-[5px] rounded-full text-2xl
                     transition-all duration-300 ease-in-out font-distancia text-md
+                    ${styling}
                     ${outlineColor}
                     ${hoverOutlineColor}
                     ${bgColor}
