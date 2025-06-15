@@ -39,7 +39,7 @@ export const PlaybackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   return (
     <PlaybackContext.Provider value={{ isPlaying, isBeenPlayed, audioRef, play, pause }}>
       <>
-        <audio ref={audioRef} src="/bliss/Bliss-Loop.wav" preload="auto" loop/>
+        <audio ref={audioRef} src="/bliss/Bliss-Loop.mp3" preload="auto" loop/>
         {children}
       </>
     </PlaybackContext.Provider>
