@@ -47,6 +47,7 @@ function Smiley({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number 
     }, [size.width, size.height]);
 
     useEffect(() => {
+        if (!gyroBaseline || !isMobileDevice()) return;
         const handleOrientation = (e: DeviceOrientationEvent) => {
             if (e.gamma !== null && e.beta !== null && gyroBaseline) {
                 const sensitivity = 3.0;
@@ -129,7 +130,7 @@ function Smiley({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number 
 
     return (
         <group ref={groupRef} scale={[15, 15, 15]} position={[0, -1, 0]}>
-            <mesh geometry={geometry} ref={meshRef} renderOrder={1}>
+            <mesh geometry={geometry} ref={meshRef} renderOrder={1} castShadow={false} receiveShadow={false}>
                 <meshPhysicalMaterial
                     transmission={1}
                     roughness={0.15}
@@ -158,7 +159,7 @@ function Comp({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number } 
     );
 }
 function StaticBackground() {
-    const tex = useLoader(THREE.TextureLoader, '/bliss/bliss-bg.jpg');
+    const tex = useLoader(THREE.TextureLoader, '/bliss/bliss-bg-optimized.jpg');
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
     const meshRef = useRef<THREE.Mesh>(null);
     const { camera } = useThree();
@@ -195,7 +196,7 @@ function StaticBackground() {
     });
     
     return (
-        <mesh ref={meshRef} position={[0, -25, -35]}>
+        <mesh ref={meshRef} position={[0, -25, -35]} castShadow={false} receiveShadow={false}>
             <planeGeometry args={[200, 100]} />
             <meshBasicMaterial
                 map={tex}
@@ -211,7 +212,7 @@ function StaticBackground() {
 
 function BurnEffectPlane() {
     const BPM = 155;
-    const texture = useLoader(THREE.TextureLoader, '/bliss/bliss-bg.jpg');
+    const texture = useLoader(THREE.TextureLoader, '/bliss/bliss-bg-optimized.jpg');
     const shaderRef = useRef<any>();
 
     const { audioRef } = usePlayback();
@@ -248,33 +249,21 @@ function BurnEffectPlane() {
       }
     });
   
-    return (
-    //   <mesh ref={meshRef} position={[0, -25, -35]}>
-    //     <planeGeometry args={[200, 100]} />
-    //     <meshBasicMaterial
-    //         map={texture}
-    //         side={THREE.DoubleSide}
-    //         depthTest={true}
-    //         toneMapped={false}
-    //         transparent={false}
-    //         opacity={1}
-    //     />
-    //   </mesh>
-        <mesh ref={meshRef} position={[0, -25, -35]}>
-            <planeGeometry args={[200, 100]} />
-            <burnShaderMaterial
-              ref={shaderRef}
-              uTime={0}
-              uProgress={0}
-              uTexture={texture}
-              side={THREE.DoubleSide}
-              depthTest={true}
-              transparent={false}
-              opacity={1}
-              toneMapped={true}
-            />
-            {/* <burnShaderMaterial uTexture={texture} toneMapped={true} /> */}
-        </mesh>
+  return (
+    <mesh ref={meshRef} position={[0, -25, -35]} castShadow={false} receiveShadow={false}>
+        <planeGeometry args={[200, 100]} />
+        <burnShaderMaterial
+        ref={shaderRef}
+        uTime={0}
+        uProgress={0}
+        uTexture={texture}
+        side={THREE.DoubleSide}
+        depthTest={true}
+        transparent={false}
+        opacity={1}
+        toneMapped={true}
+        />
+    </mesh>
   );
 }
 
@@ -371,15 +360,15 @@ export default function Three() {
                     }}
                 >
                     <React.Suspense fallback={<Loader/>}>
-                        <directionalLight position={[-2, 3, 5]} intensity={200} />
+                        <directionalLight position={[-2, 3, 5]} intensity={300} />
                         <Comp gyroBaseline={gyroBaseline} />
                         <Environment 
-                            files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
+                            // files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
                             preset="warehouse"
                             backgroundIntensity={5}
                             background={true}
                         />
-                        <mesh scale={[50, 50, 1]} renderOrder={-1}>
+                        <mesh scale={[50, 50, 1]} renderOrder={-1} castShadow={false} receiveShadow={false}>
                             <planeGeometry args={[1, 1]} />
                             <NoiseGradientShaderMaterial />
                         </mesh>
