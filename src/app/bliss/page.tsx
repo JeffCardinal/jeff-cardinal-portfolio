@@ -11,7 +11,11 @@ import { PlaybackProvider, usePlayback } from './PlaybackContext';
 import { BurnShaderMaterial } from './BurnShaderMaterial';
 import { Environment } from '@react-three/drei';
 import Loader from '../components/Loader';
+import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
 extend({ BurnShaderMaterial });
+import { TextureLoader } from 'three';
+import { Trail } from '@react-three/drei'
+
 
 const bpm = 155;
 const secondsPerBeat = 60 / bpm;
@@ -22,12 +26,16 @@ function Smiley({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number 
     const materialRef = useRef<THREE.ShaderMaterial>(null);
     const dissolveMeshRef = useRef<THREE.Mesh>(null);
     const originalPositions = useRef<Float32Array | null>(null);
-    const { camera } = useThree();
-    const { audioRef } = usePlayback();
 
-    const groupRef = useRef<THREE.Group>(null);
+    const { camera } = useThree();
     const { size } = useThree();
+    const { audioRef } = usePlayback();
+    
+    const groupRef = useRef<THREE.Group>(null);
     const mouse = useRef({ x: 0, y: 0 });
+    const smoothedMouse = useRef({ x: 0, y: 0 });
+    
+    const isMobile = useIsMobileDevice();
 
     useFrame(() => {
         const t = audioRef.current?.currentTime || 0;
@@ -35,6 +43,24 @@ function Smiley({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number 
             let beatPhase = (t % secondsPerBeat) / secondsPerBeat;
             meshRef.current.scale.setScalar(1 + 0.025 * Math.sin(beatPhase * Math.PI * 2));
         }
+    });
+
+    useFrame(() => {
+      smoothedMouse.current.x = THREE.MathUtils.lerp(
+        smoothedMouse.current.x,
+        mouse.current.x,
+        0.5
+      );
+      smoothedMouse.current.y = THREE.MathUtils.lerp(
+        smoothedMouse.current.y,
+        mouse.current.y,
+        0.5
+      );
+    
+      if (groupRef.current) {
+        groupRef.current.rotation.y = smoothedMouse.current.x * 0.4;
+        groupRef.current.rotation.x = -smoothedMouse.current.y * 0.3;
+      }
     });
 
     useEffect(() => {
@@ -47,7 +73,7 @@ function Smiley({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number 
     }, [size.width, size.height]);
 
     useEffect(() => {
-        if (!gyroBaseline || !isMobileDevice()) return;
+        if (!gyroBaseline || !isMobile) return;
         const handleOrientation = (e: DeviceOrientationEvent) => {
             if (e.gamma !== null && e.beta !== null && gyroBaseline) {
                 const sensitivity = 3.0;
@@ -60,12 +86,6 @@ function Smiley({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number 
         window.addEventListener('deviceorientation', handleOrientation, true);
         return () => window.removeEventListener('deviceorientation', handleOrientation);
     }, [gyroBaseline]);
-
-    useFrame(() => {
-        if (!groupRef.current) return;
-        groupRef.current.rotation.y = mouse.current.x * 0.4;
-        groupRef.current.rotation.x = -mouse.current.y * 0.3;
-    });
 
     useEffect(() => {
         if (meshRef.current) {
@@ -158,57 +178,6 @@ function Comp({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number } 
         </group>
     );
 }
-function StaticBackground() {
-    const tex = useLoader(THREE.TextureLoader, '/bliss/bliss-bg-optimized.jpg');
-    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    const meshRef = useRef<THREE.Mesh>(null);
-    const { camera } = useThree();
-    const { audioRef } = usePlayback();
-
-    const targetBeat = 64;
-    const lastBeat = useRef(-1);
-    
-    useFrame(() => {
-        if (meshRef.current) {
-            meshRef.current.quaternion.copy(camera.quaternion);
-            
-            const material = meshRef.current.material as THREE.MeshBasicMaterial;
-
-            const time = audioRef.current?.currentTime || 0;
-            const currentBeat = Math.floor(time / secondsPerBeat);
-            const looped = currentBeat < lastBeat.current;
-          
-            if (looped) {
-                lastBeat.current = 0;
-                material.transparent = false;
-                material.opacity = 1;
-            }
-
-            if (currentBeat !== lastBeat.current) {
-                lastBeat.current = currentBeat;
-
-                if (currentBeat === targetBeat && meshRef.current) {
-                    material.transparent = true;
-                    material.opacity = 0;
-                }
-            }
-        }
-    });
-    
-    return (
-        <mesh ref={meshRef} position={[0, -25, -35]} castShadow={false} receiveShadow={false}>
-            <planeGeometry args={[200, 100]} />
-            <meshBasicMaterial
-                map={tex}
-                side={THREE.DoubleSide}
-                depthTest={true}
-                toneMapped={false}
-                transparent={false}
-                opacity={1}
-            />
-        </mesh>
-    );
-}
 
 function BurnEffectPlane() {
     const BPM = 155;
@@ -224,8 +193,11 @@ function BurnEffectPlane() {
     const reverseEnd = 96;
 
     const meshRef = useRef<THREE.Mesh>(null);
+    // const stats = new Stats()
+    // document.body.appendChild(stats.dom)
 
     useFrame((state) => {
+    //   stats.update()
       if (meshRef.current) {
         meshRef.current.quaternion.copy(camera.quaternion);
       }
@@ -253,83 +225,214 @@ function BurnEffectPlane() {
     <mesh ref={meshRef} position={[0, -25, -35]} castShadow={false} receiveShadow={false}>
         <planeGeometry args={[200, 100]} />
         <burnShaderMaterial
-        ref={shaderRef}
-        uTime={0}
-        uProgress={0}
-        uTexture={texture}
-        side={THREE.DoubleSide}
-        depthTest={true}
-        transparent={false}
-        opacity={1}
-        toneMapped={true}
+            ref={shaderRef}
+            uTime={0}
+            uProgress={0}
+            uTexture={texture}
+            side={THREE.DoubleSide}
+            depthTest={true}
+            transparent={false}
+            opacity={1}
+            toneMapped={true}
         />
     </mesh>
   );
 }
 
-const requestGyroPermission = async (setBaseline: Function) => {
-    if (
-        typeof DeviceOrientationEvent !== 'undefined' &&
-        typeof (DeviceOrientationEvent as any).requestPermission === 'function'
-    ) {
-        try {
-            const response = await (DeviceOrientationEvent as any).requestPermission?.();
-            if (response === 'granted') {
-                setTimeout(() => {
-                    const handle = (e: DeviceOrientationEvent) => {
-                        if (e.gamma !== null && e.beta !== null) {
-                            setBaseline({ gamma: e.gamma, beta: e.beta });
-                            window.removeEventListener('deviceorientation', handle);
-                        }
-                    };
-                    window.addEventListener('deviceorientation', handle);
-                }, 100);
-            }
-        } catch (err) {
-            console.error('Gyroscope permission error:', err);
-        }
-    }
-};
-
-const isMobileDevice = () =>
-    typeof window !== 'undefined' &&
-    /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+export function Flower({
+    index,
+    texture,
+    isRetreating,
+    spawnTime,
+    retreatTime,
+  }: {
+    index: number
+    texture: THREE.Texture
+    isVisible: boolean
+    isRetreating: boolean
+    spawnTime: number
+    retreatTime: number | null
+  }) {
+    const meshRef = useRef<THREE.Mesh>(null)
+    const { camera } = useThree()
+  
+    const maxRadius = 36
+    const targetRadius = 6
+    const entranceDuration = 1
+    const exitDuration = 1
+  
+    useFrame(({ clock }) => {
+      if (!meshRef.current) return
+  
+      const t = clock.getElapsedTime()
+      const sinceSpawn = t - spawnTime
+  
+      let radius = maxRadius
+      let scale = 0
+  
+      if (!isRetreating) {
+        const progress = THREE.MathUtils.clamp(sinceSpawn / entranceDuration, 0, 1)
+        radius = THREE.MathUtils.lerp(maxRadius, targetRadius, progress)
+        scale = progress
+      }
+  
+      if (isRetreating && retreatTime !== null) {
+        const sinceRetreat = t - retreatTime
+        const progress = THREE.MathUtils.clamp(sinceRetreat / exitDuration, 0, 1)
+        radius = THREE.MathUtils.lerp(targetRadius, maxRadius, progress)
+        scale = 1 - progress
+      }
+  
+      const angle = (index / 16) * Math.PI * 2 + t * 0.5
+      const y = Math.cos(t * 2 + index)
+  
+      meshRef.current.position.set(
+        Math.cos(angle) * radius,
+        y,
+        Math.sin(angle) * radius
+      )
+  
+      meshRef.current.quaternion.copy(camera.quaternion)
+      meshRef.current.scale.setScalar(scale)
+  
+      const sway = Math.sin(t * 3 + index) * 0.4
+      meshRef.current.rotateZ(sway)
+    })
+  
+    return (
+      <mesh ref={meshRef}>
+        <planeGeometry args={[0.5, 0.5]} />
+        <meshBasicMaterial
+          map={texture}
+          alphaTest={0.1}
+          transparent={false}
+          side={THREE.DoubleSide}
+          depthWrite={true}
+          toneMapped={false}
+        />
+      </mesh>
+    )
+  }
   
 
-export default function Three() {
-    const [showModal, setShowModal] = useState(() => isMobileDevice());
-    const [gyroBaseline, setGyroBaseline] = useState<{ gamma: number; beta: number } | null>(null);
+export function FlowerOrbitManager() {
+    const { audioRef } = usePlayback()
+    const texture = useLoader(TextureLoader, 'bliss/flower.png')
 
-    const handlePermission = async () => {
-        await requestGyroPermission(setGyroBaseline);
+    const [flowerBurstTime, setFlowerBurstTime] = useState<number | null>(null)
+    const [flowerRetreatTime, setFlowerRetreatTime] = useState<number | null>(null)
+    const [flowerGone, setFlowerGone] = useState(false)
+  
+    useEffect(() => {
+        const interval = setInterval(() => {
+          const time = audioRef.current?.currentTime ?? 0
+          if (time < 0.5 && flowerBurstTime !== null) {
+            setFlowerBurstTime(null)
+            setFlowerRetreatTime(null)
+            setFlowerGone(false)
+          }
+        }, 200)
+      
+        return () => clearInterval(interval)
+    }, [flowerBurstTime])
+
+    useFrame(({ clock }) => {
+        const t = clock.getElapsedTime()
+        const beat = (audioRef.current?.currentTime ?? 0) * (bpm / 60)
+
+        if (!flowerBurstTime && beat >= 30) setFlowerBurstTime(t)
+        if (!flowerRetreatTime && beat >= 64) setFlowerRetreatTime(t)
+        if (!flowerGone && beat >= 72) setFlowerGone(true)
+    })
+
+    return (
+        <>
+            {flowerBurstTime !== null && !flowerGone &&
+                Array.from({ length: 16 }).map((_, i) => (
+                    <Flower
+                        key={i}
+                        index={i}
+                        texture={texture}
+                        isVisible={flowerRetreatTime === null}
+                        isRetreating={flowerRetreatTime !== null}
+                        spawnTime={flowerBurstTime}
+                        retreatTime={flowerRetreatTime}
+                    />
+            ))}
+        </>
+    )
+}
+
+
+export default function Three() {
+    const isMobile = useIsMobileDevice();
+    const [showModal, setShowModal] = useState(() => isMobile);
+    const [gyroBaseline, setGyroBaseline] = useState<{ gamma: number; beta: number } | null>(null);
+    const [shaderKick, setShaderKick] = useState(0);
+    
+    useEffect(() => { if (isMobile) { setShowModal(true); } }, [isMobile]);
+
+    const handlePermission = async (isGranted: boolean) => {
+        if (isGranted) {
+            if (
+                typeof DeviceOrientationEvent !== 'undefined' &&
+                typeof (DeviceOrientationEvent as any).requestPermission === 'function'
+            ) {
+                try {
+                    const response = await (DeviceOrientationEvent as any).requestPermission();
+                    if (response === 'granted') {
+                        setTimeout(() => {
+                            const handle = (e: DeviceOrientationEvent) => {
+                                if (e.gamma !== null && e.beta !== null) {
+                                    setGyroBaseline({ gamma: e.gamma, beta: e.beta });
+                                    window.removeEventListener('deviceorientation', handle);
+                                }
+                            };
+                            window.addEventListener('deviceorientation', handle);
+                        }, 100);
+                    }
+                } catch (err) {
+                    console.error('Gyroscope permission error:', err);
+                }
+            }
+        }
+
+        setTimeout(() => { setShaderKick((n) => n + 1); }, 100);
+        
         setShowModal(false);
     };
 
     return (
         <PlaybackProvider>
             {showModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-70 z-[999] flex items-center justify-center">
-                    <div className="bg-white rounded-xl p-8 text-center shadow-xl max-w-sm m-8">
+                <div className="fixed inset-0 bg-black bg-opacity-70 z-[999] flex items-center justify-center pointer-events-none backdrop-blur-sm text-pretty">
+                    <div className="bg-white rounded-xl p-8 text-center shadow-xl max-w-sm m-8 pointer-events-auto">
                         <h2 className="text-xl font-semibold mb-4 text-black">Permissions Request</h2>
                         <p className="mb-6 text-sm text-gray-700 text-left">
-                            To interact with the scene using your device's motion, please enable gyroscope access.
+                            For full interactivity of this webtoy, please enable tilt controls.
                         </p>
-                        <p className="mb-6 text-sm text-gray-300 text-left">
-                            Note: For best effect, please also lock your screen tilt.
+                        <p className="mb-6 text-sm text-gray-400 text-left">
+                            Note: For the best effect, please also enable your screen orientation lock.
                         </p>
                         <button
-                            onClick={handlePermission}
-                            className="bg-[#ea43a3] text-white px-4 py-2 hover:bg-gray-800 transition rounded-full"
+                            onClick={() => handlePermission(true)}
+                            className="bg-[#ea43a3] text-white px-4 py-2 hover:bg-gray-800 transition rounded-full min-w-[200px]"
                         >
-                            Enable Gyroscope
+                            Enable Tilt Controls
+                        </button>
+                        <button
+                            onClick={() => handlePermission(false)}
+                            className="bg-gray-800 text-white px-4 py-2 mt-4 hover:bg-[#ea43a3] transition rounded-full min-w-[200px]"
+                        >
+                            I Prefer to Click
                         </button>
                     </div>
                 </div>
             )}
-            <div className="h-screen overflow-hidden position-fixed">
+            <div className="h-dvh overflow-hidden position-fixed">
                 <div className="fixed top-0 w-full h-[20vh] bg-white flex justify-center z-50">
                     <div 
-                        className="absolute bg-red-500 w-[90vw] max-w-[800px] h-[0px] rounded-full z-100" 
+                        className="absolute bg-red-500 w-[90vw] max-w-[800px] h-[0px] rounded-full z-100 pointer-events-none select-none" 
                         style={{
                             bottom: 0,
                             left: '50%',
@@ -360,19 +463,24 @@ export default function Three() {
                     }}
                 >
                     <React.Suspense fallback={<Loader/>}>
-                        <directionalLight position={[-2, 3, 5]} intensity={300} />
+                        <FlowerOrbitManager />
+                        <directionalLight position={[-2, 3, 5]} intensity={1000} />
                         <Comp gyroBaseline={gyroBaseline} />
                         <Environment 
-                            // files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
                             preset="warehouse"
                             backgroundIntensity={5}
-                            background={true}
                         />
-                        <mesh scale={[50, 50, 1]} renderOrder={-1} castShadow={false} receiveShadow={false}>
+                        <BurnEffectPlane/>
+                        <mesh scale={[50, 50, 1]} 
+                            renderOrder={-Infinity} 
+                            frustumCulled={false} 
+                            castShadow={false} 
+                            receiveShadow={false}
+                            key={shaderKick}
+                        >
                             <planeGeometry args={[1, 1]} />
                             <NoiseGradientShaderMaterial />
                         </mesh>
-                        <BurnEffectPlane/>
                     </React.Suspense>
                 </Canvas>
             </div>

@@ -83,6 +83,11 @@ module.exports = {
         '70%': { transform: 'scale(1.5)', opacity: '0' },
         '100%': { transform: 'scale(2.5)', opacity: '0' },
       },
+      bounceHand: {
+        '0%':  { transform: 'translateY(0)'  },
+        '50%': { transform: 'translateY(-10px)' },
+        '100%': { transform: 'translateY(0)'  }
+      }
     },
     animation: {
       easeInNav:         'easeInNav  300ms  ease-in-out',
@@ -96,8 +101,9 @@ module.exports = {
       loadInFromRight:   'loadInFromRight 0.5s ease-in-out',
       loadIn:            'loadIn 0.5s ease-in-out',
       buttonGlyphEaseIn: 'buttonGlyphEaseIn 1s linear infinite',
-      radarPulse: 'radarPulse 1.5s ease-out infinite',
-      radarPulse_2: 'radarPulse 1.5s ease-out infinite',
+      radarPulse:        'radarPulse 1.5s ease-out infinite',
+      radarPulse_2:      'radarPulse 1.5s ease-out infinite',
+      bounceHand:        'bounceHand 1.2s infinite ease-in-out',
     },
     animationDelay: {
       '500': '500ms',
