@@ -16,7 +16,6 @@ extend({ BurnShaderMaterial });
 import { TextureLoader } from 'three';
 import { Trail } from '@react-three/drei'
 
-
 const bpm = 155;
 const secondsPerBeat = 60 / bpm;
 
@@ -395,8 +394,11 @@ export default function Three() {
                 }
             }
         }
-
-        setTimeout(() => { setShaderKick((n) => n + 1); }, 100);
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                setShaderKick(n => n + 1);
+            });
+        }, 1000);
         
         setShowModal(false);
     };
