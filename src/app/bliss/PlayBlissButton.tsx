@@ -10,8 +10,6 @@ export default function PlayBlissButton() {
   const analyserRef = useRef<AnalyserNode | null>(null)
   const { audioRef, isPlaying, isBeenPlayed, play, pause } = usePlayback();
 
-  const NUM_BARS = 128
-
   useEffect(() => {
     if (!isPlaying || !audioRef.current || !canvasRef.current) return
 
@@ -75,6 +73,23 @@ export default function PlayBlissButton() {
             pointerEvents: 'none',
             width: '33.33vw',
             height: '128px',
+          }}
+        />
+      )}
+
+      {!isBeenPlayed && (
+        <img
+          className='animate-bounceHand'
+          src="bliss/glove-hand.png"
+          alt="Click me"
+          style={{
+            position: 'fixed',
+            bottom: 100,
+            right: 24,
+            zIndex: 10,
+            width: 64,
+            pointerEvents: 'none',
+            transformOrigin: 'bottom center',
           }}
         />
       )}

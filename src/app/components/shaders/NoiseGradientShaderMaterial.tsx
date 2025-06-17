@@ -60,22 +60,19 @@ export default function NoiseGradientShaderMaterial(): JSX.Element {
     }
   `;
 
-  useFrame(() => {
+  useFrame(({clock}) => {
     if (shaderMaterialRef.current) {
-      shaderMaterialRef.current.uniforms.time.value += 0.01;
+      shaderMaterialRef.current.needsUpdate = true;
+      shaderMaterialRef.current.uniforms.time.value = clock.getElapsedTime();
     }
   });
-
-  const epochTime = Date.now() / 1000; // Used for random seed generation
 
   return (
     <shaderMaterial
       ref={shaderMaterialRef}
       vertexShader={vertexShader}
       fragmentShader={fragmentShader}
-      uniforms={{
-        time: { value: 0 },
-      }}
+      uniforms={{ time: { value: 0 } }}
       depthWrite={false}
       depthTest={false}
     />
