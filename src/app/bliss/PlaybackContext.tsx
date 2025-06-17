@@ -39,7 +39,11 @@ export const PlaybackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   return (
     <PlaybackContext.Provider value={{ isPlaying, isBeenPlayed, audioRef, play, pause }}>
       <>
-        <audio ref={audioRef} src="/bliss/Bliss-Loop.mp3" preload="auto" loop/>
+        <audio ref={audioRef} preload="auto" loop>
+          <source src="/bliss/Bliss-Loop.ogg" type="audio/ogg" />
+          <source src="/bliss/Bliss-Loop.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
         {children}
       </>
     </PlaybackContext.Provider>
