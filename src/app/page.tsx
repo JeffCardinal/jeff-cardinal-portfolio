@@ -65,7 +65,7 @@ export default function Page() {
         >
             <FeatureGlass
               title="Bliss"
-              description="Single cover for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrush post-processing and 3D model by Jeff Cardinal."
+              description="Single cover for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrushing, post-processing and smiley 3D model by Jeff Cardinal."
               inspiration="Y2K airbrushed hyperreality, icons evoke early cellphone OS feeling."
               tools="Blender, Illustrator, Photoshop"
               year="2025"
@@ -76,20 +76,36 @@ export default function Page() {
               headerTextColor="text-[#ea43a3]"
               borderColor="border-[#ea43a3]"
             >
-              <Button 
-                text={'Play'}
-                link={'/bliss'}
-                textColor={'text-white'}
-                hoverTextColor={'hover:text-[#ea43a3]'}
-                bgColor={''}
-                hoverBgColor={'hover:bg-white'} 
-                outlineColor={'outline-white'} 
-                hoverOutlineColor={'hover:outline-[#ea43a3]'} 
-                optional={'ml-0 mt-2'} 
-                hoverGlyph={<ArrowNav color={'#ea43a3'}/>}
-                hoverable={true}
-                styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-20'
-              />
+              <div className="flex flex-col">
+                <Button 
+                  text={'Webtoy'}
+                  link={'/bliss'}
+                  textColor={'text-[#ea43a3]'}
+                  hoverTextColor={'hover:text-white'}
+                  bgColor={'bg-white'}
+                  hoverBgColor={'hover:bg-[#ea43a3]'} 
+                  outlineColor={'outline-[#ea43a3]'} 
+                  hoverOutlineColor={'hover:outline-[#ea43a3]'} 
+                  optional={'ml-0 mt-2'} 
+                  hoverGlyph={<ArrowNav color={'white'}/>}
+                  hoverable={true}
+                  styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
+                />
+                <Button 
+                  text={'Stream'}
+                  link={'https://open.spotify.com/track/60LsGDYCP5q5fpKCLHeQSz?si=1dfbbb4ff9e849fe'}
+                  textColor={'text-[#ea43a3]'}
+                  hoverTextColor={'hover:text-white'}
+                  bgColor={'bg-white'}
+                  hoverBgColor={'hover:bg-[#ea43a3]'} 
+                  outlineColor={'outline-[#ea43a3]'} 
+                  hoverOutlineColor={'hover:outline-[#ea43a3]'} 
+                  optional={'ml-0 mt-6'} 
+                  hoverGlyph={<ArrowNav color={'white'}/>}
+                  hoverable={true}
+                  styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
+                />
+              </div>
             </FeatureGlass>
             <Feature
               title="Floating in the Breeze"

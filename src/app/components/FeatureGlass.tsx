@@ -1,6 +1,5 @@
 'use client'
 import React, { ReactNode, useState } from 'react';
-import Image from 'next/image'
 
 export default function Feature(
   { children,
@@ -36,7 +35,7 @@ export default function Feature(
   return (
     <>
       {/* <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`}> */}
-      <div className={`relative box-border p-8 flex flex-col lg:flex-row overflow-hidden ${textColor}`}>
+      <div className={`relative box-border p-8 flex flex-col lg:flex-row overflow-hidden bg-sky-400 ${textColor}`}>
 
         {/* Background Video */}
         <video
@@ -46,10 +45,10 @@ export default function Feature(
           loop
           playsInline
         >
-          <source src="images/bliss-bg-video-5.mp4" />
+          <source src="images/bliss-bg-video-6.mp4" />
           Your browser does not support the video tag.
         </video>
-        
+
         <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0 z-10">
           <div className="text-black flex justify-center items-center">
             <img
