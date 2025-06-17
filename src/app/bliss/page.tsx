@@ -395,8 +395,11 @@ export default function Three() {
                 }
             }
         }
-
-        setTimeout(() => { setShaderKick((n) => n + 1); }, 100);
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                setShaderKick(n => n + 1);
+            });
+        }, 100);
         
         setShowModal(false);
     };
