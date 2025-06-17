@@ -313,7 +313,6 @@ function Flower({
       </mesh>
     )
   }
-  
 
 function FlowerOrbitManager() {
     const { audioRef } = usePlayback()
