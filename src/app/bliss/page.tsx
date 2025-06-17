@@ -239,7 +239,7 @@ function BurnEffectPlane() {
   );
 }
 
-export function Flower({
+function Flower({
     index,
     texture,
     isRetreating,
@@ -315,7 +315,7 @@ export function Flower({
   }
   
 
-export function FlowerOrbitManager() {
+function FlowerOrbitManager() {
     const { audioRef } = usePlayback()
     const texture = useLoader(TextureLoader, 'bliss/flower.png')
 
