@@ -119,7 +119,15 @@ export default function PlayBlissButton() {
       >
         {!isPlaying && !isBeenPlayed && <span className="absolute inset-0 rounded-full bg-pink-500 animate-radarPulse opacity-100 pointer-events-none -z-10"/>}
         {!isPlaying && !isBeenPlayed && <span className="absolute inset-0 rounded-full bg-pink-500 animate-radarPulse_2 delay-500 opacity-100 pointer-events-none -z-10"/>}
-        {isPlaying ? '⏸\uFE0E' : '⏵\uFE0E'}
+        <img
+          src={isPlaying ? '/bliss/pause.svg' : '/bliss/play.svg'}
+          alt={isPlaying ? 'Pause' : 'Play'}
+          style={{
+            height: '40%',
+            width: '40%',
+            pointerEvents: 'none',
+          }}
+        />
       </div>
     </>
   )

@@ -14,7 +14,6 @@ import Loader from '../components/Loader';
 import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
 extend({ BurnShaderMaterial });
 import { TextureLoader } from 'three';
-import { Trail } from '@react-three/drei'
 
 const bpm = 155;
 const secondsPerBeat = 60 / bpm;
@@ -300,10 +299,10 @@ function Flower({
   
     return (
       <mesh ref={meshRef}>
-        <planeGeometry args={[0.5, 0.5]} />
+        <planeGeometry args={[0.75, 0.75]} />
         <meshBasicMaterial
           map={texture}
-          alphaTest={0.1}
+          alphaTest={0.5}
           transparent={false}
           side={THREE.DoubleSide}
           depthWrite={true}
@@ -320,7 +319,7 @@ function FlowerOrbitManager() {
     const [flowerBurstTime, setFlowerBurstTime] = useState<number | null>(null)
     const [flowerRetreatTime, setFlowerRetreatTime] = useState<number | null>(null)
     const [flowerGone, setFlowerGone] = useState(false)
-  
+
     useEffect(() => {
         const interval = setInterval(() => {
           const time = audioRef.current?.currentTime ?? 0

@@ -162,14 +162,6 @@ export default function Three() {
       return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
 
-    //this config is just for the 3d text, so it may be moved later to something that makes more sense
-    const { ...config } = {
-      backside: true,
-      backsideThickness: 1,
-      transmission: 2,
-      chromaticAberration: 50,
-    };
-
     return (
     <>
       <Canvas camera={{ position: [0, 0, 10] }} id="Canvas">
@@ -188,7 +180,6 @@ export default function Three() {
             {/* <Smiley/> */}
             
             <Environment 
-              // files="/hdri/kloofendal_48d_partly_cloudy_puresky_4k.hdr"
               preset="warehouse"
               backgroundIntensity={5}
               background={false}
