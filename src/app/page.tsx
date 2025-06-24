@@ -76,7 +76,7 @@ export default function Page() {
               headerTextColor="text-[#ea43a3]"
               borderColor="border-[#ea43a3]"
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col w-max">
                 <Button 
                   text={'Webtoy'}
                   link={'/bliss'}
@@ -84,26 +84,28 @@ export default function Page() {
                   hoverTextColor={'hover:text-white'}
                   bgColor={'bg-white'}
                   hoverBgColor={'hover:bg-[#ea43a3]'} 
-                  outlineColor={'outline-[#ea43a3]'} 
-                  hoverOutlineColor={'hover:outline-[#ea43a3]'} 
+                  borderColor={'border-[#ea43a3]'} 
+                  hoverBorderColor={'hover:border-white'} 
                   optional={'ml-0 mt-2'} 
                   hoverGlyph={<ArrowNav color={'white'}/>}
                   hoverable={true}
-                  styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
+                  styling='backdrop-blur-xl ${bgColor} bg-opacity-100'
+                  shadow='shadow-md rounded-full'
                 />
                 <Button 
                   text={'Stream'}
-                  link={'https://open.spotify.com/track/60LsGDYCP5q5fpKCLHeQSz?si=1dfbbb4ff9e849fe'}
+                  link={'https://open.spotify.com/track/60LsGDYCP5q5fpKCLHeQSz?si=1dfbbb4ff9e849fe, _blank'}
                   textColor={'text-[#ea43a3]'}
                   hoverTextColor={'hover:text-white'}
                   bgColor={'bg-white'}
                   hoverBgColor={'hover:bg-[#ea43a3]'} 
-                  outlineColor={'outline-[#ea43a3]'} 
-                  hoverOutlineColor={'hover:outline-[#ea43a3]'} 
+                  borderColor={'border-[#ea43a3]'} 
+                  hoverBorderColor={'hover:border-white'} 
                   optional={'ml-0 mt-6'} 
                   hoverGlyph={<ArrowNav color={'white'}/>}
                   hoverable={true}
                   styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
+                  shadow='shadow-md rounded-full'
                 />
               </div>
             </FeatureGlass>
@@ -126,13 +128,14 @@ export default function Page() {
                 hoverTextColor={'hover:text-black'} 
                 bgColor={''} 
                 hoverBgColor={'hover:bg-white'} 
-                outlineColor={'outline-white'} 
-                hoverOutlineColor={'hover:outline-black'} 
+                borderColor={'border-white'} 
+                hoverBorderColor={'hover:border-black'} 
                 optional={'ml-0 mt-2'} 
                 hoverGlyph={<ArrowNav color={'#000000'}/>}
                 hoverable={true}
               />
             </Feature>
+
           <Feature
             title="PLUS100 Branding"
             description="Branding for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
@@ -145,16 +148,6 @@ export default function Page() {
             textColor="text-black"
             borderColor="border-black"
           >
-            {/* <div className="pt-2">
-              <Link href="https://plus100.bandcamp.com/">
-                <button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-[5px] 
-                outline-rose-500 text-rose-500 bg-white hover:text-white hover:bg-rose-500 
-                rounded-full transition duration-300 font-distancia text-2xl">
-                  Visit
-                </button>
-              </Link>
-            </div> */}
-
             <Button 
               text={'Visit Site'} 
               link={'https://plus100.bandcamp.com/'} 
@@ -162,13 +155,12 @@ export default function Page() {
               hoverTextColor={'hover:text-white'} 
               bgColor={'bg-white'} 
               hoverBgColor={'hover:bg-rose-500'} 
-              outlineColor={'outline-rose-500'} 
-              hoverOutlineColor={'hover:outline-rose-500'} 
+              borderColor={'border-rose-500'} 
+              hoverBorderColor={'hover:border-rose-500'} 
               optional={'ml-0 mt-2'} 
               hoverGlyph={<ArrowNav color={"#FFFFFF"}/>}
               hoverable={true}
             />
-
           </Feature>
 
           <Feature
@@ -260,7 +252,7 @@ export default function Page() {
             isTitleVerticallyCentered={false}>
             <div className="pt-2 invisible lg:visible">
               <Link href="https://sf-compute-takehome.vercel.app/" target="_blank">
-                <button className="pt-[2px] px-4 mr-4 outline outline-[5px] outline-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:outline-indigo-500 rounded-full transition duration-300 font-distancia text-2xl">
+                <button className="pt-[2px] px-4 mr-4 border border-[6px] border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
                 </button>
               </Link>
@@ -280,12 +272,12 @@ export default function Page() {
             isTitleVerticallyCentered={false}>
             <div className="pt-2 flex flex-row align-middle">
               <Link href="https://jeff-cardinal-website.vercel.app/" target="_blank" className="hidden lg:flex">
-                <button className="pt-[2px] px-4 mr-6 outline outline-[5px] outline-white text-white hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl">
+                <button className="pt-[2px] px-4 mr-6 border border-[6px] border-white text-white hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
                 </button>
               </Link>
               <Link href="https://github.com/JeffCardinal/JeffCardinalWebsite/" target="_blank">
-                <button className="outline outline-[5px] outline-white mr-4 hover:bg-white hover:text-black hover:outline-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
+                <button className="border border-[6px] border-white mr-4 hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
                   <div className="h-6 w-6 ml-2 mt-[5px]"><FontAwesomeIcon icon={faGithub} /></div>
                   <div className="pt-[2px] pl-2 pr-4">Github</div>
                 </button>
@@ -322,7 +314,7 @@ export default function Page() {
           <FeatureFont
             title="Goupe"
             description={`Read like "coupe". Goupe is a fun, funky flowing font for all your goopy design needs.`}
-            inspiration="Modern retro font. Currently unavailable for download, but I will be releasing it officially in Q1 2025, so please stay tuned."
+            inspiration="Modern retro font. Currently available for free download!"
             tools="Procreate, Illustrator, Fontself"
             imageName="fonts/goopdemo.jpg"
             imageHoverName="fonts/goopdemo-black.jpg"
@@ -332,7 +324,18 @@ export default function Page() {
             font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
             isTitleVerticallyCentered={false}
           >
-            <div className="pt-2"><><button className="pt-[2px] pr-4 pl-4 mr-4 outline outline-[5px] outline-white text-white bg-black hover:text-white hover:bg-black rounded-full transition duration-300 font-distancia text-2xl line-through opacity-50">Download</button></></div>
+            <Button 
+                text={'Download'} 
+                link={'fonts/Goupe.otf'}
+                textColor={'text-rose-500'} 
+                hoverTextColor={'hover:text-white'} 
+                bgColor={'hover:bg-rose-500'} 
+                hoverBgColor={'hover:bg-black'} 
+                borderColor={'border-rose-500'} 
+                hoverBorderColor={'hover:border-white'}
+                optional={'ml-0 mt-2'}
+                hoverable={false}
+              />
           </FeatureFont>
           
           <FeatureDouble

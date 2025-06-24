@@ -10,12 +10,13 @@ export default function Button ({
     hoverTextColor,
     bgColor,
     hoverBgColor,
-    outlineColor,
-    hoverOutlineColor,
+    borderColor,
+    hoverBorderColor,
     optional,
     hoverGlyph,
     hoverable,
     styling,
+    shadow,
 } : {
     text: string,
     link: string,
@@ -23,12 +24,13 @@ export default function Button ({
     hoverTextColor: string,
     bgColor: string,
     hoverBgColor: string,
-    outlineColor: string,
-    hoverOutlineColor: string,
+    borderColor: string,
+    hoverBorderColor: string,
     optional: string,
-    hoverGlyph: ReactNode,
+    hoverGlyph?: ReactNode,
     hoverable: boolean, // Denotes animation glyph, consider refactoring
     styling?: string,
+    shadow?: string,
 }) {
     const [hovering, setHovering] = useState(true);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -41,16 +43,17 @@ export default function Button ({
     }, []);
     
     return (
-        <Link href={link}>
-            <button 
+        <Link href={link} target="_blank">
+            <button
                 onMouseEnter={() => setHovering(false)}
                 onMouseLeave={() => setHovering(true)}
                 className={`
-                    pt-[2px] px-4 outline outline-[5px] rounded-full text-2xl
+                    pt-[2px] px-4 border border-[6px] rounded-full text-2xl
                     transition-all duration-300 ease-in-out font-distancia text-md
+                    ${shadow}
                     ${styling}
-                    ${outlineColor}
-                    ${hoverOutlineColor}
+                    ${borderColor}
+                    ${hoverBorderColor}
                     ${bgColor}
                     ${hoverBgColor}
                     ${textColor}
