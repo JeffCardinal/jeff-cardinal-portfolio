@@ -40,47 +40,6 @@ export default function RootLayout({
             objectFit='contain'
           />
         </div>
-        {/* <Header>
-          <Button
-            text="Home"
-            link="/"
-            textColor="text-white"
-            hoverTextColor="hover:text-black"
-            bgColor=""
-            hoverBgColor="hover:bg-white"
-            outlineColor="outline-white"
-            hoverOutlineColor="hover:outline-black"
-            optional="mix-blend-lighten"
-            hoverGlyph={undefined}
-            hoverable={false}
-          />
-          <Button
-            text="About"
-            link="/about"
-            textColor="text-white"
-            hoverTextColor="hover:text-black"
-            bgColor=""
-            hoverBgColor="hover:bg-white"
-            outlineColor="outline-white"
-            hoverOutlineColor="hover:outline-black"
-            optional="mix-blend-lighten" 
-            hoverGlyph={undefined}
-            hoverable={false}
-          />
-          <Button
-            text="Resume"
-            link="/resume.pdf"
-            textColor="text-white"
-            hoverTextColor="hover:text-black"
-            bgColor=""
-            hoverBgColor="hover:bg-white"
-            outlineColor="outline-white"
-            hoverOutlineColor="hover:outline-black"
-            optional="mix-blend-lighten"
-            hoverGlyph={undefined}
-            hoverable={false}
-          />
-        </Header> */}
         <Analytics/>
         <VercelSpeedInsights/>
         {children}
