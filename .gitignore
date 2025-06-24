@@ -38,8 +38,13 @@ next-env.d.ts
 # jeff's stuff
 # I want to keep the high quality videos on my local just in case I need to re-encode them later
 public/videos/
-# Just need to keep these on local, nothing super important here, might move
+# Just need to keep these on local, nothing super important here, might move or edit
 public/psd
+*.psd
+
+#Large files that have caused issues
+public/images/bliss-bg-video.mp4
+public/bliss/bliss-bg-extended.psd
 
 # Ableton Live generated audio analysis files
 *.wav.asd

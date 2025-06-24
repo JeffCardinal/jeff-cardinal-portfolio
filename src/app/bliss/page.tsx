@@ -14,6 +14,7 @@ import Loader from '../components/Loader';
 import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
 extend({ BurnShaderMaterial });
 import { TextureLoader } from 'three';
+import PlayModal from './PlayModal';
 
 const bpm = 155;
 const secondsPerBeat = 60 / bpm;
@@ -319,7 +320,7 @@ function FlowerOrbitManager() {
     const [flowerBurstTime, setFlowerBurstTime] = useState<number | null>(null)
     const [flowerRetreatTime, setFlowerRetreatTime] = useState<number | null>(null)
     const [flowerGone, setFlowerGone] = useState(false)
-
+  
     useEffect(() => {
         const interval = setInterval(() => {
           const time = audioRef.current?.currentTime ?? 0
@@ -360,17 +361,27 @@ function FlowerOrbitManager() {
     )
 }
 
-
 export default function Three() {
     const isMobile = useIsMobileDevice();
     const [showModal, setShowModal] = useState(() => isMobile);
     const [gyroBaseline, setGyroBaseline] = useState<{ gamma: number; beta: number } | null>(null);
     const [shaderKick, setShaderKick] = useState(0);
+    const [isFadingOut, setIsFadingOut] = useState(false);
     
     useEffect(() => { if (isMobile) { setShowModal(true); } }, [isMobile]);
 
     const handlePermission = async (isGranted: boolean) => {
         if (isGranted) {
+            const setupGyro = () => {
+                const handle = (e: DeviceOrientationEvent) => {
+                    if (e.gamma !== null && e.beta !== null) {
+                        setGyroBaseline({ gamma: e.gamma, beta: e.beta });
+                        window.removeEventListener('deviceorientation', handle);
+                    }
+                };
+                window.addEventListener('deviceorientation', handle);
+            };
+    
             if (
                 typeof DeviceOrientationEvent !== 'undefined' &&
                 typeof (DeviceOrientationEvent as any).requestPermission === 'function'
@@ -378,34 +389,37 @@ export default function Three() {
                 try {
                     const response = await (DeviceOrientationEvent as any).requestPermission();
                     if (response === 'granted') {
-                        setTimeout(() => {
-                            const handle = (e: DeviceOrientationEvent) => {
-                                if (e.gamma !== null && e.beta !== null) {
-                                    setGyroBaseline({ gamma: e.gamma, beta: e.beta });
-                                    window.removeEventListener('deviceorientation', handle);
-                                }
-                            };
-                            window.addEventListener('deviceorientation', handle);
-                        }, 100);
+                        setTimeout(setupGyro, 100);
                     }
                 } catch (err) {
                     console.error('Gyroscope permission error:', err);
                 }
+            } else {
+                setTimeout(setupGyro, 200);
             }
-        }
+        }    
+
         setTimeout(() => {
             requestAnimationFrame(() => {
                 setShaderKick(n => n + 1);
             });
         }, 1000);
         
-        setShowModal(false);
+        setIsFadingOut(true);
+        setTimeout(() => {
+            setShowModal(false);
+            setIsFadingOut(false);
+        }, 200);
     };
 
     return (
         <PlaybackProvider>
             {showModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-70 z-[999] flex items-center justify-center pointer-events-none backdrop-blur-sm text-pretty">
+                <div
+                    className={`fixed inset-0 z-[999] flex items-center justify-center backdrop-blur-sm transition-opacity duration-200
+                        ${showModal && !isFadingOut ? 'opacity-100 bg-black/70' : 'opacity-0 bg-black/0'}`}
+                    onClick={() => handlePermission(false)}
+                >
                     <div className="bg-white rounded-xl p-8 text-center shadow-xl max-w-sm m-8 pointer-events-auto">
                         <h2 className="text-xl font-semibold mb-4 text-black">Permissions Request</h2>
                         <p className="mb-6 text-sm text-gray-700 text-left">
@@ -429,6 +443,7 @@ export default function Three() {
                     </div>
                 </div>
             )}
+            <PlayModal/>
             <div className="h-dvh overflow-hidden position-fixed">
                 <div className="fixed top-0 w-full h-[20vh] bg-white flex justify-center z-50">
                     <div 
