@@ -324,25 +324,20 @@ export default function Page() {
             font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
             isTitleVerticallyCentered={false}
           >
-            <Button 
-                text={'Download'} 
-                link={'fonts/Goupe.otf'}
-                textColor={'text-rose-500'} 
-                hoverTextColor={'hover:text-white'} 
-                bgColor={'hover:bg-rose-500'} 
-                hoverBgColor={'hover:bg-black'} 
-                borderColor={'border-rose-500'} 
-                hoverBorderColor={'hover:border-white'}
-                optional={'ml-0 mt-2'}
-                hoverable={false}
-              />
+            <Link href="https://github.com/JeffCardinal/Goupe" target="_blank">
+              <button className="border border-[6px] border-lime-400 mr-4 hover:bg-lime-700 hover:text-lime-200 hover:border-lime-200 rounded-full transition duration-300 font-distancia text-2xl flex flex-row relative overflow-hidden group">
+                <div className="absolute inset-0 z-0 bg-gradient-to-br from-lime-300/60 to-lime-500/40 blur-lg group-hover:blur-md rounded-full pointer-events-none transform -translate-y-1/2" />
+                <div className="h-6 w-6 ml-2 mt-[5px] z-10"><FontAwesomeIcon icon={faGithub} /></div>
+                <div className="pt-[2px] pl-2 pr-4 z-10">Download</div>
+              </button>
+            </Link>
           </FeatureFont>
           
           <FeatureDouble
             alt1={'Poster'}
             alt2={'Model'}
-            imageName1={'fonts/PutOnASmile.png'}
-            imageHover1Name={'fonts/PutOnASmile-Crumple-ColorCorrected.png'}
+            imageName1={'fonts/PutOnASmileSm.png'}
+            imageHover1Name={'fonts/PutOnASmile-Crumple-ColorCorrectedSm.png'}
             imageName2={'fonts/supersonic6-edit.png'}
             imageHover2Name={'fonts/supersonic6-edit-intense.png'}
             bgColor={'bg-black'}

@@ -39,10 +39,10 @@ body {
     font-weight: 800;
     font-style: normal;
   }
-  @font-face {
+  /* @font-face {
     font-family: 'Goupe';
     src: url('../../public/fonts/Goupe.otf') format('opentype');
     font-weight: 800;
     font-style: normal;
-  }
+  } */
 }
