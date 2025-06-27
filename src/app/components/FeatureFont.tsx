@@ -52,7 +52,7 @@ export default function Feature(
           <span className={`w-full block ${font}`}>
             <Image
               className=""
-              src={`/images/goupe-3D.png`}
+              src={`/images/fonts/GoupeTitle.png`}
               alt=""
               width={600}
               height={0}
