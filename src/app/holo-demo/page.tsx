@@ -427,7 +427,7 @@ function Chains() {
   //   )
   // }
 
-  export function VistaWindow({ position = [0, 0, 0] as [number, number, number] }) {
+  function VistaWindow({ position = [0, 0, 0] as [number, number, number] }) {
     const ref = useRef<THREE.Group>(null)
     const [hovered, setHovered] = useState(false)
 
