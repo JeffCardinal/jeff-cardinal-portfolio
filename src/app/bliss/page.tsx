@@ -12,9 +12,10 @@ import { BurnShaderMaterial } from './BurnShaderMaterial';
 import { Environment } from '@react-three/drei';
 import Loader from '../components/Loader';
 import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
-extend({ BurnShaderMaterial });
 import { TextureLoader } from 'three';
 import PlayModal from './PlayModal';
+
+extend({ BurnShaderMaterial });
 
 const bpm = 155;
 const secondsPerBeat = 60 / bpm;
