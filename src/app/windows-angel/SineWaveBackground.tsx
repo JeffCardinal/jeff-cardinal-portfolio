@@ -53,12 +53,11 @@ export default function SineWavesBackground() {
   return (
     <div
       aria-hidden
-    //   className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(120%_100%_at_50%_50%,#000,transparent)]"
-      className="pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
       <svg
         viewBox={`0 0 ${W} ${H}`}
-        preserveAspectRatio="none"
+        preserveAspectRatio="xMidYMid slice"
         className="w-full h-full"
       >
 

@@ -4,11 +4,12 @@ import React, { useEffect, useMemo, useState, useRef } from 'react'
 import { animate, motion, useAnimation } from 'framer-motion'
 import SparkleSvg from "../svg/SparkleSvg";
 import SineWavesBackground from './SineWaveBackground';
+import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
 
 export default function CDSlideOutDemo() {
   const [isOut, setIsOut] = useState(false)
   const [spin, setSpin] = useState(true)
-  const [coverUrl, setCoverUrl] = useState('windows-angel/WindowsAngel2kjpg.jpg')
+  const [coverUrl, setCoverUrl] = useState('windows-angel/WindowsAngel1kjpg.jpg')
   const [title, setTitle] = useState('Windows Angel')
   const [artist, setArtist] = useState('Dreaming Diary')
   const [tiltX, setTiltX] = useState(0)
@@ -29,15 +30,11 @@ export default function CDSlideOutDemo() {
   const rectCtrl2 = useAnimation()
   
   const rainbow = useMemo(() => buildCdGradient(), [])
-  const textureUrl = useMemo(() => {
-    try {
-      const parts = coverUrl.split('/')
-      parts[parts.length - 1] = 'holotex-sparkle.png'
-      return parts.join('/')
-    } catch {
-      return 'windows-angel/holotex-2.jpg'
-    }
-  }, [coverUrl]) 
+
+  const [started, setStarted] = useState(false);
+
+  const isMobile = useIsMobileDevice()
+  const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 500
 
    // Mouse tilt handler (ignored during intro)
    useEffect(() => {
@@ -74,7 +71,6 @@ export default function CDSlideOutDemo() {
       setGlareX(0)
       setGlareY(0)
   
-      // CD + text prep
       await cdCtrl.set({ x: '0%', y: -512, opacity: 0 })
   
       await cdCtrl.start({
@@ -82,11 +78,10 @@ export default function CDSlideOutDemo() {
         opacity: 1,
         filter: ['blur(32px)', 'blur(0px)'],
         scale: [0.6, 1],
-        transition: { duration: 0.3, ease: [0.42, 0.0, 1.0, 1.0] } // ease-in
+        transition: { duration: 0.3, ease: [0.42, 0.0, 1.0, 1.0] }
       })
       cdCtrl.set({ filter: 'none' })
 
-      // Phase 2: tilt travel while eject
       const tiltXAnim = animate(20, 0, {
         duration: 0.8, ease: [0.22, 1, 0.36, 1],
         onUpdate: v => mounted && setTiltX(v),
@@ -112,15 +107,15 @@ export default function CDSlideOutDemo() {
       })
       setTimeout(() => {
         animate(
-          { x: '-100%', opacity: 0 }, // from values
-          { x: '0%', opacity: 1 },    // to values
+          { x: '-100%', opacity: 0 },
+          { x: '0%', opacity: 1 },
           {
             duration: 0.4,
             ease: [0.22, 1, 0.36, 1],
             onUpdate: latest => textCtrl.set(latest)
           }
         )
-      }, 100) 
+      }, 100)
   
       const textIn = textCtrl.start({
         x: '0%',
@@ -144,13 +139,21 @@ export default function CDSlideOutDemo() {
         })
       }, 100) 
       
-      const cd2Eject = cd2Ctrl.start({
-        x: '50%',
+      cdCtrl.start({
+        x: '-25%',
+        // opacity: 1,
+        // filter: ['blur(32px)', 'blur(0px)'],
+        // scale: [0.6, 1],
+        transition: { type: 'spring', stiffness: 1000, damping: 100 }
+      })
+
+      cd2Ctrl.start({
+        x: (isMobile || isSmallScreen) ? '50%' : '50%',
         transition: { type: 'spring', stiffness: 1000, damping: 100 }
       })
     
       await textIn
-      const textOut = textCtrl.start({
+      textCtrl.start({
         x: '300%',
         opacity: 0,
         transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
@@ -174,46 +177,36 @@ export default function CDSlideOutDemo() {
 
   const sharpShadow = (px = 1, a = 0.5) => `${px}px ${px}px 2px rgba(0,0,0,${a})`
 
-  // Generate a holographic gradient that shifts with tilt
-  const holographicOverlay = `linear-gradient(${tiltY * 2}deg, rgba(255,0,200,0.25), rgba(0,255,255,0.25) 40%, rgba(255,255,0,0.25) 70%, rgba(255,0,200,0.25))`
-
-  // Parallax rectangle glare params
-  const slantDeg = tiltX * 0.8 // base slant, reacts to Y tilt
-  // Wide bar moves slower
-//   const wideX = `${(tiltY * 8 + (glareX - 50)).toFixed(2)}%`
-//   const wideY = `${(-tiltX * 2 + (glareY - 50)).toFixed(2)}%`
-
   return (
     <>
     <SineWavesBackground/>
-    <div className="min-h-[70vh] w-full h-screen flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-black text-slate-200 p-6">
-      <div className="w-full max-w-5xl mx-auto gap-10 items-start">
-        <div className="flex items-center justify-center">
+    <div className="w-full min-h-[100dvh] flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white px-6">
+  <div className="w-full max-w-5xl mx-auto h-full">
+    <div className="flex items-center justify-center h-full">
           <div
             ref={wrapperRef}
             style={{ perspective: '800px' }}
             className="relative md:[perspective:1000px]"
           >
             <motion.div
-                animate={cdCtrl}
-
-              className="relative w-[320px] sm:w-[380px] md:w-[440px] aspect-square [transform-style:preserve-3d] will-change-transform"
+              animate={cdCtrl}
+              className="relative w-[240px] sm:w-[240px] md:w-[440px] aspect-square [transform-style:preserve-3d] will-change-transform"
               style={{
                 rotateX: tiltX,
                 rotateY: tiltY,
                 transformOrigin: 'center center',
-                filter: 'blur(var(--blur, 0px))'
+                // filter: 'blur(var(--blur, 0px))'
               }}
               transition={{ type: 'spring', stiffness: 100, damping: 12 }}
             >
                 <motion.div animate={infoCtrl} className="opacity-0 absolute -top-4 -left-4 z-50" style={{ transform: 'translateZ(24px)' }}>
-                    <div className="backdrop-blur-md bg-white/30 border border-white/80 rounded-xl p-3 shadow-lg relative">
+                    <div className="bg-white/50 border border-white/80 rounded-xl px-2 pt-1 shadow-lg relative">
                     <div className="text-xs text-white tracking-widest uppercase" style={{ textShadow: sharpShadow(1, 0.5) }}>{artist}</div>
                     <div className="text-lg text-white sm:text-xl font-semibold tracking-wide" style={{ textShadow: sharpShadow(1, 0.5) }}>{title}</div>
                     </div>
                 </motion.div>
                 <motion.div animate={infoCtrl} className="opacity-0 absolute -bottom-4 -right-4 z-50" style={{ transform: 'translateZ(24px)' }}>
-                    <div className="backdrop-blur-md bg-purple-800/50 border border-purple-200/80 rounded-xl p-3 shadow-lg">
+                    <div className="bg-purple-800/50 border border-purple-200/80 rounded-xl p-1 px-2 shadow-lg">
                         <span className="text-lg text-purple-200 tracking-widest font-bold uppercase inline-flex items-center gap-1" style={{ textShadow: sharpShadow(1, 0.5) }}>
                             <SparkleSvg color="white" dim="12px" />
                             RARE
@@ -222,7 +215,7 @@ export default function CDSlideOutDemo() {
                 </motion.div>
               <motion.div
                 animate={infoCtrl}
-                className="absolute opacity-0 inset-0 rounded-[22px] pointer-events-none"
+                className="absolute opacity-0 inset-0 rounded-[24px] pointer-events-none"
                 style={{
                   transform: 'translateZ(-48px) scale(1.25)',
                   background:
@@ -232,17 +225,17 @@ export default function CDSlideOutDemo() {
               />
 
               <div
-                className="relative w-[320px] sm:w-[380px] md:w-[440px] aspect-square [transform-style:preserve-3d]"
+                className="relative w-[240px] sm:w-[240px] md:w-[440px] aspect-square [transform-style:preserve-3d]"
                 onMouseEnter={() => setIsOut(true)}
                 onMouseLeave={() => setIsOut(false)}
               >
                 {/* Cover Jacket */}
                 <motion.div
                   animate={{ y: isOut ? 0 : 0, rotateY: isOut ? jacketRotateY : 0 }}
-                  className="absolute inset-0 rounded-2xl shadow-2xl overflow-visible ring-1 ring-white/50 will-change-transform z-30 [transform-style:preserve-3d]"
+                  className="absolute inset-0 rounded-md shadow-xl overflow-visible ring-1 ring-white/50 will-change-transform z-30"
                 >
                   {/* COVER ART as real layer so blend-modes work */}
-                  <div className="absolute inset-0 rounded-2xl overflow-hidden z-0">
+                  <div className="absolute inset-0 rounded-md overflow-hidden z-0">
                     <div className="absolute inset-0" style={{
                       background: coverUrl
                         ? `url(${coverUrl}) center/cover no-repeat`
@@ -261,7 +254,7 @@ export default function CDSlideOutDemo() {
                       opacity: 1
                     }}
                   />
-
+                  
                   <div
                     className="absolute inset-0 rounded-2xl pointer-events-none z-10"
                     style={{
@@ -277,7 +270,7 @@ export default function CDSlideOutDemo() {
                   <div
                     className="absolute inset-0 rounded-2xl z-10 pointer-events-none"
                     style={{
-                      backgroundImage: `url(${textureUrl})`,
+                      backgroundImage: `url(windows-angel/holotex-sparkle-1k.png)`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       backgroundRepeat: 'no-repeat',
@@ -291,12 +284,11 @@ export default function CDSlideOutDemo() {
                   <div
                     className="absolute inset-0 rounded-2xl z-10 pointer-events-none"
                     style={{
-                      backgroundImage: `url(${textureUrl})`,
+                      backgroundImage: `url(windows-angel/holotex-sparkle-1k-blur.png)`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       backgroundRepeat: 'no-repeat',
                       mixBlendMode: 'hard-light',
-                      filter: 'blur(1px)',
                       WebkitMaskImage: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.75) 10%, rgba(255,255,255,.50) 50%, rgba(255,255,255,0) 75%)`,
                       maskImage:       `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.75) 10%, rgba(255,255,255,.50) 50%, rgba(255,255,255,0) 75%)`,
                       opacity: 1
@@ -308,13 +300,12 @@ export default function CDSlideOutDemo() {
                     <div
                       style={{
                         position: 'absolute',
-                        // left: '-100%',
                         top: '-100%',
                         width: '22%', height: '300%',
                         background: barsOpaque ? '#ffffff' : 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 40%, rgba(255,255,255,0.12) 70%, rgba(255,255,255,0) 100%)',
                         transform: `translateX(${wideX}px) rotate(15deg)`,
                         opacity: 1,
-                        mixBlendMode: (barsOpaque ? 'normal' : 'screen') as React.CSSProperties['mixBlendMode'],
+                        mixBlendMode: 'screen',
                         filter: 'blur(64px)'
                       }}
                     />
@@ -328,7 +319,7 @@ export default function CDSlideOutDemo() {
                         background: barsOpaque ? '#ffffff' : 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 40%, rgba(255,255,255,0.12) 70%, rgba(255,255,255,0) 100%)',
                         transform: `translateX(${wideX2}px) rotate(15deg)`,
                         opacity: 1,
-                        mixBlendMode: (barsOpaque ? 'normal' : 'screen') as React.CSSProperties['mixBlendMode'],
+                        mixBlendMode: 'screen',
                         filter: 'blur(16px)'
                       }}
                     />
@@ -339,17 +330,16 @@ export default function CDSlideOutDemo() {
                 <motion.div
                     aria-label="CD"
                     initial={{ x: 0, y: 0 }}
-                    // animate={{ x: isOut ? '50%' : '0%', y: '0%' }}
                     animate={cd2Ctrl}
                     transition={{
                         x: { delay: ejectDelay, type: 'spring', stiffness: 1000, damping: 100 },
                     }}
-                    className="absolute -top-0 right-[-0%] md:right-[-0%] size-[270px] sm:size-[320px] md:size-[440px] rounded-full shadow-2xl z-20 will-change-transform overflow-hidden"
+                    className="absolute -top-0 right-[-0%] size-[240px] sm:size-[240px] md:size-[440px] z-20 will-change-transform overflow-hidden rounded-full"
                     
                     // Fully transparent hole
                     style={{
                         transform: `${isOut ? 'translateZ(16px)' : 'translateZ(-24px)'} rotateY(12deg) translateY(-50%)`,
-                        filter: 'drop-shadow(0 10px 30px rgba(0,0,0,.6))',
+                        // filter: 'drop-shadow(0 10px 30px rgba(0,0,0,.6))',
                         WebkitMaskImage: 'radial-gradient(circle at 50% 50%, transparent 0 9.25%, #000 9.25% 100%)',
                         maskImage:       'radial-gradient(circle at 50% 50%, transparent 0 9.25%, #000 9.25% 100%)',
                     }}
@@ -357,19 +347,17 @@ export default function CDSlideOutDemo() {
 
                     {/* CD Soft Glass — 9.25% → 30% */}
                     <div
-                        className="absolute inset-0 rounded-full pointer-events-none"
+                        className="absolute inset-0 pointer-events-none"
                         style={{
                             background: 'rgba(255,255,255,0.1)',
                             WebkitMaskImage: 'radial-gradient(circle at center, transparent 0 9.25%, #000 9.25% 30%, transparent 30% 100%)',
                             maskImage:       'radial-gradient(circle at center, transparent 0 9.25%, #000 9.25% 30%, transparent 30% 100%)',
-                            backdropFilter: 'blur(2px)',
-                            WebkitBackdropFilter: 'blur(2px)',
                         }}
                     />
 
                     {/* CD Light Ring — 24% → 25% */}
                     <div
-                        className="absolute inset-0 rounded-full pointer-events-none"
+                        className="absolute inset-0 pointer-events-none"
                         style={{
                             background: 'radial-gradient(circle at 50% 10%, #FFFFFF 0%, #EEEEEE 30%, rgba(0,0,0,0) 55%)',
                             WebkitMaskImage: 'radial-gradient(circle at center, transparent 0 24%, #000 24% 25%, transparent 25% 100%)',
@@ -380,7 +368,7 @@ export default function CDSlideOutDemo() {
 
                     {/* CD Light Ring — 15% → 16% */}
                     <div
-                        className="absolute inset-0 rounded-full pointer-events-none"
+                        className="absolute inset-0 pointer-events-none"
                         style={{
                             background: 'radial-gradient(circle at 50% 10%, #FFFFFF 35%, #808080 40%, rgba(0,0,0,0) 45%)',
                             WebkitMaskImage: 'radial-gradient(circle at center, transparent 0 9.25%, #000 9.25% 10.25%, transparent 10.25% 100%)',
@@ -391,7 +379,7 @@ export default function CDSlideOutDemo() {
 
                     {/* CD Black Ring — 28% → 30% */}
                     <div
-                        className="absolute inset-0 rounded-full pointer-events-none"
+                        className="absolute inset-0  pointer-events-none"
                         style={{
                             background: 'radial-gradient(at top, #808080, #333333, #000000)',
                             WebkitMaskImage: 'radial-gradient(circle at center, transparent 0 28%, #000 28% 30%, transparent 30% 100%)',
@@ -405,7 +393,7 @@ export default function CDSlideOutDemo() {
                         transition={{
                             rotateZ: spin ? { repeat: Infinity, ease: 'linear', duration: 6 } : { duration: 0.3 },
                         }}
-                        className="absolute inset-0 rounded-full"
+                        className="absolute inset-0 pointer-events-none"
                         style={{
                             background: rainbow,
                             WebkitMaskImage: 'radial-gradient(circle at center, transparent 0 30%, #000 30% 100%)',
@@ -415,7 +403,7 @@ export default function CDSlideOutDemo() {
 
                     {/* CD HOLE glare */}
                     <div
-                        className="absolute inset-0 rounded-full pointer-events-none"
+                        className="absolute inset-0 pointer-events-none"
                         style={{
                         background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.0) 40%)`,
                         mixBlendMode: 'screen',
@@ -434,7 +422,7 @@ export default function CDSlideOutDemo() {
                   className="absolute -bottom-10 left-0 z-10 will-change-transform"
                 //   style={{ transform: 'translateZ(30px)' }}
                 >
-                  <span className="text-4xl font-distancia">GOT IT!</span>
+                  <span className="text-3xl md:text-4xl font-distancia">GOT IT!</span>
                 </motion.div>
 
               </div>
