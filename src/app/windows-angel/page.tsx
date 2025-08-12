@@ -429,7 +429,7 @@ export default function CDSlideOutDemo() {
                 <div className="p-2 px-4 border border-green-400 bg-green-800/50 rounded-full 
                                 hover:bg-green-800 transition-all
                                 shadow-[inset_0px_2px_4px_rgba(255,255,255,0.25),inset_-1px_-1px_2px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.75)]">
-                    To Spotify
+                    Spotify
                 </div>
             </button>
           </div>
