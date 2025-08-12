@@ -124,7 +124,7 @@ export default function CDSlideOutDemo() {
       })
 
       setTimeout(() => {
-        animate(-100, 500, {
+        animate(-100, (isMobile || isSmallScreen) ? 250 : 500, {
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1],
             onUpdate: v => mounted && setWideX(v),
@@ -132,7 +132,7 @@ export default function CDSlideOutDemo() {
       }, 200) 
 
       setTimeout(() => {
-        animate(-100, 500, {
+        animate(-100, (isMobile || isSmallScreen) ? 250 : 500, {
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1],
             onUpdate: v => mounted && setWideX2(v),
@@ -245,7 +245,7 @@ export default function CDSlideOutDemo() {
 
                   {/* subtle holo gradient that blends with cover */}
                   <div
-                    className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+                    className="absolute inset-0 rounded-[12px] pointer-events-none z-10"
                     style={{
                       background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
                       mixBlendMode:     'hard-light',
@@ -256,7 +256,7 @@ export default function CDSlideOutDemo() {
                   />
                   
                   <div
-                    className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+                    className="absolute inset-0 rounded-[12px] pointer-events-none z-10"
                     style={{
                       background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
                       mixBlendMode:     'hard-light',
@@ -268,7 +268,7 @@ export default function CDSlideOutDemo() {
 
                   {/* HOLOTEX overlay (simple + radial mask that tracks mouse) */}
                   <div
-                    className="absolute inset-0 rounded-2xl z-10 pointer-events-none"
+                    className="absolute inset-0 rounded-[12px] z-10 pointer-events-none"
                     style={{
                       backgroundImage: `url(windows-angel/holotex-sparkle-1k.png)`,
                       backgroundSize: 'cover',
@@ -282,7 +282,7 @@ export default function CDSlideOutDemo() {
                   />
 
                   <div
-                    className="absolute inset-0 rounded-2xl z-10 pointer-events-none"
+                    className="absolute inset-0 rounded-[12px] z-10 pointer-events-none"
                     style={{
                       backgroundImage: `url(windows-angel/holotex-sparkle-1k-blur.png)`,
                       backgroundSize: 'cover',
