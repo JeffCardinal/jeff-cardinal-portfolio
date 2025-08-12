@@ -180,7 +180,7 @@ export default function CDSlideOutDemo() {
   return (
     <>
     <SineWavesBackground/>
-    <div className="w-full min-h-[100dvh] flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white px-6">
+    <div className="w-full min-h-[100dvh] flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white px-6 overflow-hidden">
   <div className="w-full max-w-5xl mx-auto h-full">
     <div className="flex items-center justify-center h-full">
           <div
