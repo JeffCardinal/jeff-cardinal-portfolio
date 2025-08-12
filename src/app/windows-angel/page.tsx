@@ -52,7 +52,7 @@ export default function CDSlideOutDemo() {
       setTiltX(clamp(newTiltX, -maxTilt, maxTilt))
       setTiltY(clamp(newTiltY, -maxTilt, maxTilt))
 
-      const glareXPct = ((e.clientX - rect.left) / rect.width) * 100
+      const glareXPct = ((e.clientX - rect.left) / rect.width) * 100 + 25
       const glareYPct = ((e.clientY - rect.top) / rect.height) * 100
       setGlareX(clamp(glareXPct, 0, 100))
       setGlareY(clamp(glareYPct, 0, 100))
@@ -124,7 +124,7 @@ export default function CDSlideOutDemo() {
       })
 
       setTimeout(() => {
-        animate(-100, 500, {
+        animate(-100, (isMobile || isSmallScreen) ? 250 : 500, {
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1],
             onUpdate: v => mounted && setWideX(v),
@@ -132,7 +132,7 @@ export default function CDSlideOutDemo() {
       }, 200) 
 
       setTimeout(() => {
-        animate(-100, 500, {
+        animate(-100, (isMobile || isSmallScreen) ? 250 : 500, {
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1],
             onUpdate: v => mounted && setWideX2(v),
@@ -232,10 +232,10 @@ export default function CDSlideOutDemo() {
                 {/* Cover Jacket */}
                 <motion.div
                   animate={{ y: isOut ? 0 : 0, rotateY: isOut ? jacketRotateY : 0 }}
-                  className="absolute inset-0 rounded-md shadow-xl overflow-visible ring-1 ring-white/50 will-change-transform z-30"
+                  className="absolute inset-0 rounded-[12px] shadow-xl overflow-visible ring-1 ring-white/50 will-change-transform z-30"
                 >
                   {/* COVER ART as real layer so blend-modes work */}
-                  <div className="absolute inset-0 rounded-md overflow-hidden z-0">
+                  <div className="absolute inset-0 rounded-[12px] overflow-hidden z-0">
                     <div className="absolute inset-0" style={{
                       background: coverUrl
                         ? `url(${coverUrl}) center/cover no-repeat`
@@ -245,7 +245,7 @@ export default function CDSlideOutDemo() {
 
                   {/* subtle holo gradient that blends with cover */}
                   <div
-                    className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+                    className="absolute inset-0 rounded-[12px] pointer-events-none z-10"
                     style={{
                       background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
                       mixBlendMode:     'hard-light',
@@ -256,7 +256,7 @@ export default function CDSlideOutDemo() {
                   />
                   
                   <div
-                    className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+                    className="absolute inset-0 rounded-[12px] pointer-events-none z-10"
                     style={{
                       background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
                       mixBlendMode:     'hard-light',
@@ -268,7 +268,7 @@ export default function CDSlideOutDemo() {
 
                   {/* HOLOTEX overlay (simple + radial mask that tracks mouse) */}
                   <div
-                    className="absolute inset-0 rounded-2xl z-10 pointer-events-none"
+                    className="absolute inset-0 rounded-[12px] z-10 pointer-events-none"
                     style={{
                       backgroundImage: `url(windows-angel/holotex-sparkle-1k.png)`,
                       backgroundSize: 'cover',
@@ -282,7 +282,7 @@ export default function CDSlideOutDemo() {
                   />
 
                   <div
-                    className="absolute inset-0 rounded-2xl z-10 pointer-events-none"
+                    className="absolute inset-0 rounded-[12px] z-10 pointer-events-none"
                     style={{
                       backgroundImage: `url(windows-angel/holotex-sparkle-1k-blur.png)`,
                       backgroundSize: 'cover',
