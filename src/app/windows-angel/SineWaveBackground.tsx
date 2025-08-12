@@ -23,7 +23,6 @@ export default function SineWavesBackground() {
     return d
   }
 
-  // precompute the three waves
   const paths = useMemo(() => {
     return [
       {
@@ -87,7 +86,7 @@ export default function SineWavesBackground() {
         }
         .drift-slow { animation: driftX 3s linear infinite; }
         .drift-med  { animation: driftX 2s linear infinite; }
-        .drift-fast { animation: driftX 1s linear infinite; }
+        .drift-fast { animation: driftX 0.75s linear infinite; }
 
         /* customize each group's travel distance to its wavelength so loops are seamless */
         .drift-slow { animation-name: driftXSlow; }

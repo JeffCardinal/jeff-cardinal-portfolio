@@ -412,17 +412,27 @@ export default function CDSlideOutDemo() {
               </div>
             </motion.div>
           </div>
-
-          <button 
-            onClick={() => { if (!lockTilt) { setIsOut(false); setResetAnim((resetAnim) => resetAnim + 1); } }}
-            className="fixed lg:top-[85%] top-[80%] left-1/2 -translate-x-1/2"
-          >
-            <div className="p-2 px-4 border border-slate-400 bg-slate-800/50 rounded-full 
-                            hover:bg-slate-800 transition-all
-                            shadow-[inset_0px_2px_4px_rgba(255,255,255,0.25),inset_-1px_-1px_2px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.75)]">
-                RESET
-            </div>
-          </button>
+          
+          <div className="fixed lg:top-[85%] top-[80%] left-1/2 -translate-x-1/2 flex gap-4">
+            <button 
+                onClick={() => { if (!lockTilt) { setIsOut(false); setResetAnim((resetAnim) => resetAnim + 1); } }}
+            >
+                <div className="p-2 px-4 border border-slate-400 bg-slate-800/50 rounded-full 
+                                hover:bg-slate-800 transition-all
+                                shadow-[inset_0px_2px_4px_rgba(255,255,255,0.25),inset_-1px_-1px_2px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.75)]">
+                    RESET
+                </div>
+            </button>
+            <button 
+                onClick={() => { window.open('https://open.spotify.com/track/3kcd8fmRsjqKnqO4bAsJMg?si=47ba6818ea814e44', '_blank'); }}
+            >
+                <div className="p-2 px-4 border border-green-400 bg-green-800/50 rounded-full 
+                                hover:bg-green-800 transition-all
+                                shadow-[inset_0px_2px_4px_rgba(255,255,255,0.25),inset_-1px_-1px_2px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.75)]">
+                    To Spotify
+                </div>
+            </button>
+          </div>
 
         </div>
       </div>
