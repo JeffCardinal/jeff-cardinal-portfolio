@@ -52,7 +52,7 @@ export default function CDSlideOutDemo() {
       setTiltX(clamp(newTiltX, -maxTilt, maxTilt))
       setTiltY(clamp(newTiltY, -maxTilt, maxTilt))
 
-      const glareXPct = ((e.clientX - rect.left) / rect.width) * 100
+      const glareXPct = ((e.clientX - rect.left) / rect.width) * 100 + 25
       const glareYPct = ((e.clientY - rect.top) / rect.height) * 100
       setGlareX(clamp(glareXPct, 0, 100))
       setGlareY(clamp(glareYPct, 0, 100))
@@ -232,10 +232,10 @@ export default function CDSlideOutDemo() {
                 {/* Cover Jacket */}
                 <motion.div
                   animate={{ y: isOut ? 0 : 0, rotateY: isOut ? jacketRotateY : 0 }}
-                  className="absolute inset-0 rounded-md shadow-xl overflow-visible ring-1 ring-white/50 will-change-transform z-30"
+                  className="absolute inset-0 rounded-[12px] shadow-xl overflow-visible ring-1 ring-white/50 will-change-transform z-30"
                 >
                   {/* COVER ART as real layer so blend-modes work */}
-                  <div className="absolute inset-0 rounded-md overflow-hidden z-0">
+                  <div className="absolute inset-0 rounded-[12px] overflow-hidden z-0">
                     <div className="absolute inset-0" style={{
                       background: coverUrl
                         ? `url(${coverUrl}) center/cover no-repeat`
