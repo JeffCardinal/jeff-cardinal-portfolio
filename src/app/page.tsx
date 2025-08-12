@@ -239,6 +239,26 @@ export default function Page() {
           bgColor={"bg-teal-400"}
         >
           <FeatureUIUX
+            title="CD Jacket"
+            description="Motion Graphics UI animating a holographic CD jacket. Idea for a rare music drop or pre-save."
+            year="2025"
+            tools="React, Tailwind, Framer Motion"
+            imageName="ui-projects/windows-angel-ui.jpg"
+            imageHoverName="ui-projects/windows-angel-ui.jpg"
+            bgColor="bg-slate-800"
+            borderColor="border-indigo-300"
+            textColor="text-indigo-300"
+            font={'w-full block text-3xl lg:text-4xl font-distancia'}
+            isTitleVerticallyCentered={false}>
+            <div className="pt-2 invisible lg:visible">
+              <Link href="https://jeffcardinal.com/windows-angel" target="_blank">
+                <button className="pt-[2px] px-4 mr-4 border-[6px] border-indigo-300 text-indigo-300 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
+                  Demo
+                </button>
+              </Link>
+            </div>
+          </FeatureUIUX>
+          <FeatureUIUX
             title="GPU Booking"
             description="Lightweight UI component for booking GPUs. Hover to open."
             year="2024"
@@ -252,7 +272,7 @@ export default function Page() {
             isTitleVerticallyCentered={false}>
             <div className="pt-2 invisible lg:visible">
               <Link href="https://sf-compute-takehome.vercel.app/" target="_blank">
-                <button className="pt-[2px] px-4 mr-4 border border-[6px] border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
+                <button className="pt-[2px] px-4 mr-4 border-[6px] border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
                 </button>
               </Link>
@@ -272,12 +292,12 @@ export default function Page() {
             isTitleVerticallyCentered={false}>
             <div className="pt-2 flex flex-row align-middle">
               <Link href="https://jeff-cardinal-website.vercel.app/" target="_blank" className="hidden lg:flex">
-                <button className="pt-[2px] px-4 mr-6 border border-[6px] border-white text-white hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl">
+                <button className="pt-[2px] px-4 mr-6 border-[6px] border-white text-white hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
                 </button>
               </Link>
               <Link href="https://github.com/JeffCardinal/JeffCardinalWebsite/" target="_blank">
-                <button className="border border-[6px] border-white mr-4 hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
+                <button className="border-[6px] border-white mr-4 hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
                   <div className="h-6 w-6 ml-2 mt-[5px]"><FontAwesomeIcon icon={faGithub} /></div>
                   <div className="pt-[2px] pl-2 pr-4">Github</div>
                 </button>
@@ -325,7 +345,7 @@ export default function Page() {
             isTitleVerticallyCentered={false}
           >
             <Link href="https://github.com/JeffCardinal/Goupe" target="_blank">
-              <button className="border border-[6px] border-lime-400 mr-4 hover:bg-lime-700 hover:text-lime-200 hover:border-lime-200 rounded-full transition duration-300 font-distancia text-2xl flex flex-row relative overflow-hidden group">
+              <button className="border-[6px] border-lime-400 mr-4 hover:bg-lime-700 hover:text-lime-200 hover:border-lime-200 rounded-full transition duration-300 font-distancia text-2xl flex flex-row relative overflow-hidden group">
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-lime-300/60 to-lime-500/40 blur-lg group-hover:blur-md rounded-full pointer-events-none transform -translate-y-1/2" />
                 <div className="h-6 w-6 ml-2 mt-[5px] z-10"><FontAwesomeIcon icon={faGithub} /></div>
                 <div className="pt-[2px] pl-2 pr-4 z-10">Download</div>
