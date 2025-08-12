@@ -20,6 +20,7 @@ export default function CDSlideOutDemo() {
   const [glareY, setGlareY] = useState(50)
   const [barsOpaque, setBarsOpaque] = useState(true)
   const [lockTilt, setLockTilt] = useState(true) // intro lock
+  const [resetAnim, setResetAnim] = useState(0)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   const cdCtrl = useAnimation() //Jacket + CD
@@ -62,8 +63,7 @@ export default function CDSlideOutDemo() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [lockTilt])
 
- // Intro sequence
- useEffect(() => {
+   useEffect(() => {
     let mounted = true
     const run = async () => {
       setTiltX(20)
@@ -71,7 +71,13 @@ export default function CDSlideOutDemo() {
       setGlareX(0)
       setGlareY(0)
   
+      textCtrl.stop();
+      textCtrl.set({ x: '-100%', opacity: 0 });
+      infoCtrl.stop();
+      infoCtrl.set({ opacity: 0 });
+
       await cdCtrl.set({ x: '0%', y: -512, opacity: 0 })
+      cd2Ctrl.set({ x: '0%' })
   
       await cdCtrl.start({
         y: 0,
@@ -90,46 +96,25 @@ export default function CDSlideOutDemo() {
         duration: 0.8, ease: [0.22, 1, 0.36, 1],
         onUpdate: v => mounted && setTiltY(v),
       })
-
-      const glareXAnim = animate(100, 0, {
+      animate(100, 0, {
         duration: 0.8, ease: [0.22, 1, 0.36, 1],
         onUpdate: v => mounted && setGlareX(v),
       })
-      const glareYAnim = animate(0, 50, {
+      animate(0, 50, {
         duration: 0.8, ease: [0.22, 1, 0.36, 1],
         onUpdate: v => mounted && setGlareY(v),
       })
 
-      animate(0, 1, {
-        duration: 0.75,
+    textCtrl.set({ x: '-100%', opacity: 0 })
+    textCtrl.start({
+      x: ['-100%', '0%', '300%'],
+      opacity: [0, 1, 0],
+      transition: {
+        duration: 1.5,
         ease: [0.22, 1, 0.36, 1],
-        onUpdate: latest => infoCtrl.set({ opacity: latest })
-      })
-      setTimeout(() => {
-        animate(
-          { x: '-100%', opacity: 0 },
-          { x: '0%', opacity: 1 },
-          {
-            duration: 0.4,
-            ease: [0.22, 1, 0.36, 1],
-            onUpdate: latest => textCtrl.set(latest)
-          }
-        )
-      }, 100)
-  
-      const textIn = textCtrl.start({
-        x: '0%',
-        opacity: 1,
-        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }
-      })
-
-      setTimeout(() => {
-        animate(-100, (isMobile || isSmallScreen) ? 250 : 500, {
-            duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
-            onUpdate: v => mounted && setWideX(v),
-        })
-      }, 200) 
+        times: [0, 0.5, 1],
+      },
+    })
 
       setTimeout(() => {
         animate(-100, (isMobile || isSmallScreen) ? 250 : 500, {
@@ -137,26 +122,29 @@ export default function CDSlideOutDemo() {
             ease: [0.22, 1, 0.36, 1],
             onUpdate: v => mounted && setWideX2(v),
         })
-      }, 100) 
-      
+      }, 100)
+
+      setTimeout(() => {
+        animate(-100, (isMobile || isSmallScreen) ? 250 : 500, {
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1],
+            onUpdate: v => mounted && setWideX(v),
+        })
+      }, 200)
+
+      infoCtrl.start({
+        opacity: 1,
+        transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
+      })
+
       cdCtrl.start({
         x: '-25%',
-        // opacity: 1,
-        // filter: ['blur(32px)', 'blur(0px)'],
-        // scale: [0.6, 1],
         transition: { type: 'spring', stiffness: 1000, damping: 100 }
       })
 
       cd2Ctrl.start({
         x: (isMobile || isSmallScreen) ? '50%' : '50%',
         transition: { type: 'spring', stiffness: 1000, damping: 100 }
-      })
-    
-      await textIn
-      textCtrl.start({
-        x: '300%',
-        opacity: 0,
-        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
       })
 
       setLockTilt(false)
@@ -165,8 +153,8 @@ export default function CDSlideOutDemo() {
   
     run()
     return () => { mounted = false }
-  }, [])
-  
+  }, [resetAnim])
+
 
   const dropDur = 0.0
   const tiltDelay = dropDur
@@ -181,8 +169,8 @@ export default function CDSlideOutDemo() {
     <>
     <SineWavesBackground/>
     <div className="w-full min-h-[100dvh] flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white px-6 overflow-hidden">
-  <div className="w-full max-w-5xl mx-auto h-full">
-    <div className="flex items-center justify-center h-full">
+      <div className="w-full max-w-5xl mx-auto h-full">
+        <div className="flex items-center justify-center h-full">
           <div
             ref={wrapperRef}
             style={{ perspective: '800px' }}
@@ -195,7 +183,7 @@ export default function CDSlideOutDemo() {
                 rotateX: tiltX,
                 rotateY: tiltY,
                 transformOrigin: 'center center',
-                // filter: 'blur(var(--blur, 0px))'
+                opacity: 0,
               }}
               transition={{ type: 'spring', stiffness: 100, damping: 12 }}
             >
@@ -331,9 +319,9 @@ export default function CDSlideOutDemo() {
                     aria-label="CD"
                     initial={{ x: 0, y: 0 }}
                     animate={cd2Ctrl}
-                    transition={{
-                        x: { delay: ejectDelay, type: 'spring', stiffness: 1000, damping: 100 },
-                    }}
+                    // transition={{
+                    //     x: { delay: ejectDelay, type: 'spring', stiffness: 1000, damping: 100 },
+                    // }}
                     className="absolute -top-0 right-[-0%] size-[240px] sm:size-[240px] md:size-[440px] z-20 will-change-transform overflow-hidden rounded-full"
                     
                     // Fully transparent hole
@@ -416,18 +404,26 @@ export default function CDSlideOutDemo() {
 
                 <motion.div
                   initial={{ x: '-100%', opacity: 0 }}
-                //   animate={{ x: isOut ? '0%' : '-100%', opacity: isOut ? 1 : 0 }}
-                    animate={textCtrl}
-                  transition={{ delay: textDelay, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  animate={textCtrl}
                   className="absolute -bottom-10 left-0 z-10 will-change-transform"
-                //   style={{ transform: 'translateZ(30px)' }}
                 >
                   <span className="text-3xl md:text-4xl font-distancia">GOT IT!</span>
                 </motion.div>
-
               </div>
             </motion.div>
           </div>
+
+          <button 
+            onClick={() => { if (!lockTilt) { setIsOut(false); setResetAnim((resetAnim) => resetAnim + 1); } }}
+            className="fixed lg:top-[85%] top-[80%] left-1/2 -translate-x-1/2"
+          >
+            <div className="p-2 px-4 border border-slate-400 bg-slate-800/50 rounded-full 
+                            hover:bg-slate-800 transition-all
+                            shadow-[inset_0px_2px_4px_rgba(255,255,255,0.25),inset_-1px_-1px_2px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.75)]">
+                RESET
+            </div>
+          </button>
+
         </div>
       </div>
     </div>
