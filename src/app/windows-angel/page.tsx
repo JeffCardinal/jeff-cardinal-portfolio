@@ -32,10 +32,11 @@ export default function CDSlideOutDemo() {
   
   const rainbow = useMemo(() => buildCdGradient(), [])
 
-  const [started, setStarted] = useState(false);
-
   const isMobile = useIsMobileDevice()
   const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 500
+  const jacketRotateY = isOut ? 0 : 0
+
+  const sharpShadow = (px = 1, a = 0.5) => `${px}px ${px}px 2px rgba(0,0,0,${a})`
 
    // Mouse tilt handler (ignored during intro)
    useEffect(() => {
@@ -71,13 +72,17 @@ export default function CDSlideOutDemo() {
       setGlareX(0)
       setGlareY(0)
   
+      cdCtrl.stop();
+      cd2Ctrl.stop();
       textCtrl.stop();
-      textCtrl.set({ x: '-100%', opacity: 0 });
       infoCtrl.stop();
+      rectCtrl.stop();
+      rectCtrl2.stop();
+      textCtrl.set({ x: '-100%', opacity: 0 });
       infoCtrl.set({ opacity: 0 });
 
       await cdCtrl.set({ x: '0%', y: -512, opacity: 0 })
-      cd2Ctrl.set({ x: '0%' })
+      await cd2Ctrl.set({ x: '0%' })
   
       await cdCtrl.start({
         y: 0,
@@ -110,6 +115,7 @@ export default function CDSlideOutDemo() {
       x: ['-100%', '0%', '300%'],
       opacity: [0, 1, 0],
       transition: {
+        delay: 0.1, 
         duration: 1.5,
         ease: [0.22, 1, 0.36, 1],
         times: [0, 0.5, 1],
@@ -134,7 +140,7 @@ export default function CDSlideOutDemo() {
 
       infoCtrl.start({
         opacity: 1,
-        transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
+        transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
       })
 
       cdCtrl.start({
@@ -154,16 +160,6 @@ export default function CDSlideOutDemo() {
     run()
     return () => { mounted = false }
   }, [resetAnim])
-
-
-  const dropDur = 0.0
-  const tiltDelay = dropDur
-  const ejectDelay = tiltDelay
-  const textDelay = ejectDelay + 0.15
-
-  const jacketRotateY = isOut ? 0 : 0
-
-  const sharpShadow = (px = 1, a = 0.5) => `${px}px ${px}px 2px rgba(0,0,0,${a})`
 
   return (
     <>
@@ -220,10 +216,10 @@ export default function CDSlideOutDemo() {
                 {/* Cover Jacket */}
                 <motion.div
                   animate={{ y: isOut ? 0 : 0, rotateY: isOut ? jacketRotateY : 0 }}
-                  className="absolute inset-0 rounded-[12px] shadow-xl overflow-visible ring-1 ring-white/50 will-change-transform z-30"
+                  className="absolute inset-0 rounded-[6px] shadow-xl overflow-visible ring-1 ring-white will-change-transform z-30"
                 >
                   {/* COVER ART as real layer so blend-modes work */}
-                  <div className="absolute inset-0 rounded-[12px] overflow-hidden z-0">
+                  <div className="absolute inset-0 rounded-[6px] overflow-hidden z-0">
                     <div className="absolute inset-0" style={{
                       background: coverUrl
                         ? `url(${coverUrl}) center/cover no-repeat`
@@ -233,7 +229,7 @@ export default function CDSlideOutDemo() {
 
                   {/* subtle holo gradient that blends with cover */}
                   <div
-                    className="absolute inset-0 rounded-[12px] pointer-events-none z-10"
+                    className="absolute inset-0 rounded-[6px] pointer-events-none z-10"
                     style={{
                       background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
                       mixBlendMode:     'hard-light',
@@ -244,7 +240,7 @@ export default function CDSlideOutDemo() {
                   />
                   
                   <div
-                    className="absolute inset-0 rounded-[12px] pointer-events-none z-10"
+                    className="absolute inset-0 rounded-[6px] pointer-events-none z-10"
                     style={{
                       background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
                       mixBlendMode:     'hard-light',
@@ -256,7 +252,7 @@ export default function CDSlideOutDemo() {
 
                   {/* HOLOTEX overlay (simple + radial mask that tracks mouse) */}
                   <div
-                    className="absolute inset-0 rounded-[12px] z-10 pointer-events-none"
+                    className="absolute inset-0 rounded-[6px] z-10 pointer-events-none"
                     style={{
                       backgroundImage: `url(windows-angel/holotex-sparkle-1k.png)`,
                       backgroundSize: 'cover',
@@ -270,7 +266,7 @@ export default function CDSlideOutDemo() {
                   />
 
                   <div
-                    className="absolute inset-0 rounded-[12px] z-10 pointer-events-none"
+                    className="absolute inset-0 rounded-[6px] z-10 pointer-events-none"
                     style={{
                       backgroundImage: `url(windows-angel/holotex-sparkle-1k-blur.png)`,
                       backgroundSize: 'cover',
@@ -284,7 +280,7 @@ export default function CDSlideOutDemo() {
                   />
 
                   {/* Parallax rectangle glares (clipped to jacket, above holotex, below pills) */}
-                  <motion.div animate={rectCtrl} className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden" style={{ zIndex: 22 }}>
+                  <motion.div animate={rectCtrl} className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 22 }}>
                     <div
                       style={{
                         position: 'absolute',
@@ -298,7 +294,7 @@ export default function CDSlideOutDemo() {
                       }}
                     />
                   </motion.div>
-                  <motion.div animate={rectCtrl2} className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden" style={{ zIndex: 22 }}>
+                  <motion.div animate={rectCtrl2} className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 22 }}>
                     <div
                       style={{
                         position: 'absolute',
@@ -414,21 +410,23 @@ export default function CDSlideOutDemo() {
           </div>
           
           <div className="fixed lg:top-[85%] top-[80%] left-1/2 -translate-x-1/2 flex gap-4">
-            <button 
+            <button
+                className="shadow-md hover:shadow-slate-800 rounded-full transition-all duration-300"
                 onClick={() => { if (!lockTilt) { setIsOut(false); setResetAnim((resetAnim) => resetAnim + 1); } }}
             >
-                <div className="p-2 px-4 border border-slate-400 bg-slate-800/50 rounded-full 
-                                hover:bg-slate-800 transition-all
-                                shadow-[inset_0px_2px_4px_rgba(255,255,255,0.25),inset_-1px_-1px_2px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.75)]">
+                <div className="p-2 px-4 border-[1px] border-slate-800 text-slate-200 hover:text-slate-100 hover:border-slate-400 bg-slate-800/50 rounded-full 
+                                hover:bg-slate-700 transition-all
+                                shadow-[inset_0px_2px_1px_rgba(200,200,220,1),inset_0px_-3px_1px_rgba(0,0,0,1),inset_0px_-4px_2px_rgba(200,200,220,0.25),inset_0px_4px_16px_rgba(200,200,255,0.5),inset_0px_-4px_16px_rgba(0,0,0,1),0_2px_4px_rgba(0,0,0,0.75)]">
                     RESET
                 </div>
             </button>
             <button 
+                className="shadow-md hover:shadow-green-800 rounded-full transition-all duration-300"
                 onClick={() => { window.open('https://open.spotify.com/track/3kcd8fmRsjqKnqO4bAsJMg?si=47ba6818ea814e44', '_blank'); }}
             >
-                <div className="p-2 px-4 border border-green-400 bg-green-800/50 rounded-full 
-                                hover:bg-green-800 transition-all
-                                shadow-[inset_0px_2px_4px_rgba(255,255,255,0.25),inset_-1px_-1px_2px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.75)]">
+                <div className="p-2 px-4 border-[1px] border-green-950 text-green-200 hover:text-green-100 hover:border-green-400 bg-green-800/50 rounded-full 
+                                hover:bg-green-700 transition-all
+                                shadow-[inset_0px_2px_1px_rgba(200,255,200,1),inset_0px_-3px_1px_rgba(0,0,0,1),inset_0px_-4px_2px_rgba(111,255,111,0.25),inset_0px_4px_16px_rgba(111,255,111,0.5),inset_0px_-4px_16px_rgba(0,0,0,1),0_2px_4px_rgba(0,0,0,0.75)]">
                     Spotify
                 </div>
             </button>

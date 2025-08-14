@@ -3,7 +3,6 @@
 import React, { useMemo } from 'react'
 
 export default function SineWavesBackground() {
-  // fixed viewbox keeps math simple; it stretches to fit via preserveAspectRatio="none"
   const W = 1440
   const H = 900
 
@@ -12,9 +11,9 @@ export default function SineWavesBackground() {
     wavelength: number,
     phase: number,
     yCenter: number,
-    step = 12
+    step = 4 // change back to 12 if this causes issues
   ) => {
-    const extra = wavelength // extend so drift loops seamlessly
+    const extra = wavelength
     let d = `M ${-extra},${yCenter + amp * Math.sin(((-extra + phase) * 2 * Math.PI) / wavelength)}`
     for (let x = -extra + step; x <= W + extra; x += step) {
       const y = yCenter + amp * Math.sin(((x + phase) * 2 * Math.PI) / wavelength)
@@ -67,6 +66,7 @@ export default function SineWavesBackground() {
             style={{ transform: `translateZ(0)` }}
           >
             <path
+              suppressHydrationWarning // TODO: bad practice technically but just to avoid hydration warninng
               d={p.d}
               stroke="currentColor"
               className={p.className}
@@ -78,7 +78,6 @@ export default function SineWavesBackground() {
         ))}
       </svg>
 
-      {/* local styles for drifting motion */}
       <style jsx>{`
         @keyframes driftX {
           from { transform: translateX(0); }

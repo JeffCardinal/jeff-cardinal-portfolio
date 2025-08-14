@@ -170,9 +170,9 @@ export default function Three() {
             {!isMobile && (
               <group>
                 <Blob scale={1} position={[-5, 5, -3]} />
-                <Blob scale={1.25} position={[-5, 1.5, 5]} />
-                <Blob scale={1.5} position={[5, 3, 1]} />
-                <Blob scale={2.5} position={[-5, -1.5, 4]} />
+                <Blob scale={1} position={[-4, 1.5, 6]} />
+                <Blob scale={1} position={[4, 2, 4]} />
+                <Blob scale={1} position={[-2, -0.6, 7.5]} />
                 <Blob scale={1} position={[8, 1, 2]} />
               </group>
             )}
