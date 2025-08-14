@@ -240,12 +240,12 @@ export default function Page() {
         >
           <FeatureUIUX
             title="CD Jacket"
-            description="Motion Graphics UI animating a holographic CD jacket. Idea for a rare music drop or pre-save."
+            description="3D motion graphics UI animating a holographic CD jacket. Idea for a rare music drop or pre-save."
             year="2025"
             tools="React, Tailwind, Framer Motion"
             imageName="ui-projects/windows-angel-ui.jpg"
             imageHoverName="ui-projects/windows-angel-ui.jpg"
-            bgColor="bg-slate-800"
+            bgColor="bg-slate-900"
             borderColor="border-indigo-300"
             textColor="text-indigo-300"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
