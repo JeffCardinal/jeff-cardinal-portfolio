@@ -183,13 +183,13 @@ export default function CDSlideOutDemo() {
               }}
               transition={{ type: 'spring', stiffness: 100, damping: 12 }}
             >
-                <motion.div animate={infoCtrl} className="opacity-0 absolute -top-3 -left-3 md:-top-4 md:-left-4 md:z-50" style={{ transform: 'translateZ(24px)' }}>
+                <motion.div animate={infoCtrl} className="opacity-0 absolute -top-3 -left-3 md:-top-4 md:-left-4 z-50" style={{ transform: 'translateZ(24px)' }}>
                     <div className="bg-white/50 border border-white/80 rounded-xl px-2 pt-1 shadow-lg relative">
                     <div className="text-xs text-white tracking-widest uppercase" style={{ textShadow: sharpShadow(1, 0.5) }}>{artist}</div>
                     <div className="text-lg text-white sm:text-xl font-semibold tracking-wide" style={{ textShadow: sharpShadow(1, 0.5) }}>{title}</div>
                     </div>
                 </motion.div>
-                <motion.div animate={infoCtrl} className="opacity-0 absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 md:z-50" style={{ transform: 'translateZ(24px)' }}>
+                <motion.div animate={infoCtrl} className="opacity-0 absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 z-50" style={{ transform: 'translateZ(24px)' }}>
                     <div className="bg-purple-800/50 border border-purple-200/80 rounded-xl p-1 px-2 shadow-lg">
                         <span className="text-lg text-purple-200 tracking-widest font-bold uppercase inline-flex items-center gap-1" style={{ textShadow: sharpShadow(1, 0.5) }}>
                             <SparkleSvg color="white" dim="12px" />
