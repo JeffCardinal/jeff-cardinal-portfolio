@@ -63,6 +63,20 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
+          <Feature
+            title="Mesh"
+            description="Abstract 3D mesh. This started as a model of a price tag, then was morphed via subdivision modifier, meshing, and simple deform. The final render was composited in Photoshop with field blur and camera raw filter."
+            inspiration="Early abstract 3D graphics."
+            tools="Blender, Photoshop"
+            year="2025"
+            imageName="abstract-holes.jpg"
+            imageHoverName="abstract-holes.jpg"
+            bgColor="bg-black"
+            textColor="text-[#5b68d3]"
+            borderColor="border-[#5b68d3]"
+          >
+            {undefined}
+          </Feature>
             <FeatureGlass
               title="Bliss"
               description="Single cover for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrushing, post-processing and smiley 3D model by Jeff Cardinal."
@@ -90,7 +104,7 @@ export default function Page() {
                   hoverGlyph={<ArrowNav color={'white'}/>}
                   hoverable={true}
                   styling='backdrop-blur-xl ${bgColor} bg-opacity-100'
-                  shadow='shadow-md rounded-full'
+                  shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
                 />
                 <Button 
                   text={'Stream'}
@@ -105,7 +119,7 @@ export default function Page() {
                   hoverGlyph={<ArrowNav color={'white'}/>}
                   hoverable={true}
                   styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
-                  shadow='shadow-md rounded-full'
+                  shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
                 />
               </div>
             </FeatureGlass>
@@ -190,7 +204,19 @@ export default function Page() {
             textColor="text-white"
             borderColor="white"
           >
-            {undefined}
+            <Button 
+              text={'Stream'}
+              link={'https://open.spotify.com/album/3bldb8xoLHFaGtN9oyMcz2?si=AoA1b2_mSiSHUidcMWsC_Q, _blank'}
+              textColor={'text-white'} 
+              hoverTextColor={'hover:text-black'} 
+              bgColor={''} 
+              hoverBgColor={'hover:bg-white'} 
+              borderColor={'border-white'} 
+              hoverBorderColor={'hover:border-black'} 
+              optional={'ml-0 mt-2'} 
+              hoverGlyph={<ArrowNav color={'#000000'}/>}
+              hoverable={true}
+            />
           </Feature>
 
           <Feature
