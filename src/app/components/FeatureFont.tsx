@@ -47,11 +47,11 @@ export default function Feature(
         />
       </div>
 
-      <div className="flex-1 lg:pl-8 observableRight opacity-0">
+      <div className="flex-1 lg:pl-8">
         <div className="max-w-[1000px]">
           <span className={`w-full block ${font}`}>
             <Image
-              className=""
+              className="observableRight opacity-0"
               src={`/images/fonts/GoupeTitle.png`}
               alt=""
               width={600}
@@ -60,7 +60,7 @@ export default function Feature(
               objectFit='contain'
             />
           </span>
-          <div className="relative my-8">
+          <div className="observableRight opacity-0 relative my-8">
             <div className={`absolute -top-6 left-4 ${bgColor} text-lime-400 rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
               Overview
             </div>
@@ -70,7 +70,7 @@ export default function Feature(
           </div>
           
           {/* Information */}
-          <div className="relative my-8">
+          <div className="observableRight opacity-0 relative my-8">
             <div className={`absolute -top-6 left-4 ${bgColor} text-lime-400 rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
               Information
             </div>
@@ -80,7 +80,7 @@ export default function Feature(
           </div>
           
           {/* Tools */}
-          <div className={`relative my-6`}>
+          <div className={`observableRight opacity-0 relative my-6`}>
             <div className={`absolute -top-6 left-4 ${bgColor} text-${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
               Tools
             </div>
@@ -89,7 +89,7 @@ export default function Feature(
             </div>
           </div>
           
-          <div>{ children }</div>
+          <div className="observableRight opacity-0">{ children }</div>
         </div>
       </div>
     </div>
