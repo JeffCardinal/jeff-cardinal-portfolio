@@ -46,9 +46,9 @@ export default function Feature(
           </div>
         </div>
 
-        <div className="flex-1 lg:pl-8 observableRight opacity-0">
+        <div className="flex-1 lg:pl-8">
           <span 
-            className="w-full block text-3xl lg:text-4xl font-distancia"
+            className="observableRight opacity-0 w-full block text-3xl lg:text-4xl font-distancia"
             style={{ lineHeight: 1 }}
           >
             {title}
@@ -58,7 +58,7 @@ export default function Feature(
           <div className={`flex-col max-w-[1000px]`}>
 
             {/* Year */}
-            <div className={`relative my-8`}>
+            <div className={`observableRight opacity-0 relative my-8`}>
               <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Year
               </div>
@@ -68,7 +68,7 @@ export default function Feature(
             </div>
 
             {/* Overview */}
-            <div className="relative my-8">
+            <div className="observableRight opacity-0 relative my-8">
               <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl  font-semibold`}>
                 Overview
               </div>
@@ -78,7 +78,7 @@ export default function Feature(
             </div>
 
             {/* Inspiration */}
-            <div className="relative my-8">
+            <div className="observableRight opacity-0 relative my-8">
               <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Inspiration
               </div>
@@ -88,7 +88,7 @@ export default function Feature(
             </div>
 
             {/* Tools */}
-            <div className={`relative ${bottomPadding}`}>
+            <div className={`observableRight opacity-0 relative ${bottomPadding}`}>
               <div className={`absolute -top-6 left-4 ${bgColor} ${textColor} rounded-full px-2 py-2 text-2xl ${borderColor} font-semibold`} >
                 Tools
               </div>
@@ -99,7 +99,7 @@ export default function Feature(
 
           </div>
 
-          <div>{children}</div>
+          <div className="observableRight opacity-0">{children}</div>
         </div>
       </div>
     </>

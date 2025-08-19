@@ -46,10 +46,10 @@ export default function Feature(
           height="0"
         />
       </div>
-      <div className={`flex-1 lg:pl-8 observableRight opacity-0 ${textColor}`}>
+      <div className={`flex-1 lg:pl-8 ${textColor}`}>
         <span className={`w-full block ${font}`}>{title}</span>
         <div className="max-w-[1000px]">
-          <div className={`relative my-8`}>
+          <div className={`observableRight opacity-0 relative my-8`}>
             <div className={`absolute -top-6 left-4 ${bgColor} rounded-full px-2 py-2 text-2xl font-semibold`} >
               Year
             </div>
@@ -57,7 +57,7 @@ export default function Feature(
               <p className="">{year}</p>
             </div>
           </div>
-          <div className={`relative my-8`}>
+          <div className={`observableRight opacity-0 relative my-8`}>
             <div className={`absolute -top-6 left-4 ${bgColor} rounded-full px-2 py-2 text-2xl font-semibold`} >
               Overview
             </div>
@@ -66,7 +66,7 @@ export default function Feature(
             </div>
           </div>
           
-          <div className={`relative my-6`}>
+          <div className={`observableRight opacity-0 relative my-6`}>
             <div className={`absolute -top-6 left-4 ${bgColor} rounded-full px-2 py-2 text-2xl font-semibold`} >
               Tools
             </div>
@@ -74,7 +74,7 @@ export default function Feature(
               <p className="">{tools}</p>
             </div>
           </div>
-          <div>{ children }</div>
+          <div className="observableRight opacity-0">{ children }</div>
         </div>
       </div>
     </div>
