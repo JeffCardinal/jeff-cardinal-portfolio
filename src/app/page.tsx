@@ -63,6 +63,53 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
+          <FeatureGlass
+            title="Windows Angel"
+            description="Single cover for Dreaming Diary - Windows Angel. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Concept, cat eye, and sunset background by Sebastian Haid. 3D models, UI components, and final render by Jeff Cardinal."
+            inspiration={`Modern meets retro - Windows Vista and Apple Glass UI. Hyperreality of digital angels trapped in an outdated computer OS. There is reference to our "Bliss" by repurposing the background from that single cover.`}
+            tools="Blender, Bryce, Photoshop"
+            year="2025"
+            imageName="WindowsAngel-2k.jpg"
+            imageHoverName="WindowsAngel-2k.jpg"
+            bgColor="bg-white"
+            textColor="text-white"
+            headerTextColor="text-[#ea43a3]"
+            borderColor="border-[#ea43a3]"
+          >
+            <div className="flex flex-col w-max">
+              <Button 
+                text={'Demo'}
+                link={'/windows-angel'}
+                textColor={'text-[#ea43a3]'}
+                hoverTextColor={'hover:text-white'}
+                bgColor={'bg-white'}
+                hoverBgColor={'hover:bg-[#ea43a3]'} 
+                borderColor={'border-[#ea43a3]'} 
+                hoverBorderColor={'hover:border-white'} 
+                optional={'ml-0 mt-2'} 
+                hoverGlyph={<ArrowNav color={'white'}/>}
+                hoverable={true}
+                styling='backdrop-blur-xl ${bgColor} bg-opacity-100'
+                shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
+              />
+              <Button
+                text={'Stream'}
+                link={'https://open.spotify.com/album/3DkLvKm9g4q7ABoGbbbKWy?si=xh6_LkneRPOElrs1LSEP3w, _blank'}
+                textColor={'text-[#ea43a3]'}
+                hoverTextColor={'hover:text-white'}
+                bgColor={'bg-white'}
+                hoverBgColor={'hover:bg-[#ea43a3]'} 
+                borderColor={'border-[#ea43a3]'} 
+                hoverBorderColor={'hover:border-white'} 
+                optional={'ml-0 mt-6'} 
+                hoverGlyph={<ArrowNav color={'white'}/>}
+                hoverable={true}
+                styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
+                shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
+              />
+            </div>
+          </FeatureGlass>
+
           <Feature
             title="Mesh"
             description="Abstract 3D mesh. This started as a model of a price tag, then was morphed via subdivision modifier, meshing, and simple deform. The final render was composited in Photoshop with field blur and camera raw filter."
@@ -77,52 +124,52 @@ export default function Page() {
           >
             {undefined}
           </Feature>
-            <FeatureGlass
-              title="Bliss"
-              description="Single cover for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrushing, post-processing and smiley 3D model by Jeff Cardinal."
-              inspiration="Y2K airbrushed hyperreality, icons evoke early cellphone OS feeling."
-              tools="Blender, Illustrator, Photoshop"
-              year="2025"
-              imageName="Bliss-JPG-2k.jpg"
-              imageHoverName="Bliss-JPG-2k.jpg"
-              bgColor="bg-white"
-              textColor="text-white"
-              headerTextColor="text-[#ea43a3]"
-              borderColor="border-[#ea43a3]"
-            >
-              <div className="flex flex-col w-max">
-                <Button 
-                  text={'Webtoy'}
-                  link={'/bliss'}
-                  textColor={'text-[#ea43a3]'}
-                  hoverTextColor={'hover:text-white'}
-                  bgColor={'bg-white'}
-                  hoverBgColor={'hover:bg-[#ea43a3]'} 
-                  borderColor={'border-[#ea43a3]'} 
-                  hoverBorderColor={'hover:border-white'} 
-                  optional={'ml-0 mt-2'} 
-                  hoverGlyph={<ArrowNav color={'white'}/>}
-                  hoverable={true}
-                  styling='backdrop-blur-xl ${bgColor} bg-opacity-100'
-                  shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
-                />
-                <Button 
-                  text={'Stream'}
-                  link={'https://open.spotify.com/track/60LsGDYCP5q5fpKCLHeQSz?si=1dfbbb4ff9e849fe, _blank'}
-                  textColor={'text-[#ea43a3]'}
-                  hoverTextColor={'hover:text-white'}
-                  bgColor={'bg-white'}
-                  hoverBgColor={'hover:bg-[#ea43a3]'} 
-                  borderColor={'border-[#ea43a3]'} 
-                  hoverBorderColor={'hover:border-white'} 
-                  optional={'ml-0 mt-6'} 
-                  hoverGlyph={<ArrowNav color={'white'}/>}
-                  hoverable={true}
-                  styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
-                  shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
-                />
-              </div>
-            </FeatureGlass>
+          <FeatureGlass
+            title="Bliss"
+            description="Single cover for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrushing, post-processing and smiley 3D model by Jeff Cardinal."
+            inspiration="Y2K airbrushed hyperreality, icons evoke early cellphone OS feeling."
+            tools="Blender, Illustrator, Photoshop"
+            year="2025"
+            imageName="Bliss-JPG-2k.jpg"
+            imageHoverName="Bliss-JPG-2k.jpg"
+            bgColor="bg-white"
+            textColor="text-white"
+            headerTextColor="text-[#ea43a3]"
+            borderColor="border-[#ea43a3]"
+          >
+            <div className="flex flex-col w-max">
+              <Button 
+                text={'Webtoy'}
+                link={'/bliss'}
+                textColor={'text-[#ea43a3]'}
+                hoverTextColor={'hover:text-white'}
+                bgColor={'bg-white'}
+                hoverBgColor={'hover:bg-[#ea43a3]'} 
+                borderColor={'border-[#ea43a3]'} 
+                hoverBorderColor={'hover:border-white'} 
+                optional={'ml-0 mt-2'} 
+                hoverGlyph={<ArrowNav color={'white'}/>}
+                hoverable={true}
+                styling='backdrop-blur-xl ${bgColor} bg-opacity-100'
+                shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
+              />
+              <Button 
+                text={'Stream'}
+                link={'https://open.spotify.com/track/60LsGDYCP5q5fpKCLHeQSz?si=1dfbbb4ff9e849fe, _blank'}
+                textColor={'text-[#ea43a3]'}
+                hoverTextColor={'hover:text-white'}
+                bgColor={'bg-white'}
+                hoverBgColor={'hover:bg-[#ea43a3]'} 
+                borderColor={'border-[#ea43a3]'} 
+                hoverBorderColor={'hover:border-white'} 
+                optional={'ml-0 mt-6'} 
+                hoverGlyph={<ArrowNav color={'white'}/>}
+                hoverable={true}
+                styling='backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100'
+                shadow='shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full'
+              />
+            </div>
+          </FeatureGlass>
             <Feature
               title="Floating in the Breeze"
               description="Single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover. Part of a larger campaign for the release of Heaven Sample's debut record, Distorted Reality."
@@ -276,7 +323,7 @@ export default function Page() {
             textColor="text-indigo-300"
             font={'w-full block text-3xl lg:text-4xl font-distancia'}
             isTitleVerticallyCentered={false}>
-            <div className="pt-2 invisible lg:visible">
+            <div className="pt-2">
               <Link href="https://jeffcardinal.com/windows-angel" target="_blank">
                 <button className="pt-[2px] px-4 mr-4 border-[6px] border-indigo-300 text-indigo-300 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
                   Demo
@@ -286,7 +333,7 @@ export default function Page() {
           </FeatureUIUX>
           <FeatureUIUX
             title="GPU Booking"
-            description="Lightweight UI component for booking GPUs. Hover to open."
+            description="Lightweight UI component for booking GPUs. Hover to open. Desktop only."
             year="2024"
             tools="React, Tailwind"
             imageName="ui-projects/gpu.jpg"
@@ -306,7 +353,7 @@ export default function Page() {
           </FeatureUIUX>
           <FeatureUIUX
             title="Social Portal"
-            description={`Here's a "hero" screen for a social portal I designed in 2019. In 2025, I ported the site to use Vite. It animates, so be sure to check the demo.`}
+            description={`Here's a "hero" screen for a social portal I designed in 2019. In 2025, I ported the site to use Vite. It animates, so be sure to check the demo (desktop only).`}
             year="2019"
             tools="React, Vite, CSS3 Animations"
             imageName="ui-projects/jeffcardinal-2019.jpg"
