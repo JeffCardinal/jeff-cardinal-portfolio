@@ -1,4 +1,3 @@
-'use client'
 import React, { lazy, Suspense } from 'react';
 import VideoFallback from './VideoFallback';
 const Video = lazy(() => import('./Video'));
