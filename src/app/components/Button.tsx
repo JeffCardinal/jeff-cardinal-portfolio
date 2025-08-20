@@ -48,7 +48,7 @@ export default function Button ({
                 onMouseEnter={() => setHovering(false)}
                 onMouseLeave={() => setHovering(true)}
                 className={`
-                    pt-[2px] px-4 border border-[6px] rounded-full text-2xl
+                    pt-1 px-4 border-[6px] rounded-full text-2xl
                     transition-all duration-300 ease-in-out font-distancia text-md
                     ${shadow}
                     ${styling}
