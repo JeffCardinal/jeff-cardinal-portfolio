@@ -16,7 +16,7 @@ import {
   useProgress,
   Preload,
 } from "@react-three/drei";
-import Blob from "./Blob";
+import Blob from "./3d/Blob";
 import * as THREE from "three";
 import NoiseGradientShaderMaterial from "./shaders/NoiseGradientShaderMaterial";
 
@@ -25,6 +25,7 @@ import HelloText from "./HelloText";
 import Loader from "./Loader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Displace } from "lamina";
+import Striplight from "./3d/Striplight";
 
 function ThreeDText({
   font = "/fonts/Distancia-800-ExtraBold.json",
@@ -77,15 +78,6 @@ function JeffCardinalText() {
         <ThreeDText position={[0.75, -0.8, 0]} size={0.45} text="Cardinal" />
       </Float>
     </group>
-  );
-}
-
-function Striplight(props: any) {
-  return (
-    <mesh {...props}>
-      <boxGeometry />
-      <meshBasicMaterial color="white" />
-    </mesh>
   );
 }
 
