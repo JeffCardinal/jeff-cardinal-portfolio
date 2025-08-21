@@ -108,7 +108,7 @@ export default function Three() {
                     Process:
                 </div>
                 <div className="text-white w-full text-left justify-center items-center align-middle p-8">
-                    Sketch in Adobe Illustrator. Rendered in Blender using Cycles. Custom material set to mimic real diamond refractive index. Graffiti background from construction zone in Montreal, shot on iPhone 13.
+                    Sketch in Adobe Illustrator. Rendered in Blender using Cycles. Custom material set to mimic real diamond refractive index. Graffiti background from construction zone in Montréal, shot on iPhone 13.
                 </div>
             </div>
             <div className="flex flex-wrap lg:flex-row sm:flex-col items-center justify-center">
