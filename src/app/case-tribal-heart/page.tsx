@@ -104,10 +104,10 @@ export default function Three() {
       <div className="h-screen min-h-screen">
         <div className="relative w-full">
           <div className="absolute w-full top-24 items-center text-center px-8 z-10 select-none">
-            <div className="font-distancia text-2xl text-rose-500">
+            <div className="font-distancia text-2xl lg:text-4xl text-rose-500">
               Case Study:
             </div>
-            <div className="font-distancia text-white text-4xl">
+            <div className="font-distancia text-white text-2xl lg:text-4xl">
               Tribal Heart
             </div>
           </div>
@@ -129,18 +129,35 @@ export default function Three() {
       </div>
 
       {/* Process */}
-      <div className="">
-        <div className="text-2xl md:text-4xl lg:text-7xl font-distancia pt-8 px-8 text-rose-500">
+      <div className="flex flex-col items-center justify-start">
+        <div className="text-2xl lg:text-4xl font-distancia px-8 pb-2 text-rose-500">
           Process:
         </div>
-        <div className="text-white w-full text-left justify-center items-center align-middle p-8">
-          Sketch in Adobe Illustrator. Rendered in Blender using Cycles. Custom
-          material set to mimic real diamond refractive index. Graffiti
-          background from construction zone in Montréal, shot on iPhone 13.
+        <div
+          className={`shadow-[inset_0px_-8px_8px_rgba(0,0,0,1),inset_0px_-16px_32px_rgba(255,0,0,0.3),inset_0px_-8px_8px_rgba(255,0,0,1),inset_0px_-1px_2px_rgba(0,0,0,1),inset_0px_4px_16px_rgba(255,0,0,0.3),inset_0px_2px_2px_rgba(255,200,200,1)] 
+            mx-8 p-8 border-[1px] border-rose-500 rounded-xl bg-opacity-20 border-opacity-100`}
+        >
+          <span>
+            <b className="text-rose-500">• Sketch</b> in Adobe Illustrator.
+          </span>
+          <br />
+          <span>
+            <b className="text-rose-500">• Shoot</b> graffiti background from
+            construction zone in Montréal via iPhone 13.
+          </span>
+          <br />
+          <span>
+            <b className="text-rose-500">• Create</b> custom material set to
+            mimic real diamond refractive index.
+          </span>
+          <br />
+          <span>
+            <b className="text-rose-500">• Render</b> in Blender using Cycles.
+          </span>
         </div>
       </div>
-      <div className="flex flex-wrap lg:flex-row sm:flex-col items-center justify-center">
-        <div className="lg:w-1/3 sm:w-full px-8 pt-8">
+      <div className="flex flex-col md:flex-row items-center justify-center">
+        <div className="w-full px-8 pt-8">
           <Image
             src={`/images/case-tribal-heart/tribal-heart-wire.png`}
             alt="Wireframe"
@@ -151,7 +168,7 @@ export default function Three() {
             objectFit="contain"
           />
         </div>
-        <div className="lg:w-1/3 sm:w-full px-8 pt-8">
+        <div className="w-full px-8 pt-8">
           <Image
             src={`/images/case-tribal-heart/tribal-heart-render.jpg`}
             alt="Render with graffiti background"
@@ -162,7 +179,7 @@ export default function Three() {
             objectFit="contain"
           />
         </div>
-        <div className="lg:w-1/3 sm:w-full px-8 pt-8">
+        <div className="w-full px-8 pt-8">
           <Image
             src={`/images/case-tribal-heart/tribal-heart-blackbg.jpg`}
             alt="Render with black background"
