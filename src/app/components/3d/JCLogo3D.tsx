@@ -8,28 +8,31 @@ import Striplight from "./Striplight";
 export default function JCLogo3D({
   onReady,
   onIntroComplete,
-}: { onReady?: () => void; onIntroComplete?: () => void }) {
-  const scaleFactor = 10.5;
-  const yPosition = 0;
-
+  playIntro = false,
+}: {
+  onReady?: () => void;
+  onIntroComplete?: () => void;
+  playIntro?: boolean;
+}) {
   const ref = useRef<Group>(null!);
   const gltf = useLoader(GLTFLoader, "/3d-models/jc-logo-v2-bevel.gltf");
 
-  const intro = useRef({ active: false, t: 0, fromY: 0, duration: 1 });
+  useEffect(() => {
+    onReady?.();
+  }, []);
+
+  const intro = useRef({ active: false, t: 0, fromY: 0, duration: 0.9 });
   const startedOnce = useRef(false);
   const completedOnce = useRef(false);
 
   useEffect(() => {
-    if (startedOnce.current) return;
-    startedOnce.current = true;
-
-    if (ref.current) {
+    if (playIntro && !startedOnce.current && ref.current) {
+      startedOnce.current = true;
       intro.current.active = true;
       intro.current.t = 0;
       intro.current.fromY = ref.current.rotation.y;
     }
-    onReady?.();
-  }, []);
+  }, [playIntro]);
 
   const easeInOutCubic = (t: number) =>
     t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -54,8 +57,10 @@ export default function JCLogo3D({
       return;
     }
 
-    ref.current.rotation.x += 0.01;
-    ref.current.rotation.y += 0.01;
+    if (completedOnce.current) {
+      ref.current.rotation.x += 0.01;
+      ref.current.rotation.y += 0.01;
+}
   });
 
   useLayoutEffect(() => {
@@ -85,9 +90,14 @@ export default function JCLogo3D({
     });
   }, [gltf.scene]);
 
+
   return (
     <group ref={ref}>
-      <Environment files="/3d-models/hdri/club2.jpg" backgroundIntensity={2} background={false}>
+      <Environment
+        files="/3d-models/hdri/club2.jpg"
+        backgroundIntensity={2}
+        background={false}
+      >
         <Striplight position={[10, 2, 0]} scale={[1, 3, 10]} />
         <Striplight position={[-10, 2, 0]} scale={[1, 3, 10]} />
         <directionalLight intensity={10} position={[2, 2, 5]} />
@@ -97,9 +107,8 @@ export default function JCLogo3D({
       </Environment>
       <primitive
         object={gltf.scene}
-        scale={[scaleFactor, scaleFactor, scaleFactor]}
+        scale={[10.5, 10.5, 10.5]}
         rotation={[0, 0, Math.PI / 4]}
-        position={[0, yPosition, 0]}
       />
     </group>
   );
