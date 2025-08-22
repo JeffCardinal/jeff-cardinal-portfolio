@@ -16,6 +16,8 @@ export default function Feature({
   textColor,
   headerTextColor,
   borderColor,
+  dontRenderVideo,
+  bigBgColor,
 }: {
   children: ReactNode;
   id?: string;
@@ -30,6 +32,8 @@ export default function Feature({
   textColor: string;
   headerTextColor?: string;
   borderColor: string;
+  dontRenderVideo?: boolean; // TODO: Refactor this to renderVideo lol
+  bigBgColor?: string; // TODO: Refactor this. We should not have two bgColor props
 }) {
   const [hovering, setHovering] = useState(true);
   const bottomPadding = children ? "my-6" : "";
@@ -39,10 +43,9 @@ export default function Feature({
     <>
       <div
       id={id}
-        className={`relative box-border p-8 flex flex-col lg:flex-row overflow-hidden bg-sky-400 ${textColor}`}
+        className={`relative box-border p-8 flex flex-col lg:flex-row overflow-hidden ${bigBgColor} ${textColor}`}
       >
-        {/* Background Video */}
-        <video
+        { dontRenderVideo ? <></> : <video
           className="absolute inset-0 w-full h-full object-cover z-[0]"
           autoPlay
           muted
@@ -51,7 +54,7 @@ export default function Feature({
         >
           <source src="images/bliss-bg-video-6.mp4" />
           Your browser does not support the video tag.
-        </video>
+        </video>}
 
         <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0 z-10">
           <div className="text-black flex justify-center items-center">

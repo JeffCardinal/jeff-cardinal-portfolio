@@ -97,6 +97,23 @@ export default function Page() {
 
         <Drawer title="[GFX]" bgColor="bg-orange-400">
           <FeatureGlass
+            title="Folder Icon"
+            description="2.5D folder icon. Hover for the original. Original was purposed for the single Open Me Up off of VAPERROR - System Delight (2015). This is a refresh of that icon in a more modern, high resolution style."
+            inspiration="Windows 95."
+            tools="Photoshop"
+            year="2025"
+            imageName="folder.jpg"
+            imageHoverName="folder-og-upscaled.jpg"
+            bgColor="bg-white"
+            textColor="text-white"
+            headerTextColor="text-[#005dfb]"
+            borderColor="border-[#ea43a3]"
+            dontRenderVideo={true}
+            bigBgColor="bg-gradient-to-b from-[#005dfb] to-[#00fef2]"
+          >
+            {undefined}
+          </FeatureGlass>
+          <FeatureGlass
             title="Windows Angel"
             description="Single cover for Dreaming Diary - Windows Angel. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Concept, cat eye, and sunset background by Sebastian Haid. 3D models, UI components, and final render by Jeff Cardinal. Check out the 3D demo."
             inspiration={<>
