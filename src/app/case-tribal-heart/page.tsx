@@ -191,7 +191,6 @@ export default function Three() {
           />
         </div>
       </div>
-
       <Footer textColor={"text-white"} bgColor={"bg-black"} />
     </div>
   );

@@ -27,6 +27,7 @@ import FeatureUIUX from "./components/FeatureUIUX";
 import SparkleSvg from "./svg/SparkleSvg";
 import FeatureGlass from "./components/FeatureGlass";
 import { OpenDrawerLink } from "./components/OpenDrawerLink";
+import SplashSVG from "./components/svg/SplashSVG";
 
 export default function Page() {
 
@@ -328,7 +329,7 @@ export default function Page() {
               borderColor={"border-white"}
               hoverBorderColor={"hover:border-[#424ffb]"}
               optional={"ml-0 mt-2"}
-              hoverGlyph={<ArrowNav color={"#424ffb"} />}
+              hoverGlyph={<SplashSVG color={"#424ffb"} />}
               hoverable={true}
             />
           </Feature>

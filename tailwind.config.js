@@ -73,6 +73,20 @@ module.exports = {
           transform: "translateX(-40%)",
          }
       },
+      buttonGlyphSplash: {
+        "0%":   {
+          opacity: 0,
+          transform: "translateX(0%) rotate(-10deg)",
+         },
+        "50%": {
+          opacity: 1,
+          transform: "translateX(15%) rotate(10deg)",
+         },
+         "100%": {
+          opacity: 0,
+          transform: "translateX(30%) rotate(30deg)",
+         }
+      },
       radarPulse: {
         '0%': { transform: 'scale(1)', opacity: '0.75' },
         '70%': { transform: 'scale(1.5)', opacity: '0' },
@@ -101,6 +115,7 @@ module.exports = {
       loadInFromRight:   'loadInFromRight 0.5s ease-in-out',
       loadIn:            'loadIn 0.5s ease-in-out',
       buttonGlyphEaseIn: 'buttonGlyphEaseIn 1s linear infinite',
+      buttonGlyphSplash: 'buttonGlyphSplash 1s linear infinite',
       radarPulse:        'radarPulse 1.5s ease-out infinite',
       radarPulse_2:      'radarPulse 1.5s ease-out infinite',
       bounceHand:        'bounceHand 1.2s infinite ease-in-out',
