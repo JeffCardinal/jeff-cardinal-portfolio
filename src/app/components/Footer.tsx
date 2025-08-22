@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useLayoutEffect, useState, Suspense } from "react";
+import React, { useRef, useLayoutEffect, useState, Suspense, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Canvas } from "@react-three/fiber";
@@ -21,12 +21,17 @@ export default function Footer({
 
   const inView = useInView(rootRef, { once: true, amount: 0.8 });
   const [logoReady, setLogoReady] = useState(false);
-  const [introDone, setIntroDone] = useState(false);
   const [setupDone, setSetupDone] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
+  const [playIntro, setPlayIntro] = useState(false);
 
   const canvasCtrl = useAnimationControls();
   const navCtrl = useAnimationControls();
   const socialCtrl = useAnimationControls();
+
+  useEffect(() => {
+    if (inView && logoReady && setupDone && !playIntro) setPlayIntro(true)
+  }, [inView, logoReady, setupDone, playIntro])
 
   useLayoutEffect(() => {
     if (!inView || !logoReady || setupDone) return;
@@ -100,6 +105,7 @@ export default function Footer({
           <Canvas>
             <Suspense fallback={null}>
               <JCLogo3D
+                playIntro={playIntro}
                 onReady={() => setLogoReady(true)}
                 onIntroComplete={() => setIntroDone(true)}
               />
