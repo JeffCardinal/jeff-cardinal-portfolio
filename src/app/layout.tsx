@@ -4,9 +4,9 @@ import "./globals.css";
 import MobileNav from "./components/MobileNav";
 import Head from "next/head";
 import { Analytics } from '@vercel/analytics/next';
-import { VercelSpeedInsights } from "./lib/speed-insights";
 import Image from 'next/image'
 import SparkleSvg from "./svg/SparkleSvg";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,7 +41,7 @@ export default function RootLayout({
           />
         </div>
         <Analytics/>
-        <VercelSpeedInsights/>
+        <SpeedInsights />
         {children}
       </body>
     </html>
