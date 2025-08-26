@@ -72,7 +72,7 @@ export default function Feature({
               Overview
             </div>
             <div
-              className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}
+              className={`p-8 border-[3px] rounded-xl ${borderColor} border-opacity-50`}
             >
               <p>{description}</p>
             </div>
@@ -86,7 +86,7 @@ export default function Feature({
               Information
             </div>
             <div
-              className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}
+              className={`p-8 border-[3px] rounded-xl ${borderColor} border-opacity-50`}
             >
               <p>{inspiration}</p>
             </div>
@@ -100,7 +100,7 @@ export default function Feature({
               Tools
             </div>
             <div
-              className={`p-8 border-[1px] rounded-xl ${borderColor} border-opacity-50`}
+              className={`p-8 border-[3px] rounded-xl ${borderColor} border-opacity-50`}
             >
               <p className="">{tools}</p>
             </div>

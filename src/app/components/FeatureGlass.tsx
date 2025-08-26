@@ -85,14 +85,14 @@ export default function Feature({
             <div className={`observableRight opacity-0 relative my-8`}>
               <div
                 className={`
-                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[1px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
+                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[3px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
                 shadow-[inset_0px_10px_12px_rgba(255,255,255,1),inset_0px_-3px_4px_rgba(200,255,255,0.1),inset_0px_-2px_1px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(222,222,222,1),0_2px_4px_rgba(200,255,255,0.15)]
               `}
               >
                 Year
               </div>
               <div
-                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[1px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
+                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[3px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
               >
                 <p className={`${textColor}`}>{year}</p>
               </div>
@@ -102,14 +102,14 @@ export default function Feature({
             <div className="observableRight opacity-0 relative my-8">
               <div
                 className={`
-                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[1px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
+                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[3px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
                 shadow-[inset_0px_10px_12px_rgba(255,255,255,1),inset_0px_-3px_4px_rgba(200,255,255,0.1),inset_0px_-2px_1px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(222,222,222,1),0_2px_4px_rgba(200,255,255,0.15)]
               `}
               >
                 Overview
               </div>
               <div
-                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[1px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
+                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[3px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
               >
                 <p className={`${textColor}`}>{description}</p>
               </div>
@@ -119,14 +119,14 @@ export default function Feature({
             <div className="observableRight opacity-0 relative my-8">
               <div
                 className={`
-                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[1px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
+                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[3px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
                 shadow-[inset_0px_10px_12px_rgba(255,255,255,1),inset_0px_-3px_4px_rgba(200,255,255,0.1),inset_0px_-2px_1px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(222,222,222,1),0_2px_4px_rgba(200,255,255,0.15)]
               `}
               >
                 Inspiration
               </div>
               <div
-                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[1px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
+                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[3px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
               >
                 <p className={`${textColor}`}>{inspiration}</p>
               </div>
@@ -138,14 +138,14 @@ export default function Feature({
             >
               <div
                 className={`
-                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[1px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
+                absolute -top-6 left-4 ${bgColor} ${headerTextColor} border-[3px] rounded-full px-4 py-2 text-2xl font-semibold z-10 backdrop-filter border-white bg-opacity-100 text-[#ea43a3] border-opacity-100
                 shadow-[inset_0px_10px_12px_rgba(255,255,255,1),inset_0px_-3px_4px_rgba(200,255,255,0.1),inset_0px_-2px_1px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(222,222,222,1),0_2px_4px_rgba(200,255,255,0.15)]
               `}
               >
                 Tools
               </div>
               <div
-                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[1px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
+                className={`shadow-[0px_4px_8px_rgba(0,0,0,0.1),inset_0px_-2px_4px_rgba(75,200,255,1),inset_0px_-8px_8px_rgba(255,255,255,0.5),inset_0px_2px_2px_rgba(255,255,255,1),inset_0px_-2px_8px_rgba(0,75,111,0.2),inset_0px_-4px_16px_rgba(200,255,255,1)] p-8 border-[3px] border-white rounded-xl backdrop-filter backdrop-blur-md ${bgColor}  bg-opacity-20 border-opacity-100`}
               >
                 <p className={`${textColor}`}>{tools}</p>
               </div>

@@ -106,7 +106,7 @@ export default function Page() {
             imageHoverName="folder-og-upscaled.jpg"
             bgColor="bg-white"
             textColor="text-white"
-            headerTextColor="text-[#005dfb]"
+            headerTextColor="text-[#005DFB]"
             borderColor="border-[#ea43a3]"
             dontRenderVideo={true}
             bigBgColor="bg-gradient-to-b from-[#005dfb] to-[#00fef2]"
@@ -460,7 +460,7 @@ export default function Page() {
                 target="_blank"
               >
                 <button className="border-[6px] border-white mr-4 hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
-                  <div className="h-6 w-6 ml-2 mt-[5px]">
+                  <div className="h-6 w-6 ml-2 mt-1">
                     <FontAwesomeIcon icon={faGithub} />
                   </div>
                   <div className="pt-[2px] pl-2 pr-4">Github</div>
@@ -476,8 +476,8 @@ export default function Page() {
             imageName="ui-projects/retroh-board.jpg"
             imageHoverName="ui-projects/retroh-login.jpg"
             bgColor="bg-white"
-            borderColor="border-black"
-            textColor="text-black"
+            borderColor="border-[#00bfff]"
+            textColor="text-[#00bfff]"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
             isTitleVerticallyCentered={false}
           >
@@ -513,7 +513,7 @@ export default function Page() {
             <Link href="https://github.com/JeffCardinal/Goupe" target="_blank">
               <button className="border-[6px] border-lime-400 mr-4 hover:bg-lime-700 hover:text-lime-200 hover:border-lime-200 rounded-full transition duration-300 font-distancia text-2xl flex flex-row relative overflow-hidden group">
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-lime-300/60 to-lime-500/40 blur-lg group-hover:blur-md rounded-full pointer-events-none transform -translate-y-1/2" />
-                <div className="h-6 w-6 ml-2 mt-[5px] z-10">
+                <div className="h-6 w-6 ml-2 mt-1 z-10">
                   <FontAwesomeIcon icon={faGithub} />
                 </div>
                 <div className="pt-[2px] pl-2 pr-4 z-10">Download</div>
