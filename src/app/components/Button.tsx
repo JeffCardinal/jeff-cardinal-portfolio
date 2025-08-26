@@ -66,7 +66,7 @@ export default function Button ({
                         <span className="flex items-center">
                             <span>{text}</span> 
                             <span 
-                                className={`inline-block transition-all duration-300 ease-in-out text-center
+                                className={`mt-[1px] inline-block transition-all duration-300 ease-in-out text-center
                                     ${!hovering ? 'opacity-100 -translate-x-0 ml-0' : 'opacity-0 -ml-6'}
                                 `}
                             >
