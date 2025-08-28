@@ -26,7 +26,7 @@ export default function Page() {
             <div className="p-6">
               I spent my time in college studying Computer Science at the
               University of Georgia and running my record label,{" "}
-              <a className="underline hover:text-[#]" href="https://plus100.bandcamp.com/">PLUS100 Records.</a>
+              <a className="text-[#aaeeff] hover:text-white underline transition duration-300" href="https://plus100.bandcamp.com/">PLUS100 Records.</a>
               <div className="pt-4">
                 As a musician, I've played shows and festivals in destinations
                 all over the world, like Japan and Australia.
@@ -40,8 +40,9 @@ export default function Page() {
                 bettering myself and those around me as best as I can.
               </div>
               <div className="pt-4">
-                Wanna work together? Contact me. Check out my{" "}
-                <a className="underline" href="/resume">resume.</a>
+                Wanna work together?<br/> Check out my{" "}
+                <a className="text-[#aaeeff] hover:text-white underline transition duration-300" href="/resume">resume</a>
+                {" "}and contact me.
               </div>
             </div>
           </div>
