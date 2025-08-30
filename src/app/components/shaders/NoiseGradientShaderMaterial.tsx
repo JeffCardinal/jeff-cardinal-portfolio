@@ -1,11 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export default function NoiseGradientShaderMaterial(): JSX.Element {
+
   const shaderMaterialRef = useRef<THREE.ShaderMaterial | null>(null);
 
-  const vertexShader = `
+  const seed = Math.random() * 100.0; // Random seed for noise variation
+  const uniforms = useMemo(() => ({ time: { value: seed } }), []);
+
+  useFrame(({ clock }) => {
+    if (!shaderMaterialRef.current) return;
+    shaderMaterialRef.current.uniforms.time.value = clock.getElapsedTime();
+  });
+
+  const vertexShader = useMemo(() => `
     varying vec2 vUv;
     uniform float time; // Declare the time uniform
 
@@ -13,9 +22,10 @@ export default function NoiseGradientShaderMaterial(): JSX.Element {
       vUv = uv; // Pass UV coordinates to the fragment shader
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
-  `;
+  `, []);
 
-  const fragmentShader = `
+  const fragmentShader = useMemo(() => `
+    precision mediump float;  
     varying vec2 vUv;
     uniform float time; // Declare the time uniform
 
@@ -53,26 +63,16 @@ export default function NoiseGradientShaderMaterial(): JSX.Element {
 
       vec3 color = rainbow(time + n * 5.0); // Add noise influence to rainbow colors
 
-      // float grain = random(vUv * time * 100.0) * 0.1;
-      // color += vec3(grain); // Add grain. Previously I had two layers of grain, but it caused some moire-like patterns on mobile.
-
       gl_FragColor = vec4(color, 1.0);
     }
-  `;
-
-  useFrame(({clock}) => {
-    if (shaderMaterialRef.current) {
-      shaderMaterialRef.current.needsUpdate = true;
-      shaderMaterialRef.current.uniforms.time.value = clock.getElapsedTime();
-    }
-  });
+  `, []);
 
   return (
     <shaderMaterial
       ref={shaderMaterialRef}
       vertexShader={vertexShader}
       fragmentShader={fragmentShader}
-      uniforms={{ time: { value: 0 } }}
+      uniforms={uniforms}
       depthWrite={false}
       depthTest={false}
     />

@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  Canvas,
-  useFrame,
-  useLoader,
-  useThree,
-} from "@react-three/fiber";
+import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import {
   Center,
   Text3D,
@@ -173,8 +168,13 @@ export default function Three() {
 
   return (
     <>
-      <Canvas camera={{ position: [0, 0, 10] }} id="Canvas">
+      <Canvas camera={{ position: [0, 0, 10] }} id="Canvas" frameloop="always">
         {/* <Stats/> */}
+        {/* TODO: Maybe let's consider moving this to a scene background instead of rendering a mesh */}
+        <mesh scale={[50, 50, 1]} renderOrder={-1}>
+          <planeGeometry args={[1, 1]} />
+          <NoiseGradientShaderMaterial />
+        </mesh>
         <React.Suspense fallback={<Loader />}>
           {!isMobile && (
             <group>
@@ -207,11 +207,6 @@ export default function Three() {
               scale={[10, 10, 1]}
             />
           </Environment>
-          {/* TODO: Maybe let's consider moving this to a scene background instead of rendering a mesh */}
-          <mesh scale={[50, 50, 1]} renderOrder={-1}>
-            <planeGeometry args={[1, 1]} />
-            <NoiseGradientShaderMaterial />
-          </mesh>
         </React.Suspense>
         <Preload all />
       </Canvas>
