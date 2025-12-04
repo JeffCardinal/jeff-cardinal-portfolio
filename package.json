@@ -18,7 +18,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^12.23.12",
     "lamina": "^1.1.23",
-    "next": "^15.3.3",
+    "next": "^15.5.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-fast-marquee": "^1.6.5",

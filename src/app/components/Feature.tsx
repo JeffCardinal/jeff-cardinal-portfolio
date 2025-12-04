@@ -1,5 +1,6 @@
 "use client";
 import React, { ReactNode, useState } from "react";
+import Image from 'next/image'
 
 export default function Feature({
   children,
@@ -36,15 +37,16 @@ export default function Feature({
       >
         <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
           <div className="text-black flex justify-center items-center">
-            <img
-              className="pb-8 lg:pb-0 object-fill w-full max-w-[1000px]"
-              onMouseEnter={() => setHovering(false)}
-              onMouseLeave={() => setHovering(true)}
-              src={
-                hovering ? `/images/${imageName}` : `/images/${imageHoverName}`
-              }
-              alt={title}
-            />
+            <div className="relative w-full max-w-[1000px] pb-8 lg:pb-0">
+              <Image
+               fill
+               className="object-fill"
+               onMouseEnter={() => setHovering(false)}
+               onMouseLeave={() => setHovering(true)}
+               src={hovering ? `/images/${imageName}` : `/images/${imageHoverName}`}
+               alt={title}
+             />
+            </div>
           </div>
         </div>
 
