@@ -32,24 +32,21 @@ export default function Feature({
 
   return (
     <>
-      <div
-        className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`}
-      >
-        <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
-          <div className="text-black flex justify-center items-center">
-            <div className="relative w-full max-w-[1000px] pb-8 lg:pb-0">
-              <Image
-               fill
-               className="object-fill"
-               onMouseEnter={() => setHovering(false)}
-               onMouseLeave={() => setHovering(true)}
-               src={hovering ? `/images/${imageName}` : `/images/${imageHoverName}`}
-               alt={title}
-             />
-            </div>
-          </div>
+      <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`} >
+        {/* Image Container */}
+        <div className="flex flex-1 justify-center items-center lg:justify-end observableLeft opacity-0 pb-8 lg:pb-0">
+          <Image
+            width={1000}
+            height={1000}
+            sizes="100vw"
+            onMouseEnter={() => setHovering(false)}
+            onMouseLeave={() => setHovering(true)}
+            src={hovering ? `/images/${imageName}` : `/images/${imageHoverName}`}
+            alt={title}
+          />
         </div>
 
+        {/* Main Grid Container */}
         <div className="flex-1 lg:pl-8">
           <span
             className="observableRight opacity-0 w-full block text-3xl lg:text-4xl font-distancia"
@@ -58,7 +55,6 @@ export default function Feature({
             {title}
           </span>
 
-          {/* Main Grid Container */}
           <div className={`flex-col max-w-[1000px]`}>
             {/* Year */}
             <div className={`observableRight opacity-0 relative my-8`}>
