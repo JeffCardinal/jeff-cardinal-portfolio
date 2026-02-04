@@ -11,7 +11,6 @@ import Container from "./components/Container";
 import Drawer from "./components/Drawer";
 import Scroller from "./components/Scroller";
 import Splash from "./components/Splash";
-import UnderConstruction from "./components/UnderConstruction";
 import Three from "./components/Three";
 import Footer from "./components/Footer";
 import FeatureDouble from "./components/FeatureDouble";
@@ -28,8 +27,14 @@ import SparkleSvg from "./svg/SparkleSvg";
 import FeatureGlass from "./components/FeatureGlass";
 import { OpenDrawerLink } from "./components/OpenDrawerLink";
 import SplashSVG from "./components/svg/SplashSVG";
+import { LogoMorph } from "./components/i2k";
+
+import gsap from "gsap";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
 export default function Page() {
+
+  gsap.registerPlugin(MorphSVGPlugin);
 
   // TODO: Refactor to use a context or global state management solution
   const [openId, setOpenId] = useState<string | null>(null);
@@ -485,8 +490,22 @@ export default function Page() {
           </FeatureUIUX>
         </Drawer>
 
-        <Drawer title={"[PD]"} bgColor={"bg-lime-400"}>
-          <UnderConstruction textColor="black" bgColor="bg-black" />
+        <Drawer title={"[BRAND]"} bgColor={"bg-lime-400"}>
+          <FeatureUIUX
+            title="i2k Branding"
+            description={`Branding for i2K, a music festival in Richmond, Virginia.`}
+            year="2025"
+            tools="Illustrator, Blender, Photoshop"
+            imageName="i2k/i2k-iso-25.png"
+            imageHoverName="i2k/i2k-iso-25.png"
+            bgColor="bg-white"
+            borderColor="border-[#00bfff]"
+            textColor="text-[#00bfff]"
+            font={"w-full block text-3xl lg:text-4xl font-distancia"}
+            isTitleVerticallyCentered={false}
+          >          
+            <LogoMorph/>
+          </FeatureUIUX>
         </Drawer>
 
         <Drawer
