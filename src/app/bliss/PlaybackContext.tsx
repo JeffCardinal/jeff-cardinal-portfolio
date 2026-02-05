@@ -3,7 +3,7 @@ import React, { createContext, useContext, useRef, useState } from 'react';
 type PlaybackContextType = {
   isPlaying: boolean;
   isBeenPlayed: boolean;
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
   play: () => void;
   pause: () => void;
 };
@@ -41,8 +41,6 @@ export const PlaybackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       <>
         <audio ref={audioRef} preload="auto" loop>
           <source src="/bliss/Bliss-Loop.m4a" type="audio/mp4" />
-          {/* <source src="/bliss/Bliss-Loop.mp3" type="audio/mpeg" /> */}
-          {/* <source src="/bliss/Bliss-Loop.m4a" type="audio/mp4" /> */}
           Your browser does not support the audio element.
         </audio>
         {children}
