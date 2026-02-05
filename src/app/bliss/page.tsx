@@ -182,7 +182,7 @@ function Comp({ gyroBaseline }: { gyroBaseline: { gamma: number; beta: number } 
 function BurnEffectPlane() {
     const BPM = 155;
     const texture = useLoader(THREE.TextureLoader, '/bliss/bliss-bg-optimized.jpg');
-    const shaderRef = useRef<any>();
+    const shaderRef = useRef<any>(null);
 
     const { audioRef } = usePlayback();
     const { camera } = useThree();

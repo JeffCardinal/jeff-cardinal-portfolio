@@ -83,7 +83,7 @@ const BurnShaderMaterial = shaderMaterial(
   `
 );
 
-declare global {
+declare module "react" {
   namespace JSX {
       interface IntrinsicElements {
           burnShaderMaterial: ReactThreeFiber.ThreeElements['meshStandardMaterial'] & {

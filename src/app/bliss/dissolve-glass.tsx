@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { shaderMaterial } from '@react-three/drei'
 import { extend, ReactThreeFiber } from '@react-three/fiber'
-import React, { useRef } from 'react'
 
 const vertexShader = `
   varying vec3 vPosition;
@@ -129,21 +128,13 @@ const DissolveGlassMaterial = shaderMaterial(
   fragmentShader
 )
 
-extend({ DissolveGlassMaterial })
-
 declare global {
     namespace JSX {
       interface IntrinsicElements {
-        dissolveGlassMaterial: ReactThreeFiber.ThreeElements['meshStandardMaterial']
+        DissolveGlassMaterial: ReactThreeFiber.ThreeElements['meshStandardMaterial']
       }
     }
   }
 
-export const DissolveGlass = React.forwardRef((props: any, ref) => {
-  const materialRef = useRef<THREE.ShaderMaterial>(null!)
-  return <dissolveGlassMaterial ref={ref || materialRef} attach="material" {...props} />
-})
-
-DissolveGlass.displayName = 'DissolveGlass'
-
+extend({ DissolveGlassMaterial })
 export { DissolveGlassMaterial } 
