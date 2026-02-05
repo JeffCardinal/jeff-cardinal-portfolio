@@ -11,7 +11,6 @@ import Container from "./components/Container";
 import Drawer from "./components/Drawer";
 import Scroller from "./components/Scroller";
 import Splash from "./components/Splash";
-import UnderConstruction from "./components/UnderConstruction";
 import Three from "./components/Three";
 import Footer from "./components/Footer";
 import FeatureDouble from "./components/FeatureDouble";
@@ -28,8 +27,14 @@ import SparkleSvg from "./svg/SparkleSvg";
 import FeatureGlass from "./components/FeatureGlass";
 import { OpenDrawerLink } from "./components/OpenDrawerLink";
 import SplashSVG from "./components/svg/SplashSVG";
+import { LogoMorph } from "./components/i2k";
+
+import gsap from "gsap";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
 export default function Page() {
+
+  gsap.registerPlugin(MorphSVGPlugin);
 
   // TODO: Refactor to use a context or global state management solution
   const [openId, setOpenId] = useState<string | null>(null);
@@ -485,8 +490,32 @@ export default function Page() {
           </FeatureUIUX>
         </Drawer>
 
-        <Drawer title={"[PD]"} bgColor={"bg-lime-400"}>
-          <UnderConstruction textColor="black" bgColor="bg-black" />
+        <Drawer title={"[BRAND]"} bgColor={"bg-lime-400"}>
+          <FeatureUIUX
+            title="i2k Branding"
+            description={`i2K was a music festival in Richmond, Virginia. In order to ensure pixel perfection, a grid system was enforced to create the illusory 3D model, which was then captured by an orthographic camera. The final render is composited in Photoshop with precise masking and additional shading. Dynamic logo type was used for promotional motion graphics. A limited t-shirt was screen-printed, featuring an android woman and WinAmp-skin informed mp3 player.`}
+            year="2025"
+            tools="Illustrator, Blender, Photoshop"
+            imageName="i2k/i2k-iso-25.jpg"
+            imageHoverName="i2k/i2k-iso-25.jpg"
+            bgColor="bg-white"
+            borderColor="border-[#00bfff]"
+            textColor="text-[#00bfff]"
+            font={"w-full block text-3xl lg:text-4xl font-distancia"}
+            isTitleVerticallyCentered={false}
+          >          
+            <LogoMorph/>
+          </FeatureUIUX>
+          <FeatureDouble
+            alt1={"Poster"}
+            alt2={"Model"}
+            imageName1={"i2k/i2k-ExampleFlyer.jpg"}
+            imageHover1Name={"i2k/i2k-ExampleFlyer-Clean.jpg"}
+            imageName2={"i2k/i2k-shirt-pink-blue.jpg"}
+            imageHover2Name={"i2k/i2k-shirt-green.jpg"}
+            bgColor={"bg-white"}
+            textColor={"text-[#00bfff]"}
+          />
         </Drawer>
 
         <Drawer
