@@ -83,7 +83,7 @@ const HoloRealMaterial = shaderMaterial(
   `
 );
 
-declare global {
+declare module "react" {
   namespace JSX {
       interface IntrinsicElements {
           holoRealMaterial: ReactThreeFiber.ThreeElements['meshStandardMaterial'] & {

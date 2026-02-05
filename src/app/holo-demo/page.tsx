@@ -17,7 +17,7 @@ extend({ HoloMaterial });
 extend({ HoloRealMaterial });
 
 function Card() {
-    const materialRef = useRef<any>();
+    const materialRef = useRef<any>(null);
     const groupRef = useRef<THREE.Group>(null);
     const { size } = useThree();
     const mouse = useRef({ x: 0, y: 0 });
@@ -71,7 +71,7 @@ function Card() {
 }
 
 function HoloCardMesh() {
-    const materialRef = useRef<any>();
+    const materialRef = useRef<any>(null);
     const [texture, normalMap] = useTexture(['/3d-models/card/metal-black.png', '/3d-models/card/rock_bump.jpg']);
     const { size } = useThree();
     const mouse = useRef({ x: 0, y: 0 });
@@ -145,7 +145,7 @@ function HoloCardMesh() {
 }
 
 function HoloCardOutline() {
-    const materialRef = useRef<any>();
+    const materialRef = useRef<any>(null);
     const texture = useTexture('/3d-models/card/metal-outline.png');
     const { size } = useThree();
     const mouse = useRef({ x: 0, y: 0 });

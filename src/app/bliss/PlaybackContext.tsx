@@ -3,7 +3,7 @@ import React, { createContext, useContext, useRef, useState } from 'react';
 type PlaybackContextType = {
   isPlaying: boolean;
   isBeenPlayed: boolean;
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
   play: () => void;
   pause: () => void;
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-export default function NoiseGradientShaderMaterial(): JSX.Element {
+export default function NoiseGradientShaderMaterial(): React.JSX.Element {
 
   const shaderMaterialRef = useRef<THREE.ShaderMaterial | null>(null);
 
