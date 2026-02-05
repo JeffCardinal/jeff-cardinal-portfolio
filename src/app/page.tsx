@@ -493,11 +493,11 @@ export default function Page() {
         <Drawer title={"[BRAND]"} bgColor={"bg-lime-400"}>
           <FeatureUIUX
             title="i2k Branding"
-            description={`Branding for i2K, a music festival in Richmond, Virginia.`}
+            description={`i2K was a music festival in Richmond, Virginia. In order to ensure pixel perfection, a grid system was enforced to create the illusory 3D model, which was then captured by an orthographic camera. The final render is composited in Photoshop with precise masking and additional shading. Dynamic logo type was used for promotional motion graphics. A limited t-shirt was screen-printed, featuring an android woman and WinAmp-skin informed mp3 player.`}
             year="2025"
             tools="Illustrator, Blender, Photoshop"
-            imageName="i2k/i2k-iso-25.png"
-            imageHoverName="i2k/i2k-iso-25.png"
+            imageName="i2k/i2k-iso-25.jpg"
+            imageHoverName="i2k/i2k-iso-25.jpg"
             bgColor="bg-white"
             borderColor="border-[#00bfff]"
             textColor="text-[#00bfff]"
@@ -506,6 +506,16 @@ export default function Page() {
           >          
             <LogoMorph/>
           </FeatureUIUX>
+          <FeatureDouble
+            alt1={"Poster"}
+            alt2={"Model"}
+            imageName1={"i2k/i2k-ExampleFlyer.jpg"}
+            imageHover1Name={"i2k/i2k-ExampleFlyer-Clean.jpg"}
+            imageName2={"i2k/i2k-shirt-pink-blue.jpg"}
+            imageHover2Name={"i2k/i2k-shirt-green.jpg"}
+            bgColor={"bg-white"}
+            textColor={"text-[#00bfff]"}
+          />
         </Drawer>
 
         <Drawer
