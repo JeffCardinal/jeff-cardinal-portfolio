@@ -2,7 +2,21 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function Video(
-    { videoUrl, title, description, caseStudyUrl }: { videoUrl: string, title: string, description: string, caseStudyUrl: string }
+  {
+    videoUrl,
+    title,
+    description,
+    caseStudyUrl,
+    className = "",
+    videoClassName = "",
+  }: {
+    videoUrl: string;
+    title: string;
+    description: string;
+    caseStudyUrl: string;
+    className?: string;
+    videoClassName?: string;
+  }
 ) {
     let caseStudy;
     if (caseStudyUrl) {
@@ -16,8 +30,8 @@ export default function Video(
         </div>
     }
   return (
-    <div className="relative group" style={{ width: "400px", overflow: "hidden" }}>
-        <video width="400" playsInline autoPlay loop muted className="block">
+    <div className={`relative group overflow-hidden ${className}`}>
+        <video playsInline autoPlay loop muted className={`block w-full h-auto ${videoClassName}`}>
             <source src={videoUrl} type="video/mp4" />
             Your browser does not support the video tag.
         </video>
