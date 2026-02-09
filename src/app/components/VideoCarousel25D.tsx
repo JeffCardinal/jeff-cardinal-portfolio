@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
 import Video from './Video';
 
 type VideoItem = {
@@ -23,6 +24,8 @@ function shortestDelta(index: number, active: number, total: number) {
 
 export default function VideoCarousel25D({ items }: Props) {
   const [active, setActive] = useState(0);
+  const [tutorialVisible, setTutorialVisible] = useState(false);
+  const [tutorialFading, setTutorialFading] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchDeltaX = useRef(0);
   const pointerActive = useRef(false);
@@ -37,6 +40,11 @@ export default function VideoCarousel25D({ items }: Props) {
 
   const ordered = useMemo(() => items, [items]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setTutorialVisible(true);
+  }, []);
+
   const go = (dir: 1 | -1) => {
     setActive((prev) => {
       const next = prev + dir;
@@ -47,10 +55,9 @@ export default function VideoCarousel25D({ items }: Props) {
   };
 
   return (
-    <div className="w-full flex flex-col items-center gap-6 my-10">
+    <div className="w-full flex flex-col items-center gap-6">
       <div
-        className="relative w-full flex items-center justify-center"
-        style={{ perspective: '1400px' }}
+        className="relative w-full flex items-center justify-center isolate"
         tabIndex={0}
         onKeyDown={(event) => {
           if (event.key === 'ArrowLeft') go(-1);
@@ -114,10 +121,10 @@ export default function VideoCarousel25D({ items }: Props) {
         }}
         aria-label="Video carousel"
       >
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 lg:px-10 z-20">
+        <div className="pointer-events-none absolute inset-0 items-center justify-between px-4 lg:px-10 z-30 select-none hidden sm:flex">
           <button
             type="button"
-            className="pointer-events-auto w-12 h-12 border-[5px] border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white hover:border-white transition duration-300 rounded-full flex items-center justify-center leading-none backdrop-blur-sm bg-black/40"
+            className="pointer-events-auto w-12 h-12 border-[5px] border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white hover:border-white transition duration-300 rounded-full flex items-center justify-center leading-none backdrop-blur-sm bg-black/40 select-none"
             onClick={() => go(-1)}
             aria-label="Previous video"
           >
@@ -135,7 +142,7 @@ export default function VideoCarousel25D({ items }: Props) {
           </button>
           <button
             type="button"
-            className="pointer-events-auto w-12 h-12 border-[5px] border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white hover:border-white transition duration-300 rounded-full flex items-center justify-center leading-none backdrop-blur-sm bg-black/40"
+            className="pointer-events-auto w-12 h-12 border-[5px] border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white hover:border-white transition duration-300 rounded-full flex items-center justify-center leading-none backdrop-blur-sm bg-black/40 select-none"
             onClick={() => go(1)}
             aria-label="Next video"
           >
@@ -153,15 +160,50 @@ export default function VideoCarousel25D({ items }: Props) {
           </button>
         </div>
 
+        {tutorialVisible && (
+          <div
+            className={`absolute inset-y-0 inset-x-0 z-20 flex items-center justify-center bg-black/70 sm:hidden transition-opacity duration-300 backdrop-blur-sm ${
+              tutorialFading ? "opacity-0" : "opacity-100"
+            }`}
+            onPointerDown={() => {
+              setTutorialFading(true);
+              window.setTimeout(() => setTutorialVisible(false), 200);
+            }}
+            onTouchStart={() => {
+              setTutorialFading(true);
+              window.setTimeout(() => setTutorialVisible(false), 200);
+            }}
+          >
+            <div className="flex flex-col items-center select-none gap-4">
+              <div className="relative w-[64px] h-[64px] flip-hand">
+                <Image
+                  src="/bliss/glove-hand.png"
+                  alt="Swipe Icon"
+                  className="absolute swipe-hand select-none pointer-events-none"
+                  width={64}
+                  height={128}
+                />
+              </div>
+              <div className="font-distancia text-white text-md tracking-wide text-center px-4">
+                Swipe or tap to scroll through videos!
+              </div>
+            </div>
+          </div>
+        )}
+
         <div
-          className="relative w-full max-w-6xl h-[clamp(420px,55vw,800px)]"
-          style={{ transformStyle: 'preserve-3d' }}
+          className="relative w-full max-w-6xl h-[clamp(420px,55vw,800px)] my-10"
+          style={{ perspective: '1400px' }}
         >
+          <div
+            className="relative w-full h-full"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
           {ordered.map((item, index) => {
             const delta = shortestDelta(index, active, items.length);
             const abs = Math.abs(delta);
             const isVisible = abs <= viewRange;
-            const gap = 'clamp(70px, 12vw, 200px)';
+            const gap = 'clamp(60px, 12vw, 200px)';
             const translateX = `calc(${delta} * ${gap})`;
             const translateZ = 140 - abs * 80;
             const rotateY = delta * -12;
@@ -171,7 +213,7 @@ export default function VideoCarousel25D({ items }: Props) {
             return (
               <div
                 key={`${item.videoUrl}-${index}`}
-                className="absolute left-1/2 top-1/2 w-[clamp(200px,26vw,380px)]"
+                className="absolute left-1/2 top-1/2 w-[clamp(220px,26vw,380px)] select-none"
                 style={{
                   transform: `translate(-50%, -50%) translateX(${translateX}) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                   pointerEvents: isVisible ? 'auto' : 'none',
@@ -190,7 +232,7 @@ export default function VideoCarousel25D({ items }: Props) {
               >
                 <div className="relative bg-black shadow-[0px_30px_60px_rgba(0,0,0,0.45)] overflow-visible">
                   <div
-                    className="pointer-events-none absolute left-1/2 top-full h-36 w-[110%] -translate-x-1/2 blur-2xl z-0 rainbow-glow transition-opacity duration-300"
+                    className="pointer-events-none absolute left-1/2 top-full h-32 w-[110%] blur-2xl z-0 rainbow-glow transition-opacity duration-300 select-none"
                     style={{
                       opacity: abs === 0 ? 1 : 0,
                       transform: 'translateX(-50%) rotateX(75deg) translateY(-50px)',
@@ -203,6 +245,7 @@ export default function VideoCarousel25D({ items }: Props) {
                       title={item.title}
                       description={item.description}
                       caseStudyUrl={item.caseStudyUrl}
+                      caseStudyVisible={abs === 0}
                       className="w-full"
                       videoClassName=""
                     />
@@ -216,6 +259,7 @@ export default function VideoCarousel25D({ items }: Props) {
             );
           })}
         </div>
+      </div>
       </div>
     </div>
   );

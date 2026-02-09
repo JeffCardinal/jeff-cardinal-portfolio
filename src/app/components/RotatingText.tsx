@@ -22,7 +22,7 @@ function RotatingText() {
         className="z-10"
         style={{
           position: "absolute",
-          top: "calc(60dvh + 4vw)",
+          top: "calc(60vh + 4vw)",
           left: "50%",
           transform: "translate(-50%, -50%)",
           fontSize: "clamp(40px, 4vw, 64px)",
