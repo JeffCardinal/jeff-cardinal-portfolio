@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 
 export default function Video(
   {
@@ -9,6 +8,7 @@ export default function Video(
     caseStudyUrl,
     className = "",
     videoClassName = "",
+    caseStudyVisible = true,
   }: {
     videoUrl: string;
     title: string;
@@ -16,22 +16,27 @@ export default function Video(
     caseStudyUrl: string;
     className?: string;
     videoClassName?: string;
+    caseStudyVisible?: boolean;
   }
 ) {
     let caseStudy;
     if (caseStudyUrl) {
-      caseStudy = 
-        <div className="px-4 pb-4 absolute bottom-0 left-0 w-full flex flex-col items-center justify-center transform translate-y-0">
+      caseStudy =
+        <div
+          className={`px-4 pb-4 absolute bottom-0 left-0 w-full flex flex-col items-center justify-center transform translate-y-0 transition-opacity duration-700 ${
+            caseStudyVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        >
             <Link href={caseStudyUrl}>
-              <button className="px-4 mr-0 pt-[2px] outline outline-[5px] outline-black hover:text-rose-500 hover:outline-rose-500 bg-white text-black rounded-full font-distancia text-lg transition-all duration-300">
+              <button className="px-2 sm:px-4 mr-0 pt-[2px] outline outline-[5px] outline-black hover:text-rose-500 hover:outline-rose-500 bg-white text-black rounded-full font-distancia text-sm lg:text-lg whitespace-nowrap transition-all duration-300">
                   Case Study
               </button>
             </Link>
         </div>
     }
   return (
-    <div className={`relative group overflow-hidden ${className}`}>
-        <video playsInline autoPlay loop muted className={`block w-full h-auto ${videoClassName}`}>
+    <div className={`relative group overflow-hidden select-none ${className}`}>
+        <video playsInline autoPlay loop muted className={`block w-full h-auto select-none ${videoClassName}`}>
             <source src={videoUrl} type="video/mp4" />
             Your browser does not support the video tag.
         </video>

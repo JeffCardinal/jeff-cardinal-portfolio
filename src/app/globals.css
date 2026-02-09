@@ -33,28 +33,44 @@ body {
   .rainbow-glow {
     background: linear-gradient(
       90deg,
-      rgba(255, 0, 102, 0.7),
-      rgba(255, 128, 0, 0.7),
-      rgba(255, 214, 0, 0.7),
-      rgba(0, 214, 107, 0.7),
-      rgba(0, 120, 255, 0.7),
-      rgba(138, 0, 255, 0.7),
-      rgba(255, 0, 153, 0.7)
+      rgba(255, 0, 102, 0.8),
+      rgba(255, 128, 0, 0.8),
+      rgba(255, 255, 0, 0.8),
+      rgba(0, 214, 107, 0.8),
+      rgba(0, 120, 255, 0.8),
+      rgba(138, 0, 255, 0.8),
+      rgba(255, 0, 153, 0.8)
     );
-    background-size: 400% 400%;
-    animation: rainbow-glow-shift 6s ease-in-out infinite;
+    background-size: 400% 200%;
+    animation: rainbow-glow-shift 12s linear infinite;
+  }
+  .swipe-hand {
+    transform-origin: 50% 0%;
+    animation: swipe-hand-tilt 1000ms ease-in-out infinite;
+  }
+  .flip-hand {
+    transform: scaleY(-1);
   }
 }
 
 @keyframes rainbow-glow-shift {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    background-position: 400% 0%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 400%;
+  }
+}
+
+@keyframes swipe-hand-tilt {
+  0% {
+    transform: rotate(8deg) translateX(-10px);
+  }
+  25% {
+    transform: rotate(-8deg) translateX(10px);
+  }
+  100% {
+    transform: rotate(8deg) translateX(-10px);
   }
 }
 

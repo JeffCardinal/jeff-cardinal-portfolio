@@ -1,33 +1,33 @@
 'use client'
 
-import React, { useState } from "react";
-import Marquee from "react-fast-marquee";
 import Link from "next/link";
+import { useState } from "react";
+import Marquee from "react-fast-marquee";
 
-import Feature from "./components/Feature";
 import CodeFeature from "./components/CodeFeature";
-import VideoFeature from "./components/VideoFeature";
 import Container from "./components/Container";
 import Drawer from "./components/Drawer";
+import Feature from "./components/Feature";
+import FeatureDouble from "./components/FeatureDouble";
+import FeatureFont from "./components/FeatureFont";
+import Footer from "./components/Footer";
 import Scroller from "./components/Scroller";
 import Splash from "./components/Splash";
 import Three from "./components/Three";
-import Footer from "./components/Footer";
-import FeatureDouble from "./components/FeatureDouble";
-import FeatureFont from "./components/FeatureFont";
+import VideoFeature from "./components/VideoFeature";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Button from "./components/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ArrowNav from "./components/arrow-nav";
-import ImageGrid from "./components/ImageGrid";
-import ScrollToTopButton from "./components/ScrollToTopButton";
-import FeatureUIUX from "./components/FeatureUIUX";
-import SparkleSvg from "./svg/SparkleSvg";
+import Button from "./components/Button";
 import FeatureGlass from "./components/FeatureGlass";
-import { OpenDrawerLink } from "./components/OpenDrawerLink";
-import SplashSVG from "./components/svg/SplashSVG";
+import FeatureUIUX from "./components/FeatureUIUX";
 import { LogoMorph } from "./components/i2k";
+import ImageGrid from "./components/ImageGrid";
+import { OpenDrawerLink } from "./components/OpenDrawerLink";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+import SplashSVG from "./components/svg/SplashSVG";
+import SparkleSvg from "./svg/SparkleSvg";
 
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
