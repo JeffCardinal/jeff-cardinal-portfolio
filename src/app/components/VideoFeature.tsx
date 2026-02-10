@@ -4,32 +4,44 @@ import VideoCarousel25D from './VideoCarousel25D';
 export default function VideoFeature() {
   const items = [
     {
-      videoUrl: "/videos-optimized/ditb-reel.mp4",
-      title: "xJermsx - Drugs in the Bathroom [DJ CAMGIRL Remix]",
+      videoUrl: "/videos-optimized/qhd/windows-angel-reel-qhd.mp4",
+      title: "Dreaming Diary - Windows Angel Reel",
       description: "",
       caseStudyUrl: "",
     },
     {
-      videoUrl: "/videos-optimized/funk-forever-reel.mp4",
-      title: "Funk Forever Party",
-      description: "",
-      caseStudyUrl: "",
-    },
-    {
-      videoUrl: "/videos-optimized/sega-dreamland-reel.mp4",
+      videoUrl: "/videos-optimized/qhd/sega-dreamland-reel-qhd.mp4",
       title: "VAPERROR - Sega Dreamland Reel",
       description: "",
       caseStudyUrl: "",
     },
     {
-      videoUrl: "/videos-optimized/tribal-heart-reel.mp4",
+      videoUrl: "/videos-optimized/qhd/funk-forever-reel-qhd.mp4",
+      title: "Funk Forever Party",
+      description: "",
+      caseStudyUrl: "",
+    },
+    {
+      videoUrl: "/videos-optimized/qhd/rupee-spin-qhd.mp4",
+      title: "Electric Mallet - Whirlwind",
+      description: "",
+      caseStudyUrl: "",
+    },
+    {
+      videoUrl: "/videos-optimized/qhd/tribal-heart-reel-qhd.mp4",
       title: "Tribal Diamond Heart",
       description: "",
       caseStudyUrl: "./case-tribal-heart",
     },
     {
-      videoUrl: "/videos-optimized/metalheartreel1.mp4",
-      title: "DJ CAMGIRL - Aberrations",
+      videoUrl: "/videos-optimized/qhd/fitb-remix-reel-qhd.mp4",
+      title: "Heaven Sample Floating in the Breeze (VAPERROR REMIX) Reel",
+      description: "",
+      caseStudyUrl: "",
+    },
+    {
+      videoUrl: "/videos-optimized/qhd/tribal-fisheye-heart-reel-qhd.mp4",
+      title: "VAPERROR - Fatal Angels 「死の天使」 Reel",
       description: "",
       caseStudyUrl: "",
     },
