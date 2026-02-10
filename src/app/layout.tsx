@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang="en">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Script src="https://t.contentsquare.net/uxa/aa7d7e650962e.js" strategy="afterInteractive" />
       </Head>
       <body className={inter.className}>
         <MobileNav>{children}</MobileNav>
@@ -44,6 +43,7 @@ export default function RootLayout({
         </div>
         <Analytics/>
         <SpeedInsights />
+        <Script src="https://t.contentsquare.net/uxa/aa7d7e650962e.js" strategy="afterInteractive" />
         {children}
       </body>
     </html>
