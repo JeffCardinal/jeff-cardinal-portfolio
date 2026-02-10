@@ -23,7 +23,7 @@ export default function Video(
     if (caseStudyUrl) {
       caseStudy =
         <div
-          className={`px-4 pb-4 absolute bottom-0 left-0 w-full flex flex-col items-center justify-center transform translate-y-0 transition-opacity duration-700 ${
+          className={`px-4 pb-4 absolute bottom-0 left-0 w-full flex flex-col items-center justify-center transform translate-y-0 transition-opacity duration-300 ${
             caseStudyVisible ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
