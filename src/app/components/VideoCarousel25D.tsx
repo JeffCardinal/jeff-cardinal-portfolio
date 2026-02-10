@@ -239,7 +239,7 @@ export default function VideoCarousel25D({ items }: Props) {
               >
                 {/* Title Scroller - Top */}
                 <div
-                  className="pointer-events-none absolute left-1/2 -top-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 hidden sm:block transition-opacity duration-600"
+                  className="pointer-events-none absolute left-1/2 -top-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 sm:block transition-opacity duration-600"
                   style={{ opacity: abs === 0 ? 1 : 0 }}
                 >
                   <div
@@ -279,7 +279,7 @@ export default function VideoCarousel25D({ items }: Props) {
 
               {/* Title Scroller - Bottom */}
                 <div
-                  className="pointer-events-none absolute left-1/2 -bottom-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 hidden sm:block transition-opacity duration-600"
+                  className="pointer-events-none absolute left-1/2 -bottom-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 sm:block transition-opacity duration-600"
                   style={{ opacity: abs === 0 ? 1 : 0 }}
                 >
                   <div
