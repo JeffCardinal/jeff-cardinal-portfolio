@@ -35,7 +35,7 @@ export default function Video(
         </div>
     }
   return (
-    <div className={`relative group overflow-hidden select-none ${className}`}>
+    <div className={`relative group overflow-hidden select-none h-fit ${className}`}>
         <video playsInline autoPlay loop muted className={`block w-full h-auto select-none ${videoClassName}`}>
             <source src={videoUrl} type="video/mp4" />
             Your browser does not support the video tag.
