@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Marquee from "react-fast-marquee";
@@ -101,6 +102,20 @@ export default function Page() {
         </Marquee>
 
         <Drawer title="[GFX]" bgColor="bg-orange-400">
+          <Feature
+            title="Bang Bang Bang"
+            description={`Techno track cover artwork concept. A stack of identical forged steel sculptures each reading "BANG" sits in a pool of 9mm bullets. Characters are custom-made in Illustrator, see below for gridlines.`}
+            inspiration="Metal materials and neo-grunge."
+            tools="Illustrator, Blender, Photoshop"
+            year="2025"
+            imageName="bangbangbang.jpg"
+            imageHoverName="bangbangbang.jpg"
+            bgColor="bg-black"
+            textColor="text-[#ea0000]"
+            borderColor="border-[#ea0000]"
+          >
+            <Image src={`/images/bang-guide.jpg`} alt={"Bang Bang Bang Guidelines"} width={1000} height={1000} />
+          </Feature>
           <FeatureGlass
             title="Folder Icon"
             description="2.5D folder icon. Hover for the original. Original was purposed for the single Open Me Up off of VAPERROR - System Delight (2015). This is a refresh of that icon in a more modern, high resolution style."
@@ -271,33 +286,6 @@ export default function Page() {
           </Feature>
 
           <Feature
-            title="PLUS100 Branding"
-            description="Branding for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
-            inspiration="Minimalism and kawaii Japanese emoji."
-            tools="Photoshop"
-            year="2018"
-            imageName="plus100logo.png"
-            imageHoverName="plus100logo.png"
-            bgColor="bg-white"
-            textColor="text-[#ff84be]"
-            borderColor="border-[#ff84be]"
-          >
-            <Button
-              text={"Visit Site"}
-              link={"https://plus100.bandcamp.com/"}
-              textColor={"text-[#ff84be]"}
-              hoverTextColor={"hover:text-white"}
-              bgColor={"bg-white"}
-              hoverBgColor={"hover:bg-[#ff84be]"}
-              borderColor={"border-[#ff84be]"}
-              hoverBorderColor={"hover:border-[#ff84be]"}
-              optional={"ml-0 mt-2"}
-              hoverGlyph={<ArrowNav color={"#FFFFFF"} />}
-              hoverable={true}
-            />
-          </Feature>
-
-          <Feature
             title="DR. GABBA Flyer"
             description="Flyer advertisement for Chicago techno party at Empty Bottle."
             inspiration={
@@ -328,6 +316,33 @@ export default function Page() {
           </Feature>
 
           <Feature
+            title="PLUS100 Logo"
+            description="Logo for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
+            inspiration="Minimalism and kawaii Japanese emoji."
+            tools="Photoshop"
+            year="2018"
+            imageName="plus100logo.png"
+            imageHoverName="plus100logo.png"
+            bgColor="bg-white"
+            textColor="text-[#ff84be]"
+            borderColor="border-[#ff84be]"
+          >
+            <Button
+              text={"Visit Site"}
+              link={"https://plus100.bandcamp.com/"}
+              textColor={"text-[#ff84be]"}
+              hoverTextColor={"hover:text-white"}
+              bgColor={"bg-white"}
+              hoverBgColor={"hover:bg-[#ff84be]"}
+              borderColor={"border-[#ff84be]"}
+              hoverBorderColor={"hover:border-[#ff84be]"}
+              optional={"ml-0 mt-2"}
+              hoverGlyph={<ArrowNav color={"#FFFFFF"} />}
+              hoverable={true}
+            />
+          </Feature>
+
+          <Feature
             title="Mana Pool Album Cover"
             description="Album cover for my debut album, Mana Pool."
             inspiration="Minimalistic aquatic ambiance."
@@ -354,21 +369,6 @@ export default function Page() {
               hoverGlyph={<SplashSVG color={"#424ffb"} />}
               hoverable={true}
             />
-          </Feature>
-
-          <Feature
-            title="HTMHELL Logo"
-            description="Logo design for a band. It's mirrored on the y-axis, try to read it. Hover for a surprise."
-            inspiration="Metalcore logo."
-            tools="Illustrator, Photoshop"
-            year="2024"
-            imageName="htmhell-pink.png"
-            imageHoverName="htmhell-sage.png"
-            bgColor="bg-black"
-            textColor="text-[#ff00aa]"
-            borderColor="border-[#ff00aa]"
-          >
-            {undefined}
           </Feature>
         </Drawer>
 
