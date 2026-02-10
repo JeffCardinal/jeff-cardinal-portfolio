@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/next';
 import Image from 'next/image'
 import SparkleSvg from "./svg/SparkleSvg";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +43,7 @@ export default function RootLayout({
         </div>
         <Analytics/>
         <SpeedInsights />
+        <Script src="https://t.contentsquare.net/uxa/aa7d7e650962e.js" strategy="afterInteractive" />
         {children}
       </body>
     </html>
