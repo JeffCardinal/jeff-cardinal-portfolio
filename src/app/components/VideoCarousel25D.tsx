@@ -239,7 +239,7 @@ export default function VideoCarousel25D({ items }: Props) {
               >
                 {/* Title Scroller - Top */}
                 <div
-                  className="pointer-events-none absolute left-1/2 -top-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 sm:block transition-opacity duration-600"
+                  className="pointer-events-none absolute left-1/2 -top-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 sm:block transition-opacity duration-300"
                   style={{ opacity: abs === 0 ? 1 : 0 }}
                 >
                   <div
@@ -279,7 +279,7 @@ export default function VideoCarousel25D({ items }: Props) {
 
               {/* Title Scroller - Bottom */}
                 <div
-                  className="pointer-events-none absolute left-1/2 -bottom-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 sm:block transition-opacity duration-600"
+                  className="pointer-events-none absolute left-1/2 -bottom-[18px] -translate-x-1/2 w-[clamp(220px,26vw,380px)] z-40 sm:block transition-opacity duration-300"
                   style={{ opacity: abs === 0 ? 1 : 0 }}
                 >
                   <div
@@ -320,7 +320,7 @@ export default function VideoCarousel25D({ items }: Props) {
                 <div className="relative bg-black shadow-[0px_30px_60px_rgba(0,0,0,0.45)] overflow-visible h-fit">
                   {/* Overlay */}
                   <div
-                    className="absolute inset-0 pointer-events-none bg-black transition-opacity duration-450 z-20"
+                    className="absolute inset-0 pointer-events-none bg-black transition-opacity duration-300 z-20"
                     style={{ opacity: overlayOpacity }}
                   />
                   {/* Source Video */}
