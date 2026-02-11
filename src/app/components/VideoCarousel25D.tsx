@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Marquee from 'react-fast-marquee';
 import SparkleSvg from '../svg/SparkleSvg';
 import Video from './Video';
+import Link from 'next/link';
 
 type VideoItem = {
   videoUrl: string;
@@ -84,7 +85,7 @@ export default function VideoCarousel25D({ items }: Props) {
         onPointerDown={(event) => {
           if (event.pointerType === 'touch') return;
           const target = event.target as HTMLElement | null;
-          if (target?.closest('button')) return;
+          if (target?.closest('button') || target?.closest('a')) return;
           pointerActive.current = true;
           pointerStartX.current = event.clientX;
           pointerDeltaX.current = 0;
@@ -194,7 +195,7 @@ export default function VideoCarousel25D({ items }: Props) {
         )}
 
         <div
-          className="relative w-full max-w-6xl h-[clamp(420px,55vw,800px)] my-10"
+          className="relative w-full max-w-6xl h-[clamp(420px,55vw,800px)] my-10 z-0"
           style={{ perspective: '1400px', transformStyle: "preserve-3d" }}
         >
           <div
@@ -317,7 +318,7 @@ export default function VideoCarousel25D({ items }: Props) {
                 </div>
               </div>
 
-                <div className="relative shadow-[0px_30px_60px_rgba(0,0,0,0.45)] overflow-visible h-fit" style={{ transformStyle: 'preserve-3d' }}>
+                <div className="relative shadow-[0px_30px_60px_rgba(0,0,0,0.45)] overflow-visible h-fit">
                   {/* Overlay */}
                   <div
                     className="absolute inset-0 pointer-events-none bg-black transition-opacity duration-300 z-20"
@@ -329,12 +330,32 @@ export default function VideoCarousel25D({ items }: Props) {
                       videoUrl={item.videoUrl}
                       title={item.title}
                       description={item.description}
-                      caseStudyUrl={item.caseStudyUrl}
-                      caseStudyVisible={abs === 0}
                       className="w-full"
                       videoClassName=""
                     />
                   </div>
+                  {item.caseStudyUrl && (
+                    <div
+                      className={`px-4 pb-4 absolute bottom-0 left-0 w-full flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-auto z-50 ${
+                        abs === 0 ? "opacity-100" : "opacity-0 pointer-events-none"
+                      }`}
+                      style={{ transform: 'translateZ(200px)' }}
+                      data-case-study
+                    >
+                      <Link
+                        href={item.caseStudyUrl}
+                        className={`px-2 sm:px-4 mr-0 pt-[2px] outline outline-[5px] outline-black hover:text-rose-500 hover:outline-rose-500 bg-white text-black rounded-full font-distancia text-sm lg:text-lg whitespace-nowrap transition-all duration-300 ${
+                          abs === 0 ? "" : "pointer-events-none"
+                        }`}
+                        aria-disabled={abs !== 0}
+                        tabIndex={abs === 0 ? 0 : -1}
+                        onClick={(event) => event.stopPropagation()}
+                        onPointerDown={(event) => event.stopPropagation()}
+                      >
+                        Case Study
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             );

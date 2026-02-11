@@ -31,7 +31,7 @@ export default function VideoFeature() {
       videoUrl: "/videos-optimized/qhd/tribal-heart-reel-qhd.mp4",
       title: "Tribal Diamond Heart",
       description: "",
-      caseStudyUrl: "./case-tribal-heart",
+      caseStudyUrl: "/case-tribal-heart",
     },
     {
       videoUrl: "/videos-optimized/qhd/fitb-remix-reel-qhd.mp4",
