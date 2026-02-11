@@ -27,16 +27,21 @@ export default function Video(
             caseStudyVisible ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
-            <Link href={caseStudyUrl}>
-              <button className="px-2 sm:px-4 mr-0 pt-[2px] outline outline-[5px] outline-black hover:text-rose-500 hover:outline-rose-500 bg-white text-black rounded-full font-distancia text-sm lg:text-lg whitespace-nowrap transition-all duration-300">
-                  Case Study
-              </button>
-            </Link>
+          <Link href={caseStudyUrl} className="px-2 sm:px-4 mr-0 pt-[2px] outline outline-[5px] outline-black hover:text-rose-500 hover:outline-rose-500 bg-white text-black rounded-full font-distancia text-sm lg:text-lg whitespace-nowrap transition-all duration-300">
+            Case Study
+          </Link>
         </div>
     }
   return (
     <div className={`relative group overflow-hidden select-none h-fit ${className}`}>
-        <video playsInline autoPlay loop muted className={`block w-full h-auto select-none ${videoClassName}`}>
+        <video 
+          playsInline 
+          autoPlay
+          loop 
+          muted 
+          className={`block w-full h-auto select-none ${videoClassName}`}
+          style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'translateZ(0)' }
+        }>
             <source src={videoUrl} type="video/mp4" />
             Your browser does not support the video tag.
         </video>
