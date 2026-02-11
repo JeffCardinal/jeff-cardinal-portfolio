@@ -322,7 +322,13 @@ export default function VideoCarousel25D({ items }: Props) {
                   {/* Overlay */}
                   <div
                     className="absolute inset-0 pointer-events-none bg-black transition-opacity duration-300 z-20"
-                    style={{ opacity: overlayOpacity }}
+                    style={{
+                      opacity: overlayOpacity,
+                      transform: 'translateZ(1px)',
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
+                      willChange: 'opacity',
+                    }}
                   />
                   {/* Source Video */}
                   <div className="relative z-10 pointer-events-auto" onClick={() => setActive(index)}>
