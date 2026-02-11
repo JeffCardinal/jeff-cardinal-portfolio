@@ -317,7 +317,7 @@ export default function VideoCarousel25D({ items }: Props) {
                 </div>
               </div>
 
-                <div className="relative bg-black shadow-[0px_30px_60px_rgba(0,0,0,0.45)] overflow-visible h-fit">
+                <div className="relative shadow-[0px_30px_60px_rgba(0,0,0,0.45)] overflow-visible h-fit" style={{ transformStyle: 'preserve-3d' }}>
                   {/* Overlay */}
                   <div
                     className="absolute inset-0 pointer-events-none bg-black transition-opacity duration-300 z-20"
