@@ -428,7 +428,7 @@ export default function Page() {
           >
             <div className="pt-2 invisible lg:visible">
               <Link
-                href="https://sf-compute-takehome.vercel.app/"
+                href="https://nvdia-gpu-booking-example.vercel.app/"
                 target="_blank"
               >
                 <button className="pt-[2px] px-4 mr-4 border-[6px] border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
