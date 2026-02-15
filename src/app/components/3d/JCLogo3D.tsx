@@ -19,7 +19,7 @@ export default function JCLogo3D({
 
   useEffect(() => {
     onReady?.();
-  }, []);
+  });
 
   const intro = useRef({ active: false, t: 0, fromY: 0, duration: 0.9 });
   const startedOnce = useRef(false);
@@ -60,7 +60,7 @@ export default function JCLogo3D({
     if (completedOnce.current) {
       ref.current.rotation.x += 0.01;
       ref.current.rotation.y += 0.01;
-}
+    }
   });
 
   useLayoutEffect(() => {
@@ -89,7 +89,6 @@ export default function JCLogo3D({
       }
     });
   }, [gltf.scene]);
-
 
   return (
     <group ref={ref}>
