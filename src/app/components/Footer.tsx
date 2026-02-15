@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useRef, useLayoutEffect, useState, Suspense, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -96,7 +96,7 @@ export default function Footer({
       className={`lg:grid lg:grid-cols-3 items-center ${bgColor}`}
     >
       {/* 3D */}
-      <div className="flex justify-center lg:justify-start w-full z-50">
+      <div className="flex justify-center lg:justify-start w-full z-10">
         <motion.div
           ref={canvasRef}
           animate={canvasCtrl}
