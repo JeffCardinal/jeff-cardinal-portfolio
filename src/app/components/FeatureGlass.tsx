@@ -27,7 +27,7 @@ export default function Feature({
   tools: string;
   year: string;
   imageName: string;
-  imageHoverName: string;
+  imageHoverName?: string;
   bgColor: string;
   textColor: string;
   headerTextColor?: string;
@@ -36,6 +36,8 @@ export default function Feature({
   bigBgColor?: string; // TODO: Refactor this. We should not have two bgColor props
 }) {
   const [hovering, setHovering] = useState(true);
+  const hasHoverImage = Boolean(imageHoverName);
+  const imageSrc = !hovering && hasHoverImage ? imageHoverName : imageName;
   const bottomPadding = children ? "my-6" : "";
   headerTextColor = headerTextColor || textColor;
 
@@ -60,11 +62,9 @@ export default function Feature({
           <div className="text-black flex justify-center items-center">
             <Image
               className="pb-8 lg:pb-0 object-fill w-full max-w-[1000px]"
-              onMouseEnter={() => setHovering(false)}
-              onMouseLeave={() => setHovering(true)}
-              src={
-                hovering ? `/images/${imageName}` : `/images/${imageHoverName}`
-              }
+              onMouseEnter={hasHoverImage ? () => setHovering(false) : undefined}
+              onMouseLeave={hasHoverImage ? () => setHovering(true) : undefined}
+              src={`/images/${imageSrc}`}
               alt={title}
               width={1000}
               height={1000}

@@ -14,7 +14,6 @@ export default function Feature(
     borderColor,
     textColor,
     font,
-    isTitleVerticallyCentered
   }: { 
     children: ReactNode,
     title: string,
@@ -22,25 +21,24 @@ export default function Feature(
     year: string,
     tools: string,
     imageName: string,
-    imageHoverName: string,
+    imageHoverName?: string,
     bgColor: string,
     borderColor: string,
     textColor: string,
     font: string,
-    isTitleVerticallyCentered: boolean
   }) {
   const [hovering, setHovering] = useState(true);
-  let verticalCentering = '';
-  if(isTitleVerticallyCentered) verticalCentering = 'items-center';
+  const hasHoverImage = Boolean(imageHoverName);
+  const imageSrc = !hovering && hasHoverImage ? imageHoverName : imageName;
 
   return (
     <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`}>
       <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0">
         <Image
           className="pb-8 lg:pb-0  object-scale-down"
-          onMouseEnter={() => setHovering(false)}
-          onMouseLeave={() => setHovering(true)}
-          src={hovering ? `/images/${imageName}`: `/images/${imageHoverName}`}
+          onMouseEnter={hasHoverImage ? () => setHovering(false) : undefined}
+          onMouseLeave={hasHoverImage ? () => setHovering(true) : undefined}
+          src={`/images/${imageSrc}`}
           alt={title} 
           width="1000"
           height="0"

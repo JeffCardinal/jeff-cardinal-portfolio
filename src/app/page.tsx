@@ -400,7 +400,6 @@ export default function Page() {
             borderColor="border-indigo-300"
             textColor="text-indigo-300"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
-            isTitleVerticallyCentered={false}
           >
             <div className="pt-2">
               <Link
@@ -424,7 +423,6 @@ export default function Page() {
             borderColor="border-indigo-500"
             textColor="text-indigo-500"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
-            isTitleVerticallyCentered={false}
           >
             <div className="pt-2 invisible lg:visible">
               <Link
@@ -448,7 +446,6 @@ export default function Page() {
             borderColor="border-white"
             textColor="text-white"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
-            isTitleVerticallyCentered={false}
           >
             <div className="pt-2 flex flex-row align-middle">
               <Link
@@ -484,13 +481,15 @@ export default function Page() {
             borderColor="border-[#00bfff]"
             textColor="text-[#00bfff]"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
-            isTitleVerticallyCentered={false}
           >
             {undefined}
           </FeatureUIUX>
         </Drawer>
 
-        <Drawer title={"[BRAND]"} bgColor={"bg-lime-400"}>
+        <Drawer
+          title={"[BRAND]"}
+          bgColor={"bg-[#5ce37c]"}
+        >
           <FeatureUIUX
             title="i2k Branding"
             description={`i2K was a music festival in Richmond, Virginia. In order to ensure pixel perfection, a grid system was enforced to create the illusory 3D model, which was then captured by an orthographic camera. The final render is composited in Photoshop with precise masking and additional shading. Dynamic logo type was used for promotional motion graphics. A limited t-shirt was screen-printed, featuring an android woman and WinAmp-skin informed mp3 player.`}
@@ -502,7 +501,6 @@ export default function Page() {
             borderColor="border-[#00bfff]"
             textColor="text-[#00bfff]"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
-            isTitleVerticallyCentered={false}
           >          
             <LogoMorph/>
           </FeatureUIUX>
@@ -518,6 +516,66 @@ export default function Page() {
           />
         </Drawer>
 
+        <Drawer title={"[TOYS]"} bgColor={"bg-lime-400"}>
+          <FeatureUIUX
+            title="Metaball Avatar Generator"
+            description="Have fun generating your own avatar."
+            year="2026"
+            tools="React, Tailwind, Three.js"
+            imageName="metaball-avatar-generator.png"
+            imageHoverName="metaball-avatar-generator.png"
+            bgColor="bg-black"
+            borderColor="border-[#1694ff]"
+            textColor="text-[#1694ff]"
+            font={"w-full block text-3xl lg:text-4xl font-distancia"}
+          >
+            <Button
+              text={"Play"}
+              link={"/metaball-avatar-generator"}
+              textColor={"text-[#1694ff]"}
+              hoverTextColor={"hover:text-white"}
+              bgColor={"bg-black"}
+              hoverBgColor={"hover:bg-[#1694ff]"}
+              borderColor={"border-[#1694ff]"}
+              hoverBorderColor={"hover:border-white"}
+              optional={"ml-0 mt-2"}
+              hoverGlyph={<ArrowNav color={"white"} />}
+              hoverable={true}
+              styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
+              shadow=""
+            />
+          </FeatureUIUX>
+
+          <FeatureUIUX
+            title="Bliss"
+            description="Playable in-browser 3D animation for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrushing, post-processing and smiley 3D model by Jeff Cardinal. Ferrite Core font by Froyo Tam."
+            year="2026"
+            tools="React, Tailwind, Three.js"
+            imageName="bliss-toy.jpg"
+            imageHoverName="bliss-toy-hover.jpg"
+            bgColor="bg-white"
+            borderColor="border-[#ea43a3]"
+            textColor="text-[#ea43a3]"
+            font={"w-full block text-3xl lg:text-4xl font-distancia"}
+          >
+            <Button
+              text={"Play"}
+              link={"/metaball-avatar-generator"}
+              textColor={"text-[#ea43a3]"}
+              hoverTextColor={"hover:text-white"}
+              bgColor={"bg-white"}
+              hoverBgColor={"hover:bg-[#ea43a3]"}
+              borderColor={"border-[#ea43a3]"}
+              hoverBorderColor={"hover:border-[#ea43a3]"}
+              optional={"ml-0 mt-2"}
+              hoverGlyph={<ArrowNav color={"white"} />}
+              hoverable={true}
+              styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
+              shadow=""
+            />
+          </FeatureUIUX>
+        </Drawer>
+  
         <Drawer
           title={"[FONTS]"}
           bgColor={"bg-yellow-300"}
@@ -537,7 +595,6 @@ export default function Page() {
             borderColor="border-lime-400"
             textColor="text-lime-400"
             font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
-            isTitleVerticallyCentered={false}
           >
             <Link href="https://github.com/JeffCardinal/Goupe" target="_blank">
               <button className="border-[6px] border-lime-400 mr-4 hover:bg-lime-700 hover:text-lime-200 hover:border-lime-200 rounded-full transition duration-300 font-distancia text-2xl flex flex-row relative overflow-hidden group">

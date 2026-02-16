@@ -22,12 +22,14 @@ export default function Feature({
   tools: string;
   year: string;
   imageName: string;
-  imageHoverName: string;
+  imageHoverName?: string;
   bgColor: string;
   textColor: string;
   borderColor: string;
 }) {
   const [hovering, setHovering] = useState(true);
+  const hasHoverImage = Boolean(imageHoverName);
+  const imageSrc = !hovering && hasHoverImage ? imageHoverName : imageName;
   const bottomPadding = children ? "my-6" : "";
 
   return (
@@ -39,9 +41,9 @@ export default function Feature({
             width={1000}
             height={1000}
             sizes="100vw"
-            onMouseEnter={() => setHovering(false)}
-            onMouseLeave={() => setHovering(true)}
-            src={hovering ? `/images/${imageName}` : `/images/${imageHoverName}`}
+            onMouseEnter={hasHoverImage ? () => setHovering(false) : undefined}
+            onMouseLeave={hasHoverImage ? () => setHovering(true) : undefined}
+            src={`/images/${imageSrc}`}
             alt={title}
           />
         </div>
