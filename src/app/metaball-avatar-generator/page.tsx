@@ -3,7 +3,7 @@
 import type { CSSProperties } from 'react';
 import { useMemo, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment, MarchingCube, MarchingCubes, OrbitControls } from '@react-three/drei';
+import { Environment, MarchingCube, MarchingCubes, OrbitControls, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 type Circle = {
@@ -11,6 +11,7 @@ type Circle = {
   x: number;
   y: number;
   r: number;
+  isHead?: boolean;
 };
 
 const circleContains = (a: Circle, b: Circle): boolean => {
@@ -83,11 +84,55 @@ const makeProcessPanelStyle = (primary: string, secondary: string): CSSPropertie
   backgroundClip: 'padding-box, border-box',
 });
 
+const mapCircleTo3D = (
+  circle: Circle,
+  size: number,
+  sceneScale: number,
+  xScale: number,
+  yScale: number,
+  radiusScale: number,
+) => {
+  const x = ((circle.x / size) - 0.5) * 2 * sceneScale * xScale;
+  const y = (0.5 - circle.y / size) * 2 * sceneScale * yScale;
+  const r = (circle.r / size) * 2 * sceneScale * radiusScale;
+  return { id: circle.id, x, y, r, isHead: circle.isHead };
+};
+
+const getEyesAnchor = (mappedCircles: Array<{ x: number; y: number; r: number; isHead?: boolean }>) => {
+  if (mappedCircles.length === 0) return { y: 0, r: 0.2 };
+  const head = mappedCircles.find((circle) => circle.isHead);
+  if (head) return { y: head.y, r: head.r };
+  const maxR = Math.max(...mappedCircles.map((circle) => circle.r));
+  const largest = mappedCircles.filter((circle) => Math.abs(circle.r - maxR) < 0.0001);
+  const y = largest.reduce((sum, circle) => sum + circle.y, 0) / largest.length;
+  return { y, r: maxR };
+};
+
+function EyesPlane({
+  y,
+  r,
+  aspect,
+  texture,
+}: {
+  y: number;
+  r: number;
+  aspect: number;
+  texture: THREE.Texture;
+}) {
+  return (
+    <mesh position={[0, y, r + 0.03]}>
+      <planeGeometry args={[r * aspect, r]} />
+      <meshBasicMaterial map={texture} transparent toneMapped={false} />
+    </mesh>
+  );
+}
+
 function SphereCloud3D({
   circles,
   size,
   colorA,
   colorB,
+  showEyes,
   sceneScale,
   xScale,
   yScale,
@@ -97,6 +142,7 @@ function SphereCloud3D({
   size: number;
   colorA: string;
   colorB: string;
+  showEyes: boolean;
   sceneScale: number;
   xScale: number;
   yScale: number;
@@ -104,14 +150,16 @@ function SphereCloud3D({
 }) {
   const spheres = useMemo(
     () =>
-      circles.map((circle) => {
-        const x = ((circle.x / size) - 0.5) * 2 * sceneScale * xScale;
-        const y = (0.5 - circle.y / size) * 2 * sceneScale * yScale;
-        const r = (circle.r / size) * 2 * sceneScale * radiusScale;
-        return { id: circle.id, x, y, r };
-      }),
+      circles.map((circle) => mapCircleTo3D(circle, size, sceneScale, xScale, yScale, radiusScale)),
     [circles, size, sceneScale, xScale, yScale, radiusScale],
   );
+  const eyesTexture = useTexture('/images/character-gen/eyes.png');
+  const eyesAnchor = useMemo(() => getEyesAnchor(spheres), [spheres]);
+  const eyesAspect = useMemo(() => {
+    const image = eyesTexture.image as HTMLImageElement | undefined;
+    if (!image?.width || !image?.height) return 2;
+    return image.width / image.height;
+  }, [eyesTexture.image]);
   const materialColorA = useMemo(() => toThreeColor(colorA), [colorA]);
   const materialColorB = useMemo(() => toThreeColor(colorB), [colorB]);
   const sharedMaterialProps = useMemo(
@@ -141,6 +189,7 @@ function SphereCloud3D({
           <meshPhysicalMaterial {...sharedMaterialProps} />
         </mesh>
       ))}
+      {showEyes ? <EyesPlane y={eyesAnchor.y} r={eyesAnchor.r} aspect={eyesAspect} texture={eyesTexture} /> : null}
     </group>
   );
 }
@@ -150,6 +199,7 @@ function MetaballCloud3D({
   size,
   colorA,
   colorB,
+  showEyes,
   sceneScale,
   xScale,
   yScale,
@@ -159,23 +209,34 @@ function MetaballCloud3D({
   size: number;
   colorA: string;
   colorB: string;
+  showEyes: boolean;
   sceneScale: number;
   xScale: number;
   yScale: number;
   radiusScale: number;
 }) {
   const subtract = 12;
-  const metaballs = useMemo(
+  const mappedCircles = useMemo(
     () =>
-      circles.map((circle) => {
-        const x = ((circle.x / size) - 0.5) * 2 * sceneScale * xScale;
-        const y = (0.5 - circle.y / size) * 2 * sceneScale * yScale;
-        const radius = (circle.r / size) * 2 * sceneScale * radiusScale;
-        const strength = subtract * Math.pow(radius, 1.75);
-        return { id: circle.id, x, y, strength };
-      }),
+      circles.map((circle) => mapCircleTo3D(circle, size, sceneScale, xScale, yScale, radiusScale)),
     [circles, size, sceneScale, xScale, yScale, radiusScale],
   );
+  const metaballs = useMemo(
+    () =>
+      mappedCircles.map((mapped) => {
+        const radius = mapped.r;
+        const strength = subtract * Math.pow(radius, 1.75);
+        return { id: mapped.id, x: mapped.x, y: mapped.y, r: radius, strength };
+      }),
+    [mappedCircles],
+  );
+  const eyesTexture = useTexture('/images/character-gen/eyes.png');
+  const eyesAnchor = useMemo(() => getEyesAnchor(mappedCircles), [mappedCircles]);
+  const eyesAspect = useMemo(() => {
+    const image = eyesTexture.image as HTMLImageElement | undefined;
+    if (!image?.width || !image?.height) return 2;
+    return image.width / image.height;
+  }, [eyesTexture.image]);
   const materialColorA = useMemo(() => toThreeColor(colorA), [colorA]);
   const materialColorB = useMemo(() => toThreeColor(colorB), [colorB]);
   const sharedMaterialProps = useMemo(
@@ -198,12 +259,15 @@ function MetaballCloud3D({
   );
 
   return (
-    <MarchingCubes resolution={56} maxPolyCount={90000} enableUvs={false} enableColors={false}>
-      <meshPhysicalMaterial {...sharedMaterialProps} />
-      {metaballs.map((ball) => (
-        <MarchingCube key={ball.id} position={[ball.x, ball.y, 0]} strength={ball.strength} subtract={subtract} />
-      ))}
-    </MarchingCubes>
+    <group>
+      <MarchingCubes resolution={56} maxPolyCount={90000} enableUvs={false} enableColors={false}>
+        <meshPhysicalMaterial {...sharedMaterialProps} />
+        {metaballs.map((ball) => (
+          <MarchingCube key={ball.id} position={[ball.x, ball.y, 0]} strength={ball.strength} subtract={subtract} />
+        ))}
+      </MarchingCubes>
+      {showEyes ? <EyesPlane y={eyesAnchor.y} r={eyesAnchor.r} aspect={eyesAspect} texture={eyesTexture} /> : null}
+    </group>
   );
 }
 
@@ -263,6 +327,7 @@ function BlobAvatar({
 
 export default function MetaballAvatarGeneratorPage() {
   const [seed, setSeed] = useState('jeff!');
+  const [showEyes, setShowEyes] = useState(true);
   const sceneScale = 1;
   const xScale = 1;
   const yScale = 1;
@@ -275,6 +340,7 @@ export default function MetaballAvatarGeneratorPage() {
   const randomCircles = useMemo(() => {
     const rand = mulberry32(hashSeed(`${normalizedSeed}-random`));
     const mirroredPairCount = 3 + Math.floor(rand() * 4);
+    const shouldAddHead = rand() < 0.55;
     const minRadiusSpread = 7;
     const maxSetAttempts = 12;
     const maxPairAttempts = 60;
@@ -315,6 +381,26 @@ export default function MetaballAvatarGeneratorPage() {
         }
       }
 
+      if (shouldAddHead) {
+        for (let headAttempt = 0; headAttempt < maxPairAttempts; headAttempt += 1) {
+          const r = 14 + rand() * 18;
+          const x = size / 2;
+          const y = padding + r + rand() * (size - 2 * (padding + r));
+          const head: Circle = { x, y, r, id: 'head', isHead: true };
+          const hasTooSimilarRadius = pairRadii.some((existingR) => radiiTooSimilar(existingR, r));
+          const hasContainment = generated.some(
+            (existing) => circleContains(existing, head) || circleContains(head, existing),
+          );
+          const hasCenterInside = generated.some((existing) => !centersOutsideEachOther(existing, head));
+
+          if (!hasContainment && !hasTooSimilarRadius && !hasCenterInside) {
+            generated.push(head);
+            pairRadii.push(r);
+            break;
+          }
+        }
+      }
+
       const radii = generated.map((circle) => circle.r);
       const spread = radii.length > 0 ? Math.max(...radii) - Math.min(...radii) : 0;
       if (spread > bestSpread) {
@@ -348,6 +434,19 @@ export default function MetaballAvatarGeneratorPage() {
       }
     }
 
+    let filledCount = cells.flat().filter(Boolean).length;
+    const minFilledPixels = 5;
+    let guard = 0;
+    while (filledCount < minFilledPixels && guard < 100) {
+      guard += 1;
+      const y = Math.floor(rand() * gridSize);
+      const x = Math.floor(rand() * halfGrid);
+      if (cells[y][x]) continue;
+      cells[y][x] = true;
+      cells[y][gridSize - 1 - x] = true;
+      filledCount = cells.flat().filter(Boolean).length;
+    }
+
     return cells.flatMap((row, y) =>
       row.flatMap((filled, x) => {
         if (!filled) return [];
@@ -373,7 +472,7 @@ export default function MetaballAvatarGeneratorPage() {
 
   return (
     <main className={`min-h-screen bg-black text-white`}>
-      <section className="mx-auto flex w-full max-w-[1000px] flex-col gap-4 px-4 py-32">
+      <section className="mx-auto flex w-full max-w-[1000px] flex-col gap-4 px-4 py-24">
         <h1 className="text-3xl font-semibold font-distancia text-center">Metaball Avatar Generator</h1>
 
         <div className={`space-y-4 rounded-xl border p-4 border-zinc-300`}>
@@ -383,9 +482,18 @@ export default function MetaballAvatarGeneratorPage() {
               type="text"
               value={seed}
               onChange={(event) => setSeed(event.target.value)}
-              placeholder="Enter a seed"
-              className={`rounded-md border px-2 outline-none border-zinc-300 bg-white text-black focus:border-black`}
+              placeholder="Type something!"
+              className={`rounded-md border py-1 px-2 outline-none border-zinc-300 bg-white text-black focus:border-black`}
             />
+          </label>
+          <label className="flex items-center gap-2 text-sm text-zinc-200">
+            <input
+              type="checkbox"
+              checked={showEyes}
+              onChange={(event) => setShowEyes(event.target.checked)}
+              className="h-4 w-4"
+            />
+            <span className="select-none">Render Eyes</span>
           </label>
         </div>
 
@@ -437,6 +545,7 @@ export default function MetaballAvatarGeneratorPage() {
                   size={size}
                   colorA={gradientStops[0].color}
                   colorB={gradientStops[1].color}
+                  showEyes={showEyes}
                   sceneScale={sceneScale}
                   xScale={xScale}
                   yScale={yScale}
@@ -462,6 +571,7 @@ export default function MetaballAvatarGeneratorPage() {
                   size={size}
                   colorA={gradientStops[0].color}
                   colorB={gradientStops[1].color}
+                  showEyes={showEyes}
                   sceneScale={sceneScale}
                   xScale={xScale}
                   yScale={yScale}
