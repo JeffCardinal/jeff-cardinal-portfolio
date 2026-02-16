@@ -61,7 +61,7 @@ export default function Page() {
         <Marquee
           pauseOnHover={false}
           speed={100}
-          className="border-t-[5px] border-b-[5px] border-black bg-yellow-300"
+          className="border-t-[5px] border-b-[5px] border-black bg-yellow-300 select-none"
         >
           <Scroller pad={true}> FEATURES </Scroller>
           <Scroller pad={false}>
@@ -523,7 +523,6 @@ export default function Page() {
             year="2026"
             tools="React, Tailwind, Three.js"
             imageName="metaball-avatar-generator.png"
-            imageHoverName="metaball-avatar-generator.png"
             bgColor="bg-black"
             borderColor="border-[#1694ff]"
             textColor="text-[#1694ff]"
