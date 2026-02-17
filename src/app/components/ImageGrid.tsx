@@ -108,12 +108,12 @@ const ImageGrid = () => {
                                 aspect-square w-10
                                 justify-self-end self-center
                                 mr-4 z-50 rounded-full
-                                outline outline-white outline-[5px]
+                                outline-[5px]
                                 transition-all duration-300
                                 group hover:outline-rose-500
                             "
                         >
-                            <div className="justify-right outline outline-white hover:outline-rose-500 transition-all duration-300 outline-[5px] p-2 rounded-full hover:fill-rose-500 fill-white">
+                            <div className="justify-right outline outline-rose-500 hover:outline-white transition-all duration-300 outline-[5px] p-2 rounded-full hover:fill-white fill-rose-500 hover:bg-rose-500">
                                 <svg
                                     className=""
                                     id="a" 
@@ -141,12 +141,12 @@ const ImageGrid = () => {
                                 aspect-square w-10
                                 justify-self-start self-center
                                 ml-4 z-50 rounded-full
-                                outline outline-white outline-[5px]
+                                outline-[5px]
                                 transition-all duration-300
                                 group hover:outline-rose-500
                             "
                         >
-                            <div className="justify-left outline outline-white hover:outline-rose-500 transition-all duration-300 outline-[5px] p-2 rounded-full -rotate-180 hover:fill-rose-500 fill-white">
+                            <div className="justify-left outline outline-rose-500 hover:outline-white transition-all duration-300 outline-[5px] p-2 rounded-full -rotate-180 hover:fill-white fill-rose-500 hover:bg-rose-500">
                                 <svg
                                     className=""
                                     id="a" 
@@ -161,14 +161,14 @@ const ImageGrid = () => {
                         </button>
                     </div>
                     
-                    <div className="font-distancia flex flex-col items-center justify-center text-center transition-all duration-300">
+                    <div className="font-distancia flex flex-col items-center justify-center text-center">
                         <span className="mt-[2px] font-bold">{imageNames[selectedIndex][0]}</span>
                         <a
                             href={imageNames[selectedIndex][2]}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex w-fit border-[4px] rounded-full px-3 pt-[2px] hover:text-rose-500 hover:border-rose-500"
+                            className="inline-flex w-fit border-[4px] rounded-full px-3 pt-[2px] text-rose-500 border-rose-500 hover:bg-rose-500 hover:text-white hover:border-white transition-all duration-300"
                         >
                             STREAM
                         </a>

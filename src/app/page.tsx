@@ -223,7 +223,7 @@ export default function Page() {
           >
             <div className="flex flex-col w-max">
               <Button
-                text={"Webtoy"}
+                text={"3D DEMO"}
                 link={"/bliss"}
                 textColor={"text-[#ea43a3]"}
                 hoverTextColor={"hover:text-white"}
@@ -516,7 +516,7 @@ export default function Page() {
           />
         </Drawer>
 
-        <Drawer title={"[TOYS]"} bgColor={"bg-lime-400"}>
+        <Drawer title={"[TOYBOX]"} bgColor={"bg-lime-400"}>
           <FeatureUIUX
             title="Metaball Avatar Generator"
             description="Have fun generating your own avatar."
@@ -537,35 +537,6 @@ export default function Page() {
               hoverBgColor={"hover:bg-[#1694ff]"}
               borderColor={"border-[#1694ff]"}
               hoverBorderColor={"hover:border-white"}
-              optional={"ml-0 mt-2"}
-              hoverGlyph={<ArrowNav color={"white"} />}
-              hoverable={true}
-              styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
-              shadow=""
-            />
-          </FeatureUIUX>
-
-          <FeatureUIUX
-            title="Bliss"
-            description="Playable in-browser 3D animation for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrushing, post-processing and smiley 3D model by Jeff Cardinal. Ferrite Core font by Froyo Tam."
-            year="2026"
-            tools="React, Tailwind, Three.js"
-            imageName="bliss-toy.jpg"
-            imageHoverName="bliss-toy-hover.jpg"
-            bgColor="bg-white"
-            borderColor="border-[#ea43a3]"
-            textColor="text-[#ea43a3]"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >
-            <Button
-              text={"Play"}
-              link={"/metaball-avatar-generator"}
-              textColor={"text-[#ea43a3]"}
-              hoverTextColor={"hover:text-white"}
-              bgColor={"bg-white"}
-              hoverBgColor={"hover:bg-[#ea43a3]"}
-              borderColor={"border-[#ea43a3]"}
-              hoverBorderColor={"hover:border-[#ea43a3]"}
               optional={"ml-0 mt-2"}
               hoverGlyph={<ArrowNav color={"white"} />}
               hoverable={true}
