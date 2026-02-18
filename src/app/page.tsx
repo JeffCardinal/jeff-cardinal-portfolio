@@ -582,8 +582,8 @@ export default function Page() {
             alt2={"Model"}
             imageName1={"fonts/PutOnASmileSm.png"}
             imageHover1Name={"fonts/PutOnASmile-Crumple-ColorCorrectedSm.png"}
-            imageName2={"fonts/supersonic6-edit.png"}
-            imageHover2Name={"fonts/supersonic6-edit-intense.png"}
+            imageName2={"fonts/meltdown.png"}
+            imageHover2Name={"fonts/meltdown-intense.png"}
             bgColor={"bg-black"}
             textColor={"text-white"}
           />
