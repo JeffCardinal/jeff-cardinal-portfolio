@@ -1,5 +1,12 @@
 "use client";
-import React, { ReactNode, useState, useEffect, useRef } from "react";
+import React, {
+  ReactNode,
+  useState,
+  useEffect,
+  useRef,
+  useId,
+  useLayoutEffect,
+} from "react";
 
 export default function Drawer({
 children,
@@ -21,20 +28,80 @@ children,
   const open = isControlled ? controlledOpen : uncontrolledOpen;
   const setOpen = isControlled ? controlledSetOpen : setUncontrolledOpen;
 
-  const [contentHeight, setContentHeight] = useState(0);
+  const [contentHeight, setContentHeight] = useState<number | "auto">(0);
   const contentRef = useRef<HTMLDivElement | null>(null);
+  const contentId = useId();
+  const frameARef = useRef<number | null>(null);
+  const frameBRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (contentRef.current) {
-      setContentHeight(contentRef.current.scrollHeight);
+  useLayoutEffect(() => {
+    const content = contentRef.current;
+    if (!content) {
+      return;
     }
 
-    setTimeout(() => {
+    if (frameARef.current !== null) {
+      cancelAnimationFrame(frameARef.current);
+      frameARef.current = null;
+    }
+    if (frameBRef.current !== null) {
+      cancelAnimationFrame(frameBRef.current);
+      frameBRef.current = null;
+    }
+
+    if (open) {
+      setContentHeight(content.scrollHeight);
+      return;
+    }
+
+    const renderedHeight = Math.ceil(content.getBoundingClientRect().height);
+    setContentHeight(renderedHeight);
+    frameARef.current = requestAnimationFrame(() => {
+      frameBRef.current = requestAnimationFrame(() => {
+        setContentHeight(0);
+        frameBRef.current = null;
+      });
+      frameARef.current = null;
+    });
+  }, [open]);
+
+  useEffect(() => {
+    return () => {
+      if (frameARef.current !== null) {
+        cancelAnimationFrame(frameARef.current);
+      }
+      if (frameBRef.current !== null) {
+        cancelAnimationFrame(frameBRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const content = contentRef.current;
+    if (!content || typeof ResizeObserver === "undefined") {
+      return;
+    }
+
+    const observer = new ResizeObserver(() => {
+      setContentHeight(content.scrollHeight);
+    });
+
+    observer.observe(content);
+    return () => observer.disconnect();
+  }, [open]);
+
+  useEffect(() => {
+    let observer: IntersectionObserver | null = null;
+    const timeout = window.setTimeout(() => {
       const observableElements = document.querySelectorAll(
         ".observableLeft, .observableRight"
       );
 
-      const observer = new IntersectionObserver(
+      observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.target.classList.contains("observableLeft")) {
@@ -50,7 +117,7 @@ children,
               );
             }
             if (entry.isIntersecting) {
-              observer.unobserve(entry.target);
+              observer?.unobserve(entry.target);
               entry.target.classList.remove("opacity-0");
               entry.target.classList.remove("observableLeft");
               entry.target.classList.remove("observableRight");
@@ -61,9 +128,14 @@ children,
       );
 
       observableElements.forEach((element) => {
-        observer.observe(element);
+        observer?.observe(element);
       });
     }, 250);
+
+    return () => {
+      window.clearTimeout(timeout);
+      observer?.disconnect();
+    };
   }, [open]);
 
   return (
@@ -77,7 +149,7 @@ children,
           ${open ? "py-8" : "py-16"}
         `}
         aria-expanded={open}
-        aria-controls="accordion-content"
+        aria-controls={contentId}
         role="button"
       >
         <span className="w-full block text-4xl text-center text-black font-distancia pt-2">
@@ -92,13 +164,23 @@ children,
       </div>
 
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out
-          ${open ? `max-h-[${contentHeight}px]` : "max-h-0"}
-        `}
-        id="accordion-content"
-        ref={contentRef}
+        className="overflow-hidden transition-[height] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+        id={contentId}
+        style={{ height: contentHeight === "auto" ? "auto" : `${contentHeight}px` }}
+        onTransitionEnd={(event) => {
+          if (event.target !== event.currentTarget || event.propertyName !== "height") {
+            return;
+          }
+          if (open) {
+            setContentHeight("auto");
+          } else {
+            setContentHeight(0);
+          }
+        }}
       >
-        {open && <div className="overflow-hidden">{children}</div>}
+        <div ref={contentRef} className="overflow-hidden">
+          {children}
+        </div>
       </div>
     </>
   );

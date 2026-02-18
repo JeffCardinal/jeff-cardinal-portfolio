@@ -35,27 +35,40 @@ const ImageGrid = () => {
     }, [selectedIndex]);
 
     useEffect(() => {
-        setTimeout(() => {
-          const observableElements = document.querySelectorAll('.observable');
-    
-          const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.target.classList.contains('observable')) {
-                  entry.target.classList.toggle('animate-loadIn', entry.isIntersecting);
-                }
-                if (entry.isIntersecting) {
-                  observer.unobserve(entry.target);
-                  entry.target.classList.remove('opacity-0');
-                  entry.target.classList.remove('observable');
-                }
-              })
-          }, { threshold: 1 });
-      
-          observableElements.forEach((element) => {
-            observer.observe(element);
-          });
-        }, 250)
-      }, [open])
+        const timeout = window.setTimeout(() => {
+            const observableElements = document.querySelectorAll('.observable');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.target.classList.contains('observable')) {
+                        entry.target.classList.toggle('animate-loadIn', entry.isIntersecting);
+                    }
+                    if (entry.isIntersecting) {
+                        observer.unobserve(entry.target);
+                        entry.target.classList.remove('opacity-0');
+                        entry.target.classList.remove('observable');
+                    }
+                })
+            }, { threshold: 1 });
+            observableElements.forEach((element) => {
+                observer.observe(element);
+            });
+        }, 250);
+
+        return () => window.clearTimeout(timeout);
+      }, []);
+
+    useEffect(() => {
+        if (selectedIndex === null) {
+            return;
+        }
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [selectedIndex]);
 
     const closeModal = () => {
         setIsVisible(false);
