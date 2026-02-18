@@ -29,10 +29,17 @@ children,
   const setOpen = isControlled ? controlledSetOpen : setUncontrolledOpen;
 
   const [contentHeight, setContentHeight] = useState<number | "auto">(0);
+  const [isResizingWindow, setIsResizingWindow] = useState(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const contentId = useId();
   const frameARef = useRef<number | null>(null);
   const frameBRef = useRef<number | null>(null);
+  const resizeTimeoutRef = useRef<number | null>(null);
+  const openRef = useRef(open);
+
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
 
   useLayoutEffect(() => {
     const content = contentRef.current;
@@ -66,7 +73,28 @@ children,
   }, [open]);
 
   useEffect(() => {
+    const onResize = () => {
+      setIsResizingWindow(true);
+      if (openRef.current) {
+        setContentHeight("auto");
+      }
+
+      if (resizeTimeoutRef.current !== null) {
+        window.clearTimeout(resizeTimeoutRef.current);
+      }
+
+      resizeTimeoutRef.current = window.setTimeout(() => {
+        setIsResizingWindow(false);
+        resizeTimeoutRef.current = null;
+      }, 150);
+    };
+
+    window.addEventListener("resize", onResize);
     return () => {
+      window.removeEventListener("resize", onResize);
+      if (resizeTimeoutRef.current !== null) {
+        window.clearTimeout(resizeTimeoutRef.current);
+      }
       if (frameARef.current !== null) {
         cancelAnimationFrame(frameARef.current);
       }
@@ -87,12 +115,15 @@ children,
     }
 
     const observer = new ResizeObserver(() => {
+      if (isResizingWindow) {
+        return;
+      }
       setContentHeight(content.scrollHeight);
     });
 
     observer.observe(content);
     return () => observer.disconnect();
-  }, [open]);
+  }, [open, isResizingWindow]);
 
   useEffect(() => {
     let observer: IntersectionObserver | null = null;
@@ -164,9 +195,12 @@ children,
       </div>
 
       <div
-        className="overflow-hidden transition-[height] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+        className="overflow-hidden transition-[height] ease-[cubic-bezier(0.22,1,0.36,1)]"
         id={contentId}
-        style={{ height: contentHeight === "auto" ? "auto" : `${contentHeight}px` }}
+        style={{
+          height: contentHeight === "auto" ? "auto" : `${contentHeight}px`,
+          transitionDuration: isResizingWindow ? "0ms" : "600ms",
+        }}
         onTransitionEnd={(event) => {
           if (event.target !== event.currentTarget || event.propertyName !== "height") {
             return;
