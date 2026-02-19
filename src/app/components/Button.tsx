@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link';
-import React, { Component, ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 export default function Button ({
     text,
     link,
+    openInNewTab = true,
     textColor,
     hoverTextColor,
     bgColor,
@@ -20,9 +21,10 @@ export default function Button ({
 } : {
     text: string,
     link: string,
+    openInNewTab?: boolean,
     textColor: string,
     hoverTextColor: string,
-    bgColor: string,
+    bgColor?: string,
     hoverBgColor: string,
     borderColor: string,
     hoverBorderColor: string,
@@ -43,7 +45,7 @@ export default function Button ({
     }, []);
     
     return (
-        <Link href={link} target="_blank">
+        <Link href={link} target={openInNewTab ? "_blank" : undefined}>
             <button
                 onMouseEnter={() => setHovering(false)}
                 onMouseLeave={() => setHovering(true)}

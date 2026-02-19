@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import Marquee from "react-fast-marquee";
+import { useState } from "react";
 
 import CodeFeature from "./components/CodeFeature";
 import Container from "./components/Container";
@@ -37,7 +37,6 @@ export default function Page() {
 
   gsap.registerPlugin(MorphSVGPlugin);
 
-  // TODO: Refactor to use a context or global state management solution
   const [openId, setOpenId] = useState<string | null>(null);
 
   const openDrawer = (openId: string) => {
@@ -101,7 +100,10 @@ export default function Page() {
           </Scroller>
         </Marquee>
 
-        <Drawer title="[GFX]" bgColor="bg-orange-400">
+        <Drawer
+          title="[GFX]"
+          bgColor="bg-orange-400"
+        >
           <Feature
             title="Bang Bang Bang"
             description={`Techno track cover artwork concept. A stack of identical forged steel sculptures each reading "BANG" sits in a pool of 9mm bullets. Characters are custom-made in Illustrator, see below for gridlines.`}
@@ -161,6 +163,7 @@ export default function Page() {
               <Button
                 text={"3D Demo"}
                 link={"/windows-angel"}
+                openInNewTab={true}
                 textColor={"text-[#ea43a3]"}
                 hoverTextColor={"hover:text-white"}
                 bgColor={"bg-white"}
@@ -372,15 +375,24 @@ export default function Page() {
           </Feature>
         </Drawer>
 
-        <Drawer title={"[VFX]"} bgColor={"bg-rose-400"}>
+        <Drawer
+          title={"[VFX]"}
+          bgColor={"bg-rose-400"}
+        >
           <VideoFeature />
         </Drawer>
 
-        <Drawer title={"[MUSIC]"} bgColor={"bg-purple-400"}>
+        <Drawer
+          title={"[MUSIC]"}
+          bgColor={"bg-purple-400"}
+        >
           <ImageGrid />
         </Drawer>
 
-        <Drawer title={"[CODE]"} bgColor={"bg-sky-400"}>
+        <Drawer
+          title={"[CODE]"}
+          bgColor={"bg-sky-400"}
+        >
           <CodeFeature
             title="GOJIRA - SYNTH OSC"
             bgColor="bg-black"
@@ -388,7 +400,10 @@ export default function Page() {
           />
         </Drawer>
 
-        <Drawer title={"[UI/UX]"} bgColor={"bg-teal-400"}>
+        <Drawer
+          title={"[UI/UX]"}
+          bgColor={"bg-teal-400"}
+        >
           <FeatureUIUX
             title="CD Jacket"
             description="3D motion graphics UI animating a holographic CD jacket. Idea for a rare music drop or pre-save."
@@ -401,16 +416,21 @@ export default function Page() {
             textColor="text-indigo-300"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
           >
-            <div className="pt-2">
-              <Link
-                href="https://jeffcardinal.com/windows-angel"
-                target="_blank"
-              >
-                <button className="pt-[2px] px-4 mr-4 border-[6px] border-indigo-300 text-indigo-300 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
-                  Demo
-                </button>
-              </Link>
-            </div>
+            <Button
+              text={"Play"}
+              link={"/windows-angel"}
+              openInNewTab={true}
+              textColor={"text-indigo-300"}
+              hoverTextColor={"hover:text-white"}
+              hoverBgColor={"hover:bg-indigo-500"}
+              borderColor={"border-indigo-300"}
+              hoverBorderColor={"hover:border-white"}
+              optional={"ml-0 mt-2"}
+              hoverGlyph={<ArrowNav color={"white"} />}
+              hoverable={true}
+              styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
+              shadow=""
+            />
           </FeatureUIUX>
           <FeatureUIUX
             title="GPU Booking"
@@ -424,16 +444,22 @@ export default function Page() {
             textColor="text-indigo-500"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
           >
-            <div className="pt-2 invisible lg:visible">
-              <Link
-                href="https://nvdia-gpu-booking-example.vercel.app/"
-                target="_blank"
-              >
-                <button className="pt-[2px] px-4 mr-4 border-[6px] border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:border-white rounded-full transition duration-300 font-distancia text-2xl">
-                  Demo
-                </button>
-              </Link>
-            </div>
+            <Button
+              text={"Demo"}
+              link={"https://nvdia-gpu-booking-example.vercel.app/"}
+              openInNewTab={true}
+              textColor={"text-indigo-500"}
+              hoverTextColor={"hover:text-white"}
+              bgColor={"bg-black"}
+              hoverBgColor={"hover:bg-indigo-500"}
+              borderColor={"border-indigo-500"}
+              hoverBorderColor={"hover:border-white"}
+              optional={"ml-0 mt-2"}
+              hoverGlyph={<ArrowNav color={"white"} />}
+              hoverable={true}
+              styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
+              shadow="shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full"
+            />
           </FeatureUIUX>
           <FeatureUIUX
             title="Social Portal"
@@ -447,21 +473,27 @@ export default function Page() {
             textColor="text-white"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
           >
-            <div className="pt-2 flex flex-row align-middle">
-              <Link
-                href="https://jeff-cardinal-website.vercel.app/"
-                target="_blank"
-                className="hidden lg:flex"
-              >
-                <button className="pt-[2px] px-4 mr-6 border-[6px] border-white text-white hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl">
-                  Demo
-                </button>
-              </Link>
+            <div className="flex flex-col w-max">
+              <Button
+                text={"Demo"}
+                link={"https://jeff-cardinal-website.vercel.app/"}
+                textColor={"text-white"}
+                hoverTextColor={"hover:text-black"}
+                bgColor={"bg-sky-500"}
+                hoverBgColor={"hover:bg-white"}
+                borderColor={"border-white"}
+                hoverBorderColor={"hover:border-black"}
+                optional={"ml-0 mt-2"}
+                hoverGlyph={<ArrowNav color={"black"} />}
+                hoverable={true}
+                styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
+                shadow=""
+              />
               <Link
                 href="https://github.com/JeffCardinal/JeffCardinalWebsite/"
                 target="_blank"
               >
-                <button className="border-[6px] border-white mr-4 hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row">
+                <button className="border-[6px] border-white mr-4 hover:bg-white hover:text-black hover:border-black rounded-full transition duration-300 font-distancia text-2xl flex flex-row mt-6">
                   <div className="h-6 w-6 ml-2 mt-1">
                     <FontAwesomeIcon icon={faGithub} />
                   </div>
@@ -516,7 +548,10 @@ export default function Page() {
           />
         </Drawer>
 
-        <Drawer title={"[TOYBOX]"} bgColor={"bg-lime-400"}>
+        <Drawer
+          title={"[TOYBOX]"}
+          bgColor={"bg-lime-400"}
+        >
           <FeatureUIUX
             title="Metaball Avatar Generator"
             description="Have fun generating your own avatar."
@@ -531,6 +566,7 @@ export default function Page() {
             <Button
               text={"Play"}
               link={"/metaball-avatar-generator"}
+              openInNewTab={true}
               textColor={"text-[#1694ff]"}
               hoverTextColor={"hover:text-white"}
               bgColor={"bg-black"}
