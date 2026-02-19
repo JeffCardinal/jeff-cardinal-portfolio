@@ -353,6 +353,7 @@ export default function VideoCarousel25D({ items }: Props) {
                         className={`px-2 sm:px-4 mr-0 pt-[2px] outline outline-[5px] outline-black hover:text-rose-500 hover:outline-rose-500 bg-white text-black rounded-full font-distancia text-sm lg:text-lg whitespace-nowrap transition-all duration-300 ${
                           abs === 0 ? "" : "pointer-events-none"
                         }`}
+                        target="_blank"
                         aria-disabled={abs !== 0}
                         tabIndex={abs === 0 ? 0 : -1}
                         onClick={(event) => event.stopPropagation()}
