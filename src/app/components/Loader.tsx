@@ -9,13 +9,15 @@ export default function Loader() {
         {createPortal(
           <div id="loader"
             style={{
-              minHeight: "100vh",
-              minWidth: "100vw",
+              height: "100dvh",
+              width: "100dvw",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
               background: "rgba(0, 0, 0)",
+              overflow: "hidden",
+              touchAction: "none",
               position: "fixed",
               top: 0,
               left: 0,
@@ -57,10 +59,10 @@ export default function Loader() {
               </Marquee>
             </div>
 
-            <div className="z-10">
-              <div className="relative w-[450px] h-[450px] flex items-center justify-center">
+            <div className="z-10 absolute inset-0 h-[100dvh] flex items-center justify-center">
+              <div className="relative w-[500px] h-[500px] flex items-center justify-center">
               <div className="absolute top-0 left-0 w-full h-full flex items-center pointer-events-none">
-                <svg width="400" height="400" viewBox="0 0 400 400">
+                <svg width="600" height="600" viewBox="0 0 400 400">
                   <defs>
                     <path
                       id="circlePath"
