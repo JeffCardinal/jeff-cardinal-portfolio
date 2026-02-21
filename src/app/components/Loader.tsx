@@ -11,8 +11,6 @@ export default function Loader() {
             style={{
               height: "100dvh",
               width: "100dvw",
-              minHeight: "100vh",
-              minWidth: "100vw",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
