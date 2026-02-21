@@ -22,6 +22,22 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Displace } from "lamina";
 import Striplight from "./3d/Striplight";
 
+type BubbleConfig = {
+  id: number;
+  position: [number, number, number];
+  scale: number;
+  isSpawned: boolean;
+  initialVelocity?: [number, number, number];
+};
+
+const INITIAL_BUBBLES: BubbleConfig[] = [
+  { id: 1, position: [-5, 5, -3], scale: 1, isSpawned: false },
+  { id: 2, position: [-4, 1.5, 6], scale: 1, isSpawned: false },
+  { id: 3, position: [4, 2, 4], scale: 1, isSpawned: false },
+  { id: 4, position: [-2, -0.6, 7.5], scale: 1, isSpawned: false },
+  { id: 5, position: [8, 1, 2], scale: 1, isSpawned: false },
+];
+
 function ThreeDText({
   font = "/fonts/Distancia-800-ExtraBold.json",
   text,
@@ -155,6 +171,56 @@ export default function Three() {
   const { progress } = useProgress();
   const isLoaded = progress === 100;
   const [isMobile, setIsMobile] = useState(false);
+  const [bubbles, setBubbles] = useState<BubbleConfig[]>(INITIAL_BUBBLES);
+  const nextBubbleId = useRef(INITIAL_BUBBLES.length + 1);
+
+  const removeBubble = (id: number) => {
+    setBubbles((prev) => prev.filter((bubble) => bubble.id !== id));
+  };
+
+  const spawnFromBubble = (
+    origin: [number, number, number],
+    parentScale: number,
+    parentCurrentScale: number
+  ) => {
+    const MAX_BUBBLES = 24;
+    setBubbles((prev) => {
+      const remaining = MAX_BUBBLES - prev.length;
+      if (remaining <= 0) return prev;
+
+      const spawnCount = Math.min(Math.random() < 0.5 ? 1 : 2, remaining);
+      const spawned: BubbleConfig[] = Array.from({ length: spawnCount }, () => {
+        const baseSpeed = 0.8 + Math.random() * 3.8;
+        const velocity: [number, number, number] = [
+          (Math.random() * 2 - 1) * baseSpeed,
+          (Math.random() * 2 - 1) * baseSpeed,
+          (Math.random() * 2 - 1) * baseSpeed * 0.18,
+        ];
+        const parentEffectiveScale = Math.min(parentScale, parentCurrentScale);
+        const maxChildScale = Math.max(0.08, parentEffectiveScale);
+        const minChildScale = Math.max(0.06, maxChildScale * 0.45);
+        const scale = THREE.MathUtils.clamp(
+          maxChildScale * (0.45 + Math.random() * 0.35),
+          minChildScale,
+          maxChildScale
+        );
+
+        return {
+          id: nextBubbleId.current++,
+          position: [
+            origin[0] + (Math.random() - 0.5) * 0.4,
+            origin[1] + (Math.random() - 0.5) * 0.4,
+            origin[2] + (Math.random() - 0.5) * 0.2,
+          ],
+          scale,
+          isSpawned: true,
+          initialVelocity: velocity,
+        };
+      });
+
+      return [...prev, ...spawned];
+    });
+  };
 
   const checkScreenSize = () => {
     setIsMobile(window.innerWidth <= 800);
@@ -178,11 +244,19 @@ export default function Three() {
         <React.Suspense fallback={<Loader />}>
           {!isMobile && (
             <group>
-              <Blob scale={1} position={[-5, 5, -3]} />
-              <Blob scale={1} position={[-4, 1.5, 6]} />
-              <Blob scale={1} position={[4, 2, 4]} />
-              <Blob scale={1} position={[-2, -0.6, 7.5]} />
-              <Blob scale={1} position={[8, 1, 2]} />
+              {bubbles.map((bubble) => (
+                <Blob
+                  key={bubble.id}
+                  position={bubble.position}
+                  scale={bubble.scale}
+                  isSpawned={bubble.isSpawned}
+                  initialVelocity={bubble.initialVelocity}
+                  onBubbleClick={spawnFromBubble}
+                  onExpire={
+                    bubble.isSpawned ? () => removeBubble(bubble.id) : undefined
+                  }
+                />
+              ))}
             </group>
           )}
           {isLoaded && <JeffCardinalText />}
