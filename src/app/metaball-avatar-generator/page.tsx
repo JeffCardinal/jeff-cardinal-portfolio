@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, MarchingCube, MarchingCubes, OrbitControls, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
+import Footer from '../components/Footer';
 
 type Circle = {
   id: string;
@@ -583,6 +584,7 @@ export default function MetaballAvatarGeneratorPage() {
           </div>
         </div>
       </section>
+      <Footer color={"white"} bgColor={"bg-black"} />
     </main>
   );
 }

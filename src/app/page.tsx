@@ -625,7 +625,7 @@ export default function Page() {
           />
         </Drawer>
 
-        <Footer textColor={"text-black"} bgColor={"bg-white"} />
+        <Footer color={"black"} bgColor={"bg-white"} />
         <ScrollToTopButton />
       </Container>
     </div>
