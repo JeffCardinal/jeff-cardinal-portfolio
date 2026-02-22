@@ -135,7 +135,7 @@ function Smiley() {
     const mouseVector = new THREE.Vector3(
       mousePosition.x,
       mousePosition.y,
-      0.5
+      0.5,
     );
     mouseVector.unproject(camera);
 
@@ -147,7 +147,7 @@ function Smiley() {
     const worldPosition = new THREE.Vector3(
       smileyPosition.x,
       smileyPosition.y,
-      0
+      0,
     );
     worldPosition.unproject(camera);
     ref.current.position.set(worldPosition.x, worldPosition.y, -2);
@@ -181,7 +181,7 @@ export default function Three() {
   const spawnFromBubble = (
     origin: [number, number, number],
     parentScale: number,
-    parentCurrentScale: number
+    parentCurrentScale: number,
   ) => {
     const MAX_BUBBLES = 24;
     setBubbles((prev) => {
@@ -202,7 +202,7 @@ export default function Three() {
         const scale = THREE.MathUtils.clamp(
           maxChildScale * (0.45 + Math.random() * 0.35),
           minChildScale,
-          maxChildScale
+          maxChildScale,
         );
 
         return {

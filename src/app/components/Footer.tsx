@@ -1,5 +1,11 @@
-'use client';
-import React, { useRef, useLayoutEffect, useState, Suspense, useEffect } from "react";
+"use client";
+import React, {
+  useRef,
+  useLayoutEffect,
+  useState,
+  Suspense,
+  useEffect,
+} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Canvas } from "@react-three/fiber";
@@ -8,12 +14,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import JCLogo3D from "./3d/JCLogo3D";
 
-type Props = { bgColor?: string; textColor?: string };
+type Props = { bgColor?: string; color?: string };
 
 export default function Footer({
   bgColor = "bg-black",
-  textColor = "text-white",
+  color = "black",
 }: Props) {
+  const footerNavButtonClass =
+    `text-${color} pt-1 flex justify-center px-4 my-2 border-[6px] border-${color} rounded-full text-2xl transition-all duration-300 ease-in-out font-distancia text-md hover:border-rose-500 hover:text-rose-500`;
   const rootRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
@@ -30,8 +38,8 @@ export default function Footer({
   const socialCtrl = useAnimationControls();
 
   useEffect(() => {
-    if (inView && logoReady && setupDone && !playIntro) setPlayIntro(true)
-  }, [inView, logoReady, setupDone, playIntro])
+    if (inView && logoReady && setupDone && !playIntro) setPlayIntro(true);
+  }, [inView, logoReady, setupDone, playIntro]);
 
   useLayoutEffect(() => {
     if (!inView || !logoReady || setupDone) return;
@@ -47,8 +55,8 @@ export default function Footer({
           top: 0,
           height: window.innerHeight,
         } as DOMRect)
-      : rootRef.current?.getBoundingClientRect() ??
-        ({ left: 0, width: 0, top: 0, height: window.innerHeight } as DOMRect);
+      : (rootRef.current?.getBoundingClientRect() ??
+        ({ left: 0, width: 0, top: 0, height: window.innerHeight } as DOMRect));
 
     const anchorCenter = isLg
       ? anchorRect.left + (anchorRect as any).width / 2
@@ -121,29 +129,17 @@ export default function Footer({
         animate={navCtrl}
         style={{ opacity: 0 }}
       >
-        <div className={`text-2xl ${textColor} z-0`}>
+        <div className={`text-2xl text-${color} z-0 flex-col`}>
           <div className="font-distancia text-4xl">Navi</div>
-          <Link
-            className="hover:text-rose-500 transition-colors duration-300"
-            href="/"
-          >
+          <Link className={footerNavButtonClass} href="/">
             HOME
           </Link>
-          <br />
-          <Link
-            className="hover:text-rose-500 transition-colors duration-300"
-            href="/about"
-          >
+          <Link className={footerNavButtonClass} href="/about">
             ABOUT
           </Link>
-          <br />
-          <Link
-            className="hover:text-rose-500 transition-colors duration-300"
-            href="/resume.pdf"
-          >
+          <Link className={footerNavButtonClass} href="/resume.pdf">
             RESUME
           </Link>
-          <br />
         </div>
       </motion.div>
 
@@ -154,8 +150,8 @@ export default function Footer({
         animate={socialCtrl}
         style={{ opacity: 0 }}
       >
-        <div className={`text-2xl ${textColor} z-0`}>
-          <div className="font-distancia text-4xl">Social</div>
+        <div className={`text-2xl text-${color} z-0`}>
+          <div className="font-distancia text-4xl mb-2">Social</div>
           <div className="flex justify-center items-center gap-6">
             <Link href="https://www.instagram.com/vaperror">
               <div className="w-16 h-16 flex items-center justify-center">
