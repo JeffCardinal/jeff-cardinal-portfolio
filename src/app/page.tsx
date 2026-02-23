@@ -178,9 +178,8 @@ export default function Page() {
               />
               <Button
                 text={"Stream"}
-                link={
-                  "https://open.spotify.com/album/3DkLvKm9g4q7ABoGbbbKWy?si=xh6_LkneRPOElrs1LSEP3w, _blank"
-                }
+                link={"https://open.spotify.com/album/3DkLvKm9g4q7ABoGbbbKWy?si=xh6_LkneRPOElrs1LSEP3w"}
+                openInNewTab={true}
                 textColor={"text-[#ea43a3]"}
                 hoverTextColor={"hover:text-white"}
                 bgColor={"bg-white"}

@@ -4,11 +4,11 @@ const nextConfig = {
         return [
             {
                 source: "/api/data/:match*",
-                destination: "https://https://jeff-cardinal-portfolio.vercel.app/_vercel/insights/:match*",
+                destination: "https://jeff-cardinal-portfolio.vercel.app/_vercel/insights/:match*",
             },
             {
                 source: "/api/performance/:match*",
-                destination: "https://https://jeff-cardinal-portfolio.vercel.app/_vercel/speed-insights/:match*",
+                destination: "https://jeff-cardinal-portfolio.vercel.app/_vercel/speed-insights/:match*",
             },
         ];
     },

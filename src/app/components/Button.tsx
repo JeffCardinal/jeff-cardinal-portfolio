@@ -45,7 +45,7 @@ export default function Button ({
     }, []);
     
     return (
-        <Link href={link} target={openInNewTab ? "_blank" : undefined}>
+        <Link href={link} target={openInNewTab ? "_blank" : undefined} rel="noopener noreferrer">
             <button
                 onMouseEnter={() => setHovering(false)}
                 onMouseLeave={() => setHovering(true)}
