@@ -125,7 +125,7 @@ export default function Footer({
       {/* Navi */}
       <motion.div
         ref={navRef}
-        className="flex lg:pt-8 min-w-[300px] justify-center text-center"
+        className="flex min-w-[300px] justify-center text-center"
         animate={navCtrl}
         style={{ opacity: 0 }}
       >
