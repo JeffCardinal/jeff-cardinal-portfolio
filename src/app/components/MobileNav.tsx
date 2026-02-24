@@ -106,7 +106,7 @@ export default function MobileNav({ children }: { children: ReactNode }) {
           <div className="font-distancia text-4xl">About</div>
         </Link>
         <Link
-          href="/resume.pdf"
+          href="/resume"
           className={`
             ${vis_3 ? "visible" : "invisible"}
             ${inEffect && isAnimating && "animate-easeInNav_3"}

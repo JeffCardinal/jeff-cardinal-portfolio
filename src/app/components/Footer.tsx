@@ -137,7 +137,7 @@ export default function Footer({
           <Link className={footerNavButtonClass} href="/about">
             ABOUT
           </Link>
-          <Link className={footerNavButtonClass} href="/resume.pdf">
+          <Link className={footerNavButtonClass} href="/resume">
             RESUME
           </Link>
         </div>
