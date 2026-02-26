@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Jeff Cardinal Portfolio",
-  description: "Jeff Cardinal's art and code portfolio website, coded in Next.js, Tailwind, and 3JS.",
+  description: "Jeff Cardinal's art and code portfolio website, coded in React, Next.js, Tailwind, and 3JS.",
 };
 
 export default function RootLayout({
