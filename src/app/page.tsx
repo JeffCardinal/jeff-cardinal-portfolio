@@ -32,6 +32,7 @@ import SparkleSvg from "./svg/SparkleSvg";
 
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import UnderConstruction from "./components/UnderConstruction";
 
 export default function Page() {
 
@@ -390,7 +391,7 @@ export default function Page() {
 
         <Drawer
           title={"[CODE]"}
-          bgColor={"bg-sky-400"}
+          bgColor={"bg-indigo-400"}
         >
           <CodeFeature
             title="GOJIRA - SYNTH OSC"
@@ -401,7 +402,7 @@ export default function Page() {
 
         <Drawer
           title={"[UI/UX]"}
-          bgColor={"bg-teal-400"}
+          bgColor={"bg-sky-400"}
         >
           <FeatureUIUX
             title="CD Jacket"
@@ -467,7 +468,7 @@ export default function Page() {
             tools="React, Vite, CSS3 Animations"
             imageName="ui-projects/jeffcardinal-2019.jpg"
             imageHoverName="ui-projects/jeffcardinal-2019.jpg"
-            bgColor="bg-sky-500"
+            bgColor="bg-blue-400"
             borderColor="border-white"
             textColor="text-white"
             font={"w-full block text-3xl lg:text-4xl font-distancia"}
@@ -519,7 +520,7 @@ export default function Page() {
 
         <Drawer
           title={"[BRAND]"}
-          bgColor={"bg-[#5ce37c]"}
+          bgColor={"bg-teal-400"}
         >
           <FeatureUIUX
             title="i2k Branding"
@@ -545,6 +546,13 @@ export default function Page() {
             bgColor={"bg-white"}
             textColor={"text-[#00bfff]"}
           />
+        </Drawer>
+
+        <Drawer
+          title={"[PROD]"}
+          bgColor={"bg-[#5ce37c]"}
+        > 
+          <UnderConstruction bgColor={"bg-black"} textColor={""}/>
         </Drawer>
 
         <Drawer
@@ -580,7 +588,7 @@ export default function Page() {
             />
           </FeatureUIUX>
         </Drawer>
-  
+
         <Drawer
           title={"[FONTS]"}
           bgColor={"bg-yellow-300"}
