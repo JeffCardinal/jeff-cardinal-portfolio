@@ -523,6 +523,29 @@ export default function Page() {
           bgColor={"bg-teal-400"}
         >
           <FeatureUIUX
+            title="FLOWGEAR"
+            description={`Work for FLOWGEAR - a rave series. Namu (mascot) illustrations and 3D model by Cubenatural.`}
+            year="2026"
+            tools="Illustrator, Photoshop"
+            imageName="flowgear/FlowgearShirtBlack.jpg"
+            imageHoverName="flowgear/FlowgearShirtBlack.jpg"
+            bgColor="bg-black"
+            borderColor="border-white"
+            textColor="text-white"
+            font={"w-full block text-3xl lg:text-4xl font-distancia"}
+          >          
+            <FeatureDouble
+              alt1={"Sky 909 Flyer"}
+              alt2={"c678924 performing in LA"}
+              imageName1={"flowgear/Sky909Flyer.jpg"}
+              imageHover1Name={"flowgear/Sky909Flyer.jpg"}
+              imageName2={"flowgear/c678924-LA.jpg"}
+              imageHover2Name={"flowgear/c678924-LA.jpg"}
+              bgColor={"bg-black"}
+              textColor={"text-white"}
+            />
+          </FeatureUIUX>
+          <FeatureUIUX
             title="i2k Branding"
             description={`i2K was a music festival in Richmond, Virginia. In order to ensure pixel perfection, a grid system was enforced to create the illusory 3D model, which was then captured by an orthographic camera. The final render is composited in Photoshop with precise masking and additional shading. Dynamic logo type was used for promotional motion graphics. A limited t-shirt was screen-printed, featuring an android woman and WinAmp-skin informed mp3 player.`}
             year="2025"
