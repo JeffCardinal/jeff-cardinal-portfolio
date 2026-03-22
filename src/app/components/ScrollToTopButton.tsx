@@ -1,9 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react';
+import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
 
 export default function ScrollToTopButton() {
   const [hover, setHover] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobileDevice();
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
@@ -15,11 +17,22 @@ export default function ScrollToTopButton() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isVisible) {
+      setHover(false);
+    }
+  }, [isVisible]);
+
   const scrollToTop = () => {
     if (isVisible) {
+      if (isMobile) {
+        setHover(true);
+      }
+
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
@@ -27,15 +40,33 @@ export default function ScrollToTopButton() {
     }
   };
 
+  useEffect(() => {
+    if (!isMobile || !hover) {
+      return;
+    }
+
+    if (window.scrollY <= 0) {
+      setHover(false);
+    }
+  }, [hover, isMobile, isVisible]);
+
   return (
     <button
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          setHover(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) {
+          setHover(false);
+        }
+      }}
       onClick={scrollToTop}
       className={`
         fixed bottom-4 right-4 p-4 rounded-full shadow-lg
         transition-all duration-300 ease-in-out 
-        ${isVisible ? "opacity-100" : "opacity-0 cursor-default"}
+        ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none cursor-default"}
         ${hover ? "bg-rose-500 border-white" : "bg-white border-black"}
         border-[5px]`}
       style={{ zIndex: 1000 }}
