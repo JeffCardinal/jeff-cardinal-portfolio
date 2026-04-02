@@ -105,7 +105,7 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
-          <Feature
+          {/* <Feature
             title="Bang Bang Bang"
             description={`Techno track cover artwork concept. A stack of identical forged steel sculptures each reading "BANG" sits in a pool of 9mm bullets. Characters are custom-made in Illustrator, see below for gridlines.`}
             inspiration="Metal materials and neo-grunge."
@@ -118,7 +118,7 @@ export default function Page() {
             borderColor="border-[#ea0000]"
           >
             <Image src={`/images/bang-guide.jpg`} alt={"Bang Bang Bang Guidelines"} width={1000} height={1000} />
-          </Feature>
+          </Feature> */}
           <FeatureGlass
             title="Folder Icon"
             description="2.5D folder icon. Hover for the original. Original was purposed for the single Open Me Up off of VAPERROR - System Delight (2015). This is a refresh of that icon in a more modern, high resolution style."
