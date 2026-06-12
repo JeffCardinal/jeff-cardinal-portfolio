@@ -107,7 +107,7 @@ export default function Page() {
         >
           <FeatureGlass
             title="BUGLAND"
-            description={<>Leaked over for an upcoming techno album "BUGLAND TRAX". Original robotic bug characters tower over you in a sunny outdoor environment. Additional rigging and modeling assistance provided by Zeke, AKA <a target="_blank" className="text-[#ea43a3] hover:text-white transition duration-300 underline" href="https://www.instagram.com/woozieface/">Woozieface.</a></>}
+            description={<>Leaked cover for an upcoming techno album "BUGLAND TRAX". Original robotic bug characters tower over you in a sunny outdoor environment. Additional rigging and modeling assistance provided by Zeke, AKA <a target="_blank" className="text-[#ea43a3] hover:text-white transition duration-300 underline" href="https://www.instagram.com/woozieface/">Woozieface.</a></>}
             inspiration="Early 3D, Banjo Kazooie, A Bug's Life"
             tools="Blender"
             year="2026"
