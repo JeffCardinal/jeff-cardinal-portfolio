@@ -17,7 +17,7 @@ export default function Feature({
 }: {
   children: ReactNode;
   title: string;
-  description: string;
+  description: ReactNode;
   inspiration: ReactNode;
   tools: string;
   year: string;

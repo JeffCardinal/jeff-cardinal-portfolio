@@ -22,7 +22,7 @@ export default function Feature({
   children: ReactNode;
   id?: string;
   title: string;
-  description: string;
+  description: ReactNode;
   inspiration: ReactNode;
   tools: string;
   year: string;
@@ -61,7 +61,7 @@ export default function Feature({
         <div className="flex flex-1 justify-center lg:justify-end observableLeft opacity-0 z-10">
           <div className="text-black flex justify-center items-center">
             <Image
-              className="pb-8 lg:pb-0 object-fill w-full max-w-[1000px]"
+              className="pb-8 lg:pb-0 object-fill"
               onMouseEnter={hasHoverImage ? () => setHovering(false) : undefined}
               onMouseLeave={hasHoverImage ? () => setHovering(true) : undefined}
               src={`/images/${imageSrc}`}

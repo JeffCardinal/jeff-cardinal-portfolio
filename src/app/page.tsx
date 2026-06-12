@@ -105,20 +105,35 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
-          {/* <Feature
+          <FeatureGlass
+            title="BUGLAND"
+            description={<>Leaked over for an upcoming techno album "BUGLAND TRAX". Original robotic bug characters tower over you in a sunny outdoor environment. Additional rigging and modeling assistance provided by Zeke, AKA <a target="_blank" className="text-[#ea43a3] hover:text-white transition duration-300 underline" href="https://www.instagram.com/woozieface/">Woozieface.</a></>}
+            inspiration="Early 3D, Banjo Kazooie, A Bug's Life"
+            tools="Blender"
+            year="2026"
+            imageName="bugland.jpg"
+            bgColor="bg-white"
+            textColor="text-white"
+            headerTextColor="text-[#005DFB]"
+            borderColor="border-[#ea43a3]"
+            dontRenderVideo={true}
+            bigBgColor="bg-gradient-to-b from-[#005dfb] to-[#00fef2]"
+          >
+            {undefined}
+          </FeatureGlass>
+          <Feature
             title="Bang Bang Bang"
             description={`Techno track cover artwork concept. A stack of identical forged steel sculptures each reading "BANG" sits in a pool of 9mm bullets. Characters are custom-made in Illustrator, see below for gridlines.`}
             inspiration="Metal materials and neo-grunge."
             tools="Illustrator, Blender, Photoshop"
             year="2025"
             imageName="bangbangbang.jpg"
-            imageHoverName="bangbangbang.jpg"
             bgColor="bg-black"
             textColor="text-[#ea0000]"
             borderColor="border-[#ea0000]"
           >
             <Image src={`/images/bang-guide.jpg`} alt={"Bang Bang Bang Guidelines"} width={1000} height={1000} />
-          </Feature> */}
+          </Feature>
           <FeatureGlass
             title="Folder Icon"
             description="2.5D folder icon. Hover for the original. Original was purposed for the single Open Me Up off of VAPERROR - System Delight (2015). This is a refresh of that icon in a more modern, high resolution style."
@@ -289,8 +304,8 @@ export default function Page() {
           </Feature>
 
           <Feature
-            title="DR. GABBA Flyer"
-            description="Flyer advertisement for Chicago techno party at Empty Bottle."
+            title="DR. GABBA Flyers"
+            description="Flyer advertisements for various techno parties - Chicago at Empty Bottle, Montréal at Les Foufounes Électriques, and Elsewhere (Main Hall) in Brooklyn, New York."
             inspiration={
               <>
                 Liquid chrome entangles an iconic 90s acid smiley in Y2K
@@ -305,10 +320,14 @@ export default function Page() {
                   scrollTo={scrollTo} 
                 />
                 {" "}font.
+                <br/><br/>
+                The Montréal flyer features a balloon smiley physics simulation made in Blender.
+                <br/><br/>
+                The New York flyer references the Dragon Warrior Monsters 2 Official Strategy Guide for the Game Boy Color.
               </>
             }
-            tools="Cinema 4D, Illustrator, Photoshop"
-            year="2024"
+            tools="Cinema 4D, Blender, Illustrator, Photoshop"
+            year="2024-2025"
             imageName="drgabbaflyer.png"
             imageHoverName="drgabbaflyer.png"
             bgColor="bg-black"
@@ -317,10 +336,17 @@ export default function Page() {
           >
             {undefined}
           </Feature>
-
+          <FeatureDouble 
+            alt1={"DR. GABBA Montréal flyer"}
+            alt2={"Dragon Warrior-themed DR. GABBA with Kyruh and VAPERROR flyer"}
+            imageName1={"drgabba-montreal-4x5.jpg"}
+            imageName2={"gabba-dragon-warrior-poster-vaperror.jpg"}
+            bgColor={"bg-black"} 
+            textColor={""}
+          />
           <Feature
             title="PLUS100 Logo"
-            description="Logo for my record company, PLUS100 Records. Shown here is the logo. Click the button below to learn more."
+            description="Logo for my record production company, PLUS100 Records. Shown here is the logo. Click the button below to check out our Bandcamp."
             inspiration="Minimalism and kawaii Japanese emoji."
             tools="Photoshop"
             year="2018"
@@ -347,7 +373,7 @@ export default function Page() {
 
           <Feature
             title="Mana Pool Album Cover"
-            description="Album cover for my debut album, Mana Pool."
+            description={<>Album cover for my debut album, Mana Pool. Upscaled with help from <a target="_blank" className="text-white hover:text-white transition duration-300 underline" href="https://drewwise.com/">Drew Wise.</a></>}
             inspiration="Minimalistic aquatic ambiance."
             tools="Illustrator, Photoshop"
             year="2018"
@@ -479,7 +505,7 @@ export default function Page() {
                 link={"https://jeff-cardinal-website.vercel.app/"}
                 textColor={"text-white"}
                 hoverTextColor={"hover:text-black"}
-                bgColor={"bg-sky-500"}
+                bgColor={"bg-blue-400"}
                 hoverBgColor={"hover:bg-white"}
                 borderColor={"border-white"}
                 hoverBorderColor={"hover:border-black"}
