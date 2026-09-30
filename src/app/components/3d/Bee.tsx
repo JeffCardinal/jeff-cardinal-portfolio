@@ -75,10 +75,10 @@ export default function Bee({ mobile = false }: { mobile?: boolean }) {
 
     if (!beeRef.current) return;
     if (mobile) {
-      // Repeatedly peek up from the bottom, then drift back out over eight seconds.
+      // A low peek with a short rise over an eight-second cycle.
       const time = Math.max(entranceElapsed.current - 1, 0);
       const hiddenAmount = (1 + Math.cos(time * (2 * Math.PI / 8))) / 2;
-      const travel = size.length() * scale + viewport.height * 0.1;
+      const travel = viewport.height * 0.25;
       entranceRef.current.position.y = -travel * hiddenAmount
         + 0.04 * Math.sin(time * (2 * Math.PI / 3));
       entranceRef.current.visible = time > 0;

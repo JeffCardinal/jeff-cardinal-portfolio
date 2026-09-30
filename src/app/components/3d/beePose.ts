@@ -6,8 +6,8 @@ type BeeStartingPose = {
 };
 
 export const MOBILE_START_POSE: BeeStartingPose = {
-  position: [0, -0.45, 3],
-  rotation: [-30, -60, 0],
+  position: [0, -0.2, 6],
+  rotation: [-30, 0, 0],
 };
 
 export const DESKTOP_START_POSE: BeeStartingPose = {
