@@ -10,8 +10,11 @@ import {
   Lightformer,
   useProgress,
   Preload,
+  useFont,
 } from "@react-three/drei";
 import Blob from "./3d/Blob";
+import Bee from "./3d/Bee";
+import { entranceProgress } from "./3d/entrance";
 import * as THREE from "three";
 import NoiseGradientShaderMaterial from "./shaders/NoiseGradientShaderMaterial";
 
@@ -43,35 +46,70 @@ function ThreeDText({
   text,
   size = 1,
   position = [0, 0, 0],
+  waveTime,
+  letterOffset = 0,
 }: {
   font?: string;
   text?: string;
   size?: number;
   position?: [number, number, number];
+  waveTime: React.RefObject<number>;
+  letterOffset?: number;
 }) {
+  const loadedFont = useFont(font);
+  const letterRefs = useRef<(THREE.Group | null)[]>([]);
+  const letters = useMemo(() => {
+    let x = 0;
+    return Array.from(text ?? "").map((character) => {
+      const letter = { character, x };
+      x += (loadedFont.data.glyphs[character]?.ha ?? 0) / loadedFont.data.resolution;
+      return letter;
+    });
+  }, [loadedFont, text]);
+
+  useFrame(() => {
+    const elapsed = waveTime.current ?? 0;
+    const cycleTime = elapsed < 6 ? -1 : elapsed % 6;
+    letterRefs.current.forEach((letter, index) => {
+      if (!letter) return;
+      const localTime = cycleTime - (index + letterOffset) * 0.1;
+      letter.position.y = localTime > 0 && localTime < 0.6
+        ? Math.sin((localTime / 0.6) * Math.PI) ** 2 * 0.3
+        : 0;
+    });
+  });
+
   return (
     <>
       <group>
         <Center position={position}>
-          <Text3D
-            font={font}
-            scale={2 * size}
-            letterSpacing={0}
-            height={0.3 / size}
-            curveSegments={10}
-            bevelEnabled
-            bevelSize={0.05}
-            bevelSegments={1}
-            bevelThickness={0.05 / size}
-            position={position}
-          >
-            {text}
-            <meshStandardMaterial
-              color="white"
-              roughness={0.125}
-              metalness={1}
-            />
-          </Text3D>
+          <group scale={2 * size} position={position}>
+            {letters.map(({ character, x }, index) => (
+              <group
+                key={index}
+                position={[x, 0, 0]}
+                ref={(node) => { letterRefs.current[index] = node; }}
+              >
+                <Text3D
+                  font={font}
+                  letterSpacing={0}
+                  height={0.3 / size}
+                  curveSegments={10}
+                  bevelEnabled
+                  bevelSize={0.05}
+                  bevelSegments={1}
+                  bevelThickness={0.05 / size}
+                >
+                  {character}
+                  <meshStandardMaterial
+                    color="white"
+                    roughness={0.125}
+                    metalness={1}
+                  />
+                </Text3D>
+              </group>
+            ))}
+          </group>
         </Center>
       </group>
     </>
@@ -81,12 +119,23 @@ function ThreeDText({
 function JeffCardinalText() {
   const { viewport } = useThree();
   const scaleFactor = Math.min(viewport.width, viewport.height) * 0.065;
+  const entranceRef = useRef<THREE.Group>(null);
+  const elapsed = useRef(0);
+
+  useFrame((_, delta) => {
+    elapsed.current += delta;
+    if (!entranceRef.current) return;
+
+    const progress = entranceProgress(elapsed.current, 0, { damping: 4, frequency: 10 });
+    entranceRef.current.scale.setScalar(scaleFactor * progress);
+    entranceRef.current.visible = progress > 0;
+  });
 
   return (
-    <group scale={scaleFactor}>
+    <group ref={entranceRef} scale={0} visible={false}>
       <Float speed={3} rotationIntensity={0.5}>
-        <ThreeDText position={[-0.85, 0.8, 0]} text="Jeff" />
-        <ThreeDText position={[0.75, -0.8, 0]} size={0.45} text="Cardinal" />
+        <ThreeDText position={[-0.85, 0.8, 0]} text="Jeff" waveTime={elapsed} />
+        <ThreeDText position={[0.75, -0.8, 0]} size={0.45} text="Cardinal" waveTime={elapsed} letterOffset={4} />
       </Float>
     </group>
   );
@@ -260,6 +309,9 @@ export default function Three() {
             </group>
           )}
           {isLoaded && <JeffCardinalText />}
+          <Bee key={isMobile ? "mobile-bee" : "desktop-bee"} mobile={isMobile} />
+          <directionalLight position={[4, 6, 5]} intensity={3} />
+          <ambientLight intensity={0.7} />
           {/* <Smiley/> */}
 
           <Environment
