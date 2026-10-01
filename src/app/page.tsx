@@ -105,6 +105,19 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
+          <Feature
+            title="ENTER THE HIVE"
+            description={<>Leaked single cover for an upcoming techno single from "BUGLAND TRAX".</>}
+            inspiration="Early 3D, Banjo Kazooie"
+            tools="Blender"
+            year="2026"
+            imageName="bugland-EnterTheHive.jpg"
+            bgColor="bg-black"
+            textColor="text-[#fffc00]"
+            borderColor="border-[#fffc00]"
+          >
+            {undefined}
+          </Feature>
           <FeatureGlass
             title="BUGLAND"
             description={<>Leaked cover for an upcoming techno album "BUGLAND TRAX". Original robotic bug characters tower over you in a sunny outdoor environment. Additional rigging and modeling assistance provided by Zeke, AKA <a target="_blank" className="text-[#ea43a3] hover:text-white transition duration-300 underline" href="https://www.instagram.com/woozieface/">Woozieface.</a></>}
