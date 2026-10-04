@@ -3,9 +3,9 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { createLoaderDissolve } from "./createLoaderDissolve";
 import MetaballLoader from "./MetaballLoader";
 import Marquee from "react-fast-marquee";
-import { createLoaderDissolve } from "./createLoaderDissolve";
 
 export default function Loader() {
     const { active, errors } = useProgress();
