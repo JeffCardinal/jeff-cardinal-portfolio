@@ -5,6 +5,7 @@ import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Environment, OrbitControls, useCursor, useGLTF, useTexture, Text } from '@react-three/drei';
 import Loader from '../components/Loader';
+import LoaderRefractionSource from '../components/LoaderRefractionSource';
 import { HoloMaterial } from './holo';
 import { FrostedGlassMaterial } from './FrostedGlassMaterial';
 
@@ -451,7 +452,8 @@ export default function Three() {
     return (
         <div className="w-[100dvw] h-[100dvh] overflow-hidden">
             <Canvas camera={{ position: [0, 2, 10] }} >
-                <React.Suspense fallback={<Loader/>}>
+                <LoaderRefractionSource />
+                <React.Suspense fallback={null}>
                     <directionalLight position={[-2, 3, 5]} intensity={3} />
                     <OrbitControls/>
                     <group rotation={[0, -Math.PI / 2, 0]}>
@@ -470,6 +472,7 @@ export default function Three() {
                     {/* <mesh rotation={[-Math.PI / 2, 0, 0]}><TestPanel/></mesh> */}
                 </React.Suspense>
             </Canvas>
+            <Loader />
         </div>
     );
 }
