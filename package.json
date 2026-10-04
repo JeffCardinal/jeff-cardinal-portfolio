@@ -2,6 +2,9 @@
   "name": "jeff-cardinal-portfolio",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,7 +23,6 @@
     "gsap": "^3.14.2",
     "lamina": "^1.1.23",
     "next": "^16.3.8",
-    "node": "^26.10.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-fast-marquee": "^1.6.5",
@@ -31,7 +33,7 @@
   },
   "devDependencies": {
     "@types/flubber": "^0.4.0",
-    "@types/node": "^26.6.4",
+    "@types/node": "^24.19.1",
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
     "@types/react-fontawesome": "^1.6.8",
