@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import Loader from "../components/Loader";
+import LoaderRefractionSource from "../components/LoaderRefractionSource";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import * as THREE from "three";
@@ -113,7 +114,8 @@ export default function Three() {
           </div>
         </div>
         <Canvas camera={{ position: [0, 2, 10] }}>
-          <React.Suspense fallback={<Loader />}>
+          <LoaderRefractionSource />
+          <React.Suspense fallback={null}>
             <Environment
               preset="studio"
               backgroundIntensity={1}
@@ -126,6 +128,7 @@ export default function Three() {
             <OrbitControls enableZoom={false} />
           </React.Suspense>
         </Canvas>
+        <Loader />
       </div>
 
       {/* Process */}

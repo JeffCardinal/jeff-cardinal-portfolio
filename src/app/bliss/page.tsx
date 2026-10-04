@@ -11,6 +11,7 @@ import { PlaybackProvider, usePlayback } from './PlaybackContext';
 import { BurnShaderMaterial } from './BurnShaderMaterial';
 import { Environment } from '@react-three/drei';
 import Loader from '../components/Loader';
+import LoaderRefractionSource from '../components/LoaderRefractionSource';
 import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
 import { TextureLoader } from 'three';
 import PlayModal from './PlayModal';
@@ -478,7 +479,8 @@ export default function Three() {
                         gl.setClearColor(0x000000, 0);
                     }}
                 >
-                    <React.Suspense fallback={<Loader/>}>
+                    <LoaderRefractionSource />
+                    <React.Suspense fallback={null}>
                         <FlowerOrbitManager />
                         <directionalLight position={[-2, 3, 5]} intensity={1000} />
                         <Comp gyroBaseline={gyroBaseline} />
@@ -499,6 +501,7 @@ export default function Three() {
                         </mesh>
                     </React.Suspense>
                 </Canvas>
+                <Loader />
             </div>
             <PlayBlissButton />
         </PlaybackProvider>

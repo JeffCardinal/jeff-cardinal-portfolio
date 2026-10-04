@@ -21,6 +21,7 @@ import NoiseGradientShaderMaterial from "./shaders/NoiseGradientShaderMaterial";
 import RotatingText from "./RotatingText";
 import HelloText from "./HelloText";
 import Loader from "./Loader";
+import LoaderRefractionSource from "./LoaderRefractionSource";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Displace } from "lamina";
 import Striplight from "./3d/Striplight";
@@ -126,7 +127,7 @@ function JeffCardinalText() {
     elapsed.current += delta;
     if (!entranceRef.current) return;
 
-    const progress = entranceProgress(elapsed.current, 0, { damping: 4, frequency: 10 });
+    const progress = entranceProgress(elapsed.current, 0.75, { damping: 4, frequency: 10 });
     entranceRef.current.scale.setScalar(scaleFactor * progress);
     entranceRef.current.visible = progress > 0;
   });
@@ -219,7 +220,7 @@ function Smiley() {
 export default function Three() {
   const { progress } = useProgress();
   const isLoaded = progress === 100;
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const [bubbles, setBubbles] = useState<BubbleConfig[]>(INITIAL_BUBBLES);
   const nextBubbleId = useRef(INITIAL_BUBBLES.length + 1);
 
@@ -283,14 +284,15 @@ export default function Three() {
 
   return (
     <>
-      <Canvas camera={{ position: [0, 0, 10] }} id="Canvas" frameloop="always">
+      {isMobile !== null && <Canvas camera={{ position: [0, 0, 10] }} dpr={isMobile ? 1 : [1, 2]} id="Canvas" frameloop="always">
+        <LoaderRefractionSource />
         {/* <Stats/> */}
         {/* TODO: Maybe let's consider moving this to a scene background instead of rendering a mesh */}
         <mesh scale={[50, 50, 1]} renderOrder={-1}>
           <planeGeometry args={[1, 1]} />
           <NoiseGradientShaderMaterial />
         </mesh>
-        <React.Suspense fallback={<Loader />}>
+        <React.Suspense fallback={null}>
           {!isMobile && (
             <group>
               {bubbles.map((bubble) => (
@@ -335,7 +337,8 @@ export default function Three() {
           </Environment>
         </React.Suspense>
         <Preload all />
-      </Canvas>
+      </Canvas>}
+      <Loader />
       <HelloText />
       <RotatingText />
     </>
