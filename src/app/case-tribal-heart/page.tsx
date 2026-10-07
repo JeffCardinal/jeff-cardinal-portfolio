@@ -163,34 +163,32 @@ export default function Three() {
         <div className="w-full px-8 pt-8">
           <Image
             src={`/images/case-tribal-heart/tribal-heart-wire.png`}
+            className="object-contain"
             alt="Wireframe"
             width={0}
             height={0}
             sizes="100vw"
             style={{ width: "100%", height: "auto" }}
-            objectFit="contain"
           />
         </div>
         <div className="w-full px-8 pt-8">
           <Image
             src={`/images/case-tribal-heart/tribal-heart-render.jpg`}
+            className="w-full h-full object-contain"
             alt="Render with graffiti background"
             width={0}
             height={0}
             sizes="100vw"
-            style={{ width: "100%", height: "auto" }}
-            objectFit="contain"
           />
         </div>
         <div className="w-full px-8 pt-8">
           <Image
             src={`/images/case-tribal-heart/tribal-heart-blackbg.jpg`}
+            className="w-full h-full object-contain"
             alt="Render with black background"
             width={0}
             height={0}
             sizes="100vw"
-            style={{ width: "100%", height: "auto" }}
-            objectFit="contain"
           />
         </div>
       </div>

@@ -11,14 +11,13 @@ export default function Page() {
         <div className="justify-center flex sm:flex-row flex-wrap">
           <div className="place-content-center lg:w-[500px] md:w-[300px] sm:w-[300px] px-8 pt-8">
             <Image
-              className="rounded-full shadow-2xl outline outline-white outline-1"
+              className="rounded-full shadow-2xl outline outline-white outline-1 object-contain"
               src={`/images/suit-square-sm.png`}
               alt=""
               width={0}
               height={0}
               sizes="100vw"
               style={{ width: "100%", height: "auto" }}
-              objectFit="contain"
             />
           </div>
           <div className="justify-start text-start sm:px-2 px-8 lg:w-[500px] md:w-[300px] sm:w-[300px] text-white">

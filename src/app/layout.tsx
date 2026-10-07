@@ -32,12 +32,12 @@ export default function RootLayout({
         </div>
         <div className="overflow-hidden flex justify-center py-6 text-2xl absolute inset-x-0 top-0 z-10">
           <Image
-            className="-m-[5px]"
+            className="-m-[5px] object-contain"
             src={`/images/jc-tribal-logo-flat.png`}
             alt=""
             width={120}
             height={0}
-            objectFit='contain'
+            style={{ height: 'auto' }}
           />
         </div>
         <Analytics/>

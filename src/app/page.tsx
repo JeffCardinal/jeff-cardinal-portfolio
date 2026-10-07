@@ -357,32 +357,6 @@ export default function Page() {
             bgColor={"bg-black"} 
             textColor={""}
           />
-          <Feature
-            title="PLUS100 Logo"
-            description="Logo for my record production company, PLUS100 Records. Shown here is the logo. Click the button below to check out our Bandcamp."
-            inspiration="Minimalism and kawaii Japanese emoji."
-            tools="Photoshop"
-            year="2018"
-            imageName="plus100logo.png"
-            imageHoverName="plus100logo.png"
-            bgColor="bg-white"
-            textColor="text-[#ff84be]"
-            borderColor="border-[#ff84be]"
-          >
-            <Button
-              text={"Visit Site"}
-              link={"https://plus100.bandcamp.com/"}
-              textColor={"text-[#ff84be]"}
-              hoverTextColor={"hover:text-white"}
-              bgColor={"bg-white"}
-              hoverBgColor={"hover:bg-[#ff84be]"}
-              borderColor={"border-[#ff84be]"}
-              hoverBorderColor={"hover:border-[#ff84be]"}
-              optional={"ml-0 mt-2"}
-              hoverGlyph={<ArrowNav color={"#FFFFFF"} />}
-              hoverable={true}
-            />
-          </Feature>
 
           <Feature
             title="Mana Pool Album Cover"
@@ -608,6 +582,32 @@ export default function Page() {
             bgColor={"bg-white"}
             textColor={"text-[#00bfff]"}
           />
+          <Feature
+            title="PLUS100 Logo"
+            description="Logo for my record production company, PLUS100 Records. Shown here is the logo. Click the button below to check out our Bandcamp."
+            inspiration="Minimalism and kawaii Japanese emoji."
+            tools="Photoshop"
+            year="2018"
+            imageName="plus100logo.png"
+            imageHoverName="plus100logo.png"
+            bgColor="bg-white"
+            textColor="text-[#ff84be]"
+            borderColor="border-[#ff84be]"
+          >
+            <Button
+              text={"Visit Site"}
+              link={"https://plus100.bandcamp.com/"}
+              textColor={"text-[#ff84be]"}
+              hoverTextColor={"hover:text-white"}
+              bgColor={"bg-white"}
+              hoverBgColor={"hover:bg-[#ff84be]"}
+              borderColor={"border-[#ff84be]"}
+              hoverBorderColor={"hover:border-[#ff84be]"}
+              optional={"ml-0 mt-2"}
+              hoverGlyph={<ArrowNav color={"#FFFFFF"} />}
+              hoverable={true}
+            />
+          </Feature>
         </Drawer>
 
         <Drawer

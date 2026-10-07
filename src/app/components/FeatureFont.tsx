@@ -54,13 +54,12 @@ export default function Feature({
         <div className="max-w-[1000px]">
           <span className={`w-full block ${font}`}>
             <Image
-              className="observableRight opacity-0"
+              className="observableRight opacity-0 object-contain"
               src={`/images/fonts/GoupeTitle.png`}
               alt=""
               width={600}
               height={0}
               sizes="100vw"
-              objectFit="contain"
             />
           </span>
           <div className="observableRight opacity-0 relative my-8">
