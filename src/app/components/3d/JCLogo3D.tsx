@@ -79,7 +79,7 @@ export default function JCLogo3D({
           iridescenceIOR: 1.7,
           iridescenceThicknessRange: [100, 800],
           color: "#00bfff",
-          attenuationColor: "ffffff",
+          attenuationColor: "#ffffff",
           attenuationDistance: 0.1,
           metalness: 0,
           toneMapped: false,

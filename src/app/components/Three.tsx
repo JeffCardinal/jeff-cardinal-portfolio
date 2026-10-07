@@ -19,7 +19,7 @@ import * as THREE from "three";
 import NoiseGradientShaderMaterial from "./shaders/NoiseGradientShaderMaterial";
 
 import RotatingText from "./RotatingText";
-import HelloText from "./HelloText";
+import HeyIm from "./HeyIm";
 import Loader from "./Loader";
 import LoaderRefractionSource from "./LoaderRefractionSource";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -339,7 +339,7 @@ export default function Three() {
         <Preload all />
       </Canvas>}
       <Loader />
-      <HelloText />
+      <HeyIm />
       <RotatingText />
     </>
   );
