@@ -7,7 +7,7 @@ import LoaderDissolveShaderMaterial from "./shaders/LoaderDissolveShaderMaterial
 // A bounded-resolution WebGL mask lets the liquid shader reveal the live DOM visuals.
 export function createLoaderDissolve(width: number, height: number, seed = Math.random() * 1000) {
   const renderer = new WebGLRenderer({ alpha: true, preserveDrawingBuffer: true, antialias: false });
-  const resolutionScale = Math.min(1, 768 / Math.max(width, height));
+  const resolutionScale = Math.min(1, 1080 / Math.max(width, height));
   renderer.setPixelRatio(1);
   renderer.setSize(Math.max(1, Math.round(width * resolutionScale)), Math.max(1, Math.round(height * resolutionScale)), false);
   renderer.setClearColor(0x000000, 0);
