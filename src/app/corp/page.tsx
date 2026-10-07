@@ -10,6 +10,9 @@ import MatrixRain from "./MatrixRain";
 import styles from "./password.module.css";
 import Key from "./Key";
 
+// Temporary animation demo password; real authorization will be added later.
+const DEMO_PASSWORD = "password123";
+
 function Padlock({ unlocked, password, focused, inserting, onInserted, attempt, failedAttempt }: {
   unlocked: boolean;
   password: string;
@@ -77,8 +80,7 @@ export default function Page() {
   const [focused, setFocused] = useState(false);
   const [inserting, setInserting] = useState(false);
   const [attempt, setAttempt] = useState(0);
-  const [result, setResult] = useState<"success" | "failure" | "error" | null>(null);
-  const [accessError, setAccessError] = useState("");
+  const [result, setResult] = useState<"success" | "failure" | null>(null);
   const busy = inserting && result === null;
 
   return (
@@ -104,24 +106,10 @@ export default function Page() {
           <Padlock
             unlocked={unlocked} password={password} focused={focused} inserting={inserting}
             attempt={attempt} failedAttempt={result === "failure" ? attempt : 0}
-            onInserted={async () => {
-              try {
-                const response = await fetch("/corp/auth", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ password }),
-                  cache: "no-store",
-                  signal: AbortSignal.timeout(15000),
-                });
-                const data = await response.json();
-                const success = response.ok && data.success === true;
-                setUnlocked(success);
-                setResult(success ? "success" : response.status === 401 ? "failure" : "error");
-                if (!success && response.status !== 401) setAccessError(data.message ?? "Unable to verify password. Please try again.");
-              } catch {
-                setResult("error");
-                setAccessError("Unable to connect. Please try again.");
-              }
+            onInserted={() => {
+              const success = password === DEMO_PASSWORD;
+              setUnlocked(success);
+              setResult(success ? "success" : "failure");
             }}
           />
         </Suspense>
@@ -138,7 +126,6 @@ export default function Page() {
           if (busy) return;
           setUnlocked(false);
           setResult(null);
-          setAccessError("");
           setAttempt((value) => value + 1);
           setInserting(true);
         }}
@@ -160,7 +147,6 @@ export default function Page() {
             setInserting(false);
             setUnlocked(false);
             setResult(null);
-            setAccessError("");
           }}
           autoComplete="current-password"
           spellCheck={false}
@@ -174,7 +160,7 @@ export default function Page() {
         >
           Submit
         </button>
-        <span role="status" className={result === "error" ? "absolute left-6 right-6 top-full mt-2 text-xs text-purple-100" : "sr-only"}>{result === "success" ? "Lock opened." : result === "failure" ? "Incorrect password. Try again." : result === "error" ? accessError : ""}</span>
+        <span role="status" className="sr-only">{result === "success" ? "Lock opened." : result === "failure" ? "Incorrect password. Try again." : ""}</span>
       </form>
       <Loader />
     </main>
