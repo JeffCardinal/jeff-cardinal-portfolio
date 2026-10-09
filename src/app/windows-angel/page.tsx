@@ -231,10 +231,10 @@ export default function CDSlideOutDemo() {
                   <div
                     className="absolute inset-0 rounded-[6px] pointer-events-none z-10"
                     style={{
-                      background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
-                      mixBlendMode:     'hard-light',
-                      WebkitMaskImage:  `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 20%, rgba(255,255,255,0) 50%)`,
-                      maskImage:        `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 20%, rgba(255,255,255,0) 50%)`,
+                      background:      `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
+                      mixBlendMode:    'hard-light',
+                      WebkitMaskImage: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 20%, rgba(255,255,255,0) 50%)`,
+                      maskImage:       `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 20%, rgba(255,255,255,0) 50%)`,
                       opacity: 1
                     }}
                   />
@@ -242,10 +242,10 @@ export default function CDSlideOutDemo() {
                   <div
                     className="absolute inset-0 rounded-[6px] pointer-events-none z-10"
                     style={{
-                      background:       `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
-                      mixBlendMode:     'hard-light',
-                      WebkitMaskImage:  `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 25%, rgba(255,255,255,0) 50%)`,
-                      maskImage:        `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 25%, rgba(255,255,255,0) 50%)`,
+                      background:      `linear-gradient(45deg, rgba(255,0,200,.5), rgba(0,255,255,.5) 40%, rgba(255,255,0,.5) 70%, rgba(255,0,200,.5))`,
+                      mixBlendMode:    'hard-light',
+                      WebkitMaskImage: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 25%, rgba(255,255,255,0) 50%)`,
+                      maskImage:       `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,1) 0%, rgba(255,255,255,.90) 25%, rgba(255,255,255,0) 50%)`,
                       opacity: 1
                     }}
                   />
