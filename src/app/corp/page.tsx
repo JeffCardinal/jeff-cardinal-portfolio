@@ -9,9 +9,7 @@ import LoaderRefractionSource from "../components/LoaderRefractionSource";
 import MatrixRain from "./MatrixRain";
 import styles from "./password.module.css";
 import Key from "./Key";
-
-// Temporary animation demo password; real authorization will be added later.
-const DEMO_PASSWORD = "password123";
+import { useCorpAuth } from "../hooks/useCorpAuth";
 
 function Padlock({ unlocked, password, focused, inserting, onInserted, attempt, failedAttempt }: {
   unlocked: boolean;
@@ -75,12 +73,11 @@ function Padlock({ unlocked, password, focused, inserting, onInserted, attempt, 
 }
 
 export default function Page() {
-  const [unlocked, setUnlocked] = useState(false);
+  const { unlocked, result, verifyPassword, reset: resetAuth } = useCorpAuth();
   const [password, setPassword] = useState("");
   const [focused, setFocused] = useState(false);
   const [inserting, setInserting] = useState(false);
   const [attempt, setAttempt] = useState(0);
-  const [result, setResult] = useState<"success" | "failure" | null>(null);
   const busy = inserting && result === null;
 
   return (
@@ -106,11 +103,7 @@ export default function Page() {
           <Padlock
             unlocked={unlocked} password={password} focused={focused} inserting={inserting}
             attempt={attempt} failedAttempt={result === "failure" ? attempt : 0}
-            onInserted={() => {
-              const success = password === DEMO_PASSWORD;
-              setUnlocked(success);
-              setResult(success ? "success" : "failure");
-            }}
+            onInserted={() => { void verifyPassword(password); }}
           />
         </Suspense>
         <OrbitControls makeDefault enablePan={false} enableZoom={false} />
@@ -124,8 +117,7 @@ export default function Page() {
         onSubmit={(event) => {
           event.preventDefault();
           if (busy) return;
-          setUnlocked(false);
-          setResult(null);
+          resetAuth();
           setAttempt((value) => value + 1);
           setInserting(true);
         }}
@@ -145,8 +137,7 @@ export default function Page() {
           onChange={(event) => {
             setPassword(event.target.value);
             setInserting(false);
-            setUnlocked(false);
-            setResult(null);
+            resetAuth();
           }}
           autoComplete="current-password"
           spellCheck={false}
@@ -160,7 +151,9 @@ export default function Page() {
         >
           Submit
         </button>
-        <span role="status" className="sr-only">{result === "success" ? "Lock opened." : result === "failure" ? "Incorrect password. Try again." : ""}</span>
+        <span role="status" className="sr-only">
+          {result === "success" ? "Lock opened." : result === "failure" ? "Incorrect password. Try again." : result === "error" ? "Unable to verify the password. Please try again later." : ""}
+        </span>
       </form>
       <Loader />
     </main>
