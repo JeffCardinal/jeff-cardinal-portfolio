@@ -1,5 +1,5 @@
 import { verifyPassword } from '../../lib/auth';
-import { getCorpSession, isCorpSessionConfigured } from '../../lib/corp-session';
+import { getCorpSession, isCorpAuthConfigured } from '../../lib/corp-session';
 import { AuthRequestSchema } from './models/AuthRequest';
 import type { AuthResponse } from './models/AuthResponse';
 
@@ -33,7 +33,14 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const passwordHash = process.env.CORP_PASSWORD_HASH;
-  if (!passwordHash || !isCorpSessionConfigured()) {
+  const sessionSecretConfigured = Boolean(
+    process.env.CORP_SESSION_SECRET && process.env.CORP_SESSION_SECRET.length >= 32,
+  );
+  if (!passwordHash || !isCorpAuthConfigured()) {
+    console.error('Corp auth environment configuration is incomplete.', {
+      CORP_PASSWORD_HASH: Boolean(passwordHash),
+      CORP_SESSION_SECRET: sessionSecretConfigured,
+    });
     return authJson({ error: 'Password verification is not configured.' }, 503);
   }
 

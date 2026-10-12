@@ -10,9 +10,15 @@ export interface CorpSessionData {
 const SESSION_COOKIE_NAME = 'corp_session';
 const SESSION_TTL_SECONDS = 60 * 60 * 8;
 
-export function isCorpSessionConfigured(): boolean {
+export function isCorpAuthConfigured(): boolean {
   const secret = process.env.CORP_SESSION_SECRET;
-  return typeof secret === 'string' && secret.length >= 32;
+  const passwordHash = process.env.CORP_PASSWORD_HASH;
+  return (
+    typeof passwordHash === 'string' &&
+    passwordHash.length > 0 &&
+    typeof secret === 'string' &&
+    secret.length >= 32
+  );
 }
 
 function getSessionOptions(): SessionOptions {
