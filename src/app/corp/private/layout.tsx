@@ -1,4 +1,10 @@
-// Server-side authorization will be restored when real auth is implemented.
-export default function PrivateLayout({ children }: { children: React.ReactNode }) {
+import type { ReactNode } from 'react';
+import { redirect } from 'next/navigation';
+import { getCorpSession } from '../../lib/corp-session';
+
+export default async function PrivateLayout({ children }: { children: ReactNode }) {
+  const session = await getCorpSession();
+  if (!session.isAuthenticated) redirect('/corp');
+
   return children;
 }
