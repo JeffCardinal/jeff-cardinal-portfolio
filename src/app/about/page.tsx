@@ -15,7 +15,7 @@ export default function Page() {
       >
         <div className="justify-center flex sm:flex-row flex-wrap">
           <PortraitTilt />
-          <div className="justify-start text-start sm:px-2 px-8 lg:w-[500px] md:w-[300px] sm:w-[300px] text-white">
+          <div className="justify-start text-start px-8 lg:w-[500px] sm:w-[300px] text-white">
             <div className="font-distancia text-2xl pt-8">Yeah, about me.</div>
             <div className="p-6">
               I spent my time in college studying Computer Science at the

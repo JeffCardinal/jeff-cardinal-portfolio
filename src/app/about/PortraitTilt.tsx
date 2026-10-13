@@ -25,8 +25,8 @@ export default function PortraitTilt() {
 
   return (
     <div
-      className="relative place-content-center lg:w-[500px] md:w-[300px] sm:w-[300px] max-w-full aspect-[3/4] mx-8 mt-8"
-      style={{ perspective: "900px" }}
+      className="relative place-content-center w-[min(80vw,300px)] sm:w-[300px] lg:w-[500px] max-w-full shrink-0 aspect-[3/4] mx-0 sm:mx-8 mt-8"
+      style={{ perspective: "750px" }}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetTilt}
     >
