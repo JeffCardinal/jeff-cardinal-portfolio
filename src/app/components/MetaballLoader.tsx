@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   Mesh,
   OrthographicCamera,
@@ -132,55 +132,11 @@ const fragmentShader = `
   }
 `;
 
-function MobileMetaballFallback() {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const animationsStarted = useRef(false);
-
-  useEffect(() => {
-    if (animationsStarted.current) return;
-    animationsStarted.current = true;
-    svgRef.current
-      ?.querySelectorAll<SVGAnimationElement>("animate, animateTransform")
-      .forEach((animation) => animation.beginElement());
-  }, []);
-
-  return (
-    <svg ref={svgRef} viewBox="-10 -20 130 110" width="400" height="400" aria-hidden="true">
-      <defs>
-        <filter id="mobileMetaball">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
-          <feColorMatrix in="blur" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -10" result="fused" />
-          <feComposite in="SourceGraphic" in2="fused" operator="atop" />
-        </filter>
-      </defs>
-      <g filter="url(#mobileMetaball)" fill="#edf3ff">
-        <circle cx="50" cy="20" r="34">
-          <animate attributeName="cx" values="50;40;50;60;50" dur="4.8s" repeatCount="indefinite" begin="indefinite" />
-          <animate attributeName="cy" values="20;29;20;11;20" dur="4.8s" repeatCount="indefinite" begin="indefinite" />
-        </circle>
-        <circle cx="68" cy="38" r="26">
-          <animate attributeName="cx" values="68;58;68;78;68" dur="3.8s" repeatCount="indefinite" begin="indefinite" />
-          <animate attributeName="cy" values="38;46;38;30;38" dur="3.8s" repeatCount="indefinite" begin="indefinite" />
-        </circle>
-        <circle cx="42" cy="53" r="18">
-          <animate attributeName="cx" values="42;35;42;49;42" dur="3s" repeatCount="indefinite" begin="indefinite" />
-          <animate attributeName="cy" values="53;60;53;46;53" dur="3s" repeatCount="indefinite" begin="indefinite" />
-        </circle>
-      </g>
-    </svg>
-  );
-}
-
 export default function MetaballLoader({ active = true }: { active?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [useFallback, setUseFallback] = useState(false);
 
   useEffect(() => {
     if (!active) return;
-    if (window.matchMedia("(pointer: coarse)").matches) {
-      setUseFallback(true);
-      return;
-    }
 
     const container = containerRef.current;
     if (!container) return;
@@ -241,7 +197,6 @@ export default function MetaballLoader({ active = true }: { active?: boolean }) 
         animationFrame = requestAnimationFrame(render);
       };
       animationFrame = requestAnimationFrame(render);
-      setUseFallback(false);
     } catch {
       resizeObserver?.disconnect();
       cancelAnimationFrame(animationFrame);
@@ -249,7 +204,6 @@ export default function MetaballLoader({ active = true }: { active?: boolean }) 
       material?.dispose();
       renderer?.dispose();
       renderer?.domElement.remove();
-      setUseFallback(true);
     }
 
     return () => {
@@ -267,7 +221,6 @@ export default function MetaballLoader({ active = true }: { active?: boolean }) 
 
   return (
     <div ref={containerRef} className="relative h-[300px] w-[300px]">
-      {useFallback && <MobileMetaballFallback />}
     </div>
   );
 }
