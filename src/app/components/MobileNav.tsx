@@ -66,7 +66,7 @@ export default function MobileNav() {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         onClick={handleClick}
-        className={`z-50 fixed top m-5 p-2 outline outline-[5px] text-black bg-white rounded-full text-md hover:bg-rose-500 hover:text-white transition duration-300 ${
+        className={`fixed left-5 top-5 z-50 p-2 outline outline-[5px] text-black bg-white rounded-full text-md hover:bg-rose-500 hover:text-white transition duration-300 ${
           hover ? "shadow-lg" : ""
         }`}
       >
