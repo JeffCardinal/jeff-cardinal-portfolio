@@ -1,9 +1,9 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
-export default function MobileNav({ children }: { children: ReactNode }) {
+export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [inEffect, setInEffect] = useState(false);
@@ -15,30 +15,53 @@ export default function MobileNav({ children }: { children: ReactNode }) {
   const [vis_3, setVis_3] = useState(false);
 
   const handleClick = () => {
-    if (!inEffect && !outEffect && !isAnimating) {
-      setInEffect(true);
-    }
+    if (isAnimating) return;
 
-    if (!isAnimating) {
-      setIsAnimating(true);
+    setIsAnimating(true);
+    setIsOpen((currentlyOpen) => !currentlyOpen);
+
+    if (isOpen) {
+      setInEffect(false);
+      setOutEffect(true);
+    } else {
+      setInEffect(true);
+      setOutEffect(false);
       setVis_1(true);
       setVis_2(true);
       setVis_3(true);
-      setIsOpen(!isOpen);
     }
   };
 
-  const toggleInOut = () => {
-    setInEffect(!inEffect);
-    setOutEffect(!outEffect);
-    setIsAnimating(false);
+  const closeMenu = () => {
+    if (!isOpen && !isAnimating) return;
+
+    setIsOpen(false);
+    setInEffect(false);
+    setOutEffect(true);
+    setIsAnimating(true);
+  };
+
+  const finishAnimation = () => {
+    if (isOpen && inEffect) {
+      setInEffect(false);
+      setIsAnimating(false);
+      return;
+    }
+
+    if (!isOpen && outEffect) {
+      setVis_1(false);
+      setVis_2(false);
+      setVis_3(false);
+      setOutEffect(false);
+      setIsAnimating(false);
+    }
   };
 
   // TODO: Extract button to its own component 
   const [hover, setHover] = useState(false);
 
   return (
-    <div className="">
+    <div>
       <button
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -76,7 +99,7 @@ export default function MobileNav({ children }: { children: ReactNode }) {
       >
         <Link
           href="/"
-          onClick={handleClick}
+          onClick={closeMenu}
           className={`
             ${vis_1 ? "visible" : "invisible"}
             ${inEffect && isAnimating && "animate-easeInNav"}
@@ -85,14 +108,14 @@ export default function MobileNav({ children }: { children: ReactNode }) {
             transition duration-500 ease-in-out
             flex grow w-full bg-rose-500 p-4 items-center text-center justify-center`}
           onAnimationEnd={() => {
-            if (!isOpen && outEffect) setVis_1(!vis_1);
+            if (!isOpen && outEffect) setVis_1(false);
           }}
         >
           <div className="font-distancia text-4xl">Home</div>
         </Link>
         <Link
           href="/about"
-          onClick={handleClick}
+          onClick={closeMenu}
           className={`
             ${vis_2 ? "visible" : "invisible"}
             ${inEffect && isAnimating && "animate-easeInNav_2"}
@@ -100,13 +123,14 @@ export default function MobileNav({ children }: { children: ReactNode }) {
             fill-mode-forwards
             flex grow w-full bg-rose-500 p-4 items-center text-center justify-center`}
           onAnimationEnd={() => {
-            if (!isOpen && outEffect) setVis_2(!vis_2);
+            if (!isOpen && outEffect) setVis_2(false);
           }}
         >
           <div className="font-distancia text-4xl">About</div>
         </Link>
         <Link
           href="/resume"
+          onClick={closeMenu}
           className={`
             ${vis_3 ? "visible" : "invisible"}
             ${inEffect && isAnimating && "animate-easeInNav_3"}
@@ -114,8 +138,7 @@ export default function MobileNav({ children }: { children: ReactNode }) {
             fill-mode-forwards
             flex grow w-full bg-rose-500 p-4 items-center text-center justify-center`}
           onAnimationEnd={() => {
-            if (!isOpen && outEffect) setVis_3(!vis_3);
-            toggleInOut();
+            finishAnimation();
           }}
         >
           <div className="font-distancia text-4xl">Resume</div>
