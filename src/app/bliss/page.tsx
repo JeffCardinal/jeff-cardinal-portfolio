@@ -10,8 +10,8 @@ import NoiseGradientShaderMaterial from '../components/shaders/NoiseGradientShad
 import { PlaybackProvider, usePlayback } from './PlaybackContext';    
 import { BurnShaderMaterial } from './BurnShaderMaterial';
 import { Environment } from '@react-three/drei';
-import Loader from '../components/Loader';
-import LoaderRefractionSource from '../components/LoaderRefractionSource';
+import Loader from '../components/loader/Loader';
+import LoaderRefractionSource from '../components/loader/LoaderRefractionSource';
 import { useIsMobileDevice } from '../hooks/useIsMobileDevice';
 import { TextureLoader } from 'three';
 import PlayModal from './PlayModal';
