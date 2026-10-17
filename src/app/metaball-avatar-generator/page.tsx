@@ -1,7 +1,7 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import { useMemo, useState } from 'react';
+import { useDeferredValue, useMemo, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, MarchingCube, MarchingCubes, OrbitControls, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
@@ -335,11 +335,12 @@ export default function MetaballAvatarGeneratorPage() {
   const radiusScale = 1;
   const metaballStrength = 0;
   const normalizedSeed = seed.trim() || 'default-seed';
+  const generationSeed = useDeferredValue(normalizedSeed);
   const size = 160;
   const padding = 10;
 
   const randomCircles = useMemo(() => {
-    const rand = mulberry32(hashSeed(`${normalizedSeed}-random`));
+    const rand = mulberry32(hashSeed(`${generationSeed}-random`));
     const mirroredPairCount = 3 + Math.floor(rand() * 4);
     const shouldAddHead = rand() < 0.55;
     const minRadiusSpread = 7;
@@ -414,10 +415,10 @@ export default function MetaballAvatarGeneratorPage() {
     }
 
     return best;
-  }, [normalizedSeed, size, padding]);
+  }, [generationSeed, size, padding]);
 
   const gridCircles = useMemo(() => {
-    const rand = mulberry32(hashSeed(`${normalizedSeed}-grid`));
+    const rand = mulberry32(hashSeed(`${generationSeed}-grid`));
     const gridSize = 5;
     const halfGrid = Math.ceil(gridSize / 2);
     const fillDensity = 0.2 + rand() * 0.5;
@@ -456,11 +457,11 @@ export default function MetaballAvatarGeneratorPage() {
         return [{ x: cx, y: cy, r, id: `${x}-${y}` }];
       }),
     );
-  }, [normalizedSeed, size, padding]);
+  }, [generationSeed, size, padding]);
 
   const gradientStops = useMemo(
-    () => makeGradientStops(`${normalizedSeed}-random-gradient`),
-    [normalizedSeed],
+    () => makeGradientStops(`${generationSeed}-random-gradient`),
+    [generationSeed],
   );
 
   const panelStyle = useMemo(
@@ -536,7 +537,7 @@ export default function MetaballAvatarGeneratorPage() {
             style={panelStyle}
           >
             <div className="h-[360px] w-full overflow-hidden rounded-lg bg-black">
-              <Canvas camera={{ position: [0, 0, 2.3], fov: 45 }}>
+              <Canvas frameloop="demand" camera={{ position: [0, 0, 2.3], fov: 45 }}>
                 <ambientLight intensity={0.7} />
                 <directionalLight position={[2, 3, 4]} intensity={1.2} />
                 <directionalLight position={[-2, -1, 2]} intensity={0.5} />
@@ -562,7 +563,7 @@ export default function MetaballAvatarGeneratorPage() {
             style={panelStyle}
           >
             <div className="h-[360px] w-full overflow-hidden rounded-lg bg-black">
-              <Canvas camera={{ position: [0, 0, 2.3], fov: 45 }}>
+              <Canvas frameloop="demand" camera={{ position: [0, 0, 2.3], fov: 45 }}>
                 <ambientLight intensity={0.7} />
                 <directionalLight position={[2, 3, 4]} intensity={1.2} />
                 <directionalLight position={[-2, -1, 2]} intensity={0.5} />
