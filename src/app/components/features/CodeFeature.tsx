@@ -2,7 +2,7 @@
 import React, { ReactNode } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { obsidian } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Video from './Video';
+import Video from '../video/Video';
 
 export default function CodeFeature({
   title,

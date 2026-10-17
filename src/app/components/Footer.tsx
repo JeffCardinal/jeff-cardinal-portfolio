@@ -12,7 +12,7 @@ import { Canvas } from "@react-three/fiber";
 import { motion, useInView, useAnimationControls } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import JCLogo3D from "./3d/JCLogo3D";
+import JCLogo3D from "./splash/JCLogo3D";
 
 type Props = { bgColor?: string; color?: string };
 

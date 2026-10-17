@@ -1,5 +1,5 @@
 import React from 'react';
-import Splash from '../components/Splash'
+import Splash from '../components/splash/Splash'
 import Image from 'next/image'
 
 export default function Page() {
