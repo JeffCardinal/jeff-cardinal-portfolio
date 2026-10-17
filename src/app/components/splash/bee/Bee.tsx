@@ -5,7 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimationMixer, Box3, Euler, Group, LoopRepeat, MathUtils, Plane, Quaternion, Raycaster, Vector3 } from "three";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
-import { entranceProgress } from "./entrance";
+import { beeEntranceProgress } from "./beeEntranceProgress";
 import { beeOrientation } from "./beeRotation";
 import { DESKTOP_START_POSE, MOBILE_START_POSE } from "./beePose";
 
@@ -68,7 +68,7 @@ export default function Bee({ mobile = false }: { mobile?: boolean }) {
     entranceElapsed.current += delta;
     if (!entranceRef.current) return;
 
-    const progress = entranceProgress(entranceElapsed.current);
+    const progress = beeEntranceProgress(entranceElapsed.current);
     entranceRef.current.position.y = -viewport.height * (1 - progress);
     entranceRef.current.position.z = 0.08 * Math.sin(entranceElapsed.current * (2 * Math.PI / 3));
     entranceRef.current.visible = progress > 0;

@@ -2,7 +2,7 @@ import {
   CanvasTexture, Mesh, OrthographicCamera, PlaneGeometry, Scene, Vector2, WebGLRenderer,
 } from "three";
 import { captureLoaderScene } from "./LoaderRefractionSource";
-import LoaderDissolveShaderMaterial from "./shaders/LoaderDissolveShaderMaterial";
+import LoaderDissolveShaderMaterial from "../shaders/LoaderDissolveShaderMaterial";
 
 // A bounded-resolution WebGL mask lets the liquid shader reveal the live DOM visuals.
 export function createLoaderDissolve(width: number, height: number, seed = Math.random() * 1000) {

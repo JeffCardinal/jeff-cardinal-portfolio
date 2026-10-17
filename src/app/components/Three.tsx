@@ -14,7 +14,7 @@ import {
 } from "@react-three/drei";
 import Blob from "./splash/Blob";
 import Bee from "./splash/bee/Bee";
-import { entranceProgress } from "./splash/entrance";
+import { entranceProgress } from "./splash/bee/beeEntranceProgress";
 import * as THREE from "three";
 import NoiseGradientShaderMaterial from "./shaders/NoiseGradientShaderMaterial";
 
