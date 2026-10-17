@@ -1,5 +1,5 @@
 // Shared damped spring entrance with a configurable hold.
-export function beeEntranceProgress(
+export function entranceProgress(
   elapsed: number,
   delay = 1,
   { damping = 5, frequency = 5 }: { damping?: number; frequency?: number } = {},

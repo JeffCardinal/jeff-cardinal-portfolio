@@ -24,6 +24,7 @@ import LoaderRefractionSource from "./loader/LoaderRefractionSource";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Displace } from "lamina";
 import Striplight from "./splash/Striplight";
+import { entranceProgress } from "./splash/entranceProgress";
 
 type BubbleConfig = {
   id: number;
