@@ -1,5 +1,3 @@
-import React from "react";
-
 const ArrowNav = ({ color }: { color: string }) => (
   <div className="-rotate-180 justify-right -mt-1">
     <svg

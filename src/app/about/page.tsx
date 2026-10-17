@@ -1,5 +1,5 @@
 import React from "react";
-import Splash from "../components/Splash";
+import Splash from "../components/splash/Splash";
 import PortraitTilt from "./PortraitTilt";
 
 export default function Page() {
@@ -28,7 +28,7 @@ export default function Page() {
               <div className="pt-4">
                 As a musician, I've played shows and festivals in destinations
                 all over the world—like Japan, Australia, and my homeland of the United States.
-                On occaision, my work expands into fashion world, including works featured by labels like 10DEEP, COS, and Lacoste.
+                On occaision, my work expands into fashion world, including works featured by labels like 10Deep, COS, and Lacoste.
               </div>
               <div className="pt-4">
                 As a graphics designer, I've had works published in AIGA Eye on Design. 

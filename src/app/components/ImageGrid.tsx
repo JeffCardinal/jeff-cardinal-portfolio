@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "./Button";
-import ArrowNav from "./arrow-nav";
+import ArrowNav from "./ArrowNav";
 import Marquee from "react-fast-marquee";
 
 const ImageGrid = () => {

@@ -5,7 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimationMixer, Box3, Euler, Group, LoopRepeat, MathUtils, Plane, Quaternion, Raycaster, Vector3 } from "three";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
-import { entranceProgress } from "./entrance";
+import { entranceProgress } from "../entranceProgress";
 import { beeOrientation } from "./beeRotation";
 import { DESKTOP_START_POSE, MOBILE_START_POSE } from "./beePose";
 

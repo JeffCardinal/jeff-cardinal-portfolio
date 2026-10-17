@@ -4,8 +4,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Environment, OrbitControls, useCursor, useGLTF, useTexture, Text } from '@react-three/drei';
-import Loader from '../components/Loader';
-import LoaderRefractionSource from '../components/LoaderRefractionSource';
+import Loader from '../components/loader/Loader';
+import LoaderRefractionSource from '../components/loader/LoaderRefractionSource';
 import { HoloMaterial } from './holo';
 import { FrostedGlassMaterial } from './FrostedGlassMaterial';
 

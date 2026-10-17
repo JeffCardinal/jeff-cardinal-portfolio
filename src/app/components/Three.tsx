@@ -12,19 +12,19 @@ import {
   Preload,
   useFont,
 } from "@react-three/drei";
-import Blob from "./3d/Blob";
-import Bee from "./3d/Bee";
-import { entranceProgress } from "./3d/entrance";
+import Blob from "./splash/Blob";
+import Bee from "./splash/bee/Bee";
 import * as THREE from "three";
 import NoiseGradientShaderMaterial from "./shaders/NoiseGradientShaderMaterial";
 
-import RotatingText from "./RotatingText";
+import RotatingText from "./splash/RotatingText";
 import HeyIm from "./HeyIm";
-import Loader from "./Loader";
-import LoaderRefractionSource from "./LoaderRefractionSource";
+import Loader from "./loader/Loader";
+import LoaderRefractionSource from "./loader/LoaderRefractionSource";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Displace } from "lamina";
-import Striplight from "./3d/Striplight";
+import Striplight from "./splash/Striplight";
+import { entranceProgress } from "./splash/entranceProgress";
 
 type BubbleConfig = {
   id: number;
@@ -322,9 +322,9 @@ export default function Three() {
             background={false}
             backgroundRotation={[0, 0, 0]}
           >
+            <directionalLight intensity={10} position={[2, 2, 5]} />
             <Striplight position={[10, 2, 0]} scale={[1, 3, 10]} />
             <Striplight position={[-10, 2, 0]} scale={[1, 3, 10]} />
-            <directionalLight intensity={10} position={[2, 2, 5]} />
             <Striplight position={[10, 2, 0]} scale={[1, 3, -10]} />
             <Striplight position={[-10, 2, 0]} scale={[1, 3, -10]} />
             <ambientLight intensity={10} />

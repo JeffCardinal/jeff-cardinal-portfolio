@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Marquee from 'react-fast-marquee';
-import SparkleSvg from '../svg/SparkleSvg';
+import SparkleSvg from '../../svg/SparkleSvg';
 import Video from './Video';
 import Link from 'next/link';
 

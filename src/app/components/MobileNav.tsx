@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
 
 export default function MobileNav({ children }: { children: ReactNode }) {
