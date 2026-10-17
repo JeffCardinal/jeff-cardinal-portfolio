@@ -26,7 +26,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <body className={inter.className}>
-        <MobileNav>{children}</MobileNav>
+        <MobileNav/>
         <div className="overflow-hidden flex justify-end p-4 absolute inset-x-0 top-0 z-10">
           <SparkleSvg color={"white"} dim={"50px"}/>
         </div>
