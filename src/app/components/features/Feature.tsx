@@ -1,14 +1,15 @@
 "use client";
 import React, { ReactNode, useState } from "react";
 import Image from 'next/image'
+import { WorkNavigationContext } from "../OpenDrawerLink";
+import type { WorkMetadata } from "../../types/WorkMetadata";
 
 export default function Feature({
   children,
   title,
-  description,
-  inspiration,
-  tools,
-  year,
+  metadata,
+  openDrawer,
+  scrollTo,
   imageName,
   imageHoverName,
   bgColor,
@@ -17,10 +18,9 @@ export default function Feature({
 }: {
   children: ReactNode;
   title: string;
-  description: ReactNode;
-  inspiration: ReactNode;
-  tools: string;
-  year: string;
+  metadata: WorkMetadata;
+  openDrawer?: (id: string) => void;
+  scrollTo?: (id: string) => void;
   imageName: string;
   imageHoverName?: string;
   bgColor: string;
@@ -31,9 +31,12 @@ export default function Feature({
   const hasHoverImage = Boolean(imageHoverName);
   const imageSrc = !hovering && hasHoverImage ? imageHoverName : imageName;
   const bottomPadding = children ? "my-6" : "";
-
+  const year =
+    typeof metadata.year === "number"
+      ? metadata.year
+      : `${metadata.year.start}-${metadata.year.end}`;
   return (
-    <>
+    <WorkNavigationContext.Provider value={{ openDrawer, scrollTo }}>
       <div className={`box-border p-8 flex flex-col lg:flex-row ${bgColor} ${textColor}`} >
         {/* Image Container */}
         <div className="flex flex-1 justify-center items-center lg:justify-end observableLeft opacity-0 pb-8 lg:pb-0">
@@ -82,7 +85,7 @@ export default function Feature({
               <div
                 className={`p-8 border-[3px] rounded-xl ${borderColor} border-opacity-50`}
               >
-                <p>{description}</p>
+                <p>{metadata.overview}</p>
               </div>
             </div>
 
@@ -96,7 +99,7 @@ export default function Feature({
               <div
                 className={`p-8 border-[3px] rounded-xl ${borderColor} border-opacity-50`}
               >
-                <p>{inspiration}</p>
+                <p>{metadata.inspiration}</p>
               </div>
             </div>
 
@@ -112,7 +115,7 @@ export default function Feature({
               <div
                 className={`p-8 border-[3px] rounded-xl ${borderColor} border-opacity-50`}
               >
-                <p className="">{tools}</p>
+                <p className="">{metadata.tools.join(", ")}</p>
               </div>
             </div>
           </div>
@@ -120,6 +123,6 @@ export default function Feature({
           <div className="observableRight opacity-0">{children}</div>
         </div>
       </div>
-    </>
+    </WorkNavigationContext.Provider>
   );
 }
