@@ -107,7 +107,7 @@ export default function Feature({ work, children, openDrawer, scrollTo }: Featur
           />
         </div>
 
-        <div className={`flex-1 lg:pl-8`}>
+        <div className={"flex-1 lg:pl-8 relative z-10"}>
           <div className={"flex-col max-w-[1000px]"}>
             <span className={titleClass} style={isUiux || isFont ? undefined : { lineHeight: 1 }}>
               {isFont ? (
@@ -126,6 +126,18 @@ export default function Feature({ work, children, openDrawer, scrollTo }: Featur
                 hasChildren={Boolean(children)}
               />
             ))}
+            {/* {work.tags.length > 0 && (
+              <div className="observableRight opacity-0 flex flex-wrap gap-2 z-10">
+                {work.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className={`work-tag border rounded-md px-2 py-1 text-sm ${work.borderColor} ${work.textColor}`}
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )} */}
             <div className={`observableRight opacity-0`}>{children}</div>
           </div>
         </div>

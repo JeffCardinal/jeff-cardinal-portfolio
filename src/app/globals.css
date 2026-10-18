@@ -54,6 +54,10 @@ body {
 }
 
 @layer components {
+  .work-tag {
+    background-color: color-mix(in srgb, currentColor 25%, transparent);
+  }
+
   .work-image {
     object-fit: fill;
   }
