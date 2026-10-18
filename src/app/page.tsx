@@ -1,38 +1,35 @@
 'use client'
 
+import { useState } from "react";
+import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import Link from "next/link";
-import Marquee from "react-fast-marquee";
-import { useState } from "react";
 
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import gsap from "gsap";
+
+import { Works } from "./data/Works";
+import ArrowNav from "./components/ArrowNav";
+import Button from "./components/Button";
 import CodeFeature from "./components/features/CodeFeature";
 import Container from "./components/Container";
 import Drawer from "./components/Drawer";
 import Feature from "./components/features/Feature";
-import FeatureDouble from "./components/features/FeatureDouble";
-import FeatureFont from "./components/features/FeatureFont";
+import ImagePairGallery from "./components/features/ImagePairGallery";
+import ImageGrid from "./components/ImageGrid";
 import Footer from "./components/Footer";
+import LogoMorph from "./components/i2k";
 import Scroller from "./components/Scroller";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 import Splash from "./components/splash/Splash";
+import SplashSVG from "./components/svg/SplashSVG";
 import Three from "./components/Three";
+import UnderConstruction from "./components/UnderConstruction";
 import VideoFeature from "./components/video/VideoFeature";
 
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ArrowNav from "./components/ArrowNav";
-import Button from "./components/Button";
-import FeatureGlass from "./components/features/FeatureGlass";
-import FeatureUIUX from "./components/features/FeatureUIUX";
-import { LogoMorph } from "./components/i2k";
-import ImageGrid from "./components/ImageGrid";
-import { OpenDrawerLink } from "./components/OpenDrawerLink";
-import ScrollToTopButton from "./components/ScrollToTopButton";
-import SplashSVG from "./components/svg/SplashSVG";
 import SparkleSvg from "./svg/SparkleSvg";
-
-import gsap from "gsap";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-import UnderConstruction from "./components/UnderConstruction";
 
 export default function Page() {
 
@@ -105,153 +102,50 @@ export default function Page() {
           title="[GFX]"
           bgColor="bg-orange-400"
         >
-          <Feature
-            title="ENTER THE HIVE"
-            description={<>Leaked single cover for an upcoming techno single from "BUGLAND TRAX".</>}
-            inspiration="Early 3D, Banjo Kazooie"
-            tools="Blender"
-            year="2026"
-            imageName="bugland-EnterTheHive.jpg"
-            bgColor="bg-black"
-            textColor="text-[#fffc00]"
-            borderColor="border-[#fffc00]"
-          >
-            {undefined}
+          <Feature work={Works.enterTheHive} />
+          <Feature work={Works.bugland} />
+          <Feature work={Works.bangBangBang}>
+            <Image src="/images/bang-guide.jpg" alt="Bang Bang Bang Guidelines" width={1000} height={1000} />
           </Feature>
-          <FeatureGlass
-            title="BUGLAND"
-            description={<>Leaked cover for an upcoming techno album "BUGLAND TRAX". Original robotic bug characters tower over you in a sunny outdoor environment. Additional rigging and modeling assistance provided by Zeke, AKA <a target="_blank" className="text-[#ea43a3] hover:text-white transition duration-300 underline" href="https://www.instagram.com/woozieface/">Woozieface.</a></>}
-            inspiration="Early 3D, Banjo Kazooie, A Bug's Life"
-            tools="Blender"
-            year="2026"
-            imageName="bugland.jpg"
-            bgColor="bg-white"
-            textColor="text-white"
-            headerTextColor="text-[#005DFB]"
-            borderColor="border-[#ea43a3]"
-            dontRenderVideo={true}
-            bigBgColor="bg-gradient-to-b from-[#005dfb] to-[#00fef2]"
-          >
-            {undefined}
-          </FeatureGlass>
-          <Feature
-            title="Bang Bang Bang"
-            description={`Techno track cover artwork concept. A stack of identical forged steel sculptures each reading "BANG" sits in a pool of 9mm bullets. Characters are custom-made in Illustrator, see below for gridlines.`}
-            inspiration="Metal materials and neo-grunge."
-            tools="Illustrator, Blender, Photoshop"
-            year="2025"
-            imageName="bangbangbang.jpg"
-            bgColor="bg-black"
-            textColor="text-[#ea0000]"
-            borderColor="border-[#ea0000]"
-          >
-            <Image src={`/images/bang-guide.jpg`} alt={"Bang Bang Bang Guidelines"} width={1000} height={1000} />
-          </Feature>
-          <FeatureGlass
-            title="Folder Icon"
-            description="2.5D folder icon. Hover for the original. Original was purposed for the single Open Me Up off of VAPERROR - System Delight (2015). This is a refresh of that icon in a more modern, high resolution style."
-            inspiration="Windows 95."
-            tools="Photoshop"
-            year="2025"
-            imageName="folder.jpg"
-            imageHoverName="folder-og-upscaled.jpg"
-            bgColor="bg-white"
-            textColor="text-white"
-            headerTextColor="text-[#005DFB]"
-            borderColor="border-[#ea43a3]"
-            dontRenderVideo={true}
-            bigBgColor="bg-gradient-to-b from-[#005dfb] to-[#00fef2]"
-          >
-            {undefined}
-          </FeatureGlass>
-          <FeatureGlass
-            title="Windows Angel"
-            description="Single cover for Dreaming Diary - Windows Angel. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Concept, cat eye, and sunset background by Sebastian Haid. 3D models, UI components, and final render by Jeff Cardinal. Check out the 3D demo."
-            inspiration={<>
-              Modern meets retro - Windows Vista and Apple Glass UI. Hyperreality of digital angels trapped in an outdated computer OS. There is reference to our track,{" "}
-                <OpenDrawerLink
-                  options={"text-[#ea43a3] hover:text-white transition duration-300"}
-                  scrollToId={"blissFeature"}
-                  text={"Bliss,"}
-                  openDrawer={openDrawer} 
-                  scrollTo={scrollTo} 
-                />
-              {" "}by repurposing the background from that single cover.
-              </>
-            }
-            tools="Blender, Bryce, Photoshop"
-            year="2025"
-            imageName="WindowsAngel-2k.jpg"
-            imageHoverName="WindowsAngel-2k.jpg"
-            bgColor="bg-white"
-            textColor="text-white"
-            headerTextColor="text-[#ea43a3]"
-            borderColor="border-[#ea43a3]"
-          >
+          <Feature work={Works.folderIcon} />
+          <Feature work={Works.windowsAngel} openDrawer={openDrawer} scrollTo={scrollTo}>
             <div className="flex flex-col w-max">
               <Button
-                text={"3D Demo"}
-                link={"/windows-angel"}
+                text="3D Demo"
+                link="/windows-angel"
                 openInNewTab={true}
-                textColor={"text-[#ea43a3]"}
-                hoverTextColor={"hover:text-white"}
-                bgColor={"bg-white"}
-                hoverBgColor={"hover:bg-[#ea43a3]"}
-                borderColor={"border-[#ea43a3]"}
-                hoverBorderColor={"hover:border-white"}
-                optional={"ml-0 mt-2"}
-                hoverGlyph={<ArrowNav color={"white"} />}
+                textColor="text-[#ea43a3]"
+                hoverTextColor="hover:text-white"
+                bgColor="bg-white"
+                hoverBgColor="hover:bg-[#ea43a3]"
+                borderColor="border-[#ea43a3]"
+                hoverBorderColor="hover:border-white"
+                optional="ml-0 mt-2"
+                hoverGlyph={<ArrowNav color="white" />}
                 hoverable={true}
                 styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
                 shadow="shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full"
               />
               <Button
-                text={"Stream"}
-                link={"https://open.spotify.com/album/3DkLvKm9g4q7ABoGbbbKWy?si=xh6_LkneRPOElrs1LSEP3w"}
+                text="Stream"
+                link="https://open.spotify.com/album/3DkLvKm9g4q7ABoGbbbKWy?si=xh6_LkneRPOElrs1LSEP3w"
                 openInNewTab={true}
-                textColor={"text-[#ea43a3]"}
-                hoverTextColor={"hover:text-white"}
-                bgColor={"bg-white"}
-                hoverBgColor={"hover:bg-[#ea43a3]"}
-                borderColor={"border-[#ea43a3]"}
-                hoverBorderColor={"hover:border-white"}
-                optional={"ml-0 mt-6"}
-                hoverGlyph={<ArrowNav color={"white"} />}
+                textColor="text-[#ea43a3]"
+                hoverTextColor="hover:text-white"
+                bgColor="bg-white"
+                hoverBgColor="hover:bg-[#ea43a3]"
+                borderColor="border-[#ea43a3]"
+                hoverBorderColor="hover:border-white"
+                optional="ml-0 mt-6"
+                hoverGlyph={<ArrowNav color="white" />}
                 hoverable={true}
                 styling="backdrop-filter backdrop-blur-xl ${bgColor} bg-opacity-100"
                 shadow="shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full"
               />
             </div>
-          </FeatureGlass>
-
-          <Feature
-            title="Mesh"
-            description="Abstract 3D mesh. This started as a model of a price tag, then was morphed via subdivision modifier, meshing, and simple deform. The final render was composited in Photoshop with field blur and camera raw filter."
-            inspiration="Early abstract 3D graphics."
-            tools="Blender, Photoshop"
-            year="2025"
-            imageName="abstract-holes.jpg"
-            imageHoverName="abstract-holes.jpg"
-            bgColor="bg-black"
-            textColor="text-[#5b68d3]"
-            borderColor="border-[#5b68d3]"
-          >
-            {undefined}
           </Feature>
-          <FeatureGlass
-            title="Bliss"
-            id="blissFeature"
-            description="Single cover for Dreaming Diary + VAPERROR - Bliss. Part of a larger campaign for the release of Dreaming Diary's record Digital Artifacts. Layout, icons and background photo by Sebastian Haid. Airbrushing, post-processing and smiley 3D model by Jeff Cardinal. Ferrite Core font by Froyo Tam."
-            inspiration="Y2K airbrushed hyperreality, icons evoke early cellphone OS feeling."
-            tools="Blender, Illustrator, Photoshop"
-            year="2025"
-            imageName="Bliss-JPG-2k.jpg"
-            imageHoverName="Bliss-JPG-2k.jpg"
-            bgColor="bg-white"
-            textColor="text-white"
-            headerTextColor="text-[#ea43a3]"
-            borderColor="border-[#ea43a3]"
-          >
+          <Feature work={Works.mesh} />
+          <Feature work={Works.bliss}>
             <div className="flex flex-col w-max">
               <Button
                 text={"3D DEMO"}
@@ -286,19 +180,8 @@ export default function Page() {
                 shadow="shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full"
               />
             </div>
-          </FeatureGlass>
-          <Feature
-            title="Floating in the Breeze"
-            description="Single cover for Heaven Sample - Floating in the Breeze [VAPERROR Remix]. Hover for the original cover. Part of a larger campaign for the release of Heaven Sample's debut record, Distorted Reality."
-            inspiration="Y2K chrometype and metalheart (remix) and 70s psychedelia and pop art (original)."
-            tools="Blender, Photoshop"
-            year="2025"
-            imageName="FloatingInTheBreeze-Remix-1080.jpg"
-            imageHoverName="FloatingInTheBreeze-Original-1080.jpg"
-            bgColor="bg-sky-400"
-            textColor="text-white"
-            borderColor="border-white"
-          >
+          </Feature>
+          <Feature work={Works.floatingInTheBreeze}>
             <Button
               text={"Stream"}
               link={
@@ -316,60 +199,16 @@ export default function Page() {
             />
           </Feature>
 
-          <Feature
-            title="DR. GABBA Flyers"
-            description="Flyer advertisements for various techno parties - Chicago at Empty Bottle, Montréal at Les Foufounes Électriques, and Elsewhere (Main Hall) in Brooklyn, New York."
-            inspiration={
-              <>
-                Liquid chrome entangles an iconic 90s acid smiley in Y2K
-                fashion. Matrix-like background. Custom goop font for DR. GABBA,
-                which informed the later{" "}
-                <OpenDrawerLink
-                  options="text-[#8846e1] hover:text-[#32d100] transition duration-300"
-                  openDrawerId={"fonts"}
-                  scrollToId={"goupe"}
-                  text={"Goupe"}
-                  openDrawer={openDrawer} 
-                  scrollTo={scrollTo} 
-                />
-                {" "}font.
-                <br/><br/>
-                The Montréal flyer features a balloon smiley physics simulation made in Blender.
-                <br/><br/>
-                The New York flyer references the Dragon Warrior Monsters 2 Official Strategy Guide for the Game Boy Color.
-              </>
-            }
-            tools="Cinema 4D, Blender, Illustrator, Photoshop"
-            year="2024-2025"
-            imageName="drgabbaflyer.png"
-            imageHoverName="drgabbaflyer.png"
-            bgColor="bg-black"
-            textColor="text-[#32d100]"
-            borderColor="border-[#32d100]"
-          >
-            {undefined}
-          </Feature>
-          <FeatureDouble 
+          <Feature work={Works.drGabbaFlyers} openDrawer={openDrawer} scrollTo={scrollTo} />
+          <ImagePairGallery 
             alt1={"DR. GABBA Montréal flyer"}
             alt2={"Dragon Warrior-themed DR. GABBA with Kyruh and VAPERROR flyer"}
             imageName1={"drgabba-montreal-4x5.jpg"}
             imageName2={"gabba-dragon-warrior-poster-vaperror.jpg"}
             bgColor={"bg-black"} 
-            textColor={""}
           />
 
-          <Feature
-            title="Mana Pool Album Cover"
-            description={<>Album cover for my debut album, Mana Pool. Upscaled with help from <a target="_blank" className="text-white hover:text-white transition duration-300 underline" href="https://drewwise.com/">Drew Wise.</a></>}
-            inspiration="Minimalistic aquatic ambiance."
-            tools="Illustrator, Photoshop"
-            year="2018"
-            imageName="manapool.png"
-            imageHoverName="manapool.png"
-            bgColor="bg-[#23caff]"
-            textColor="text-white"
-            borderColor="white"
-          >
+          <Feature work={Works.manaPoolAlbumCover}>
             <Button
               text={"Stream"}
               link={
@@ -417,18 +256,7 @@ export default function Page() {
           title={"[UI/UX]"}
           bgColor={"bg-sky-400"}
         >
-          <FeatureUIUX
-            title="CD Jacket"
-            description="3D motion graphics UI animating a holographic CD jacket. Idea for a rare music drop or pre-save."
-            year="2025"
-            tools="React, Tailwind, Framer Motion"
-            imageName="ui-projects/windows-angel-ui.jpg"
-            imageHoverName="ui-projects/windows-angel-ui.jpg"
-            bgColor="bg-slate-900"
-            borderColor="border-indigo-300"
-            textColor="text-indigo-300"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >
+          <Feature work={Works.cdJacket}>
             <Button
               text={"Play"}
               link={"/windows-angel"}
@@ -444,19 +272,8 @@ export default function Page() {
               styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
               shadow=""
             />
-          </FeatureUIUX>
-          <FeatureUIUX
-            title="GPU Booking"
-            description="Lightweight UI component for booking GPUs. Hover to open. Desktop only."
-            year="2024"
-            tools="React, Tailwind"
-            imageName="ui-projects/gpu.jpg"
-            imageHoverName="ui-projects/gpu-2.jpg"
-            bgColor="bg-black"
-            borderColor="border-indigo-500"
-            textColor="text-indigo-500"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >
+          </Feature>
+          <Feature work={Works.gpuBooking}>
             <Button
               text={"Demo"}
               link={"https://nvdia-gpu-booking-example.vercel.app/"}
@@ -473,19 +290,8 @@ export default function Page() {
               styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
               shadow="shadow-[0px_4px_8px_rgba(0,0,0,0.1)] rounded-full"
             />
-          </FeatureUIUX>
-          <FeatureUIUX
-            title="Social Portal"
-            description={`Here's a "hero" screen for a social portal I designed in 2019. In 2025, I ported the site to use Vite. It animates, so be sure to check the demo (desktop only).`}
-            year="2019"
-            tools="React, Vite, CSS3 Animations"
-            imageName="ui-projects/jeffcardinal-2019.jpg"
-            imageHoverName="ui-projects/jeffcardinal-2019.jpg"
-            bgColor="bg-blue-400"
-            borderColor="border-white"
-            textColor="text-white"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >
+          </Feature>
+          <Feature work={Works.socialPortal}>
             <div className="flex flex-col w-max">
               <Button
                 text={"Demo"}
@@ -514,40 +320,16 @@ export default function Page() {
                 </button>
               </Link>
             </div>
-          </FeatureUIUX>
-          <FeatureUIUX
-            title="RetRoh!"
-            description="A cute retrospective board for reflecting on your Agile projects after each sprint. Hover for login page."
-            year="2017"
-            tools="React, Spring Boot, PostgreSQL"
-            imageName="ui-projects/retroh-board.jpg"
-            imageHoverName="ui-projects/retroh-login.jpg"
-            bgColor="bg-white"
-            borderColor="border-[#00bfff]"
-            textColor="text-[#00bfff]"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >
-            {undefined}
-          </FeatureUIUX>
+          </Feature>
+          <Feature work={Works.retroh} />
         </Drawer>
 
         <Drawer
           title={"[BRAND]"}
           bgColor={"bg-teal-400"}
         >
-          <FeatureUIUX
-            title="FLOWGEAR"
-            description={`Work for FLOWGEAR - a rave series. Namu (mascot) illustrations and 3D model by Cubenatural.`}
-            year="2026"
-            tools="Illustrator, Photoshop"
-            imageName="flowgear/FlowgearShirtBlack.jpg"
-            imageHoverName="flowgear/FlowgearShirtBlack.jpg"
-            bgColor="bg-black"
-            borderColor="border-white"
-            textColor="text-white"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >          
-            <FeatureDouble
+          <Feature work={Works.flowgear}>
+            <ImagePairGallery
               alt1={"Sky 909 Flyer"}
               alt2={"c678924 performing in LA"}
               imageName1={"flowgear/Sky909Flyer.jpg"}
@@ -555,24 +337,12 @@ export default function Page() {
               imageName2={"flowgear/c678924-LA.jpg"}
               imageHover2Name={"flowgear/c678924-LA.jpg"}
               bgColor={"bg-black"}
-              textColor={"text-white"}
             />
-          </FeatureUIUX>
-          <FeatureUIUX
-            title="i2k Branding"
-            description={`i2K was a music festival in Richmond, Virginia. In order to ensure pixel perfection, a grid system was enforced to create the illusory 3D model, which was then captured by an orthographic camera. The final render is composited in Photoshop with precise masking and additional shading. Dynamic logo type was used for promotional motion graphics. A limited t-shirt was screen-printed, featuring an android woman and WinAmp-skin informed mp3 player.`}
-            year="2025"
-            tools="Illustrator, Blender, Photoshop"
-            imageName="i2k/i2k-iso-25.jpg"
-            imageHoverName="i2k/i2k-iso-25.jpg"
-            bgColor="bg-white"
-            borderColor="border-[#00bfff]"
-            textColor="text-[#00bfff]"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >          
+          </Feature>
+          <Feature work={Works.i2kBranding}>
             <LogoMorph/>
-          </FeatureUIUX>
-          <FeatureDouble
+          </Feature>
+          <ImagePairGallery
             alt1={"Poster"}
             alt2={"Model"}
             imageName1={"i2k/i2k-ExampleFlyer.jpg"}
@@ -580,20 +350,8 @@ export default function Page() {
             imageName2={"i2k/i2k-shirt-pink-blue.jpg"}
             imageHover2Name={"i2k/i2k-shirt-green.jpg"}
             bgColor={"bg-white"}
-            textColor={"text-[#00bfff]"}
           />
-          <Feature
-            title="PLUS100 Logo"
-            description="Logo for my record production company, PLUS100 Records. Shown here is the logo. Click the button below to check out our Bandcamp."
-            inspiration="Minimalism and kawaii Japanese emoji."
-            tools="Photoshop"
-            year="2018"
-            imageName="plus100logo.png"
-            imageHoverName="plus100logo.png"
-            bgColor="bg-white"
-            textColor="text-[#ff84be]"
-            borderColor="border-[#ff84be]"
-          >
+          <Feature work={Works.plus100Logo}>
             <Button
               text={"Visit Site"}
               link={"https://plus100.bandcamp.com/"}
@@ -621,17 +379,7 @@ export default function Page() {
           title={"[TOYBOX]"}
           bgColor={"bg-lime-400"}
         >
-          <FeatureUIUX
-            title="Metaball Avatar Generator"
-            description="Have fun generating your own avatar."
-            year="2026"
-            tools="React, Tailwind, Three.js"
-            imageName="metaball-avatar-generator.png"
-            bgColor="bg-black"
-            borderColor="border-[#1694ff]"
-            textColor="text-[#1694ff]"
-            font={"w-full block text-3xl lg:text-4xl font-distancia"}
-          >
+          <Feature work={Works.metaballAvatarGenerator}>
             <Button
               text={"Play"}
               link={"/metaball-avatar-generator"}
@@ -648,7 +396,7 @@ export default function Page() {
               styling="backdrop-blur-xl ${bgColor} bg-opacity-100"
               shadow=""
             />
-          </FeatureUIUX>
+          </Feature>
         </Drawer>
 
         <Drawer
@@ -658,19 +406,7 @@ export default function Page() {
           open={openId === "fonts"}
           setOpen={(v) => setOpenId(v ? "fonts" : null)}
         >
-          <FeatureFont
-            id={"goupe"}
-            title="Goupe"
-            description={`Read like "coupe". Goupe is a fun, funky flowing font for all your goopy design needs.`}
-            inspiration="Modern retro font. Currently available for free download!"
-            tools="Procreate, Illustrator, Fontself"
-            imageName="fonts/goopdemo.jpg"
-            imageHoverName="fonts/goopdemo-black.jpg"
-            bgColor="bg-black"
-            borderColor="border-lime-400"
-            textColor="text-lime-400"
-            font="font-goupe text-[5em] lg:text-[8em] text-lime-400"
-          >
+          <Feature work={Works.goupe}>
             <Link href="https://github.com/JeffCardinal/Goupe" target="_blank">
               <button className="border-[6px] border-lime-400 mr-4 hover:bg-lime-700 hover:text-lime-200 hover:border-lime-200 rounded-full transition duration-300 font-distancia text-2xl flex flex-row relative overflow-hidden group">
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-lime-300/60 to-lime-500/40 blur-lg group-hover:blur-md rounded-full pointer-events-none transform -translate-y-1/2" />
@@ -680,9 +416,9 @@ export default function Page() {
                 <div className="pt-[2px] pl-2 pr-4 z-10">Download</div>
               </button>
             </Link>
-          </FeatureFont>
+          </Feature>
 
-          <FeatureDouble
+          <ImagePairGallery
             alt1={"Poster"}
             alt2={"Model"}
             imageName1={"fonts/PutOnASmileSm.png"}
@@ -690,7 +426,6 @@ export default function Page() {
             imageName2={"fonts/meltdown.png"}
             imageHover2Name={"fonts/meltdown-intense.png"}
             bgColor={"bg-black"}
-            textColor={"text-white"}
           />
         </Drawer>
 

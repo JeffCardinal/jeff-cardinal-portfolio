@@ -4,34 +4,34 @@ import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
 gsap.registerPlugin(MorphSVGPlugin);
 
-export function LogoMorph() {
+export default function LogoMorph() {
   const svgRef = useRef<SVGSVGElement>(null);
 
-useEffect(() => {
-  if (!svgRef.current) return;
+  useEffect(() => {
+    if (!svgRef.current) return;
 
-  const svg = svgRef.current;
+    const svg = svgRef.current;
 
-  const from = svg.querySelector("#i2k_cyan") as SVGPathElement | null;
-  const to = svg.querySelector("#i2k_cyan_2") as SVGPathElement | null;
-  const magenta_from = svg.querySelector("#i2k_magenta_1") as SVGPathElement | null;
-  const magenta_to = svg.querySelector("#i2k_magenta_2") as SVGPathElement | null;
-  if (!from || !to || !magenta_from || !magenta_to) return;
+    const from = svg.querySelector("#i2k_cyan") as SVGPathElement | null;
+    const to = svg.querySelector("#i2k_cyan_2") as SVGPathElement | null;
+    const magenta_from = svg.querySelector("#i2k_magenta_1") as SVGPathElement | null;
+    const magenta_to = svg.querySelector("#i2k_magenta_2") as SVGPathElement | null;
+    if (!from || !to || !magenta_from || !magenta_to) return;
 
-  MorphSVGPlugin.convertToPath(from as any);
-  MorphSVGPlugin.convertToPath(to as any);
-  MorphSVGPlugin.convertToPath(magenta_from as any);
-  MorphSVGPlugin.convertToPath(magenta_to as any);
+    MorphSVGPlugin.convertToPath(from as any);
+    MorphSVGPlugin.convertToPath(to as any);
+    MorphSVGPlugin.convertToPath(magenta_from as any);
+    MorphSVGPlugin.convertToPath(magenta_to as any);
 
-  gsap.set(to, { autoAlpha: 0 });
-  gsap.set(magenta_to, { autoAlpha: 0 });
+    gsap.set(to, { autoAlpha: 0 });
+    gsap.set(magenta_to, { autoAlpha: 0 });
 
-  const tl = gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: "power4.inOut", duration: 2.0 } })
-  .to(from, { morphSVG: { shape: to, } })
-  .to(magenta_from, { morphSVG: { shape: magenta_to, } }, 0);
+    const tl = gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: "power4.inOut", duration: 2.0 } })
+    .to(from, { morphSVG: { shape: to, } })
+    .to(magenta_from, { morphSVG: { shape: magenta_to, } }, 0);
 
-  return () => {tl.kill()};
-}, []);
+    return () => {tl.kill()};
+  }, []);
 
   return (
     <svg
