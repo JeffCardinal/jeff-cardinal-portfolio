@@ -53,6 +53,37 @@ body {
   }
 }
 
+@layer components {
+  .work-image {
+    object-fit: fill;
+  }
+
+  .metadata-label {
+    position: absolute;
+    top: -1.5rem;
+    left: 1rem;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+  }
+
+  .glass-metadata-label {
+    z-index: 10;
+    border: 3px solid white;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    --tw-bg-opacity: 1;
+    --tw-border-opacity: 1;
+    box-shadow: inset 0px 10px 12px rgba(255, 255, 255, 1),
+      inset 0px -3px 4px rgba(200, 255, 255, 0.1),
+      inset 0px -2px 1px rgba(255, 255, 255, 1),
+      inset 0px -2px 8px rgba(222, 222, 222, 1),
+      0 2px 4px rgba(200, 255, 255, 0.15);
+  }
+}
+
 @keyframes rainbow-glow-shift {
   0% {
     background-position: 400% 0%;
@@ -81,10 +112,4 @@ body {
     font-weight: 800;
     font-style: normal;
   }
-  /* @font-face {
-    font-family: 'Goupe';
-    src: url('../../public/fonts/Goupe.otf') format('opentype');
-    font-weight: 800;
-    font-style: normal;
-  } */
 }
