@@ -24,8 +24,7 @@ export type Work =
   | (WorkBase & { presentation: "standard"; })
   | (WorkBase & { presentation: "uiux"; })
   | (WorkBase & { presentation: "font"; })
-  | (WorkBase & {
-      presentation: "glass";
+  | (WorkBase & { presentation: "glass";
       renderVideo?: boolean;
       bigBgColor?: string;
     });
